@@ -1,0 +1,761 @@
+/*
+Theme Name: SIW 2015
+Theme URI: http://www.siw.nl
+Description: Thema voor www.siw.nl
+Author: Maarten Bruna
+Author URI: http://www.siw.nl
+Template: pinnacle_premium
+Version: 1.1
+*/
+
+
+
+/*
+Algemene styling
+*/
+/*h5 footer wit maken (bug in pinnacle)*/
+.footerclass h5{
+    color: #f2f2f2;
+}
+
+.home-padding {
+    padding: 0px 0;
+}
+
+.home-product {
+	padding-bottom: 30px !important ;
+}
+
+.page-header {
+    padding-bottom: 75px;
+    padding-top: 75px;
+}
+
+/*Footer */
+#containerfooter a:hover{
+	color:#59ab9c;
+}
+
+#containerfooter .kadence_testimonials_slider a:hover{
+	background:#59ab9c !important;
+	color: #fff !important;
+}
+
+/*tekst in widget-invoervelden grijs*/
+.widget_wysija_cont .wysija-paragraph .wysija-input {
+	color:#444;
+}
+
+h3{
+	text-align:center;
+}
+
+
+h4.info_box_title{
+	font-size: 18px;
+	font-weight: bold;
+}
+
+/*infobox in sidebar*/
+.kadence_infobox_widget{
+	margin-top:0px;
+}
+
+.woocommerce .checkout .col-2 h3, .woocommerce-page .checkout .col-2 h3 {
+    float: none;
+}
+
+/*alle headers onderstepen*/
+h3::after{
+    background-color: #444;
+    content: "";
+    display: block;
+    height: 1px;
+    margin: 0 auto;
+    transition: background 0.3s ease-out 0s;
+    width: 60px;
+}
+
+/*hover effect voor headers*/
+.hometitle:hover:after, .sectiontitle:hover:after, .widget-title:hover:after, .related.products > h3:hover:after, h3:hover:after{
+    background-color: #ff9900;
+}
+
+/*onderdrukken in footer*/
+.footerclass .hometitle:hover:after, .footerclass .sectiontitle:hover:after, .footerclass .widget-title:hover:after {
+    background-color: #f2f2f2;
+}
+
+/*pijltje achter links weg*/
+
+a::after, .kad-post-navigation .kad-previous-link a span::before, .kad-post-navigation .kad-next-link a span::after {
+    content: none !important;
+}	
+
+
+/*styling voor home-carousel*/
+.kad-slider-btn{
+	background: rgba(51,51,51, 0.5) !important;
+	border:none !important;
+	transition: background 0.6s ease-out 0s !important;
+}
+
+.kad-slider-btn:hover{
+	background-color: #444 !important;
+
+}
+
+/*iconbox hover-kleur*/
+.kad-icon-box:hover h4::after, .kad-icon-box:hover h3::after {
+    background-color: #ff9900;
+}
+.kad-icon-box:hover i {
+    background-color: #ff9900;
+}
+
+.kad-icon-box:hover .kad-btn-primary {
+    background: none repeat scroll 0 0 #ff9900;
+}
+
+
+/*styling voor datepicker*/
+
+.datepicker table tr td span:hover, .datepicker table tr td.day:hover, .datepicker table tr th:hover, .datepicker table tr td span.active {
+    background: #ff9900 none repeat scroll 0 0 !important;
+    color: #fff !important;
+}
+
+
+/*
+Styling voor portfolio
+*/
+
+.portfolio-postclass h1.entry-title{
+    font-size: 24px;
+    line-height: 30px;
+}
+.cportfoliotag{
+	text-transform: none;
+}
+
+
+/*
+Styling voor testimonials
+*/
+.wpm-testimonial h1.entry-title{
+	display:none;
+}
+
+
+/*
+Styling voor woocommerce
+*/
+h1.product_title{
+    font-size: 24px;
+    line-height: 30px;
+}
+
+/*sorteerdropdown verbergen*/
+.woocommerce-ordering{
+	display: none;
+}
+
+/*Styling op archiefpagina */
+.product_item:hover, .product_list_widget li:hover{
+	color:#ffffff !important;
+	background-color:#ff9900 !important;
+}
+
+.product_item, .product_item h5, .product_list_widget li, .product_list_widget li a{
+	transition: all 0.3s linear 0s !important;
+}
+
+.product_list_widget li{
+	border-radius: 4px;
+}
+
+.product_list_widget li img{
+	padding: 4px;
+}
+
+.product_item:hover h5, .product_list_widget li:hover a{
+	color:#ffffff !important;
+}
+
+/*categorieheader voor projecten*/
+.kt_woo_single_override {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background-repeat: no-repeat;
+	background-size: cover !important;
+	background-position: center center !important;
+}
+
+/*accordeon tonen in woocommerce product*/
+div.product .woocommerce-tabs .panel-default {
+	display: block !important;
+}
+div.product .woocommerce-tabs .panel-default {
+	padding: 0px;
+}
+
+/*prijsrange verbergen*/
+div.product_details_case .price{
+	display:none !important;
+}
+
+span.price span.amount{
+	color:#555;
+	font-size:20px;	
+}
+
+/*resetlink voor tarieven verbergen*/
+.reset_variations, p.price{
+	display:none !important;
+}
+
+/*pijltje op knoppen verbergen*/
+.wc-forward::after, .checkout-button::after, .return-to-shop a.wc-backward::after {
+    content: none !important;
+}
+
+/* tarief-knoppen wit i.p.v. themakleur*/
+.variations .kad_radio_variations label.selectedValue {
+    border-color: #ff9900;
+	color: #333;
+	background: none repeat scroll 0 0 #fff !important;
+}
+
+/*gekozen filter niet inspringen */
+html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a{
+	padding: 5px 15px;
+}
+
+/* labels van attributen tabel breder maken*/
+.woocommerce table.shop_attributes th, .woocommerce-page table.shop_attributes th{
+	width:20%;
+}
+
+/*checkout*/
+.woocommerce-shipping-fields label.radio, .woocommerce-billing-fields label.radio{
+	display:inline-block !important;
+	padding-right: 20px !important;
+	padding-left: 0px !important;
+	font-weight: 400 !important;
+}
+
+.woocommerce-shipping-fields .checkradios-radio, .woocommerce-billing-fields .checkradios-radio{
+	margin-left: 5px !important;
+}
+
+.wizard > .steps .done a, .wizard > .steps .done a:hover, .wizard > .steps .done a:active {
+    background: #ffcc44 none repeat scroll 0 0;
+}
+
+.form-row-day .select2-container, .form-row-month .select2-container , .form-row-year .select2-container{
+	min-width: 50px;
+}
+
+.woocommerce form .form-row-year, .woocommerce form .form-row-month, .woocommerce form .form-row-day, .woocommerce-page form .form-row-year, .woocommerce-page form .form-row-month, .woocommerce-page form .form-row-day {
+    min-height: 1px;
+    overflow: visible;
+    position: relative;
+}
+
+
+@media (min-width: 768px){
+.woocommerce form .form-row-day, .woocommerce-page form .form-row-day {
+    float: left;
+    padding-right: 5px;
+    width: 15%;
+}
+
+
+.woocommerce form .form-row-month, .woocommerce-page form .form-row-month {
+    float: left;
+    padding-right: 5px;
+    width: 20%;
+}
+.woocommerce form .form-row-year, .woocommerce-page form .form-row-year {
+    float: left;
+    width: 15%;
+	padding-right: 5px;
+}
+
+}
+
+@media (max-width: 767px){
+.woocommerce form .form-row-day, .woocommerce-page form .form-row-day {
+    float: left;
+    padding-right: 5px;
+    width: 20%;
+}
+
+.woocommerce form .form-row-month, .woocommerce-page form .form-row-month {
+    float: left;
+    padding-right: 5px;
+    width: 40%;
+}
+.woocommerce form .form-row-year, .woocommerce-page form .form-row-year {
+    float: left;
+    width: 40%;
+	padding-right: 5px;
+}
+
+}
+/*tekstblokken in informatie voor PO hoger maken*/
+#infoForPartner textarea{
+	height: auto !important;
+}
+
+/*
+Radio buttons zichtbaar maken i.v.m. validatie
+*/
+
+.woocommerce-billing-fields input[type="radio"], .woocommerce-shipping-fields input[type="radio"]{
+	display: inline-block !important;
+	margin-left: 10px !important;
+	left: -99999%;
+	opacity: 0;
+}
+
+.woocommerce-billing-fields .radiobutton, .woocommerce-shipping-fields .radiobutton{
+	position:relative !important;
+	margin-left: -15px !important;
+}
+
+/*
+Styling voor invoervelden
+*/
+
+/*default styling voor alle submit-inputs*/
+input[type="submit"], input[type="file"] {
+    padding: 12px 18px;
+    border: none; 
+	margin: 10px 0;
+    display: inline-block; 
+    background: #ff9900; 
+    color: #ffffff; 
+	border-radius:4px;
+    transition: background .6s ease-out; 
+    -webkit-transition: background .6s ease-out; 
+    -moz-transition: background .6s ease-out; 
+    -o-transition: background .6s ease-out;
+}
+input[type="submit"]:hover, input[type="file"]:hover, .btn-primary:focus{
+	background: #ffcc33 !important; 
+	color: #ffffff !important;
+}
+
+
+input[type="text"]:disabled {
+    background: #eee !important;
+}
+
+/*aparte kleur voor submits in de footer*/
+
+#containerfooter input[type="submit"]{
+	background-color: #59ab9c !important;
+}
+
+#containerfooter input[type="submit"]:hover{
+	background-color: #8cdecf !important;
+}
+
+
+
+
+#mailpoet_checkout_subscribe_field .checkbox{
+	padding-left:0px;
+}
+#mailpoet_checkout_subscribe_field .checkbox .input-checkbox{
+	display:inline-block;
+}
+
+.vfb-radio label, .vfb-checkbox label{
+	padding-left:0px !important;
+}
+
+
+/*styling voor visual form builder*/
+
+.vfb-wizard ul > li.current div, .vfb-wizard ul > li.current div:hover, .vfb-wizard ul > li.current div:active {
+    background: none repeat scroll 0 0 #ff9900;
+}	
+
+.vfbp-form .btn-primary {
+    background-color: #ff9900;
+    border-color: #ff9900;
+    color: #fff;
+}
+
+.vfbp-form .btn-primary:hover{
+    background-color: #ffcc33;
+    border-color: #ffcc33;
+    color: #fff;
+}
+
+.vfb-wizard ul > li {
+    display: inline-table;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+/* styling voor select */
+.vfbp-form .select2-container {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.vfbp-form .btn-file {
+    overflow: visible;
+}
+
+
+/* styling voor likert-radiobuttons*/
+.vfb-likert-row .mCheckable {
+   width: 20px;
+    border: 1px solid #b9b9b9;
+}
+
+.vfb-likert-row .mCheckable div {
+	vertical-align: top;
+}
+
+/*weer zichtbaar maken ivm validatie*/
+.vfb-radio input[type="radio"]{
+	display: block !important;
+	left: -99999%;
+	opacity: 0;
+}
+.vfb-checkbox input[type="checkbox"]{
+	display: block !important;
+	left: -99999%;
+	opacity: 0;
+}
+
+.vfb-radio .mCheckable{
+	position:relative !important;
+}
+
+
+/*styling voor snelzoeken*/
+.snelzoeken {
+    left: 5%;
+    position: absolute;
+    top: 25%;
+    z-index: 10;
+	display:inline-block;
+	background: rgba(51,51,51, 0.5);
+	border-radius: 5px;
+}
+
+.snelzoeken ul li{
+	padding: 4px;
+	display:block;
+}
+
+.snelzoeken h4{
+	color:#ffffff;
+}
+
+.snelzoeken h4::after {
+    background-color: #ffffff;
+}
+
+
+/*contact form styling*/
+div.wpcf7-validation-errors, div.wpcf7-mail-sent-ok{
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 2px solid;
+	border-radius: 4px;
+	border-color: #ff9900;
+    color: #444;
+    font-size: 15px;
+    line-height: 40px;
+    list-style: outside none none;
+    margin: 0 0 30px;
+    padding: 5px 5px 5px 55px;
+    position: relative;
+    width: auto;
+
+}
+
+div.wpcf7-validation-errors::after , div.wpcf7-mail-sent-ok::after{
+    clear: both;
+    content: "";
+    display: block;
+}
+
+div.wpcf7-validation-errors::before, div.wpcf7-mail-sent-ok::before{
+    color: #ff9900;
+    display: block;
+    height: 40px;
+    left: 15px;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+    top: 15px;
+    vertical-align: middle;
+    width: 30px;
+	background-color: transparent;
+    font-family: kt-icon;
+    font-style: normal;
+    font-variant: normal;
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: none;
+    top: 5px;
+}
+div.wpcf7-validation-errors::before{
+	content:"\e362";
+}
+div.wpcf7-mail-sent-ok::before{
+	content:"\e367";
+}
+
+.wpcf7-form textarea{
+    height: 5em !important;
+}
+
+
+/*sidebar links i.p.v. rechts*/
+@media (min-width: 992px) {
+	body .main.col-lg-9 {float:right;}
+}
+
+
+/*
+Styling voor event calendar
+*/
+li.tribe-events-list-widget-events h4 a::before{
+    color: #fff;
+    display: inline-block;
+    height: 40px;
+    left: 15px;
+    vertical-align: middle;
+    width: 30px;
+	background-color: transparent;
+    font-family: kt-icon;
+	content:"\e115";
+}
+
+.tribe-events-list-widget ol{
+	padding:0px;
+	list-style-type:none;
+}
+
+.tribe-events-cal-links, a.tribe-events-ical{
+	display:none !important;
+}
+
+.tribe-events-list .tribe-events-event-image img{
+	width:auto;
+}
+
+.tribe-events-list-widget .duration, .tribe-events-widget-link a {
+    font-weight: 700;
+}
+
+/*
+Styling voor contactform
+*/
+#ncf_sidebar, #ncf_sidebar .ncf_user_bio, #ncf_sidebar input, #ncf_sidebar textarea {
+	font-family: 'Open Sans',sans-serif !important;
+	color: #444 !important;
+}
+#ncf_sidebar .ncf_ph label{
+	position: static;
+	padding: 0px;
+}
+
+
+/*
+Styling voor mobiel
+*/
+
+/*sidebar verbergen op mobiel*/
+@media (max-width:992px) {
+	.sidebar {
+		display: none;
+	}
+}
+
+/*NKS-tab 1 (productfilter) verbergen op desktop*/
+@media (min-width:992px) {
+	#nks-tab-1 {
+		display: none !important;
+	}
+	
+	.portfolio-postclass .col-md-7, .portfolio-postclass .col-md-5{
+	width:50%
+}
+
+}
+
+/*verwijderen producten uit cart*/
+@media (max-width: 767px){
+    table.shop_table td.product-remove {
+      display: table-cell;
+      padding: 0;
+    }
+    table.shop_table th.product-remove{
+        opacity:1;
+        display: table-cell;
+    }
+    #content table.cart a.remove {
+        font-size: 12px;
+        width: 20px;
+    }
+}
+
+#kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li a {
+    position: static;
+    margin-left:30px;
+}
+#kad-mobile-nav #kad-head-cart-popup ul.cart_list li a.remove {
+    display: block;
+    float:none;
+    position: absolute;
+    left: 0;
+    margin-left:0px;
+}
+#kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li {
+    position: relative;
+}
+
+
+
+
+/*
+kopieën van mPopup.css en mCheckable.css om aantal stylesheets te verminderen
+*/
+
+/*! mCheckable - v1.0.2 - 2015-03-01
+* https://github.com/mIRUmd/mCheckable/
+* Copyright (c) 2015 Balan Miroslav; */
+
+.mCheckable{
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #b9b9b9;
+    height: 20px;
+    width: 20px;
+    font-size: 0;
+}
+
+.mCheckable div{
+    background-color: #eeeeee;
+    margin-top: 3px;
+    width: 12px;
+    height: 12px;
+}
+
+.mCheckable.radiobutton.checked div{ background-color: #ff9900; }
+
+
+.mCheckable.radiobutton{
+    border-radius: 50%;
+}
+
+.mCheckable.checkbox div{
+    display: inline;
+}
+
+.mCheckable.radiobutton div{
+    border-radius: 50%;
+	display: inline-block;
+}
+
+.mCheckable.checkbox{
+	padding-left:0px;
+	display: inline-block;
+	box-sizing: content-box;
+}
+
+.mCheckable.checkbox.checked div::before{
+	font-family: kt-icon !important;
+	content:"\e370" !important;
+	color: #ff9900 !important;
+	font-size:16px !important;
+
+
+}
+
+
+
+/*! mPopup - v1.0.9 - 2015-03-01
+* https://github.com/mIRUmd/mPopup/
+* Copyright (c) 2015 Balan Miroslav; */
+
+.mPopup{
+    top: 50%;
+	/*bottom:5% !important;*/
+    left: 50%;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    z-index: 9999;
+    max-width: 700px;
+    display: none;
+    width: 88%;
+    -webkit-border-radius: 3px;
+            border-radius: 3px;
+}
+
+.mPopup-overlay{
+    background-color: #000;
+    opacity: 0.7;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    display: none;
+}
+
+.mPopup-close{
+    background: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    color: #ccc;
+    font-size: 2em;
+    line-height: 1;
+}
+
+.mPopup-close:hover{ color: #3e3e3e; }
+
+.mPopup .popup-header{
+    margin: 0;
+    font-size: 17px;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 15px;
+}
+
+
+.mPopup .popup-body{
+	height:70vh;
+	overflow-y:auto;
+    padding: 15px;
+	position:relative;
+}
+
+.mPopup .popup-footer{
+	display:none;
+	/*
+	border-top: 1px solid #e5e5e5;
+    margin-top: 15px;
+    padding: 19px 20px 20px;
+    text-align: right;
+	*/
+}

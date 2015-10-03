@@ -1,0 +1,5 @@
+/*! mCheckable - v1.0.2 - 2015-03-01
+* https://github.com/mIRUmd/mCheckable/
+* Copyright (c) 2015 Balan Miroslav; */
+
+.mCheckable{display:inline-block;cursor:pointer;margin-right:10px;text-align:center;vertical-align:middle;background-color:#fff;border:1px solid #b9b9b9;height:20px;width:20px;font-size:0}.mCheckable em{background-color:#eee;margin-top:3px;display:inline-block;width:12px;height:12px}.mCheckable.checked em{background-color:#ff9900}.mCheckable.radiobutton,.mCheckable.radiobutton em{border-radius:50%}
