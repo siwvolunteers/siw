@@ -53,8 +53,8 @@ function siw_remove_unnecessary_scripts(){
 	}
 	//woocommerce ajax filter
 	if ((! is_shop()) && (! is_product_category()) && (! is_product_tag()) ){
-		wp_dequeue_script('yith_wcan_frontend');
-		wp_dequeue_style('yith_wcan_admin');
+		wp_dequeue_script('yith-wcan-script');
+		wp_dequeue_style('yith-wcan-frontend');
 	}
 
 	//search&filter
