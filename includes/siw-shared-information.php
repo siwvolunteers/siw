@@ -1,13 +1,16 @@
 <?php
 
-function siw_get_outgoing_placements_officer(){
+function siw_get_postcode_api_key(){
+	$postcode_api_key = '2e68fc5a552f49564269b903b3df0f07b33a7246';
+	return $postcode_api_key;
+}
 
+function siw_get_outgoing_placements_officer(){
 	$outgoing_placements_officer = 'Alet van der Voorn';
 	return $outgoing_placements_officer;
 }
 
 function siw_get_outgoing_placements_email(){
-
 	$outgoing_placements_email = 'outgoing.placements@siw.nl';
 	return $outgoing_placements_email;
 }

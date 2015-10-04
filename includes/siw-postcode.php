@@ -3,8 +3,8 @@
 (c)2015 SIW Internationale Vrijwilligersprojecten
 */
 
-
-define('APIKEY', '2e68fc5a552f49564269b903b3df0f07b33a7246');
+$api_key = siw_get_postcode_api_key;
+define('APIKEY', $api_key);
 
    
 function strip4url( $title , $seperator = '-' ){
