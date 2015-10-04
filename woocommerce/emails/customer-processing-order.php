@@ -108,7 +108,7 @@ siw_wc_generate_email_table_row('Aanmeldnummer', $application_number );
 
 foreach ( $order->get_items() as $item_id => $item ) {
 	$_product     = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
-	$item_meta    = new WC_Order_Item_Meta( $item['item_meta'], $_product );
+	$item_meta    = new WC_Order_Item_Meta( $item, $_product );
 	
 	//projectdetails formatteren
 	$item_details = apply_filters( 'woocommerce_order_item_name', $item['name'], $item ) . ' (' . get_post_meta($_product->id, 'projectduur', true) . ')';
