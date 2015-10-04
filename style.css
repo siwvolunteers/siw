@@ -58,7 +58,7 @@ Algemene styling
 	cursor: pointer;
 	z-index: 5000;
 }
-.wysija-paragraph .formError .formErrorContent{
+.wysija-paragraph .formError .formErrorContent, .widget_wysija_cont .allmsgs{
 	background: none;
 	font-family: inherit;
 	font-size:11px;
@@ -68,13 +68,20 @@ Algemene styling
 	margin-bottom:4px;
 	padding: 4px 10px;
 	position: relative;
-    width: 150px;
+    width: 100%;
     z-index: 5001;	
 }
 
 .widget_wysija_cont .abs-req {
     display: none;
 }
+
+.widget_wysija_cont .allmsgs li {
+    list-style-type: none;
+}
+
+
+
 
 h3{
 	text-align:center;
