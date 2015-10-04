@@ -7,6 +7,19 @@
 Extra functies
 */
 
+//admin-bar opschonen
+add_action( 'wp_before_admin_bar_render', 'siw_remove_admin_bar_items', 999 );
+
+function siw_remove_admin_bar_items( $wp_admin_bar ) {
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu( 'wp-logo' );
+	$wp_admin_bar->remove_menu( 'comments' );
+	$wp_admin_bar->remove_menu( 'wpseo-menu' );
+	$wp_admin_bar->remove_menu( 'tribe-events' );
+	$wp_admin_bar->remove_menu( 'vfbp-admin-toolbar' );	
+	
+}
+
 //welcome panel verwijderen
 remove_action( 'welcome_panel', 'wp_welcome_panel' );
 
