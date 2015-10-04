@@ -83,5 +83,7 @@ function siw_remove_unnecessary_scripts(){
 	//ncf font
 	wp_dequeue_style( 'ncf_lato_font' );
 	
+	//styling van mailpoet widget
+	wp_deregister_style('validate-engine-css');
 }
 
