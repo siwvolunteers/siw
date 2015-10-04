@@ -49,7 +49,7 @@ $("a[href='#formulier']").click(function() {
 		var site_url = parameters.url;
 		
 		$.ajax({        
-			url: site_url +'/wp-content/themes/pinnacle_child/includes/siw-postcode.php',
+			url: site_url +'/wp-content/themes/siw/includes/siw-postcode.php',
 			type: 'GET',
 			dataType: 'json',
 			data: 'postcode=' + postcode + '&housenumber=' + housenumber,	
