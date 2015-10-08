@@ -5,6 +5,11 @@ function siw_get_postcode_api_key(){
 	return $postcode_api_key;
 }
 
+function siw_get_plato_organization_webkey(){
+	$organization_webkey = '2dce9859-913f-4a26-b2d4-4bf97b45fba4';
+	return $organization_webkey;
+}
+
 function siw_get_outgoing_placements_officer(){
 	$outgoing_placements_officer = 'Alet van der Voorn';
 	return $outgoing_placements_officer;

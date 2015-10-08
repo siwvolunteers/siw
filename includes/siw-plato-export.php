@@ -93,11 +93,11 @@ function siw_wc_define_xml_structure( $order_format, $order ) {
 add_filter( 'wc_customer_order_xml_export_suite_http_post_args', 'siw_wc_set_http_post_arguments_for_application_export' );
 
 function siw_wc_set_http_post_arguments_for_application_export( $args ) {
-	
+	$organization_webkey = siw_get_plato_organization_webkey();
 	$xml = $args['body'];
 	$args['headers']['content-type'] = 'application/x-www-form-urlencoded';
 	$args['headers']['accept'] = 'text/html';
-	$args['body']='organizationWebserviceKey=2dce9859-913f-4a26-b2d4-4bf97b45fba4&xmlData=' . rawurlencode( $xml );
+	$args['body']='organizationWebserviceKey=' . $organization_webkey . '&xmlData=' . rawurlencode( $xml );
 	return $args;
 }
 
