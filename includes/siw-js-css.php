@@ -5,12 +5,12 @@ functies t.b.v styling van radiobuttons, checkboxes en lightboxes
 */
 
 function siw_mcheckable_js(){
-	wp_register_script('siw_mcheckable_js', get_stylesheet_directory_uri() . '/assets/mCheckable/mCheckable.jquery.min.js', array('jquery'), '', TRUE);
+	wp_register_script('siw_mcheckable_js', get_stylesheet_directory_uri() . '/assets/js/mCheckable.jquery.min.js', array('jquery'), '', TRUE);
 	wp_enqueue_script('siw_mcheckable_js');
 }
 
 function siw_mpopup_js(){
-	wp_register_script('siw_mpopup_js', get_stylesheet_directory_uri() . '/assets/mPopup/mPopup.jquery.min.js', array('jquery'), '', TRUE);
+	wp_register_script('siw_mpopup_js', get_stylesheet_directory_uri() . '/assets/js/mPopup.jquery.min.js', array('jquery'), '', TRUE);
 }
 add_action('wp_enqueue_scripts', 'siw_mpopup_js');
 add_action('wp_enqueue_scripts', 'siw_mcheckable_js');
@@ -18,7 +18,7 @@ add_action('wp_enqueue_scripts', 'siw_mcheckable_js');
 
 /*custom javascript/jQuery functies*/
 function siw_custom_js(){
-	wp_register_script('siw_custom_js', get_stylesheet_directory_uri() . '/assets/siw-scripts.js', array('jquery'), '', TRUE);
+	wp_register_script('siw_custom_js', get_stylesheet_directory_uri() . '/assets/js/siw-scripts.js', array('jquery'), '', TRUE);
 	$site_url = site_url();
 	$parameters = array(
 		'url' => $site_url,
@@ -30,7 +30,7 @@ function siw_custom_js(){
 add_action('wp_enqueue_scripts', 'siw_custom_js');
 
 function siw_wc_checkout_scripts_js(){
-	wp_register_script('siw-wc-checkout-scripts', get_stylesheet_directory_uri() . '/assets/siw-wc-checkout-scripts.js', array('jquery'), '', TRUE);
+	wp_register_script('siw-wc-checkout-scripts', get_stylesheet_directory_uri() . '/assets/js/siw-wc-checkout-scripts.js', array('jquery'), '', TRUE);
 	$site_url = site_url();
 	$parameters = array(
 		'url' => $site_url,
