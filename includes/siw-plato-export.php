@@ -69,7 +69,7 @@ function siw_wc_define_xml_structure( $order_format, $order ) {
 		'zip' => $zip,
 		'city' => $city,
 		'country' => $country,//TODO
-		'occupation' => 'OTH',
+		'occupation' => $occupation,
 		'emergency_contact' => $emergency_contact,
 		'choice1' => $projectcode,
 		'language1' => $language1,
