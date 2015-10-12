@@ -228,3 +228,20 @@ function siw_cf7_set_mail_signature( $output, $name, $html ) {
 	
 	return $output;
 }
+
+//siteurl voor gebruik in mailtemplates
+add_filter( 'wpcf7_special_mail_tags', 'siw_cf7_set_site_url', 10, 3 );
+
+function siw_cf7_set_site_url( $output, $name, $html ) {
+	$name = preg_replace( '/^wpcf7\./', '_', $name );
+	$submission = WPCF7_Submission::get_instance();
+
+	if ( ! $submission ) {
+		return $output;
+	}
+	if ('_site_url' == $name) {
+		$site_url = site_url('', 'http' );
+		return $site_url;
+	}
+	return $output;
+}
