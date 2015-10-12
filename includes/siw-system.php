@@ -53,7 +53,7 @@ function siw_remove_plugin_metaboxes(){
 
 add_action('login_head', 'siw_custom_login');
 function siw_custom_login() {
-	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('stylesheet_directory') . '/login/siw-login-styles.css" />';
+	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('stylesheet_directory') . '/assets/css/siw-login-styles.css" />';
 }
 
 add_filter( 'login_headerurl', 'siw_login_logo_url' );
