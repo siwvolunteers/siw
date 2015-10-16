@@ -19,24 +19,6 @@ function siw_get_google_analytics_id(){
 }
 
 
-//EVS
-function siw_get_evs_next_deadline(){
-	$evs_deadlines[]='2016-02-02';
-	$evs_deadlines[]='2016-10-04';
-	$evs_deadlines[]='2016-04-26';
-	
-	asort($evs_deadlines);
-	$weeks = 3;
-	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$weeks." weeks"));
-
-	foreach($evs_deadlines as $evs_deadline => $evs_deadline_date) {
-		if ($evs_deadline_date > $limit){
-			$evs_next_deadline = $evs_deadline_date;
-			break;
-		}
-	}
-	return $evs_next_deadline;
-}
 
 
 //afzender plato export
