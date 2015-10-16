@@ -36,7 +36,7 @@ function siw_wc_project_duration_in_days( $startdate, $enddate ){
 
 function siw_wc_project_work( $work_codes, $format='string' ){
 	$work_types = explode(",", $work_codes);
-	$project_work=siw_get_shared_array('project_work');
+	$project_work=siw_get_array('project_work');
 	$work='';
 
 	foreach ($work_types as $work_type) {
@@ -52,7 +52,7 @@ function siw_wc_project_work( $work_codes, $format='string' ){
 
 function siw_wc_continent_from_country($country_code){
 	$continent = '';
-	$project_countries = siw_get_shared_array('project_countries');	
+	$project_countries = siw_get_array('project_countries');	
 	if (isset ( $project_countries[ $country_code ]['continent'])){
 		$continent = $project_countries[ $country_code ]['continent'];
 	}
@@ -61,7 +61,7 @@ function siw_wc_continent_from_country($country_code){
 
 function siw_wc_country($country_code){
 	$country = '';
-	$project_countries = siw_get_shared_array('project_countries');	
+	$project_countries = siw_get_array('project_countries');	
 	if (isset ( $project_countries[ $country_code ]['slug'])){
 		$country = $project_countries[ $country_code ]['slug'];
 	}	
@@ -72,7 +72,7 @@ function siw_wc_country($country_code){
 
 function siw_wc_country_name( $country_code ){
 	$country_name = '';
-	$project_countries = siw_get_shared_array('project_countries');	
+	$project_countries = siw_get_array('project_countries');	
 	if (isset ( $project_countries[ $country_code ]['name'])){
 		$country_name = $project_countries[ $country_code ]['name'];
 	}
@@ -158,7 +158,7 @@ function siw_wc_is_teenage_project( $minimum_age, $project_type ){
 
 function siw_wc_project_languages( $languages ){
 	$languageCodeArray = explode(",", $languages );
-	$project_languages = siw_get_shared_array('project_languages');
+	$project_languages = siw_get_array('project_languages');
 	$languages = '';
 	foreach ( $languageCodeArray as $code ) {
 		$languages .= $project_languages[strtoupper( $code )] . "|";
@@ -220,7 +220,7 @@ function siw_wc_project_location_map( $latitude, $longitude ){
 
 //functie om zin met projectduur te genereren
 function siw_wc_project_duration_in_text( $startdate, $enddate ){
-	$month_array = siw_get_shared_array('month_to_text');
+	$month_array = siw_get_array('month_to_text');
 	$end_day = date("j", strtotime( $enddate ));
 	$end_month = date("n",strtotime( $enddate ));
 	$start_day = date("j", strtotime( $startdate ));

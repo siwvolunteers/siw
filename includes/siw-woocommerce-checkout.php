@@ -64,8 +64,8 @@ function siw_wc_override_locale_nl($fields){
 add_filter('woocommerce_default_address_fields','siw_wc_checkout_address_fields');
 function siw_wc_checkout_address_fields($fields){
 	//standaardlijsten ophalen
-	$gender = siw_get_shared_array('gender');
-	$nationalities = siw_get_shared_array('nationalities');
+	$gender = siw_get_array('gender');
+	$nationalities = siw_get_array('nationalities');
  
 	//toevoegen geslacht
 	$address_fields['gender'] = array(
@@ -87,9 +87,9 @@ function siw_wc_checkout_address_fields($fields){
 		'type'  		=> 'text',
     );
 /*	
-	$days = siw_get_shared_array('days');	
-	$months = siw_get_shared_array('months');
-	$years = siw_get_shared_array('years');
+	$days = siw_get_array('days');	
+	$months = siw_get_array('months');
+	$years = siw_get_array('years');
 
 	$address_fields['day'] = array(
 		'label'     	=> __('Geboortedatum<abbr class="required" title="verplicht">&nbsp*</abbr>', 'woocommerce'),
@@ -210,8 +210,8 @@ add_action( 'woocommerce_before_order_notes', 'siw_wc_checkout_extra_information
 function siw_wc_checkout_extra_information( $checkout ) {
  
 	//lijsten van talen en niveau
-	$languages = siw_get_shared_array('languages');
-	$language_skill = siw_get_shared_array('language_skill');
+	$languages = siw_get_array('languages');
+	$language_skill = siw_get_array('language_skill');
 	
     echo '<div id="languageSkills"><h3>' . __('Talenkennis') . '</h3>';
  

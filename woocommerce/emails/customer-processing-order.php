@@ -11,10 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 //hulplijstjes
-$genders = siw_get_shared_array('gender');
-$nationalities = siw_get_shared_array('nationalities');
-$languages = siw_get_shared_array('languages');
-$language_skill = siw_get_shared_array('language_skill');
+$genders = siw_get_array('gender');
+$nationalities = siw_get_array('nationalities');
+$languages = siw_get_array('languages');
+$language_skill = siw_get_array('language_skill');
 
 //ondertekening
 $signature = siw_get_mail_signature_name('aanmelding_groepsproject');

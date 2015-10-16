@@ -1,5 +1,9 @@
 <?php
+/*
+(c)2015 SIW Internationale Vrijwilligersprojecten
+*/
 
+//API keys
 function siw_get_postcode_api_key(){
 	$postcode_api_key = '2e68fc5a552f49564269b903b3df0f07b33a7246';
 	return $postcode_api_key;
@@ -10,6 +14,32 @@ function siw_get_plato_organization_webkey(){
 	return $organization_webkey;
 }
 
+function siw_get_google_analytics_id(){
+//TODO
+}
+
+
+//EVS
+function siw_get_evs_next_deadline(){
+	$evs_deadlines[]='2016-02-02';
+	$evs_deadlines[]='2016-10-04';
+	$evs_deadlines[]='2016-04-26';
+	
+	asort($evs_deadlines);
+	$weeks = 3;
+	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$weeks." weeks"));
+
+	foreach($evs_deadlines as $evs_deadline => $evs_deadline_date) {
+		if ($evs_deadline_date > $limit){
+			$evs_next_deadline = $evs_deadline_date;
+			break;
+		}
+	}
+	return $evs_next_deadline;
+}
+
+
+//afzender plato export
 function siw_get_outgoing_placements_officer(){
 	$outgoing_placements_officer = 'Alet van der Voorn';
 	return $outgoing_placements_officer;
@@ -20,7 +50,7 @@ function siw_get_outgoing_placements_email(){
 	return $outgoing_placements_email;
 }
 
-
+//ondertekening e-mails
 function siw_get_mail_signature_name( $type ){
     switch ($type) {
         case  "contact_algemeen":
@@ -53,6 +83,8 @@ function siw_get_mail_signature_name( $type ){
 	}
 }
 
+
+//PLATO import
 function siw_wc_get_tariff_array(){
 	$tariff_array = array(
 		"regulier"=>275.00,
@@ -67,7 +99,7 @@ function siw_wc_get_nr_of_days_before_start_to_hide_project(){
 	return $nr_of_days_before_start_to_hide_project;
 }
 
-function siw_get_shared_array( $array ){
+function siw_get_array( $array ){
 
     switch ($array) {
         case  "gender":

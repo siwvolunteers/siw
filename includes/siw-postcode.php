@@ -2,7 +2,7 @@
 /*
 (c)2015 SIW Internationale Vrijwilligersprojecten
 */
-require_once('siw-shared-information.php');
+require_once('siw-get-information.php');
 
 
 $api_key = siw_get_postcode_api_key();

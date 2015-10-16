@@ -153,7 +153,7 @@ function siw_wc_hide_custom_fields() {
 Functies voor tonen order op adminscherm
 */
 
-/*Mollie refund-knop verwijderen*/
+/*Mollie refund-knop verwijderen TODO: Werkt die nog met nieuwe mollie-plugin?*/
 remove_action('woocommerce_admin_order_data_after_order_details', array( $mpm, 'show_refund_button'));
 
 //tonen adresgegevens op adminscherm
@@ -183,10 +183,10 @@ add_filter( 'cmb_meta_boxes', 'siw_wc_order_meta_boxes' );
 
 function siw_wc_order_meta_boxes( array $meta_boxes ){
 
-	$languages = siw_get_shared_array('languages');
-	$language_skill = siw_get_shared_array('language_skill');
-	$gender = siw_get_shared_array('gender');
-	$nationalities = siw_get_shared_array('nationalities');
+	$languages = siw_get_array('languages');
+	$language_skill = siw_get_array('language_skill');
+	$gender = siw_get_array('gender');
+	$nationalities = siw_get_array('nationalities');
 	
 
 	$meta_boxes[] = array(
