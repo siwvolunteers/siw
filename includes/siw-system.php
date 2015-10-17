@@ -100,6 +100,33 @@ function siw_custom_upload_mimes( $existingMimes=array() ){
 	return $existingMimes;
 }
 
+//attachment verwijderen nadat deze per mail verstuurd is.
+add_action( 'vfbp_after_email', 'siw_delete_attachment_after_mail', 10, 2 );
+function siw_delete_attachment_after_mail( $entry_id, $form_id ) {
+	global $wpdb;
+
+	$attachments_args = array(
+		'post_type' 	=> 'attachment',
+		'post_parent'	=> $entry_id,
+		'fields' 		=> 'ids'
+	);
+	$attachments = get_posts( $attachments_args ); 
+	foreach ( $attachments as $attachment ) {
+		$attachment_url = wp_get_attachment_url( $attachment );
+		wp_delete_attachment( $attachment );
+	}
+	$wpdb->query(
+		$wpdb->prepare(
+			"UPDATE $wpdb->postmeta
+			SET meta_value = 'gemaild'
+				WHERE post_id = %d
+				AND meta_value = %s;",
+			$entry_id,
+			$attachment_url
+        )
+	);
+}
+
 
 /*disable emojis*/
 add_action( 'init', 'siw_disable_wp_emojicons' );
