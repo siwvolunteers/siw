@@ -185,6 +185,28 @@ Styling voor testimonials
 
 
 /*
+Styling voor testimonialpagina
+*/
+.strong-content .testimonial{
+	float:left;
+	margin:15px;
+	background-color:#f9f9f9;
+	border-radius:4px;
+	padding:15px;
+	
+}
+
+
+@media (min-width: 767px){
+	.strong-content .testimonial{
+		width:45%;
+		height:350px;
+	}
+
+}
+
+
+/*
 Styling voor woocommerce
 */
 h1.product_title{
