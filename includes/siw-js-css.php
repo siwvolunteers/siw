@@ -1,5 +1,10 @@
 <?php
-
+/*
+(c)2015 SIW Internationale Vrijwilligersprojecten
+*/
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 /*
 functies t.b.v styling van radiobuttons, checkboxes en lightboxes
 */

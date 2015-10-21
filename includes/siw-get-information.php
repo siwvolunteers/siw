@@ -2,7 +2,9 @@
 /*
 (c)2015 SIW Internationale Vrijwilligersprojecten
 */
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 //API keys
 function siw_get_postcode_api_key(){
 	$postcode_api_key = '2e68fc5a552f49564269b903b3df0f07b33a7246';

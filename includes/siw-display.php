@@ -1,5 +1,10 @@
 <?php
-
+/*
+(c)2015 SIW Internationale Vrijwilligersprojecten
+*/
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 //shortcodes mogelijk maken in text widget
 add_filter( 'widget_text', 'do_shortcode' );
 

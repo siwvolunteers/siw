@@ -2,7 +2,9 @@
 /*
 (c)2015 SIW Internationale Vrijwilligersprojecten
 */
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 /*
 functies voor de import van projecten uit PLATO
 */
