@@ -2,8 +2,8 @@
 /*
 (c)2015 SIW Internationale Vrijwilligersprojecten
 */
+define('ABSPATH', 'ABSPATH');
 require_once('siw-get-information.php');
-
 
 $api_key = siw_get_postcode_api_key();
 define('APIKEY', $api_key);
