@@ -51,7 +51,7 @@ function siw_remove_plugin_metaboxes(){
 	remove_meta_box( 'woocommerce_dashboard_recent_reviews', 'dashboard', 'normal' ); 
 }
 
-
+//login
 
 add_action('login_head', 'siw_custom_login');
 function siw_custom_login() {
@@ -68,22 +68,20 @@ function siw_login_logo_url_title() {
 	return 'SIW Internationale Vrijwilligersprojecten';
 }
 
-
- 
-/* custom dashboard widget
-add_action('wp_dashboard_setup', 'siw_custom_dashboard_widget' );
-function siw_custom_dashboard_widget() {
-	wp_add_dashboard_widget('wp_dashboard_widget', 'Theme Details', 'siw_theme_info_widget');
+add_filter( 'login_message', 'siw_login_message' );
+function siw_login_message( $message ) {
+	if ( empty($message) ){
+		return "<p class='message'>Welkom bij SIW. Log in om verder te gaan.</p>";
+    } else {
+		return $message;
+    }
 }
 
- 
-function siw_theme_info_widget() {
-	echo "<ul>
-	<li><strong>Ontwikkeld door:</strong> Maarten Bruna</li>
-	<li><strong>Contact:</strong> <a href='ictbeheer@siw.nl'>ictbeheer@siw.nl</a></li>
-	</ul>";
+add_filter('login_errors', 'siw_failed_login');
+function siw_failed_login() {
+    return 'Incorrecte logingegevens.';
 }
-*/
+
 
 //permalink van testimonials aanpassen van 'testimonial' naar 'ervaring'
 add_action( 'init', 'siw_change_permalink_structure' );
