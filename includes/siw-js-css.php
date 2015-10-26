@@ -9,16 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 functies t.b.v styling van radiobuttons, checkboxes en lightboxes
 */
 
+add_action('wp_enqueue_scripts', 'siw_mcheckable_js');
 function siw_mcheckable_js(){
 	wp_register_script('siw_mcheckable_js', get_stylesheet_directory_uri() . '/assets/js/mCheckable.jquery.min.js', array('jquery'), '', TRUE);
 	wp_enqueue_script('siw_mcheckable_js');
 }
-
-function siw_mpopup_js(){
-	wp_register_script('siw_mpopup_js', get_stylesheet_directory_uri() . '/assets/js/mPopup.jquery.min.js', array('jquery'), '', TRUE);
-}
-add_action('wp_enqueue_scripts', 'siw_mpopup_js');
-add_action('wp_enqueue_scripts', 'siw_mcheckable_js');
 
 
 /*custom javascript/jQuery functies*/

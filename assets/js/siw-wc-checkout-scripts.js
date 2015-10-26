@@ -49,31 +49,8 @@
 		
 		//uitvoeren
 		$('.mCheck').mCheckable({innerTags: "<div></div>"});
-		
-		// lightbox met voorwaarden
-		var popup = $('#terms-and-conditions').mPopup();
-
-		$('#open-terms-and-conditions').on('click',function(e){
-			e.preventDefault();
-			popup.mPopup('open');
-		});
-    
+   
 	})
-
-	$(document).on('click', '#accept-terms', function(){
-		$('#terms-and-conditions').mPopup('close');
-		$("#terms").prop( "checked", true );
-		$('.terms .mCheckable').addClass('checked');
-
-	});
-	
-	$(document).on('click', '#cancel-terms', function(){
-		$('#terms-and-conditions').mPopup('close');
-		$("#terms").prop( "checked", false );
-		$('.terms .mCheckable').removeClass('checked');
-
-	});
-
 
 	$(document).ready(function() {   
 		$("#billing_postcode, #billing_housenumber").change(function(){

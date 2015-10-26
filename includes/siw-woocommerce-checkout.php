@@ -19,7 +19,6 @@ function siw_wc_checkout_scripts(){
 	if (is_checkout()){
 		wp_enqueue_script( 'jquery-datepicker' );
 		wp_enqueue_script( 'jquery-datepicker-i18n-nl' );
-		wp_enqueue_script( 'siw_mpopup_js');
 		wp_enqueue_script( 'siw-wc-checkout-scripts' );
 	}
 }

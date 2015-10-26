@@ -50,30 +50,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<?php if ( wc_get_page_id( 'terms' ) > 0 && apply_filters( 'woocommerce_checkout_show_terms', true ) ) : $terms_page = get_post( woocommerce_get_page_id('terms') ); ?>
 			<p class="form-row terms">
-				<label for="terms" class="checkbox"><?php printf( __( 'Ik heb de <a id="open-terms-and-conditions" href="#" >inschrijfvoorwaarden</a> gelezen en ga akkoord ', 'woocommerce' ), esc_url( wc_get_page_permalink( 'terms' ) ) ); ?></label>
+				<label for="terms" class="checkbox"><?php printf( __( 'Ik heb de <a id="open-terms-and-conditions" data-toggle="modal" data-target="#kt-modal-terms" >inschrijfvoorwaarden</a> gelezen en ga akkoord ', 'woocommerce' ), esc_url( wc_get_page_permalink( 'terms' ) ) ); ?></label>
 				<input type="checkbox" class="input-checkbox" name="terms" <?php checked( apply_filters( 'woocommerce_terms_is_checked_default', isset( $_POST['terms'] ) ), true ); ?> id="terms" />
 			</p>
-			<div id="terms-and-conditions" class="mPopup">
-				<button class="mPopup-close">×</button>
-				<div class="popup-header">
-					<?php  echo $terms_page->post_title; ?>
-				</div>
-				<div class="popup-body">
-					<?php  echo apply_filters('the_content', $terms_page->post_content); ?>
-				</div>
-				<div class="popup-footer">
-					<button class="kad-btn kad-btn-primary" id="accept-terms" type="button">Akkoord</button>
-					<button class="kad-btn" id="cancel-terms" type="button">Annuleren</button>
-				</div>
+			<div class="hide-button">
+			<?php echo do_shortcode( '[kad_modal btnsize="small" id = "terms" btntitle="voorwaarden" btncolor="#ffffff" title="' . $terms_page->post_title . '"]' . apply_filters('the_content', $terms_page->post_content) . '[/kad_modal]' );?>
 			</div>
-    </div>
 		<?php endif; ?>
 
 		<?php do_action( 'woocommerce_review_order_after_submit' ); ?>
 
 	</div>
 
-	<div class="clear"></div>
 </div>
 
 <?php if ( ! is_ajax() ) : ?>
