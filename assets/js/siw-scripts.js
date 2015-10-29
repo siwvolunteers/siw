@@ -15,8 +15,14 @@
 		$(document).on('click',function(){
 			$('.kad-head-cart-popup.in').collapse('hide');
 		});
+		//winkelwagen verbergen indien er geen projecten in zitten
+		$( "li.menu-cart-icon-kt" ).has( "span.kt-cart-total:contains('0')" ).css( "display", "none" );
 
-		
+	})
+	
+	$(document).ajaxComplete(function() {
+		//winkelwagen verbergen indien er geen projecten in zitten
+		$( "li.menu-cart-icon-kt" ).has( "span.kt-cart-total:contains('0')" ).css( "display", "none" );
 	})
 })(jQuery);
 
