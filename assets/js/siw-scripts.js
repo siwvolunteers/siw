@@ -30,6 +30,8 @@
 		var housenumber = $('.huisnummer').val();
 		var housenumber = housenumber.replace(/[^0-9]/g,'');
 		
+		if ((postcode != '') && (housenumber != '')){
+		
 		$.ajax({
 			url : parameters.ajax_url,
 			type : 'get',
@@ -54,6 +56,7 @@
 				}             
 			},
 		});
+		}
 		return false;
     });
 	

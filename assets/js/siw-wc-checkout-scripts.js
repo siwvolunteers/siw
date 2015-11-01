@@ -56,31 +56,32 @@
 		var postcode = $('#billing_postcode').val().replace(/ /g,'').toUpperCase();
 		var housenumber = $('#billing_housenumber').val();
 		var housenumber = housenumber.replace(/[^0-9]/g,'');
-		
-		$.ajax({
-			url : parameters.ajax_url,
-			type : 'get',
-			dataType: 'json',
-			data : {
-				action : 'postcode_lookup',
-				postcode : postcode,
-				housenumber : housenumber
-			},
-			success: function(result) {
-				if(result.success == 1) {
-					$('#billing_city').val(result.resource.town);
-					$('#billing_address_1').val(result.resource.street);
-					$('#billing_city').prop('disabled', true);		  
-					$('#billing_address_1').prop('disabled', true);		  
-				}
-				else {
-					$('#billing_city').val('');
-					$('#billing_address_1').val('');
-					$('#billing_city').prop('disabled', false);		  
-					$('#billing_address_1').prop('disabled', false);		
-				}             
-			},
-		});
+		if ((postcode != '') && (housenumber != '')){
+			$.ajax({
+				url : parameters.ajax_url,
+				type : 'get',
+				dataType: 'json',
+				data : {
+					action : 'postcode_lookup',
+					postcode : postcode,
+					housenumber : housenumber
+				},
+				success: function(result) {
+					if(result.success == 1) {
+						$('#billing_city').val(result.resource.town);
+						$('#billing_address_1').val(result.resource.street);
+						$('#billing_city').prop('disabled', true);		  
+						$('#billing_address_1').prop('disabled', true);		  
+					}
+					else {
+						$('#billing_city').val('');
+						$('#billing_address_1').val('');
+						$('#billing_city').prop('disabled', false);		  
+						$('#billing_address_1').prop('disabled', false);		
+					}             
+				},
+			});
+		}
 		return false;
     });
 	
