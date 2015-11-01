@@ -6,8 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-add_action( 'wp_ajax_nopriv_postcode_lookup', 'siw_postcode_lookup' );
-add_action( 'wp_ajax_postcode_lookup', 'siw_postcode_lookup' );
+add_action( 'siw_ajax_nopriv_postcode_lookup', 'siw_postcode_lookup' );
+add_action( 'siw_ajax_postcode_lookup', 'siw_postcode_lookup' );
 
 function siw_postcode_lookup() {
 
