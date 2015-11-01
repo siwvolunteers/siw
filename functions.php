@@ -18,5 +18,5 @@ require_once('includes/siw-search.php');
 require_once('includes/siw-system.php');
 require_once('includes/siw-display.php');
 require_once('includes/siw-get-information.php');
-//require_once('includes/siw-configuration.php');
 require_once('includes/siw-dashboard-widgets.php');
+require_once('includes/siw-postcode.php');
