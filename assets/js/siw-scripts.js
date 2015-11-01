@@ -24,41 +24,21 @@
 		//winkelwagen verbergen indien er geen projecten in zitten
 		$( "li.menu-cart-icon-kt" ).has( "span.kt-cart-total:contains('0')" ).css( "display", "none" );
 	})
-})(jQuery);
 
-/*
-(function($) {
-$("a[href='#formulier']").click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
-        || location.hostname == this.hostname) {
-
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-           if (target.length) {
-             $('html,body').animate({
-                 scrollTop: target.offset().top
-            }, 1000);
-            return false;
-        }
-    }
-});
-})(jQuery);
-*/
-
-
-
-(function($) {
     $(".postcode, .huisnummer").change(function(){
 		var postcode = $('.postcode').val().replace(/ /g,'').toUpperCase();
 		var housenumber = $('.huisnummer').val();
 		var housenumber = housenumber.replace(/[^0-9]/g,'');
-		var site_url = parameters.url;
 		
-		$.ajax({        
-			url: site_url +'/wp-content/themes/siw/includes/siw-postcode.php',
-			type: 'GET',
+		$.ajax({
+			url : parameters.ajax_url,
+			type : 'get',
 			dataType: 'json',
-			data: 'postcode=' + postcode + '&housenumber=' + housenumber,	
+			data : {
+				action : 'postcode_lookup',
+				postcode : postcode,
+				housenumber : housenumber
+			},
 			success: function(result) {
 				if(result.success == 1) {
 					$('.plaats').val(result.resource.town);
@@ -79,3 +59,21 @@ $("a[href='#formulier']").click(function() {
 	
 
 })(jQuery);
+/*
+(function($) {
+$("a[href='#formulier']").click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+        || location.hostname == this.hostname) {
+
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+           if (target.length) {
+             $('html,body').animate({
+                 scrollTop: target.offset().top
+            }, 1000);
+            return false;
+        }
+    }
+});
+})(jQuery);
+*/

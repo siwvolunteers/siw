@@ -52,19 +52,20 @@
    
 	})
 
-	$(document).ready(function() {   
-		$("#billing_postcode, #billing_housenumber").change(function(){
+	$("#billing_postcode, #billing_housenumber").change(function(){
 		var postcode = $('#billing_postcode').val().replace(/ /g,'').toUpperCase();
 		var housenumber = $('#billing_housenumber').val();
 		var housenumber = housenumber.replace(/[^0-9]/g,'');
-		var site_url = parameters.url;
 		
-		$.ajax({        
-				url: site_url +'/wp-content/themes/siw/includes/siw-postcode.php',
-				type: 'GET',
-				dataType: 'json',
-				data: 'postcode=' + postcode + '&housenumber=' + housenumber,
-				
+		$.ajax({
+			url : parameters.ajax_url,
+			type : 'get',
+			dataType: 'json',
+			data : {
+				action : 'postcode_lookup',
+				postcode : postcode,
+				housenumber : housenumber
+			},
 			success: function(result) {
 				if(result.success == 1) {
 					$('#billing_city').val(result.resource.town);
@@ -81,9 +82,6 @@
 			},
 		});
 		return false;
-		});
-	}) 
-
-
+    });
 	
 })(jQuery);
