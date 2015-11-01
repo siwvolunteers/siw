@@ -31,31 +31,30 @@
 		var housenumber = housenumber.replace(/[^0-9]/g,'');
 		
 		if ((postcode != '') && (housenumber != '')){
-		
-		$.ajax({
-			url : parameters.ajax_url,
-			type : 'get',
-			dataType: 'json',
-			data : {
-				action : 'postcode_lookup',
-				postcode : postcode,
-				housenumber : housenumber
-			},
-			success: function(result) {
-				if(result.success == 1) {
-					$('.plaats').val(result.resource.town);
-					$('.straat').val(result.resource.street);
-					$('.plaats').prop('disabled', true);		  
-					$('.straat').prop('disabled', true);		  
-				}
-				else {
-					$('.plaats').val('');
-					$('.straat').val('');
-					$('.plaats').prop('disabled', false);		  
-					$('.straat').prop('disabled', false);		
-				}             
-			},
-		});
+			$.ajax({
+				url : parameters.ajax_url,
+				type : 'get',
+				dataType: 'json',
+				data : {
+					action : 'postcode_lookup',
+					postcode : postcode,
+					housenumber : housenumber
+				},
+				success: function(result) {
+					if(result.success == 1) {
+						$('.plaats').val(result.resource.town);
+						$('.straat').val(result.resource.street);
+						$('.plaats').prop('disabled', true);		  
+						$('.straat').prop('disabled', true);		  
+					}
+					else {
+						$('.plaats').val('');
+						$('.straat').val('');
+						$('.plaats').prop('disabled', false);		  
+						$('.straat').prop('disabled', false);		
+					}             
+				},
+			});
 		}
 		return false;
     });

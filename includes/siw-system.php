@@ -55,12 +55,12 @@ function siw_remove_plugin_metaboxes(){
 
 add_action('login_head', 'siw_custom_login');
 function siw_custom_login() {
-	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('stylesheet_directory') . '/assets/css/siw-login-styles.css" />';
+	echo '<link rel="stylesheet" type="text/css" href="' . get_stylesheet_directory_uri()  . '/assets/css/siw-login-styles.css" />';
 }
 
 add_filter( 'login_headerurl', 'siw_login_logo_url' );
 function siw_login_logo_url() {
-	return get_bloginfo( 'url' );
+	return get_home_url('','','http');
 }
 
 add_filter( 'login_headertitle', 'siw_login_logo_url_title' );
@@ -93,11 +93,11 @@ function siw_change_permalink_structure() {
 //pdf en doc(x) upload toestaan
 add_filter('upload_mimes', 'siw_custom_upload_mimes');
 
-function siw_custom_upload_mimes( $existingMimes=array() ){
-	$existingMimes['doc'] = 'application/msword'; 
-	$existingMimes['docx'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; 
-	$existingMimes['pdf'] = 'application/pdf';	
-	return $existingMimes;
+function siw_custom_upload_mimes( $existing_mimes=array() ){
+	$existing_mimes['doc'] = 'application/msword'; 
+	$existing_mimes['docx'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; 
+	$existing_mimes['pdf'] = 'application/pdf';	
+	return $existing_mimes;
 }
 
 //attachment verwijderen nadat deze per mail verstuurd is.
@@ -156,7 +156,7 @@ function siw_disable_emojicons_tinymce( $plugins ) {
 //footer van admin
 add_filter('admin_footer_text', 'siw_change_admin_footer');
 function siw_change_admin_footer () { 
-	echo '&copy;2015 SIW Internationale Vrijwilligersprojecten'; 
+	echo '&copy;' . date("Y") . ' SIW Internationale Vrijwilligersprojecten'; 
 } 
  
 ///vervang Google Analytics functie door custom functie en voor Pingdom Real Use Monitoring toe
@@ -230,21 +230,6 @@ function child_manage_woocommerce_styles() {
 	if (!isset($_COOKIE['wp_woocommerce_session_'])){
 		wp_dequeue_script( 'wc-cart-fragments' );
 	}
-}
-*/
-
-
-/*upload-directory van VFB-pro aanpassen
-add_filter( 'vfbp_upload_directory', 'vfbp_filter_upload_directory', 10, 2 );
-  
-function vfbp_filter_upload_directory( $upload, $form_id ){    
-    $dir = 'my-awesome-directory';
- 
-    $upload['subdir'] = "/$dir" . $upload['subdir'];
-    $upload['path']    = $upload['basedir'] . $upload['subdir'];
-    $upload['url']       = $upload['baseurl'] . $upload['subdir'];
-     
-    return $upload;
 }
 */
 

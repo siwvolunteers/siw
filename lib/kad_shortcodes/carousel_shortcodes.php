@@ -10,6 +10,7 @@ function kad_carousel_shortcode_function( $atts, $content) {
 		'cat' => '',
 		'fullwidth' => 'standard',
 		'readmore' => false,
+		'ratio' => 'defualt',
 		'items' => '8'
 ), $atts));
 	$carousel_rn = (rand(10,100));
@@ -34,14 +35,19 @@ function kad_carousel_shortcode_function( $atts, $content) {
 		      		$shortcodeclasses[] = $pstyleclass;
 				    $shortcodeclasses[] = $phoverstyleclass;
 				    $shortcodeclasses[] = 'kt-portfolio-carousel';
+				    if(isset($pinnacle['portfolio_viewdetails_text']) && !empty($pinnacle['portfolio_viewdetails_text']) ) {
+		            	$viewdetails = $pinnacle['portfolio_viewdetails_text'];
+			        } else {
+			            $viewdetails = __('View details', 'pinnacle');
+			        }
 		      	} else {
 		      		$shortcodeclasses[] = '';
 		      	}
 ob_start(); ?>
 				<div class="carousel_outerrim kad-animation" data-animation="fade-in" data-delay="0">
 				<div class="home-margin fredcarousel">
-				<div id="carouselcontainer-<?php echo $carousel_rn; ?>" class="rowtight <?php echo implode(" ", $shortcodeclasses);?> fadein-carousel">
-				<div id="carousel-<?php echo $carousel_rn; ?>" class="clearfix <?php echo $product_shop_style;?> blog_carousel caroufedselclass products">
+				<div id="carouselcontainer-<?php echo esc_attr($carousel_rn); ?>" class="rowtight <?php echo implode(" ", $shortcodeclasses);?> fadein-carousel">
+				<div id="carousel-<?php echo esc_attr($carousel_rn); ?>" class="clearfix <?php echo esc_attr($product_shop_style);?> blog_carousel caroufedselclass products">
 	<?php if ($type == "portfolio") {
 		      		if(isset($pinnacle['portfolio_ratio_default'])) {
                    	$pimgratio = $pinnacle['portfolio_ratio_default'];
@@ -74,118 +80,28 @@ ob_start(); ?>
 					} else {
 						$slideheight = $slidewidth;
 					}
+					global $kt_portfolio_loop;
+                 $kt_portfolio_loop = array(
+                 	'lightbox' => 'false',
+                 	'showexcerpt' => 'false',
+                 	'showtypes' => 'true',
+                 	'pstyleclass' => $pstyleclass,
+                 	'viewdetails' => $viewdetails,
+                 	'slidewidth' => $slidewidth,
+                 	'slideheight' => $slideheight,
+                 	);
 		        if(!empty($cat)){$portfolio_category = $cat;} else {$portfolio_category = '';}
 				$wp_query = null; 
 				$wp_query = new WP_Query();
 						$wp_query->query(array('orderby' => $orderby,'order' => $order,'post_type' => 'portfolio','portfolio-type'=>$portfolio_category,'posts_per_page' => $items));
 						if ( $wp_query ) :  while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
-						<?php global $post;?>
-						<div class="<?php echo $itemsize;?> all p-item">
-                			<div class="portfolio-item grid_item postclass kad-light-gallery">
-					
-                       <?php $postsummery = get_post_meta( $post->ID, '_kad_post_summery', true );
-						     if ($postsummery == 'slider') { ?>
-						     <div class="portfolio-imagepadding">
-                           <div class="flexslider kt-flexslider loading imghoverclass clearfix" data-flex-speed="7000" data-flex-anim-speed="400" data-flex-animation="fade" data-flex-auto="true">
-                       <ul class="slides kad-light-gallery">
-                          <?php 
-                          global $post;
-	                      $image_gallery = get_post_meta( $post->ID, '_kad_image_gallery', true );
-	                            $attachments = array_filter( explode( ',', $image_gallery ) );
-	                              if ($attachments) {
-	                              foreach ($attachments as $attachment) {
-	                                $thumbnailURL = wp_get_attachment_url($attachment , 'full');
-	                                $image = aq_resize($thumbnailURL, $slidewidth, $slideheight, true);
-	                                  if(empty($image)) {$image = $thumbnailURL;}?>
-	                                  <li><a href="<?php the_permalink() ?>" class=""><img src="<?php echo $image ?>" width="<?php echo $slidewidth;?>" height="<?php echo $slideheight;?>" class="" />
-	                                  <div class="portfolio-hoverover"></div>
-	                                       <div class="portfolio-table">
-	                                       		<div class="portfolio-cell">
-	                                       			<?php if($pstyleclass == "padded_style" ) { ?>
-		                                       				<a href="<?php the_permalink() ?>" class="kad-btn kad-btn-primary"><?php echo __('View details', 'pinnacle');?></a>
-		                                       		<?php } elseif($pstyleclass == "flat-no-margin" || $pstyleclass == "flat-w-margin" ) { ?>
-		                                       				<h5><?php the_title();?></h5>
-                           									<?php $terms = get_the_terms( $post->ID, 'portfolio-type' ); if ($terms) {?> <p class="cportfoliotag"><?php $output = array(); foreach($terms as $term){ $output[] = $term->name;} echo implode(', ', $output); ?></p> <?php } ?>
-		                                       		<?php } ?>
-		                                       </div>
-	                                       </div>
-	                                   </a>
-	                                   </li>
-	                                <?php }
-	                          }  ?>                            
-					</ul>
-              	</div> <!--Flex Slides-->
-              </div>
-              <?php } else if($postsummery == 'videolight') { 
-
-							if (has_post_thumbnail( $post->ID ) ) {
-									$image_url = wp_get_attachment_image_src( 
-									get_post_thumbnail_id( $post->ID ), 'full' ); 
-									$thumbnailURL = $image_url[0]; 
-									 $image = aq_resize($thumbnailURL, $slidewidth, $slideheight, true);
-									 $video_string = get_post_meta( $post->ID, '_kad_post_video_url', true );
-									 if(!empty($video_string)) {$video_url = $video_string;} else {$video_url = $thumbnailURL;}
-
-									if(empty($image)) {$image = $thumbnailURL;} ?>
-									<div class="portfolio-imagepadding kt-portfolio-video">
-										<div class="portfolio-hoverclass">
-											<a href="<?php the_permalink() ?>" class="">
-	                                       <img src="<?php echo $image ?>" alt="<?php the_title(); ?>" class="kad-lightboxhover">
-	                                       <div class="portfolio-hoverover"></div>
-	                                       <div class="portfolio-table">
-	                                       		<div class="portfolio-cell">
-	                                       			<?php if($pstyleclass == "padded_style" ) { ?>
-		                                       				<a href="<?php the_permalink() ?>" class="kad-btn kad-btn-primary"><?php echo __('View details', 'pinnacle');?></a>
-		                                       		<?php } elseif($pstyleclass == "flat-no-margin" || $pstyleclass == "flat-w-margin" ) { ?>
-		                                       				<h5><?php the_title();?></h5>
-                           									<?php $terms = get_the_terms( $post->ID, 'portfolio-type' ); if ($terms) {?> <p class="cportfoliotag"><?php $output = array(); foreach($terms as $term){ $output[] = $term->name;} echo implode(', ', $output); ?></p> <?php } ?>
-		                                       		<?php } ?>
-		                                       </div>
-	                                       </div>
-	                                   </a>
-	                                   </div>
-	                                </div>
-	                                <?php $image = null; $thumbnailURL = null;?>
-                <?php }
-              } else {
-								if (has_post_thumbnail( $post->ID ) ) {
-									$image_url = wp_get_attachment_image_src( 
-									get_post_thumbnail_id( $post->ID ), 'full' ); 
-									$thumbnailURL = $image_url[0]; 
-									 $image = aq_resize($thumbnailURL, $slidewidth, $slideheight, true);
-
-									if(empty($image)) {$image = $thumbnailURL;} ?>
-									<div class="portfolio-imagepadding">
-										<div class="portfolio-hoverclass">
-											<a href="<?php the_permalink() ?>" class="">
-	                                       <img src="<?php echo $image ?>" alt="<?php the_title(); ?>" width="<?php echo $slidewidth;?>" height="<?php echo $slideheight;?>" class="kad-lightboxhover">
-	                                       <div class="portfolio-hoverover"></div>
-	                                       <div class="portfolio-table">
-	                                       		<div class="portfolio-cell">
-	                                       			<?php if($pstyleclass == "padded_style" ) { ?>
-		                                       				<a href="<?php the_permalink() ?>" class="kad-btn kad-btn-primary"><?php echo __('View details', 'pinnacle');?></a>
-		                                       		<?php } elseif($pstyleclass == "flat-no-margin" || $pstyleclass == "flat-w-margin" ) { ?>
-		                                       				<h5><?php the_title();?></h5>
-                           									<?php $terms = get_the_terms( $post->ID, 'portfolio-type' ); if ($terms) {?> <p class="cportfoliotag"><?php $output = array(); foreach($terms as $term){ $output[] = $term->name;} echo implode(', ', $output); ?></p> <?php } ?>
-		                                       		<?php } ?>
-		                                       </div>
-	                                       </div>
-	                                   </a>
-	                                   </div>
-	                                </div>
-	                                <?php $image = null; $thumbnailURL = null;?>
-                           <?php } } ?>
-                           <?php if($pstyleclass == "padded_style" ) { ?>
-		              		<a href="<?php the_permalink() ?>" class="portfoliolink">
-			              		<div class="piteminfo">   
-			                          <h5><?php the_title();?></h5>
-			                           <?php $terms = get_the_terms( $post->ID, 'portfolio-type' ); if ($terms) {?> <p class="cportfoliotag"><?php $output = array(); foreach($terms as $term){ $output[] = $term->name;} echo implode(', ', $output); ?></p> <?php } ?>
-			                    </div>
-		                	</a>
-                	<?php } ?>
-                		</div>
-                    </div>
-					<?php endwhile; else: ?>
+						<div class="<?php echo esc_attr($itemsize);?> all p-item">
+                		<?php do_action('kadence_portfolio_loop_start');
+							get_template_part('templates/content', 'loop-portfolio'); 
+						  do_action('kadence_portfolio_loop_start');
+						?>
+	                    </div>
+						<?php endwhile; else: ?>
 					<li class="error-not-found"><?php _e('Sorry, no portfolio entries found.', 'pinnacle');?></li>
 				<?php endif; $wp_query = null; wp_reset_query(); ?>
             </div></div>
@@ -298,6 +214,7 @@ ob_start(); ?>
 				  $wp_query = null; 
 				  $wp_query = new WP_Query();
 				  $wp_query->query(array('post_type' => 'product','orderby' => $orderby, 'order' => $order, 'product_cat'=>$product_category, 'post_status' => 'publish','posts_per_page' => $items, 'meta_key' => '_visibility', 'meta_value' => 'visible'));
+				  
 					if ( $wp_query ) : while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
 					<?php woocommerce_get_template_part( 'content', 'product' ); ?>
 					<?php endwhile; ?>

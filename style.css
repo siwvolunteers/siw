@@ -139,7 +139,6 @@ a::after, .kad-post-navigation .kad-previous-link a span::before, .kad-post-navi
 
 .kad-slider-btn:hover{
 	background-color: #444 !important;
-
 }
 
 /*iconbox hover-kleur*/
@@ -154,6 +153,9 @@ a::after, .kad-post-navigation .kad-previous-link a span::before, .kad-post-navi
     background: none repeat scroll 0 0 #ff9900;
 }
 
+.kad-icon-box .kad-btn{
+	font-size:14px;
+}
 
 /*styling voor datepicker*/
 
@@ -287,7 +289,7 @@ span.price span.amount{
 }
 
 /*resetlink voor tarieven verbergen*/
-.reset_variations, p.price{
+a.reset_variations, p.price{
 	display:none !important;
 }
 
@@ -458,6 +460,10 @@ input[type="text"]:disabled {
 .modal-body{
 	height:65vh;
 	overflow-y:auto;	
+}
+
+.modal-footer{
+	padding:10px;
 }
 
 .hide-button button.sm-kad-btn{
