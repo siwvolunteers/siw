@@ -159,22 +159,15 @@ function siw_change_admin_footer () {
 	echo '&copy;2015 SIW Internationale Vrijwilligersprojecten'; 
 } 
  
-///vervang Google Analytics functie door custom functie en voor Pingdom Real Use Monitoring toe
+///vervang Google Analytics functie door custom functie
 add_action( 'after_setup_theme', 'siw_after_theme_setup' );
 function siw_after_theme_setup() {
-	$google_analytics_id = siw_get_google_analytics_id();
-	define('GOOGLE_ANALYTICS_ID', $google_analytics_id); // UA-XXXXX-Y
+	global $pinnacle; if(isset($pinnacle['google_analytics'])) { $g_analytics = $pinnacle['google_analytics'];} else {$g_analytics = '';}
+	define('GOOGLE_ANALYTICS_ID', $g_analytics); // UA-XXXXX-Y
 	if (GOOGLE_ANALYTICS_ID) {
 		remove_action('wp_footer', 'kadence_google_analytics', 20);
 		add_action( 'wp_footer', 'siw_google_analytics', 20 );
 	}
-	
-	$pingdom_rum_id = siw_get_pingdom_rum_id();
-	define('PINGDOM_RUM_ID', $pingdom_rum_id );
-	if ( PINGDOM_RUM_ID ){
-		add_action('wp_head','siw_pingdom_rum');
-	}
-	
 }
 
 function siw_google_analytics() {?>
@@ -190,19 +183,6 @@ function siw_google_analytics() {?>
 </script>
 <?php }
 
-function siw_pingdom_rum() {?>
-<script>
-var _prum = [['id', '<?php echo PINGDOM_RUM_ID; ?>'],
-             ['mark', 'firstbyte', (new Date()).getTime()]];
-(function() {
-    var s = document.getElementsByTagName('script')[0]
-      , p = document.createElement('script');
-    p.async = 'async';
-    p.src = '//rum-static.pingdom.net/prum.min.js';
-    s.parentNode.insertBefore(p, s);
-})();
-</script>
-<?php }
 
 
 /*instellen starttijd Updraft Plus backup*/
