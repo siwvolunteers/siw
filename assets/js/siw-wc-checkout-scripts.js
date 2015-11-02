@@ -52,7 +52,7 @@
    
 	})
 
-	$("#billing_postcode, #billing_housenumber").change(function(){
+	$(document).on('change', '#billing_postcode, #billing_housenumber', function() {
 		var postcode = $('#billing_postcode').val().replace(/ /g,'').toUpperCase();
 		var housenumber = $('#billing_housenumber').val();
 		var housenumber = housenumber.replace(/[^0-9]/g,'');
@@ -70,14 +70,14 @@
 					if(result.success == 1) {
 						$('#billing_city').val(result.resource.town);
 						$('#billing_address_1').val(result.resource.street);
-						$('#billing_city').prop('disabled', true);		  
-						$('#billing_address_1').prop('disabled', true);		  
+						//$('#billing_city').prop('disabled', true);		  
+						//$('#billing_address_1').prop('disabled', true);		  
 					}
 					else {
 						$('#billing_city').val('');
 						$('#billing_address_1').val('');
-						$('#billing_city').prop('disabled', false);		  
-						$('#billing_address_1').prop('disabled', false);		
+						//$('#billing_city').prop('disabled', false);		  
+						//$('#billing_address_1').prop('disabled', false);		
 					}             
 				},
 			});
