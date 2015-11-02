@@ -131,10 +131,15 @@ function siw_wc_free_places_left( $free_places_male, $free_places_female ){
 
 function siw_wc_age_range( $minimum_age, $maximum_age ){
 	$minimum_age = (integer) $minimum_age;
-	$age_range = '';
-	if ( $minimum_age>0){
-		$age_range = $minimum_age . " t/m " . $maximum_age . " jaar";
+	$maximum_age = (integer) $maximum_age;
+	if ($minimum_age < 1){
+		$minimum_age = 18;
+	}	
+	if ($maximum_age < 1){
+		$maximum_age = 99;
 	}
+	$age_range = '';
+	$age_range = $minimum_age . " t/m " . $maximum_age . " jaar";
 	return $age_range;
 }
 
