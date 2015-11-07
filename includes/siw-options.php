@@ -71,7 +71,6 @@ function siw_settings_signatures_init(){
 		'siw_signatures_contact_forms', 
 		'siw_signature_camp_leader' 
 	);	
-	/*
 	add_settings_field( 
 		'siw_signature_evs', 
 		__( 'EVS aanmelding', 'siw' ), 
@@ -87,8 +86,7 @@ function siw_settings_signatures_init(){
 		'siw_signatures',
 		'siw_signatures_application_forms', 
 		'siw_signature_op_maat' 
-	);	
-	
+	);		
 	add_settings_field( 
 		'siw_signature_community_day', 
 		__( 'Community day', 'siw' ), 
@@ -96,7 +94,7 @@ function siw_settings_signatures_init(){
 		'siw_signatures',
 		'siw_signatures_application_forms', 
 		'siw_signature_community_day' 
-	);	*/
+	);	
 	add_settings_field( 
 		'siw_signature_workcamp', 
 		__( 'Groepsproject', 'siw' ), 
@@ -428,3 +426,24 @@ function siw_settings_page(  ) {?>
 		</form>     
     </div><?php
 }
+
+
+/*
+E-mail templates bijwerken na aanpassen ondertekening
+*/
+
+add_action( 'update_option_siw_signature_evs', 'siw_update_email_template_evs', 10, 3 );
+function siw_update_email_template_evs($old_value, $value ) {
+	siw_update_vfb_mail_template('evs');
+}
+
+add_action( 'update_option_siw_signature_op_maat', 'siw_update_email_template_op_maat', 10, 3 );
+function siw_update_email_template_op_maat($old_value, $value ) {
+	siw_update_vfb_mail_template('op_maat');
+}
+
+add_action( 'update_option_siw_signature_community_day', 'siw_update_email_template_community_day', 10, 3 );
+function siw_update_email_template_community_day($old_value, $value ) {
+	siw_update_vfb_mail_template('community_day');
+}
+
