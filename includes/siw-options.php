@@ -14,7 +14,13 @@ add_action( 'admin_init', 'siw_settings_evs_init' );
 add_action( 'admin_init', 'siw_settings_api_init' );
 
 function siw_add_settings_menu(){ 
-	add_menu_page( 'Instellingen SIW', 'Instellingen SIW', 'manage_options', 'siw_settings', 'siw_settings_page','dashicons-admin-settings');
+	add_menu_page( 'Instellingen SIW', 'Instellingen SIW', 'manage_options', 'siw_settings', 'siw_settings_page','dashicons-admin-settings',110);
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Algemeen', 'manage_options', 'siw_settings');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Ondertekening', 'manage_options', 'admin.php?page=siw_settings&tab=signatures');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Tarieven', 'manage_options', 'admin.php?page=siw_settings&tab=tariffs');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'PLATO', 'manage_options', 'admin.php?page=siw_settings&tab=plato');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'EVS', 'manage_options', 'admin.php?page=siw_settings&tab=evs');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'API keys', 'manage_options', 'admin.php?page=siw_settings&tab=api');
 }
 
 function siw_settings_signatures_init(){ 
