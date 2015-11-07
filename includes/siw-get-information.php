@@ -513,6 +513,11 @@ function siw_get_array( $array ){
 					'name'  	=> 'Griekenland' ,
 					'continent'	=> 'europa',
 				);
+				$project_countries['HKG'] = array(
+					'slug'		=> 'hong-kong',
+					'name'  	=> 'Hong Kong' ,
+					'continent'	=> 'azie',
+				);
 				$project_countries['HUN'] = array(
 					'slug'		=> 'hongarije',
 					'name'  	=> 'Hongarije' ,
