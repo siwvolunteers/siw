@@ -331,6 +331,10 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a{
     background: #ffcc44 none repeat scroll 0 0;
 }
 
+.wizard > .steps a, .wizard > .steps a:hover, .wizard > .steps a:active {
+	text-align: left;
+}
+
 .form-row-day .select2-container, .form-row-month .select2-container , .form-row-year .select2-container{
 	min-width: 50px;
 }
@@ -443,7 +447,9 @@ input[type="text"]:disabled {
 }
 
 
-
+#mailpoet_subscription_section h3{
+	display:none;
+}
 
 #mailpoet_checkout_subscribe_field .checkbox{
 	padding-left:0px;
