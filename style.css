@@ -420,6 +420,7 @@ input[type="submit"], input[type="file"] {
     -webkit-transition: background .6s ease-out; 
     -moz-transition: background .6s ease-out; 
     -o-transition: background .6s ease-out;
+	font-size: 14px !important;
 }
 input[type="submit"]:hover, input[type="file"]:hover, .btn-primary:focus{
 	background: #ffcc33 !important; 
