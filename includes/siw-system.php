@@ -285,7 +285,7 @@ function siw_cf7_set_site_url( $output, $name, $html ) {
 //update alle mailtemplates na theme-update
 add_action('wppusher_theme_was_updated', 'siw_update_all_mail_templates', 10, 1);
 
-function siw_update_all_mail_templates(ThemeWasInstalled $action){
+function siw_update_all_mail_templates(){
 	//vfb templates
     siw_update_vfb_mail_template('evs');
 	siw_update_vfb_mail_template('op_maat');
