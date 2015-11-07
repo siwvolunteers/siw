@@ -25,6 +25,16 @@ function siw_get_pingdom_rum_id(){
 	return $pingdom_rum_id;
 }
 
+function siw_get_db_backup_time(){
+	$db_backup_time = '03:00';
+	return $db_backup_time;
+}
+
+function siw_get_files_backup_time(){
+	$files_backup_time = '04:00';
+	return $files_backup_time;
+}
+
 //EVS
 function siw_get_evs_next_deadline(){
 	$evs_deadlines[]= get_option( 'siw_evs_deadline_1' );
