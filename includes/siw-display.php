@@ -1,5 +1,10 @@
 <?php
-
+/*
+(c)2015 SIW Internationale Vrijwilligersprojecten
+*/
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 //shortcodes mogelijk maken in text widget
 add_filter( 'widget_text', 'do_shortcode' );
 
@@ -49,4 +54,22 @@ function kt_category_image_onproduct() {
 			}
 		}
 	}
+}
+
+//evs kaart niet tonen op mobiel
+add_filter( 'siteorigin_panels_data', 'siw_hide_mapplic_on_mobile', 1 );
+
+function siw_hide_mapplic_on_mobile( $panels_data ){
+	$detect = new Mobile_Detect_pinnacle;
+	if($detect->isMobile()) {
+		if( !empty($panels_data['widgets']) && is_array($panels_data['widgets']) ) {
+			foreach( $panels_data['widgets'] as &$widget ) {
+				if ( $widget['panels_info']['style']['class'] == 'mapplic'){
+				$index = $widget['panels_info']['id'];
+				}
+			}
+		}
+		array_splice($panels_data['widgets'], $index, 1);
+	}
+	return $panels_data;
 }

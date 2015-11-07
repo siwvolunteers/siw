@@ -49,64 +49,40 @@
 		
 		//uitvoeren
 		$('.mCheck').mCheckable({innerTags: "<div></div>"});
-		
-		// lightbox met voorwaarden
-		var popup = $('#terms-and-conditions').mPopup();
-
-		$('#open-terms-and-conditions').on('click',function(e){
-			e.preventDefault();
-			popup.mPopup('open');
-		});
-    
+   
 	})
 
-	$(document).on('click', '#accept-terms', function(){
-		$('#terms-and-conditions').mPopup('close');
-		$("#terms").prop( "checked", true );
-		$('.terms .mCheckable').addClass('checked');
-
-	});
-	
-	$(document).on('click', '#cancel-terms', function(){
-		$('#terms-and-conditions').mPopup('close');
-		$("#terms").prop( "checked", false );
-		$('.terms .mCheckable').removeClass('checked');
-
-	});
-
-
-	$(document).ready(function() {   
-		$("#billing_postcode, #billing_housenumber").change(function(){
+	$(document).on('change', '#billing_postcode, #billing_housenumber', function() {
 		var postcode = $('#billing_postcode').val().replace(/ /g,'').toUpperCase();
 		var housenumber = $('#billing_housenumber').val();
 		var housenumber = housenumber.replace(/[^0-9]/g,'');
-		var site_url = parameters.url;
-		
-		$.ajax({        
-				url: site_url +'/wp-content/themes/pinnacle_child/includes/siw-postcode.php',
-				type: 'GET',
+		if ((postcode != '') && (housenumber != '')){
+			$.ajax({
+				url : parameters.ajax_url,
+				type : 'get',
 				dataType: 'json',
-				data: 'postcode=' + postcode + '&housenumber=' + housenumber,
-				
-			success: function(result) {
-				if(result.success == 1) {
-					$('#billing_city').val(result.resource.town);
-					$('#billing_address_1').val(result.resource.street);
-					$('#billing_city').prop('disabled', true);		  
-					$('#billing_address_1').prop('disabled', true);		  
-				}
-				else {
-					$('#billing_city').val('');
-					$('#billing_address_1').val('');
-					$('#billing_city').prop('disabled', false);		  
-					$('#billing_address_1').prop('disabled', false);		
-				}             
-			},
-		});
+				data : {
+					action : 'postcode_lookup',
+					postcode : postcode,
+					housenumber : housenumber
+				},
+				success: function(result) {
+					if(result.success == 1) {
+						$('#billing_city').val(result.resource.town);
+						$('#billing_address_1').val(result.resource.street);
+						//$('#billing_city').prop('disabled', true);		  
+						//$('#billing_address_1').prop('disabled', true);		  
+					}
+					else {
+						$('#billing_city').val('');
+						$('#billing_address_1').val('');
+						//$('#billing_city').prop('disabled', false);		  
+						//$('#billing_address_1').prop('disabled', false);		
+					}             
+				},
+			});
+		}
 		return false;
-		});
-	}) 
-
-
+    });
 	
 })(jQuery);

@@ -1,11 +1,12 @@
 /*
-Theme Name: SIW 2015
+Theme Name: SIW
 Theme URI: http://www.siw.nl
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Author URI: http://www.siw.nl
 Template: pinnacle_premium
-Version: 1.1
+Version: 1.2
+GitHub Theme URI: https://github.com/siwvolunteers/siw
 */
 
 
@@ -44,7 +45,43 @@ Algemene styling
 /*tekst in widget-invoervelden grijs*/
 .widget_wysija_cont .wysija-paragraph .wysija-input {
 	color:#444;
+	box-shadow:none;
 }
+
+.widget_wysija_cont .wysija-paragraph .wysija-input:focus {
+	box-shadow:none;
+}
+
+.widget_wysija_cont .wysija-paragraph .formError{
+	position:static !important;
+	opacity:1 !important;
+	cursor: pointer;
+	z-index: 5000;
+}
+.wysija-paragraph .formError .formErrorContent, .widget_wysija_cont .allmsgs{
+	background: none;
+	font-family: inherit;
+	font-size:11px;
+	border: 1px solid #59ab9c;
+	border-radius: 4px;
+    color: #59ab9c;
+	margin-bottom:4px;
+	padding: 4px 10px;
+	position: relative;
+    width: 100%;
+    z-index: 5001;	
+}
+
+.widget_wysija_cont .abs-req {
+    display: none;
+}
+
+.widget_wysija_cont .allmsgs li {
+    list-style-type: none;
+}
+
+
+
 
 h3{
 	text-align:center;
@@ -102,7 +139,6 @@ a::after, .kad-post-navigation .kad-previous-link a span::before, .kad-post-navi
 
 .kad-slider-btn:hover{
 	background-color: #444 !important;
-
 }
 
 /*iconbox hover-kleur*/
@@ -117,6 +153,9 @@ a::after, .kad-post-navigation .kad-previous-link a span::before, .kad-post-navi
     background: none repeat scroll 0 0 #ff9900;
 }
 
+.kad-icon-box .kad-btn{
+	font-size:14px;
+}
 
 /*styling voor datepicker*/
 
@@ -145,6 +184,43 @@ Styling voor testimonials
 .wpm-testimonial h1.entry-title{
 	display:none;
 }
+
+
+/*
+Styling voor testimonialpagina
+*/
+.strong-content{
+	display:flex;
+	flex-wrap: wrap;
+}
+
+.strong-content .testimonial{
+	float:left;
+	margin:15px;
+	background-color:#f9f9f9;
+	border-radius:4px;
+	padding:10px;	
+}
+.testimonial .inner .content .photo{
+	margin: 10px;
+}
+
+.testimonial .inner .readmore a{
+	float:right;
+}
+
+@media (min-width: 767px){
+	.strong-content .testimonial{
+		width:45%;
+	}
+	.testimonial .inner .content{
+		display:flex;
+	}
+	
+	
+}
+
+
 
 
 /*
@@ -213,7 +289,7 @@ span.price span.amount{
 }
 
 /*resetlink voor tarieven verbergen*/
-.reset_variations, p.price{
+a.reset_variations, p.price{
 	display:none !important;
 }
 
@@ -253,6 +329,10 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a{
 
 .wizard > .steps .done a, .wizard > .steps .done a:hover, .wizard > .steps .done a:active {
     background: #ffcc44 none repeat scroll 0 0;
+}
+
+.wizard > .steps a, .wizard > .steps a:hover, .wizard > .steps a:active {
+	text-align: left;
 }
 
 .form-row-day .select2-container, .form-row-month .select2-container , .form-row-year .select2-container{
@@ -344,6 +424,7 @@ input[type="submit"], input[type="file"] {
     -webkit-transition: background .6s ease-out; 
     -moz-transition: background .6s ease-out; 
     -o-transition: background .6s ease-out;
+	font-size: 14px !important;
 }
 input[type="submit"]:hover, input[type="file"]:hover, .btn-primary:focus{
 	background: #ffcc33 !important; 
@@ -366,7 +447,9 @@ input[type="text"]:disabled {
 }
 
 
-
+#mailpoet_subscription_section h3{
+	display:none;
+}
 
 #mailpoet_checkout_subscribe_field .checkbox{
 	padding-left:0px;
@@ -379,6 +462,20 @@ input[type="text"]:disabled {
 	padding-left:0px !important;
 }
 
+
+/*modal*/
+.modal-body{
+	height:65vh;
+	overflow-y:auto;	
+}
+
+.modal-footer{
+	padding:10px;
+}
+
+.hide-button button.sm-kad-btn{
+	display:none;
+}
 
 /*styling voor visual form builder*/
 
@@ -630,9 +727,8 @@ Styling voor mobiel
 
 
 
-
 /*
-kopieën van mPopup.css en mCheckable.css om aantal stylesheets te verminderen
+kopie van mCheckable.css om aantal stylesheets te verminderen
 */
 
 /*! mCheckable - v1.0.2 - 2015-03-01
@@ -688,74 +784,4 @@ kopieën van mPopup.css en mCheckable.css om aantal stylesheets te verminderen
 	font-size:16px !important;
 
 
-}
-
-
-
-/*! mPopup - v1.0.9 - 2015-03-01
-* https://github.com/mIRUmd/mPopup/
-* Copyright (c) 2015 Balan Miroslav; */
-
-.mPopup{
-    top: 50%;
-	/*bottom:5% !important;*/
-    left: 50%;
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    z-index: 9999;
-    max-width: 700px;
-    display: none;
-    width: 88%;
-    -webkit-border-radius: 3px;
-            border-radius: 3px;
-}
-
-.mPopup-overlay{
-    background-color: #000;
-    opacity: 0.7;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 9998;
-    display: none;
-}
-
-.mPopup-close{
-    background: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: none;
-    color: #ccc;
-    font-size: 2em;
-    line-height: 1;
-}
-
-.mPopup-close:hover{ color: #3e3e3e; }
-
-.mPopup .popup-header{
-    margin: 0;
-    font-size: 17px;
-    border-bottom: 1px solid #e5e5e5;
-    padding: 15px;
-}
-
-
-.mPopup .popup-body{
-	height:70vh;
-	overflow-y:auto;
-    padding: 15px;
-	position:relative;
-}
-
-.mPopup .popup-footer{
-	display:none;
-	/*
-	border-top: 1px solid #e5e5e5;
-    margin-top: 15px;
-    padding: 19px 20px 20px;
-    text-align: right;
-	*/
 }

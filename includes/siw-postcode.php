@@ -2,26 +2,20 @@
 /*
 (c)2015 SIW Internationale Vrijwilligersprojecten
 */
-
-
-define('APIKEY', '2e68fc5a552f49564269b903b3df0f07b33a7246');
-
-   
-function strip4url( $title , $seperator = '-' ){
-    $title = preg_replace( '/[^a-z0-9\s]/i' , '' , $title );
-
-    if (!empty($title) && strlen($title) <= 6)    
-        return $title;
-    else
-        return false;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
 }
 
-if(basename($_SERVER['PHP_SELF']) == basename(__FILE__)):
-    
-    if($_SERVER['REQUEST_METHOD'] == 'GET'):
-	
-	$postcode = strtoupper(strip4url($_GET['postcode']));
-	$houseNumber = strip4url($_GET['housenumber']);
+add_action( 'siw_ajax_nopriv_postcode_lookup', 'siw_postcode_lookup' );
+add_action( 'siw_ajax_postcode_lookup', 'siw_postcode_lookup' );
+
+function siw_postcode_lookup() {
+
+	$api_key = siw_get_postcode_api_key();
+	define('APIKEY', $api_key);
+
+	$postcode = strtoupper(siw_strip_url($_GET['postcode']));
+	$houseNumber = siw_strip_url($_GET['housenumber']);
    
     $url = 'http://api.postcodeapi.nu/' . str_replace(' ', '', $postcode) . '/' . $houseNumber . '/';
     $ch = curl_init();
@@ -34,17 +28,17 @@ if(basename($_SERVER['PHP_SELF']) == basename(__FILE__)):
     $return_data = curl_exec($ch);
     curl_close($ch);
         
-	$json = json_decode($return_data, true);
-	print $return_data;
+	//$json = json_decode($return_data, true);
+	echo $return_data;	
+	die();
 
-    else:
-        header("Location: /");
+}
+   
+function siw_strip_url( $title , $seperator = '-' ){
+    $title = preg_replace( '/[^a-z0-9\s]/i' , '' , $title );
 
-    endif;
-
-else:
-    header("Location: /");
-
-endif;
-
-
+    if (!empty($title) && strlen($title) <= 6)    
+        return $title;
+    else
+        return false;
+}

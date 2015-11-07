@@ -1,65 +1,152 @@
 <?php
+/*
+(c)2015 SIW Internationale Vrijwilligersprojecten
+*/
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+//API keys
+function siw_get_postcode_api_key(){
+	$postcode_api_key = get_option('siw_api_postcode_api_key');
+	return $postcode_api_key;
+}
 
+function siw_get_plato_organization_webkey(){
+	$organization_webkey = get_option('siw_plato_organization_web_key');//
+	return $organization_webkey;
+}
+
+function siw_get_google_analytics_id(){
+	$google_analytics_id = get_option('siw_api_google_analytics_id');
+	return $google_analytics_id;
+}
+function siw_get_pingdom_rum_id(){
+	$pingdom_rum_id = get_option('siw_api_pingdom_rum_id');
+	return $pingdom_rum_id;
+}
+
+function siw_get_db_backup_time(){
+	$db_backup_time = '03:00';
+	return $db_backup_time;
+}
+
+function siw_get_files_backup_time(){
+	$files_backup_time = '04:00';
+	return $files_backup_time;
+}
+
+//EVS
+function siw_get_evs_next_deadline(){
+	$evs_deadlines[]= get_option( 'siw_evs_deadline_1' );
+	$evs_deadlines[]= get_option( 'siw_evs_deadline_2' );
+	$evs_deadlines[]= get_option( 'siw_evs_deadline_3' );
+	$evs_deadlines[]= get_option( 'siw_evs_deadline_4' );
+	$evs_deadlines[]= get_option( 'siw_evs_deadline_5' );
+	
+	asort($evs_deadlines);
+	$weeks = 3;
+	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$weeks." weeks"));
+
+	foreach($evs_deadlines as $evs_deadline => $evs_deadline_date) {
+		if ($evs_deadline_date > $limit){
+			$evs_next_deadline = $evs_deadline_date;
+			break;
+		}
+	}
+	return $evs_next_deadline;
+}
+
+
+//afzender plato export
 function siw_get_outgoing_placements_officer(){
-
-	$outgoing_placements_officer = 'Alet van der Voorn';
+	$outgoing_placements_officer = get_option('siw_plato_outgoing_placements_name');
 	return $outgoing_placements_officer;
 }
 
 function siw_get_outgoing_placements_email(){
-
-	$outgoing_placements_email = 'outgoing.placements@siw.nl';
+	$outgoing_placements_email = get_option('siw_plato_outgoing_placements_email');
 	return $outgoing_placements_email;
 }
 
-
+//ondertekening e-mails
 function siw_get_mail_signature_name( $type ){
     switch ($type) {
         case  "contact_algemeen":
-			$signature_name = 'Alet van der Voorn';
+			$signature_name = get_option('siw_signature_general');
 			return $signature_name;
 			
         case  "contact_np":
-			$signature_name = 'Marijtje Mur';
+			$signature_name = get_option('siw_signature_camp_leader');
 			return $signature_name;
 			
         case  "contact_project":
-			$signature_name = 'Alet van der Voorn';
+			$signature_name = get_option('siw_signature_project');
 			return $signature_name;
 			
         case  "aanmelding_groepsproject":
-			$signature_name = 'Alet van der Voorn';
+			$signature_name = get_option('siw_signature_workcamp');
 			return $signature_name;
 			
         case  "aanmelding_evs":
-			$signature_name = 'Nelleke Ungersma';
+			$signature_name = get_option('siw_signature_evs');
 			return $signature_name;	
 			
         case  "aanmelding_op_maat":
-			$signature_name = 'Alet van der Voorn';
+			$signature_name = get_option('siw_signature_op_maat');
 			return $signature_name;
 			
         case  "aanmelding_community_day":
-			$signature_name = 'Alet van der Voorn';
-			return $signature_name;					
+			$signature_name = get_option('siw_signature_community_day');
+			return $signature_name;		
+	}
+}
+//tarieven
+function siw_get_fee_op_maat( $tariff ){
+    switch ($tariff) {
+        case  "student":
+			$fee = get_option('siw_tariffs_op_maat_student');
+			return $fee;
+			
+        case  "regulier":
+			$fee = get_option('siw_tariffs_op_maat_regular');
+			return $fee;					
 	}
 }
 
+function siw_get_fee_workcamp( $tariff ){
+    switch ($tariff) {
+        case  "student":
+			$fee = get_option('siw_tariffs_workcamp_student');
+			return $fee;
+			
+        case  "regulier":
+			$fee = get_option('siw_tariffs_workcamp_regular');
+			return $fee;					
+	}
+}
+
+function siw_get_evs_deposit(){
+	$evs_deposit = get_option('siw_tariffs_evs_deposit');
+	return $evs_deposit;
+}
+
+
+//PLATO import
 function siw_wc_get_tariff_array(){
 	$tariff_array = array(
-		"regulier"=>275.00,
-		"student"=>225.00
+		"regulier"=>number_format(get_option('siw_tariffs_workcamp_regular'),2),
+		"student"=>number_format(get_option('siw_tariffs_workcamp_student'),2)
 	);
 	return $tariff_array;
 }
 
 
 function siw_wc_get_nr_of_days_before_start_to_hide_project(){
-	$nr_of_days_before_start_to_hide_project = 5;
+	$nr_of_days_before_start_to_hide_project = get_option('siw_plato_nr_of_days_before_start_to_hide_project');
 	return $nr_of_days_before_start_to_hide_project;
 }
 
-function siw_get_shared_array( $array ){
+function siw_get_array( $array ){
 
     switch ($array) {
         case  "gender":
@@ -425,6 +512,11 @@ function siw_get_shared_array( $array ){
 					'slug'		=> 'griekenland',
 					'name'  	=> 'Griekenland' ,
 					'continent'	=> 'europa',
+				);
+				$project_countries['HKG'] = array(
+					'slug'		=> 'hong-kong',
+					'name'  	=> 'Hong Kong' ,
+					'continent'	=> 'azie',
 				);
 				$project_countries['HUN'] = array(
 					'slug'		=> 'hongarije',

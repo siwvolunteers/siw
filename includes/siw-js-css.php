@@ -1,27 +1,27 @@
 <?php
-
+/*
+(c)2015 SIW Internationale Vrijwilligersprojecten
+*/
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 /*
 functies t.b.v styling van radiobuttons, checkboxes en lightboxes
 */
 
+add_action('wp_enqueue_scripts', 'siw_mcheckable_js');
 function siw_mcheckable_js(){
-	wp_register_script('siw_mcheckable_js', get_stylesheet_directory_uri() . '/assets/mCheckable/mCheckable.jquery.min.js', array('jquery'), '', TRUE);
+	wp_register_script('siw_mcheckable_js', get_stylesheet_directory_uri() . '/assets/js/mCheckable.jquery.min.js', array('jquery'), '', TRUE);
 	wp_enqueue_script('siw_mcheckable_js');
 }
-
-function siw_mpopup_js(){
-	wp_register_script('siw_mpopup_js', get_stylesheet_directory_uri() . '/assets/mPopup/mPopup.jquery.min.js', array('jquery'), '', TRUE);
-}
-add_action('wp_enqueue_scripts', 'siw_mpopup_js');
-add_action('wp_enqueue_scripts', 'siw_mcheckable_js');
 
 
 /*custom javascript/jQuery functies*/
 function siw_custom_js(){
-	wp_register_script('siw_custom_js', get_stylesheet_directory_uri() . '/assets/siw-scripts.js', array('jquery'), '', TRUE);
+	wp_register_script('siw_custom_js', get_stylesheet_directory_uri() . '/assets/js/siw-scripts.js', array('jquery'), '', TRUE);
 	$site_url = site_url();
 	$parameters = array(
-		'url' => $site_url,
+		'ajax_url' => get_stylesheet_directory_uri().'/siw-ajax.php'
 	);
 	wp_localize_script( 'siw_custom_js', 'parameters', $parameters );
 	wp_enqueue_script('siw_custom_js');
@@ -30,10 +30,10 @@ function siw_custom_js(){
 add_action('wp_enqueue_scripts', 'siw_custom_js');
 
 function siw_wc_checkout_scripts_js(){
-	wp_register_script('siw-wc-checkout-scripts', get_stylesheet_directory_uri() . '/assets/siw-wc-checkout-scripts.js', array('jquery'), '', TRUE);
+	wp_register_script('siw-wc-checkout-scripts', get_stylesheet_directory_uri() . '/assets/js/siw-wc-checkout-scripts.js', array('jquery'), '', TRUE);
 	$site_url = site_url();
 	$parameters = array(
-		'url' => $site_url,
+		'ajax_url' => get_stylesheet_directory_uri().'/siw-ajax.php'
 	);
 	wp_localize_script( 'siw-wc-checkout-scripts', 'parameters', $parameters );
 }
@@ -83,5 +83,7 @@ function siw_remove_unnecessary_scripts(){
 	//ncf font
 	wp_dequeue_style( 'ncf_lato_font' );
 	
+	//styling van mailpoet widget
+	wp_deregister_style('validate-engine-css');
 }
 
