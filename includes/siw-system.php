@@ -407,5 +407,5 @@ function siw_update_cf7_mail_template($form){
 	//bevestiging
 	$confirmation_mail = get_post_meta( $post_id, '_mail_2', false ) ;
 	$confirmation_mail['0']['body'] = $template_confirmation;
-	update_post_meta( $post_id, '_mail', $confirmation_mail[0]);
+	update_post_meta( $post_id, '_mail_2', $confirmation_mail[0]);
 }
