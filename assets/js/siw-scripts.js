@@ -44,14 +44,14 @@
 					if(result.success == 1) {
 						$('.plaats').val(result.resource.town);
 						$('.straat').val(result.resource.street);
-						$('.plaats').prop('disabled', true);		  
-						$('.straat').prop('disabled', true);		  
+						//$('.plaats').prop('disabled', true);		  
+						//$('.straat').prop('disabled', true);		  
 					}
 					else {
 						$('.plaats').val('');
 						$('.straat').val('');
-						$('.plaats').prop('disabled', false);		  
-						$('.straat').prop('disabled', false);		
+						//$('.plaats').prop('disabled', false);		  
+						//$('.straat').prop('disabled', false);		
 					}             
 				},
 			});
