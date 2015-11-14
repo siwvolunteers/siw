@@ -114,17 +114,18 @@ function siw_delete_attachment_after_mail( $entry_id, $form_id ) {
 	foreach ( $attachments as $attachment ) {
 		$attachment_url = wp_get_attachment_url( $attachment );
 		wp_delete_attachment( $attachment );
+		
+		$wpdb->query(
+			$wpdb->prepare(
+				"UPDATE $wpdb->postmeta
+				SET meta_value = 'gemaild'
+					WHERE post_id = %d
+					AND meta_value = %s;",
+				$entry_id,
+				$attachment_url
+			)
+		);
 	}
-	$wpdb->query(
-		$wpdb->prepare(
-			"UPDATE $wpdb->postmeta
-			SET meta_value = 'gemaild'
-				WHERE post_id = %d
-				AND meta_value = %s;",
-			$entry_id,
-			$attachment_url
-        )
-	);
 }
 
 
