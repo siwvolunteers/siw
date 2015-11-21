@@ -61,6 +61,7 @@ add_filter( 'siteorigin_panels_data', 'siw_hide_mapplic_on_mobile', 1 );
 
 function siw_hide_mapplic_on_mobile( $panels_data ){
 	$detect = new Mobile_Detect_pinnacle;
+	$index = '';
 	if($detect->isMobile()) {
 		if( !empty($panels_data['widgets']) && is_array($panels_data['widgets']) ) {
 			foreach( $panels_data['widgets'] as &$widget ) {
@@ -69,7 +70,9 @@ function siw_hide_mapplic_on_mobile( $panels_data ){
 				}
 			}
 		}
-		array_splice($panels_data['widgets'], $index, 1);
+		if ($index!=''){
+			array_splice($panels_data['widgets'], $index, 1);
+		}
 	}
 	return $panels_data;
 }
