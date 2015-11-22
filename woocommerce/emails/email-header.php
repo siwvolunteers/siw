@@ -18,12 +18,15 @@ $site_url = site_url('', 'http' );
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><?php echo $email_heading; ?></title>
 	</head>
-    <body <?php echo is_rtl() ? 'rightmargin' : 'leftmargin'; ?>="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" bgcolor="#eeeeee">
+    <body <?php echo is_rtl() ? 'rightmargin' : 'leftmargin'; ?>="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" bgcolor="#ffffff">
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
        	<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" bgcolor="#eeeeee">
+			<tr>
+				<td align="center">&nbsp;</td>
+			</tr>
            	<tr>
                	<td align="center" valign="top">
-                   	<table border="0" cellpadding="0" cellspacing="0" width="600" bgcolor="#ffffff">
+                   	<table border="0" cellpadding="0" cellspacing="0" width="600" bgcolor="#ffffff" style="border-radius:3px !important">
 						<tr>
 							<td align="center">&nbsp;</td>
 						</tr>

@@ -59,6 +59,9 @@ $site_url = site_url('', 'http' );
                     </table>
                 </td>
             </tr>
+			<tr>
+				<td align="center">&nbsp;</td>
+			</tr>
 		</table>
     </body>
 </html>
