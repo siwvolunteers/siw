@@ -565,6 +565,19 @@ input[type="text"]:disabled {
 }
 
 
+/*vacatures*/
+article.vacatures {
+	background-color:#fff;
+}
+
+.siw-vacature-grid{
+	margin: 20px;
+}
+
+h5.job-title, p.job-mission{
+	text-align:center;
+}
+
 /*contact form styling*/
 div.wpcf7-validation-errors, div.wpcf7-mail-sent-ok{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);

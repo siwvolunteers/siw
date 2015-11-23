@@ -25,6 +25,17 @@ function siw_get_pingdom_rum_id(){
 	return $pingdom_rum_id;
 }
 
+function siw_get_jobs_company_profile(){
+	$company_profile = get_option('siw_jobs_company_profile');
+	return $company_profile;
+}
+
+function siw_get_jobs_mission_statement(){
+	$mission = get_option('siw_jobs_mission_statement');
+	return $mission;
+
+}
+
 function siw_get_db_backup_time(){
 	$db_backup_time = '03:00';
 	return $db_backup_time;

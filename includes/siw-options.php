@@ -12,6 +12,7 @@ add_action( 'admin_init', 'siw_settings_plato_init' );
 add_action( 'admin_init', 'siw_settings_tariffs_init' );
 add_action( 'admin_init', 'siw_settings_evs_init' );
 add_action( 'admin_init', 'siw_settings_api_init' );
+add_action( 'admin_init', 'siw_settings_jobs_init');
 
 function siw_add_settings_menu(){ 
 	add_menu_page( 'Instellingen SIW', 'Instellingen SIW', 'manage_options', 'siw_settings', 'siw_settings_page','dashicons-admin-settings',110);
@@ -21,6 +22,7 @@ function siw_add_settings_menu(){
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'PLATO', 'manage_options', 'admin.php?page=siw_settings&tab=plato');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'EVS', 'manage_options', 'admin.php?page=siw_settings&tab=evs');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'API keys', 'manage_options', 'admin.php?page=siw_settings&tab=api');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Vacatures', 'manage_options', 'admin.php?page=siw_settings&tab=jobs');
 }
 
 function siw_settings_signatures_init(){ 
@@ -331,6 +333,46 @@ function siw_settings_api_init(){
 	);
 
 }
+
+
+function siw_settings_jobs_init(){
+	register_setting( 'siw_jobs', 'siw_jobs_company_profile' );
+	register_setting( 'siw_jobs', 'siw_jobs_mission_statement' );
+	register_setting( 'siw_jobs', 'siw_jobs_parent_page' );
+
+	
+	//secties
+	add_settings_section(
+		'siw_jobs', 
+		__( 'Vacatures', 'siw' ), 
+		'__return_false', 
+		'siw_jobs'
+	);
+	add_settings_field( 
+		'siw_jobs_company_profile', 
+		__( 'Wie zijn wij?', 'siw' ), 
+		'siw_settings_show_textarea_field', 
+		'siw_jobs',
+		'siw_jobs', 
+		'siw_jobs_company_profile' 
+	);
+	add_settings_field( 
+		'siw_jobs_mission_statement', 
+		__( 'Missie', 'siw' ), 
+		'siw_settings_show_textarea_field', 
+		'siw_jobs',
+		'siw_jobs', 
+		'siw_jobs_mission_statement' 
+	);
+	add_settings_field( 
+		'siw_jobs_parent_page', 
+		__( 'Vacature pagina', 'siw' ), 
+		'siw_settings_show_page_select', 
+		'siw_jobs',
+		'siw_jobs', 
+		'siw_jobs_parent_page' 
+	);
+}
 //functies op secties te tonen
 
 function siw_settings_plato_outgoing_placements_header() { 
@@ -359,6 +401,12 @@ function siw_settings_show_text_field( $option ) {
 	<?php
 }
 
+function siw_settings_show_textarea_field( $option ) {
+	?>
+	<textarea name='<?php echo $option; ?>' maxlength="2000" rows="10" cols="100"><?php echo get_option($option); ?></textarea>
+	<?php
+}
+
 function siw_settings_show_amount_field( $option ){
 	?> &euro;
 	<input type='number' name='<?php echo $option; ?>' value='<?php echo get_option($option); ?>' min="1" max="1000">
@@ -381,6 +429,17 @@ function siw_settings_show_date_field( $option ) {
 	<?php
 }
 
+function siw_settings_show_page_select( $option ) {
+	$pages = get_pages(); 
+    if (!empty($pages)) {
+		echo '<select name="', $option, '" id="', $field['id'], '">';
+		  foreach ($pages as $page) {
+		    echo '<option value="', $page->ID, '"', get_option($option) == $page->ID ? ' selected="selected"' : '', '>',(($page->post_parent)?get_the_title($page->post_parent).' / ':''), $page->post_title, '</option>';
+		  }
+		  echo '</select>'; 
+	}
+}
+
 function siw_settings_page(  ) {?>
     <div class="wrap">  
         <h2>Instellingen SIW</h2>
@@ -393,7 +452,8 @@ function siw_settings_page(  ) {?>
 			<a href="?page=siw_settings&tab=tariffs" class="nav-tab <?php echo $active_tab == 'tariffs' ? 'nav-tab-active' : ''; ?>">Tarieven</a>
 			<a href="?page=siw_settings&tab=plato" class="nav-tab <?php echo $active_tab == 'plato' ? 'nav-tab-active' : ''; ?>">PLATO</a>
 			<a href="?page=siw_settings&tab=evs" class="nav-tab <?php echo $active_tab == 'evs' ? 'nav-tab-active' : ''; ?>">EVS</a>			
-			<a href="?page=siw_settings&tab=api" class="nav-tab <?php echo $active_tab == 'api' ? 'nav-tab-active' : ''; ?>">API keys</a>	
+			<a href="?page=siw_settings&tab=api" class="nav-tab <?php echo $active_tab == 'api' ? 'nav-tab-active' : ''; ?>">API keys</a>
+			<a href="?page=siw_settings&tab=jobs" class="nav-tab <?php echo $active_tab == 'jobs' ? 'nav-tab-active' : ''; ?>">Vacatures</a>	
 		</h2>        
         <form method="post" action="options.php">
 			<?php  
@@ -420,7 +480,11 @@ function siw_settings_page(  ) {?>
 			else if( $active_tab == 'api' ) {
 				settings_fields( 'siw_api' );
 				do_settings_sections( 'siw_api' );
-			} 			
+			}
+			else if( $active_tab == 'jobs' ) {
+				settings_fields( 'siw_jobs' );
+				do_settings_sections( 'siw_jobs' );
+			} 			 			
 			submit_button();
 			?>
 		</form>     
