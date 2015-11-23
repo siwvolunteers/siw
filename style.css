@@ -618,7 +618,9 @@ div.wpcf7-mail-sent-ok::before{
 .wpcf7-form textarea{
     height: 5em !important;
 }
-
+span.wpcf7-not-valid-tip {
+    color: #f90;
+}
 
 /*sidebar links i.p.v. rechts*/
 @media (min-width: 992px) {
