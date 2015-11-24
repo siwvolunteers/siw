@@ -22,3 +22,4 @@ require_once('includes/siw-options.php');
 require_once('includes/siw-dashboard-widgets.php');
 require_once('includes/siw-shortcodes.php');
 require_once('includes/siw-postcode.php');
+require_once('includes/siw-jobs.php');
