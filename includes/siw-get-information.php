@@ -142,6 +142,21 @@ function siw_get_evs_deposit(){
 }
 
 
+//datum
+function siw_get_date_in_text( $date, $year = true ){
+	$date_array = date_parse( $date );
+	$month_array = siw_get_array('month_to_text');
+	$day = $date_array['day'];
+	$month = $month_array[$date_array['month']];
+	$date_in_text = $day . ' ' . $month;
+	if ($year){
+		$year = $date_array['year'];
+		$date_in_text .=  ' ' . $year;
+	}
+	return $date_in_text;
+
+}
+
 //PLATO import
 function siw_wc_get_tariff_array(){
 	$tariff_array = array(
