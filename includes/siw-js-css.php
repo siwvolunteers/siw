@@ -46,7 +46,10 @@ function siw_remove_unnecessary_scripts(){
 		wp_dequeue_script('yith-wcan-script');
 		wp_dequeue_style('yith-wcan-frontend');
 	}
-
+	//woocommerce
+	wp_dequeue_script( 'woocommerce' );
+	
+	
 	//search&filter
 	wp_dequeue_style('search-filter-chosen-styles');
 	wp_dequeue_style('search-filter-plugin-styles');
