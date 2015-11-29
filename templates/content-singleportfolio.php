@@ -229,7 +229,7 @@
     				    <?php if (!empty($project_v4t)) echo '<li class="pdetails"><span>'.$project_v4t.'</span> '.$project_v4d.'</li>'; ?>
     				    <?php if (!empty($project_v5t)) echo '<li class="pdetails"><span>'.$project_v5t.'</span> <a href="'.$project_v5d.'" target="_new">'.$project_v5d.'</a></li>'; ?>
   				    </ul><!--Portfolio-content-->
-					<a href="/zo-werkt-het/projecten-op-maat" class="kad-btn kad-btn-primary">Alles over projecten op maat</a>
+					<a href="/zo-werkt-het/projecten-op-maat/" class="kad-btn kad-btn-primary">Alles over projecten op maat</a>
 				    </div>
             <?php }?>
 				</div>
