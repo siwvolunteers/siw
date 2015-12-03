@@ -564,6 +564,10 @@ input[type="text"]:disabled {
 	display:inline-block;
 	background: rgba(51,51,51, 0.5);
 	border-radius: 5px;
+	padding: 10px 20px;
+	text-align: center;
+	margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .snelzoeken ul li{
@@ -573,12 +577,22 @@ input[type="text"]:disabled {
 
 .snelzoeken h4{
 	color:#ffffff;
+	text-align:center;
 }
 
 .snelzoeken h4::after {
     background-color: #ffffff;
+    content: "";
+    display: block;
+    height: 1px;
+    margin: 0 auto;
+    transition: background 0.3s ease-out 0s;
+    width: 60px;
 }
 
+.snelzoeken h4:hover:after{
+    background-color: #ff9900;
+}
 
 /*vacatures*/
 article.vacatures {
