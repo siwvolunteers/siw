@@ -391,6 +391,21 @@ function siw_wc_checkout_save_checkout_fields( $order_id ) {
 	}	
 }	
 
+/*
+Multi-step checkout
+*/
+remove_filter('woocommerce_locate_template', 'wcmultichecout_woocommerce_locate_template', 1, 3);
+
+add_action('wp_enqueue_scripts', 'siw_woocommerce_multistep_checkout_scripts');
+function siw_woocommerce_multistep_checkout_scripts(){
+	global $wp_scripts;
+	if ($wp_scripts->registered['wmc-wizard']){
+		$wp_scripts->registered['wmc-wizard']->src = get_stylesheet_directory_uri() . '/assets/js/woocommerce-multistep-checkout/wizard.js';
+	}
+	if ($wp_scripts->registered['jquery-validate']){
+		$wp_scripts->registered['jquery-validate']->src = get_stylesheet_directory_uri() . '/assets/js/woocommerce-multistep-checkout/jquery.validate.js';
+	}
+}
 
 /**
 Opslaan dat gebruiker akkoord is gegaan met voorwaarden
