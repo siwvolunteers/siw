@@ -70,14 +70,14 @@
 					if(result.success == 1) {
 						$('#billing_city').val(result.resource.town);
 						$('#billing_address_1').val(result.resource.street);
-						//$('#billing_city').prop('disabled', true);		  
-						//$('#billing_address_1').prop('disabled', true);		  
+						$('#billing_city').prop('readonly', true);		  
+						$('#billing_address_1').prop('readonly', true);		  
 					}
 					else {
 						$('#billing_city').val('');
 						$('#billing_address_1').val('');
-						//$('#billing_city').prop('disabled', false);		  
-						//$('#billing_address_1').prop('disabled', false);		
+						$('#billing_city').prop('readonly', false);		  
+						$('#billing_address_1').prop('readonly', false);		
 					}             
 				},
 			});

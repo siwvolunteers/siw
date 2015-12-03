@@ -17,7 +17,12 @@
 		});
 		//winkelwagen verbergen indien er geen projecten in zitten
 		$( "li.menu-cart-icon-kt" ).has( "span.kt-cart-total:contains('0')" ).css( "display", "none" );
-
+		
+		if( $(window).width() < 790 ) {
+			$('.accordion-toggle').each(function(){
+				$(this).removeAttr('data-parent');
+			});
+		}
 	})
 	
 	$(document).ajaxComplete(function() {
@@ -44,14 +49,14 @@
 					if(result.success == 1) {
 						$('.plaats').val(result.resource.town);
 						$('.straat').val(result.resource.street);
-						//$('.plaats').prop('disabled', true);		  
-						//$('.straat').prop('disabled', true);		  
+						$('.plaats').prop('readonly', true);		  
+						$('.straat').prop('readonly', true);		  
 					}
 					else {
 						$('.plaats').val('');
 						$('.straat').val('');
-						//$('.plaats').prop('disabled', false);		  
-						//$('.straat').prop('disabled', false);		
+						$('.plaats').prop('readonly', false);		  
+						$('.straat').prop('readonly', false);		
 					}             
 				},
 			});

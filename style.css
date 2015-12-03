@@ -422,6 +422,11 @@ Radio buttons zichtbaar maken i.v.m. validatie
 	margin-left: -15px !important;
 }
 
+.woocommerce input.input-text[readonly], form.checkout input.input-text[readonly]{
+	background-color: #eee;
+    cursor: not-allowed;
+}
+
 /*
 Styling voor invoervelden
 */
