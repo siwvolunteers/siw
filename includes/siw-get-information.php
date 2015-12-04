@@ -393,6 +393,7 @@ function siw_get_array( $array ){
 				"LANG"	=> "taalcursus",
 				"TRAS"	=> "taal",
 				"ZOO"	=> "dieren",
+				"ANIM"	=> "dieren",
 				"LEAD"	=> "projectbegeleider",
 				"HERI"	=> "erfgoed"
 			);
