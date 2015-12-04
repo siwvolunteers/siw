@@ -35,6 +35,14 @@ function siw_set_page_title($title){
 
 */
 
+function siw_show_quick_search_widget(){?>
+<div class="snelzoeken">
+<h4>Snel zoeken</h4>
+<?php echo do_shortcode( '[searchandfilter id="57"]');?>
+</div>
+<?php
+}
+
 	
 //functie om categorie header te tonen op productpagina TODO:herschrijven conform naamgevingsconventies
 	

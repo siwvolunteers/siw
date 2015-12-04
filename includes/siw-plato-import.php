@@ -329,6 +329,13 @@ function siw_wc_seo_keywords(){
 	return $seo_keywords;
 }
 
+function siw_wc_set_project_slug( $code, $country, $work, $end_date ){
+	$year =  date("Y", strtotime($end_date));
+	$project_slug = $year . '-' . $code . '-';
+	$project_slug .= siw_wc_project_name( $country, $work );
+	return $project_slug;
+
+}
 
 
 /*functie om basis van projecteigenschappen een standaardfoto toe te wijzen TODO: Coderedundatie verminderen*/

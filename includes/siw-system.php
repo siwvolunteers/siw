@@ -89,6 +89,14 @@ function siw_change_permalink_structure() {
 	add_permastruct( 'wpm-testimonial', "ervaring/%wpm-testimonial%", array( 'slug' => 'ervaring' ) );
 }
 
+add_action( 'init', 'siw_change_portfolio_type', 11 );
+function siw_change_portfolio_type() {
+    $portfolio_type_args = get_taxonomy( 'portfolio-type' );
+    $portfolio_type_args->rewrite['slug'] = 'projecten-op-maat-in';
+    register_taxonomy( 'portfolio-type',array('portfolio'), (array) $portfolio_type_args );
+}
+
+
 
 //pdf en doc(x) upload toestaan
 add_filter('upload_mimes', 'siw_custom_upload_mimes');
@@ -410,3 +418,21 @@ function siw_update_cf7_mail_template($form){
 	$confirmation_mail['0']['body'] = $template_confirmation;
 	update_post_meta( $post_id, '_mail_2', $confirmation_mail[0]);
 }
+
+
+
+/*
+VFB-pro aanpassingen
+*/
+
+add_action('wp_enqueue_scripts', 'siw_vfb_pro_scripts');
+function siw_vfb_pro_scripts(){
+	global $wp_scripts;
+	if ($wp_scripts->registered['vfbp-js']){
+		$wp_scripts->registered['vfbp-js']->src = get_stylesheet_directory_uri() . '/assets/js/vfb-pro/vfb-js.min.js';
+	}
+	if ($wp_scripts->registered['jquery-intl-tel']){	
+		wp_enqueue_script( 'jquery-phone-format', VFB_PLUGIN_URL . "public/assets/js/vendors/phone-format.min.js",array(), null, true);	
+	}
+}
+
