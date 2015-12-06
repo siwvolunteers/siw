@@ -436,3 +436,11 @@ function siw_vfb_pro_scripts(){
 	}
 }
 
+//CMB meta box url protocol-onafhankelijk maken
+add_filter( 'cmb_meta_box_url', 'siw_cmb_meta_box_url', 10, 1 );
+
+function siw_cmb_meta_box_url( $cmb_url ){
+	$cmb_url = str_replace("http://", "//", $cmb_url);
+    return $cmb_url;
+}
+        
