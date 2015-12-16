@@ -31,6 +31,11 @@ function siw_remove_admin_menu_items(){
 	remove_menu_page( 'edit-comments.php' );       
 }
 
+//yoast box onderaan pagina
+add_filter( 'wpseo_metabox_prio', function() { return 'low';});
+
+
+
 //admin bar niet tonen voor ingelogde gebruikers
 add_filter('show_admin_bar', '__return_false');
 
