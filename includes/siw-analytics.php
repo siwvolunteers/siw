@@ -34,6 +34,9 @@ function siw_google_analytics() {?>
 	r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
 	ga('create','<?php echo GOOGLE_ANALYTICS_ID; ?>',{'siteSpeedSampleRate': 100});
 	ga('set', 'anonymizeIp', true);
+	ga('require', 'linkid', {
+		'levels': 5
+	});
 	ga('send','pageview');
 </script>
 <?php }
