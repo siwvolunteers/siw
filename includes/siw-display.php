@@ -43,7 +43,10 @@ function siw_show_quick_search_widget(){?>
 <?php
 }
 
-	
+function siw_show_op_maat_button(){?>
+<a href="/zo-werkt-het/projecten-op-maat/" class="kad-btn kad-btn-primary">Alles over projecten op maat</a>
+<?php
+}	
 //functie om categorie header te tonen op productpagina TODO:herschrijven conform naamgevingsconventies
 	
 add_action('kt_header_overlay', 'kt_category_image_onproduct'); 

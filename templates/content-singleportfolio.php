@@ -100,7 +100,7 @@
 				<?php 	
 				} else if ($ppost_type == 'shortcode') {
 
-					 $shortcodeslider = get_post_meta( $post->ID, '_kad_shortcode_slider', true ); if(!empty($shortcodeslider)) echo do_shortcode( $shortcodeslider );
+					 $shortcodeslider = get_post_meta( $post->ID, '_kad_portfolio_shortcode_slider', true ); if(!empty($shortcodeslider)) echo do_shortcode( $shortcodeslider );
 
 				} else if ($ppost_type == 'video') { ?>
 					
@@ -162,9 +162,12 @@
                 }?>  
 							</div> 
         <?php } else if ($ppost_type == 'imagegrid') { 
-        $image_gallery = get_post_meta( $post->ID, '_kad_image_gallery', true );
-        echo do_shortcode('[gallery ids="'.$image_gallery.'" columns="4"]');
-				} else if ($ppost_type == 'imagelist2') { ?>
+        		$image_gallery = get_post_meta( $post->ID, '_kad_image_gallery', true );
+        		$columns = get_post_meta( $post->ID, '_kad_portfolio_img_grid_columns', true );
+        		if(empty($columns)) {$columns = '4';}
+        		echo do_shortcode('[gallery ids="'.$image_gallery.'" columns="'.$columns.'"]');
+
+			} else if ($ppost_type == 'imagelist2') { ?>
 				<div class="kad-light-gallery portfolio_image_list_style2">
 					<?php $image_gallery = get_post_meta( $post->ID, '_kad_image_gallery', true );
                  if(!empty($image_gallery)) {
@@ -192,7 +195,7 @@
 						$image = aq_resize( $img_url, $slidewidth, $slideheight, true ); //resize & crop the image
 						if(empty($image)) {$image = $img_url;} 
 							if($image) : ?>
-                                    <div class="imghoverclass portfolio-single-img">
+                                    <div class="imghoverclass portfolio-single-img" itemprop="image">
                                     	<a href="<?php echo esc_url($img_url); ?>" rel="lightbox" class="lightboxhover">
                                     		<img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr(get_post($post_id)->post_excerpt); ?>"  />
                                     	</a>
@@ -203,13 +206,13 @@
           <div class="p-container <?php echo esc_attr($layoutcontainclass);?>">
   			   <div class="<?php echo esc_attr($textclass); ?>">
            <div class="postclass clearfix">
-		    	 <div class="entry-content <?php echo esc_attr($entryclass); ?> <?php echo esc_attr($portfolio_margin); ?>">
+		    	 <div class="entry-content <?php echo esc_attr($entryclass); ?> <?php echo esc_attr($portfolio_margin); ?>" itemprop="mainContentOfPage">
             <?php if (isset($pinnacle['default_showportfoliotitle_inpost']) && $pinnacle['default_showportfoliotitle_inpost'] == 1) { ?>
-              <h1 class="entry-title"><?php the_title(); ?></h1>
+              <h1 class="entry-title" itemprop="name"><?php the_title(); ?></h1>
             <?php } ?>
 		      	<?php the_content(); ?>
 		  		  </div>
-	    	<div class="<?php echo $valueclass; ?>">
+	    	<div class="<?php echo esc_attr($valueclass); ?>">
 				    	<?php  $project_v1t = get_post_meta( $post->ID, '_kad_project_val01_title', true );
 				    						$project_v1d = get_post_meta( $post->ID, '_kad_project_val01_description', true );
 				    						$project_v2t = get_post_meta( $post->ID, '_kad_project_val02_title', true );
@@ -228,8 +231,14 @@
     				    <?php if (!empty($project_v3t)) echo '<li class="pdetails"><span>'.$project_v3t.'</span> '.$project_v3d.'</li>'; ?>
     				    <?php if (!empty($project_v4t)) echo '<li class="pdetails"><span>'.$project_v4t.'</span> '.$project_v4d.'</li>'; ?>
     				    <?php if (!empty($project_v5t)) echo '<li class="pdetails"><span>'.$project_v5t.'</span> <a href="'.$project_v5d.'" target="_new">'.$project_v5d.'</a></li>'; ?>
+    				     <?php $tag_terms = get_the_terms( $post->ID, 'portfolio-tag' ); 
+                        	if ($tag_terms) {?> 
+                        		<li class="kt-portfolio-tags pdetails"><span class="portfoliotags"><i class="kt-icon-tag2"></i> </span>
+                        			<?php echo get_the_term_list( $post->ID,'portfolio-tag','',', ','') ?>
+                        		</li>
+                        <?php } ?>
   				    </ul><!--Portfolio-content-->
-					<a href="/zo-werkt-het/projecten-op-maat/" class="kad-btn kad-btn-primary">Alles over projecten op maat</a>
+					<?php siw_show_op_maat_button(); ?>
 				    </div>
             <?php }?>
 				</div>
