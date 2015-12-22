@@ -53,7 +53,7 @@ add_action( 'do_meta_boxes', 'siw_remove_plugin_metaboxes' );
 function siw_remove_plugin_metaboxes(){
     remove_meta_box( 'tribe_dashboard_widget', 'dashboard', 'normal' ); 
 	remove_meta_box( 'woocommerce_dashboard_recent_reviews', 'dashboard', 'normal' ); 
-	
+	remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'normal' ); 	
 }
 
 
