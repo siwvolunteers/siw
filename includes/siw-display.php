@@ -43,6 +43,9 @@ function siw_show_quick_search_widget(){?>
 <?php
 }
 
+//knop naar infopagina onder elke op maat project
+add_action('kadence_single_portfolio_value_after','siw_show_op_maat_button');
+
 function siw_show_op_maat_button(){?>
 <a href="/zo-werkt-het/projecten-op-maat/" class="kad-btn kad-btn-primary">Alles over projecten op maat</a>
 <?php
