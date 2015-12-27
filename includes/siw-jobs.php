@@ -141,7 +141,13 @@ function siw_jobs_metaboxes( array $meta_boxes ){
 				'name'    => 'Beschrijving',
 				'id'      => $prefix . 'beschrijving',
 				'type'    => 'title',
-			),		
+			),
+			array(
+				'name' => 'Meervoud',
+				'desc' => 'Geef aan of de vacaturetitel in het meervoud is. Bijvoorbeeld "regiospecialisten".',
+				'id' => $prefix . 'meervoud',
+				'type' => 'checkbox'
+),			
 			array(
 				'name'    => 'Wie ben jij? *',
 				'id'      => $prefix . 'wie_ben_jij',
