@@ -514,7 +514,8 @@ function siw_settings_page(  ) {?>
 			<a href="?page=siw_settings&tab=plato" class="nav-tab <?php echo $active_tab == 'plato' ? 'nav-tab-active' : ''; ?>">PLATO</a>
 			<a href="?page=siw_settings&tab=evs" class="nav-tab <?php echo $active_tab == 'evs' ? 'nav-tab-active' : ''; ?>">EVS</a>			
 			<a href="?page=siw_settings&tab=api" class="nav-tab <?php echo $active_tab == 'api' ? 'nav-tab-active' : ''; ?>">API keys</a>
-			<a href="?page=siw_settings&tab=jobs" class="nav-tab <?php echo $active_tab == 'jobs' ? 'nav-tab-active' : ''; ?>">Vacatures</a>	
+			<a href="?page=siw_settings&tab=jobs" class="nav-tab <?php echo $active_tab == 'jobs' ? 'nav-tab-active' : ''; ?>">Vacatures</a>
+			<a href="?page=siw_settings&tab=forms" class="nav-tab <?php echo $active_tab == 'forms' ? 'nav-tab-active' : ''; ?>">Formulieren</a>	
 		</h2>        
         <form method="post" action="options.php">
 			<?php  
