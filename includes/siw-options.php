@@ -13,6 +13,7 @@ add_action( 'admin_init', 'siw_settings_tariffs_init' );
 add_action( 'admin_init', 'siw_settings_evs_init' );
 add_action( 'admin_init', 'siw_settings_api_init' );
 add_action( 'admin_init', 'siw_settings_jobs_init');
+add_action( 'admin_init', 'siw_settings_forms_init');
 
 function siw_add_settings_menu(){ 
 	add_menu_page( 'Instellingen SIW', 'Instellingen SIW', 'manage_options', 'siw_settings', 'siw_settings_page','dashicons-admin-settings',110);
@@ -23,6 +24,7 @@ function siw_add_settings_menu(){
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'EVS', 'manage_options', 'admin.php?page=siw_settings&tab=evs');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'API keys', 'manage_options', 'admin.php?page=siw_settings&tab=api');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Vacatures', 'manage_options', 'admin.php?page=siw_settings&tab=jobs');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Formulieren', 'manage_options', 'admin.php?page=siw_settings&tab=forms');
 }
 
 function siw_settings_signatures_init(){ 
@@ -373,6 +375,44 @@ function siw_settings_jobs_init(){
 		'siw_jobs_parent_page' 
 	);
 }
+function siw_settings_forms_init(){
+	register_setting( 'siw_forms', 'siw_forms_community_day' );
+	register_setting( 'siw_forms', 'siw_forms_evs' );
+	register_setting( 'siw_forms', 'siw_forms_op_maat' );
+	
+	//secties
+	add_settings_section(
+		'siw_forms', 
+		__( 'Formulieren', 'siw' ), 
+		'__return_false', 
+		'siw_forms'
+	);
+	add_settings_field( 
+		'siw_forms_community_day', 
+		__( 'Community Day', 'siw' ), 
+		'siw_settings_show_vfb_form_select', 
+		'siw_forms',
+		'siw_forms', 
+		'siw_forms_community_day' 
+	);
+	add_settings_field( 
+		'siw_forms_evs', 
+		__( 'EVS', 'siw' ), 
+		'siw_settings_show_vfb_form_select', 
+		'siw_forms',
+		'siw_forms', 
+		'siw_forms_evs' 
+	);
+	add_settings_field( 
+		'siw_forms_op_maat', 
+		__( 'Op maat', 'siw' ), 
+		'siw_settings_show_vfb_form_select', 
+		'siw_forms',
+		'siw_forms', 
+		'siw_forms_op_maat' 
+	);
+}
+
 //functies op secties te tonen
 
 function siw_settings_plato_outgoing_placements_header() { 
@@ -429,10 +469,31 @@ function siw_settings_show_date_field( $option ) {
 	<?php
 }
 
+function siw_settings_show_vfb_form_select( $option ) {
+
+	global $wpdb;
+	if (!isset($wpdb->vfbp_forms)) {
+		$wpdb->vfbp_forms = $wpdb->prefix . 'vfbp_forms';
+	}
+	
+	$query = "SELECT $wpdb->vfbp_forms.id, $wpdb->vfbp_forms.title FROM $wpdb->vfbp_forms ORDER BY $wpdb->vfbp_forms.title ASC";
+	
+	$forms = $wpdb->get_results($query, ARRAY_A);
+
+    if (!empty($forms)) {
+		echo '<select name="', $option, '">';
+		  foreach ($forms as $form) {
+		    echo '<option value="', $form[id], '"', get_option($option) == $form[id] ? ' selected="selected"' : '', '>', $form[title], '</option>';
+		  }
+		  echo '</select>'; 
+	}
+}
+
+
 function siw_settings_show_page_select( $option ) {
 	$pages = get_pages(); 
     if (!empty($pages)) {
-		echo '<select name="', $option, '" id="', $field['id'], '">';
+		echo '<select name="', $option, '">';
 		  foreach ($pages as $page) {
 		    echo '<option value="', $page->ID, '"', get_option($option) == $page->ID ? ' selected="selected"' : '', '>',(($page->post_parent)?get_the_title($page->post_parent).' / ':''), $page->post_title, '</option>';
 		  }
@@ -484,7 +545,10 @@ function siw_settings_page(  ) {?>
 			else if( $active_tab == 'jobs' ) {
 				settings_fields( 'siw_jobs' );
 				do_settings_sections( 'siw_jobs' );
-			} 			 			
+			} 			 						else if( $active_tab == 'forms' ) {
+				settings_fields( 'siw_forms' );
+				do_settings_sections( 'siw_forms' );
+			} 
 			submit_button();
 			?>
 		</form>     

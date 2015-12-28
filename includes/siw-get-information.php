@@ -25,6 +25,22 @@ function siw_get_pingdom_rum_id(){
 	return $pingdom_rum_id;
 }
 
+//formulieren
+function siw_get_vfb_form_id( $type ){
+    switch ($type) {
+        case  "community_day":
+			$form_id = get_option('siw_forms_community_day');
+			return $form_id;
+        case  "evs":
+			$form_id = get_option('siw_forms_evs');
+			return $form_id;
+        case  "op_maat":
+			$form_id = get_option('siw_forms_op_maat');
+			return $form_id;
+	}
+}
+
+		
 function siw_get_jobs_company_profile(){
 	$company_profile = get_option('siw_jobs_company_profile');
 	return $company_profile;
