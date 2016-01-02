@@ -143,9 +143,16 @@ if (class_exists('woocommerce') && isset($pinnacle['shop_breadcrumbs']) && $pinn
                   }
           }
 		if ($post_type == 'vacatures'){
-			$vacature_parent = get_option('siw_jobs_parent_page');
+			$vacature_parent = siw_get_parent_page('vacatures');
 			if( !empty($vacature_parent) ) { 
 				$parentpagelink = get_page_link($vacature_parent); $parenttitle = get_the_title($vacature_parent);
+				echo '<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="'.$parentpagelink. '"><span itemprop="title">' . $parenttitle . '</span></a></span> ' . $delimiter . ' ';
+			} 
+		}
+		if ($post_type == 'agenda'){
+			$agenda_parent = siw_get_parent_page('agenda');
+			if( !empty($agenda_parent) ) { 
+				$parentpagelink = get_page_link($agenda_parent); $parenttitle = get_the_title($agenda_parent);
 				echo '<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="'.$parentpagelink. '"><span itemprop="title">' . $parenttitle . '</span></a></span> ' . $delimiter . ' ';
 			} 
 		}

@@ -66,11 +66,13 @@ function siw_remove_unnecessary_scripts(){
 	}
 	
 	//events calendar
-	if ( (! tribe_is_event_query()) && (! tribe_is_event()) ){
-		wp_dequeue_style('tribe-events-full-calendar-style');
-		wp_dequeue_style('tribe-events-calendar-style');		
-		wp_dequeue_style('tribe-events-calendar-full-mobile-style');	
-		wp_dequeue_style('tribe-events-calendar-mobile-style');	
+	if ( function_exists('tribe_is_event_query')){
+		if((! tribe_is_event_query()) && (! tribe_is_event()) ){
+			wp_dequeue_style('tribe-events-full-calendar-style');
+			wp_dequeue_style('tribe-events-calendar-style');		
+			wp_dequeue_style('tribe-events-calendar-full-mobile-style');	
+			wp_dequeue_style('tribe-events-calendar-mobile-style');	
+		}
 	}
 	
 	//ncf font

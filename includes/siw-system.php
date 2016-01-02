@@ -131,7 +131,17 @@ function siw_cmb_meta_box_url( $cmb_url ){
 	$cmb_url = str_replace("http://", "//", $cmb_url);
     return $cmb_url;
 }
-        
+     
+
+/*
+*/
+add_action('admin_enqueue_scripts', 'siw_cmb_admin_scripts');
+function siw_cmb_admin_scripts(){
+	global $wp_scripts;
+	if ($wp_scripts->registered['cmb-scripts']){
+		$wp_scripts->registered['cmb-scripts']->src = get_stylesheet_directory_uri() . '/assets/js/kadence-slider/cmb.min.js';
+	}
+} 
 /*dns-prefetch*/
 add_action('wp_head','siw_dns_prefetch', 0);
 

@@ -13,6 +13,7 @@ add_action( 'admin_init', 'siw_settings_tariffs_init' );
 add_action( 'admin_init', 'siw_settings_evs_init' );
 add_action( 'admin_init', 'siw_settings_api_init' );
 add_action( 'admin_init', 'siw_settings_jobs_init');
+add_action( 'admin_init', 'siw_settings_agenda_init');
 add_action( 'admin_init', 'siw_settings_forms_init');
 
 function siw_add_settings_menu(){ 
@@ -24,6 +25,7 @@ function siw_add_settings_menu(){
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'EVS', 'manage_options', 'admin.php?page=siw_settings&tab=evs');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'API keys', 'manage_options', 'admin.php?page=siw_settings&tab=api');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Vacatures', 'manage_options', 'admin.php?page=siw_settings&tab=jobs');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Agenda', 'manage_options', 'admin.php?page=siw_settings&tab=agenda');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Formulieren', 'manage_options', 'admin.php?page=siw_settings&tab=forms');
 }
 
@@ -375,6 +377,29 @@ function siw_settings_jobs_init(){
 		'siw_jobs_parent_page' 
 	);
 }
+
+
+function siw_settings_agenda_init(){
+	register_setting( 'siw_agenda', 'siw_agenda_parent_page' );
+
+	
+	//secties
+	add_settings_section(
+		'siw_agenda', 
+		__( 'Agenda', 'siw' ), 
+		'__return_false', 
+		'siw_agenda'
+	);
+	add_settings_field( 
+		'siw_agenda_parent_page', 
+		__( 'Agenda pagina', 'siw' ), 
+		'siw_settings_show_page_select', 
+		'siw_agenda',
+		'siw_agenda', 
+		'siw_agenda_parent_page' 
+	);
+}
+
 function siw_settings_forms_init(){
 	register_setting( 'siw_forms', 'siw_forms_community_day' );
 	register_setting( 'siw_forms', 'siw_forms_evs' );
@@ -515,7 +540,8 @@ function siw_settings_page(  ) {?>
 			<a href="?page=siw_settings&tab=evs" class="nav-tab <?php echo $active_tab == 'evs' ? 'nav-tab-active' : ''; ?>">EVS</a>			
 			<a href="?page=siw_settings&tab=api" class="nav-tab <?php echo $active_tab == 'api' ? 'nav-tab-active' : ''; ?>">API keys</a>
 			<a href="?page=siw_settings&tab=jobs" class="nav-tab <?php echo $active_tab == 'jobs' ? 'nav-tab-active' : ''; ?>">Vacatures</a>
-			<a href="?page=siw_settings&tab=forms" class="nav-tab <?php echo $active_tab == 'forms' ? 'nav-tab-active' : ''; ?>">Formulieren</a>	
+			<a href="?page=siw_settings&tab=agenda" class="nav-tab <?php echo $active_tab == 'agenda' ? 'nav-tab-active' : ''; ?>">Agenda</a>		
+			<a href="?page=siw_settings&tab=forms" class="nav-tab <?php echo $active_tab == 'forms' ? 'nav-tab-active' : ''; ?>">Formulieren</a>					
 		</h2>        
         <form method="post" action="options.php">
 			<?php  
@@ -546,10 +572,15 @@ function siw_settings_page(  ) {?>
 			else if( $active_tab == 'jobs' ) {
 				settings_fields( 'siw_jobs' );
 				do_settings_sections( 'siw_jobs' );
-			} 			 						else if( $active_tab == 'forms' ) {
+			}
+			else if( $active_tab == 'agenda' ) {
+				settings_fields( 'siw_agenda' );
+				do_settings_sections( 'siw_agenda' );
+			}
+			else if( $active_tab == 'forms' ) {
 				settings_fields( 'siw_forms' );
 				do_settings_sections( 'siw_forms' );
-			} 
+			} 				
 			submit_button();
 			?>
 		</form>     

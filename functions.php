@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /*
 import
 */
+require_once('includes/siw-agenda.php');
 require_once('includes/siw-login.php');
 require_once('includes/siw-admin.php');
 require_once('includes/siw-analytics.php');
