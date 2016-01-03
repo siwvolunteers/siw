@@ -36,7 +36,7 @@ Template Name: Agenda
 						)
 					);
 					$count =0;
-					if ( $wp_query ) : while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
+					if ( $wp_query->have_posts() ) : while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
 					<?php 
 							if($display_sidebar){
 								global $kt_post_with_sidebar; 
@@ -48,7 +48,9 @@ Template Name: Agenda
 						 	get_template_part('templates/content', 'agenda'); 
 
                     endwhile; else: ?>
-						<li class="error-not-found"><?php _e('Er zijn momenteel geen geplande evenementen.', 'siw'); ?></li>
+					<div>
+						<h5 class="error-not-found"><?php _e('Er zijn momenteel geen geplande evenementen.', 'siw'); ?></h5>
+					</div>
 					<?php endif; ?>
                 
 				<?php 

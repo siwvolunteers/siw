@@ -268,6 +268,42 @@ function siw_event_show_custom_application_fields($field){
 	return false;
 }
 
+//kolom in admin menu
+add_filter('manage_agenda_posts_columns', 'siw_agenda_admin_start_column_header', 10);
+
+function siw_agenda_admin_start_column_header($columns) {
+    $columns['start'] = 'Start';
+    return $columns;
+}
+
+add_action('manage_agenda_posts_custom_column', 'siw_agenda_admin_start_column_value', 10, 2);
+function siw_agenda_admin_start_column_value($column_name, $post_id) {
+    if ($column_name == 'start') {
+        $start = get_post_meta( $post_id, 'siw_agenda_start', true );
+        if ($start) {
+            echo date('j F Y H:i', $start);;
+        }
+    }
+}
+
+/*sorteren op deadline*/
+add_filter( 'manage_edit-agenda_sortable_columns', 'siw_agenda_start_column_sorting' );
+function siw_agenda_start_column_sorting( $columns ) {
+  $columns['start'] = 'start';
+  return $columns;
+}
+
+add_filter( 'request', 'siw_agenda_start_column_orderby' );
+function siw_agenda_start_column_orderby( $vars ) {
+    if ( (!isset( $vars['orderby'] ) && $vars['post_type'] == 'agenda' )|| ( isset( $vars['orderby'] ) && 'start' == $vars['orderby'] ) ) {
+        $vars = array_merge( $vars, array(
+            'meta_key' => 'siw_agenda_start',
+            'orderby' => 'meta_value'
+        ) );
+    }
+    return $vars;
+}
+
 
 /*
 Widget
@@ -347,7 +383,8 @@ public function __construct() {
 		?>
 		
 		<ul class="siw_events">
-			<?php while( $siw_agenda->have_posts() ): $siw_agenda->the_post();
+			<?php if ($siw_agenda->have_posts()):
+			while( $siw_agenda->have_posts() ): $siw_agenda->the_post();
 				$start_ts = get_post_meta( get_the_ID(), 'siw_agenda_start', true );
 				$end_ts = get_post_meta( get_the_ID(), 'siw_agenda_eind', true );
 				$date_range = siw_get_date_range_in_text( date("Y-m-d",$start_ts),  date("Y-m-d",$end_ts), false );
@@ -383,12 +420,14 @@ public function __construct() {
 }]
 					</script>
 					</li>
-			<?php endwhile; ?>
+			<?php endwhile;?>
 		</ul>
 		<p class="siw_agenda_page_link">
 			<a href="<?php echo get_page_link( $agenda_page ); ?>">Bekijk de volledige agenda</a>
 		</p>
-		<?php
+		<?php else: ?>
+		<p><?php _e('Er zijn momenteel geen geplande activiteiten.', 'siw'); ?></p>
+		<?php endif;
 		wp_reset_query();
 		echo $after_widget;
 	}
