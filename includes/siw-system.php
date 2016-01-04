@@ -16,14 +16,15 @@ function siw_change_permalink_structure() {
 	add_permastruct( 'wpm-testimonial', "ervaring/%wpm-testimonial%", array( 'slug' => 'ervaring' ) );
 }
 
-add_action( 'init', 'siw_change_portfolio_type', 11 );
-function siw_change_portfolio_type() {
-    $portfolio_type_args = get_taxonomy( 'portfolio-type' );
-    $portfolio_type_args->rewrite['slug'] = 'projecten-op-maat-in';
-    register_taxonomy( 'portfolio-type',array('portfolio'), (array) $portfolio_type_args );
+//portfolio permalinks aanpassen
+add_filter('kadence_portfolio_type_slug', 'siw_portfolio_type_slug');
+function siw_portfolio_type_slug(){
+	return 'projecten-op-maat-in';
 }
-
-
+add_filter('kadence_portfolio_tag_slug', 'siw_portfolio_tag_slug');
+function siw_portfolio_tag_slug(){
+	return 'projecten-op-maat-per-tag';
+}
 
 //pdf en doc(x) upload toestaan
 add_filter('upload_mimes', 'siw_custom_upload_mimes');
