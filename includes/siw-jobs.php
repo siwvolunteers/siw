@@ -146,7 +146,17 @@ function siw_jobs_metaboxes( array $meta_boxes ){
 				'desc' => 'Geef aan of de vacaturetitel in het meervoud is. Bijvoorbeeld "regiospecialisten".',
 				'id' => $prefix . 'meervoud',
 				'type' => 'checkbox'
-),			
+			),
+			array(
+				'name'    => 'Inleiding',
+				'id'      => $prefix . 'inleiding',
+				'type'    => 'wysiwyg',
+				'options' => array(
+					'wpautop' => true, 
+					'media_buttons' => false, 
+					'teeny' => true, 
+				),
+			),			
 			array(
 				'name'    => 'Wie ben jij? *',
 				'id'      => $prefix . 'wie_ben_jij',
