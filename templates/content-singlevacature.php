@@ -3,7 +3,7 @@
 <?php global $post;
 	$deadline_ts = get_post_meta( $post->ID, 'siw_vacature_deadline', true );
 	$deadline = siw_get_date_in_text( date("Y-m-d",$deadline_ts), false);
-	$mission = siw_get_jobs_mission_statement();
+	$missie = siw_get_jobs_missie_statement();
 	$inleiding = get_post_meta( $post->ID, 'siw_vacature_inleiding', true );	
 	$wie_zijn_wij = siw_get_jobs_company_profile();
 	$wie_ben_jij = get_post_meta( $post->ID, 'siw_vacature_wie_ben_jij', true );			
@@ -17,10 +17,10 @@
 	$solliciteren_functie = get_post_meta( $post->ID, 'siw_vacature_solliciteren_functie', true );	
 	$solliciteren_email = get_post_meta( $post->ID, 'siw_vacature_solliciteren_email', true );
 	$gesprekken = get_post_meta( $post->ID, 'siw_vacature_gesprekken', true );
-	$plural = get_post_meta( $post->ID, 'siw_vacature_meervoud', true );
+	$meervoud = get_post_meta( $post->ID, 'siw_vacature_meervoud', true );
 	
 	$content = '[accordion]';
-	$content .= '[pane title="Wie zijn wij?"]' . wpautop($mission) . wpautop($wie_zijn_wij) . '[/pane]';
+	$content .= '[pane title="Wie zijn wij?"]' . wpautop($missie) . wpautop($wie_zijn_wij) . '[/pane]';
 	$content .= '[pane title="Wie ben jij?"]' . wpautop($wie_ben_jij) . '[/pane]';
 	$content .= '[pane title="Wat ga je doen?"]' . wpautop($wat_ga_je_doen) . '[/pane]';	
 	$content .= '[pane title="Wat bieden wij jou?"]' . wpautop($wat_bieden_wij_jou) . '[/pane]';	
@@ -38,7 +38,7 @@
 				<div class="row">
 					<div class="col-md-7">
 						<h3 class="job-heading">Vacature</h3>
-						<p><?php echo get_the_excerpt(); ?> <?php echo 'Wij zijn op zoek naar', ( $plural ?':':' een:');?></p>
+						<p><?php echo get_the_excerpt(); ?> <?php echo 'Wij zijn op zoek naar', ( $meervoud ?':':' een:');?></p>
 						<h5 class="job-title"><?php the_title();?></h5>
 						<?php echo ($inleiding ? wpautop($inleiding) : ''  ); ?>
 						<?php echo do_shortcode( $content );?>
