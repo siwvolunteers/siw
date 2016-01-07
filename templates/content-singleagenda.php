@@ -36,7 +36,7 @@
 				</header>
 				<div class="row">
 					<div class="col-md-10">
-						<p><?php echo wpautop($description); ?></p>				
+						<?php echo wpautop($description); ?>			
 					</div>
 				</div>
 				<div class="row">
@@ -47,12 +47,12 @@
 						<?php
 						foreach ( (array) $program as $key => $item ) {
 						?>
-							<div class="col-md-2 ">
-								<p><b><?php echo date("H:i", strtotime($item['starttijd'])), '-', date("H:i", strtotime($item['eindtijd']));?></b></p>
+							<div class="col-md-3">
+								<p><b><?php echo date("H:i", strtotime($item['starttijd'])), ' - ', date("H:i", strtotime($item['eindtijd']));?></b></p>
 							</div>
-							<div class="col-md-10 ">
-								<p><?php echo $item['omschrijving'];?></p>
-							</div>
+							<div class="col-md-9">
+								<?php echo wpautop($item['omschrijving']);?>
+							</div>		
 						<?php }?>
 						</div>
 						<?php }?>
@@ -65,14 +65,14 @@
 							<?php echo $postal_code, ' ', $city; ?><br/>
 							</b>
 						</p>
-						<p><?php echo do_shortcode( $location_map );?></p>
+						<?php echo do_shortcode( $location_map );?>
 					</div>
 					<div class="col-md-6">
 						<h3>Aanmelden</h3>
 						<?php if ($application == 'formulier'){
 							echo do_shortcode( '[vfb id=' . $vfb_form_id . ']' );
 						}else{?>
-							<p><?php echo wpautop($application_explanation); ?></p>				
+							<?php echo wpautop($application_explanation); ?>				
 						<?php
 							if ( $application_link_url){?>
 							<a href="<?php echo $application_link_url;?>" target="_blank"><?php echo (($application_link_text)? $application_link_text : $application_link_url)?> <i class="kt-icon-newtab"></i></a>
