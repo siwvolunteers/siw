@@ -520,7 +520,7 @@ function siw_settings_show_page_select( $option ) {
     if (!empty($pages)) {
 		echo '<select name="', $option, '">';
 		  foreach ($pages as $page) {
-		    echo '<option value="', $page->ID, '"', get_option($option) == $page->ID ? ' selected="selected"' : '', '>',(($page->post_parent)?get_the_title($page->post_parent).' / ':''), $page->post_title, '</option>';
+		    echo '<option value="', $page->ID, '"', get_option($option) == $page->ID ? ' selected="selected"' : '', '>',(($page->post_parent)?'-- ':''), $page->post_title, '</option>';
 		  }
 		  echo '</select>'; 
 	}
