@@ -120,8 +120,9 @@ function siw_vfb_pro_scripts(){
 	if ($wp_scripts->registered['vfbp-js']){
 		$wp_scripts->registered['vfbp-js']->src = get_stylesheet_directory_uri() . '/assets/js/vfb-pro/vfb-js.min.js';
 	}
-	if ($wp_scripts->registered['jquery-intl-tel']){	
-		wp_enqueue_script( 'jquery-phone-format', VFB_PLUGIN_URL . "public/assets/js/vendors/phone-format.min.js",array(), null, true);	
+	if ($wp_scripts->registered['jquery-intl-tel']){
+		wp_register_script( 'jquery-phone-format', VFB_PLUGIN_URL . "public/assets/js/vendors/phone-format.min.js",array(), null, true);	
+		$wp_scripts->registered['jquery-intl-tel']->deps[] = 'jquery-phone-format';
 	}
 }
 
