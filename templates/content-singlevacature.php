@@ -3,7 +3,7 @@
 <?php global $post;
 	$deadline_ts = get_post_meta( $post->ID, 'siw_vacature_deadline', true );
 	$deadline = siw_get_date_in_text( date("Y-m-d",$deadline_ts), false);
-	$missie = siw_get_jobs_missie_statement();
+	$missie = siw_get_jobs_mission_statement();
 	$inleiding = get_post_meta( $post->ID, 'siw_vacature_inleiding', true );	
 	$wie_zijn_wij = siw_get_jobs_company_profile();
 	$wie_ben_jij = get_post_meta( $post->ID, 'siw_vacature_wie_ben_jij', true );			
