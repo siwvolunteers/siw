@@ -742,7 +742,7 @@ li.tribe-events-list-widget-events h4 a::before{
 /*
 Styling voor contactform
 */
-#ncf_sidebar, #ncf_sidebar .ncf_user_bio, #ncf_sidebar input, #ncf_sidebar textarea {
+#ncf_sidebar, #ncf_sidebar .ncf_user_bio, #ncf_sidebar input, #ncf_sidebar textarea, #ncf_sidebar form.wpcf7-form p {
 	font-family: 'Open Sans',sans-serif !important;
 	color: #444 !important;
 }
