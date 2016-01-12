@@ -6,6 +6,58 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+//SIW shortcodes toevoegen aan pinnacle shortcodes
+add_filter('kadence_shortcodes', 'siw_shortcodes');
+
+function siw_shortcodes( $pinnacle_shortcodes ){
+
+	$pinnacle_shortcodes['siw_evs_volgende_deadline'] = array(
+		'title' =>	__('SIW: Volgende EVS deadline', 'siw'), 
+	);
+	$pinnacle_shortcodes['siw_evs_volgende_vertrekmoment'] = array(
+		'title' =>	__('SIW: Volgende EVS-vertrekmoment', 'siw'), 
+	);	
+	$pinnacle_shortcodes['siw_evs_borg'] = array( 
+		'title'=>__('SIW: EVS borg', 'siw'), 
+	);
+	$pinnacle_shortcodes['siw_inschrijfgeld_op_maat'] = array(
+		'title'	=>	__('SIW: Inschrijfgeld project op maat', 'siw'), 
+		'attr'	=>	array(
+			'tarief' => array(
+				'type'=>'select', 
+				'title'=>__('Tarief', 'siw'),
+				'values' => array(
+					"student" => __('Student','pinnacle'),
+					"regulier" => __('Regulier','pinnacle'),
+
+				),
+			),
+		),
+	);
+	$pinnacle_shortcodes['siw_inschrijfgeld_groepsproject'] = array(
+		'title'	=>	__('SIW: Inschrijfgeld groepsproject', 'siw'), 
+		'attr'	=>	array(
+			'tarief' => array(
+				'type'=>'select', 
+				'title'=>__('Tarief', 'siw'),
+				'values' => array(
+					"student" => __('Student','pinnacle'),
+					"regulier" => __('Regulier','pinnacle'),
+
+				),
+			),
+		),
+	);
+	
+	return $pinnacle_shortcodes;
+}
+
+
+
+
+
+
+
 //Volgende EVS deadline
 add_shortcode('siw_evs_volgende_deadline', 'siw_shortcode_evs_next_deadline');
 function siw_shortcode_evs_next_deadline() {

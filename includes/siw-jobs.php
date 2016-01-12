@@ -88,7 +88,6 @@ function siw_taxonomy_job_type() {
 
 //kolom in admin menu
 add_filter('manage_vacatures_posts_columns', 'siw_vacature_admin_deadline_column_header', 10);
-
 function siw_vacature_admin_deadline_column_header($columns) {
     $columns['deadline'] = 'Deadline';
     return $columns;
@@ -113,7 +112,7 @@ function siw_vacature_deadline_column_sorting( $columns ) {
 
 add_filter( 'request', 'siw_vacature_deadline_column_orderby' );
 function siw_vacature_deadline_column_orderby( $vars ) {
-    if ( isset( $vars['orderby'] ) && 'deadline' == $vars['orderby'] ) {
+    if ( ( !isset( $vars['orderby'] ) && $vars['post_type'] == 'vacatures' ) || ( isset( $vars['orderby'] ) && 'deadline' == $vars['orderby'] ) ) {
         $vars = array_merge( $vars, array(
             'meta_key' => 'siw_vacature_deadline',
             'orderby' => 'meta_value'
@@ -141,7 +140,23 @@ function siw_jobs_metaboxes( array $meta_boxes ){
 				'name'    => 'Beschrijving',
 				'id'      => $prefix . 'beschrijving',
 				'type'    => 'title',
-			),		
+			),
+			array(
+				'name' => 'Meervoud',
+				'desc' => 'Geef aan of de vacaturetitel in het meervoud is. Bijvoorbeeld "regiospecialisten".',
+				'id' => $prefix . 'meervoud',
+				'type' => 'checkbox'
+			),
+			array(
+				'name'    => 'Inleiding',
+				'id'      => $prefix . 'inleiding',
+				'type'    => 'wysiwyg',
+				'options' => array(
+					'wpautop' => true, 
+					'media_buttons' => false, 
+					'teeny' => true, 
+				),
+			),			
 			array(
 				'name'    => 'Wie ben jij? *',
 				'id'      => $prefix . 'wie_ben_jij',

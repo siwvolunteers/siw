@@ -27,7 +27,7 @@ function siw_register_evs_applications_widget() {
 		'siw_display_applications_widget',
 		'',
 		array(
-			'form'=>'EVS',
+			'form'=>'evs',
 			'results'=>5
 		)			
 	);
@@ -41,7 +41,7 @@ function siw_register_op_maat_applications_widget() {
 		'siw_display_applications_widget',
 		'',
 		array(
-			'form'=>'Vrijwilligerswerk op maat',
+			'form'=>'op_maat',
 			'results'=>5
 		)
 	);
@@ -55,7 +55,7 @@ function siw_register_community_day_applications_widget() {
 		'siw_display_applications_widget',
 		'',
 		array(
-			'form'=>'Aanmelden SIW Community Day',
+			'form'=>'community_day',
 			'results'=>5
 		)
 	);
@@ -64,7 +64,7 @@ function siw_register_community_day_applications_widget() {
 
 function siw_display_applications_widget( $var, $args ) {
 	
-	$form_title = $args['args']['form'];
+	$form_id = siw_get_vfb_form_id($args['args']['form']);
 	$results = $args['args']['results'];
 	global $wpdb;
 	if (!isset($wpdb->vfbp_forms)) {
@@ -80,16 +80,14 @@ function siw_display_applications_widget( $var, $args ) {
 							ON $wpdb->posts.id = $wpdb->postmeta.post_id 
 					WHERE  $wpdb->posts.post_type = 'vfb_entry' 
 						AND $wpdb->postmeta.meta_key = '_vfb_form_id' 
-						AND $wpdb->postmeta.meta_value = (SELECT $wpdb->vfbp_forms.id 
-														FROM   $wpdb->vfbp_forms 
-														WHERE  $wpdb->vfbp_forms.title = %s) 
+						AND $wpdb->postmeta.meta_value = %d 
 					GROUP  BY application_year, 
 							application_month 
 					ORDER  BY application_year DESC, 
 							application_month DESC 
 					LIMIT  %d; ";
 
-	$applications = $wpdb->get_results( $wpdb->prepare( $query, $form_title, $results ), ARRAY_A);
+	$applications = $wpdb->get_results( $wpdb->prepare( $query, $form_id, $results ), ARRAY_A);
 
 	if (!empty($applications)){
 		

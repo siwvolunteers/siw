@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 /*
 import
 */
+require_once('includes/siw-agenda.php');
+require_once('includes/siw-login.php');
+require_once('includes/siw-admin.php');
+require_once('includes/siw-analytics.php');
 require_once('includes/siw-js-css.php');
 require_once('includes/siw-woocommerce.php');
 require_once('includes/siw-woocommerce-checkout.php');
@@ -22,4 +26,5 @@ require_once('includes/siw-options.php');
 require_once('includes/siw-dashboard-widgets.php');
 require_once('includes/siw-shortcodes.php');
 require_once('includes/siw-postcode.php');
+require_once('includes/siw-email.php');
 require_once('includes/siw-jobs.php');

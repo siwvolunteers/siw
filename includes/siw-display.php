@@ -13,8 +13,10 @@ add_filter( 'widget_text', 'do_shortcode' );
 add_filter('kadence_display_sidebar', 'siw_remove_sidebar');
 
 function siw_remove_sidebar( $sidebar ) {
-  if ( tribe_is_event_query() ) {
-    return false;
+  if ( function_exists('tribe_is_event_query')){
+	if (tribe_is_event_query() ) {
+		return false;
+	}
   } 
   if ( get_post_type() == 'wpm-testimonial'){
 	return false;
@@ -43,7 +45,13 @@ function siw_show_quick_search_widget(){?>
 <?php
 }
 
-	
+//knop naar infopagina onder elke op maat project
+add_action('kadence_single_portfolio_value_after','siw_show_op_maat_button');
+
+function siw_show_op_maat_button(){?>
+<a href="/zo-werkt-het/projecten-op-maat/" class="kad-btn kad-btn-primary">Alles over projecten op maat</a>
+<?php
+}	
 //functie om categorie header te tonen op productpagina TODO:herschrijven conform naamgevingsconventies
 	
 add_action('kt_header_overlay', 'kt_category_image_onproduct'); 

@@ -8,6 +8,7 @@
         </header>
         <div class="entry-content" itemprop="description articleBody">
             <?php the_excerpt(); ?>
+			<a class="read-more" href="<?php the_permalink() ?>">Lees meer</a>
         </div>
 		<footer class="single-footer clearfix">
 			<?php $categories= get_the_terms($post->ID,'soort_vacature');

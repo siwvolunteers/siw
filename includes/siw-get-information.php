@@ -25,6 +25,35 @@ function siw_get_pingdom_rum_id(){
 	return $pingdom_rum_id;
 }
 
+
+//pagina's
+function siw_get_parent_page( $type ){
+    switch ($type) {
+        case  "vacatures":
+			$parent_page = get_option('siw_jobs_parent_page');
+			return $parent_page;
+        case  "agenda":
+			$parent_page = get_option('siw_agenda_parent_page');
+			return $parent_page;
+	}
+}
+
+//formulieren
+function siw_get_vfb_form_id( $type ){
+    switch ($type) {
+        case  "community_day":
+			$form_id = get_option('siw_forms_community_day');
+			return $form_id;
+        case  "evs":
+			$form_id = get_option('siw_forms_evs');
+			return $form_id;
+        case  "op_maat":
+			$form_id = get_option('siw_forms_op_maat');
+			return $form_id;
+	}
+}
+
+		
 function siw_get_jobs_company_profile(){
 	$company_profile = get_option('siw_jobs_company_profile');
 	return $company_profile;
@@ -154,6 +183,35 @@ function siw_get_date_in_text( $date, $year = true ){
 		$date_in_text .=  ' ' . $year;
 	}
 	return $date_in_text;
+
+}
+
+function siw_get_date_range_in_text ($date_start, $date_end, $year = true){
+	//als beide datums gelijk zijn gebruik dan siw_get_date_in_text
+	if ( $date_start == $date_end){
+		$date_range_in_text = siw_get_date_in_text( $date_start, $year );
+	}
+	else{
+		$date_start_array = date_parse( $date_start );
+		$date_end_array = date_parse( $date_end );
+		$month_array = siw_get_array('month_to_text');
+	
+		$date_range_in_text = $date_start_array['day'];
+		if ( $date_start_array['month'] != $date_end_array['month']){
+			$date_range_in_text .= ' ' . $month_array[$date_start_array['month']];
+		}
+		if ( ($date_start_array['year'] != $date_end_array['year']) and $year){
+			$date_range_in_text .= ' ' . $date_start_array['year'];
+		}
+		$date_range_in_text .= ' t/m ';
+		$date_range_in_text .= $date_end_array['day'];
+		$date_range_in_text .= ' ' . $month_array[$date_end_array['month']];
+		if ( $year ){
+			$date_range_in_text .= ' ' . $date_end_array['year'];
+		}
+		
+	}
+	return $date_range_in_text;
 
 }
 

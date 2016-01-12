@@ -3,9 +3,8 @@ Theme Name: SIW
 Theme URI: http://www.siw.nl
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
-Author URI: http://www.siw.nl
 Template: pinnacle_premium
-Version: 1.3
+Version: 1.4
 GitHub Theme URI: https://github.com/siwvolunteers/siw
 */
 
@@ -608,10 +607,14 @@ article.vacatures {
 	margin: 20px;
 }
 
-h5.job-title, p.job-mission{
+h5.job-title{
 	text-align:center;
 }
 
+/*agenda*/
+article.agenda {
+	background-color:#fff;
+}
 /*contact form styling*/
 div.wpcf7-validation-errors, div.wpcf7-mail-sent-ok{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -678,6 +681,28 @@ span.wpcf7-not-valid-tip {
 /*
 Styling voor event calendar
 */
+ul.siw_events{
+	padding:0px;
+	list-style-type:none;
+}
+
+li.siw_event h4 a::before{
+    color: #fff;
+    display: inline-block;
+    height: 40px;
+    left: 15px;
+    vertical-align: middle;
+    width: 30px;
+	background-color: transparent;
+    font-family: kt-icon;
+	content:"\e115";
+}
+
+h4.siw_event_title{
+	margin-bottom:0px;
+}
+
+
 li.tribe-events-list-widget-events h4 a::before{
     color: #fff;
     display: inline-block;
@@ -688,6 +713,13 @@ li.tribe-events-list-widget-events h4 a::before{
 	background-color: transparent;
     font-family: kt-icon;
 	content:"\e115";
+}
+
+.siw_event_duration, .siw_agenda_page_link{
+	font-weight: bold;
+}
+.agenda-location{
+	font-style:italic;
 }
 
 .tribe-events-list-widget ol{
@@ -710,7 +742,7 @@ li.tribe-events-list-widget-events h4 a::before{
 /*
 Styling voor contactform
 */
-#ncf_sidebar, #ncf_sidebar .ncf_user_bio, #ncf_sidebar input, #ncf_sidebar textarea {
+#ncf_sidebar, #ncf_sidebar .ncf_user_bio, #ncf_sidebar input, #ncf_sidebar textarea, #ncf_sidebar form.wpcf7-form p {
 	font-family: 'Open Sans',sans-serif !important;
 	color: #444 !important;
 }
