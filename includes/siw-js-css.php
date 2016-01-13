@@ -65,16 +65,6 @@ function siw_remove_unnecessary_scripts(){
 		wp_dequeue_style('kadence_slider_css');
 	}
 	
-	//events calendar
-	if ( function_exists('tribe_is_event_query')){
-		if((! tribe_is_event_query()) && (! tribe_is_event()) ){
-			wp_dequeue_style('tribe-events-full-calendar-style');
-			wp_dequeue_style('tribe-events-calendar-style');		
-			wp_dequeue_style('tribe-events-calendar-full-mobile-style');	
-			wp_dequeue_style('tribe-events-calendar-mobile-style');	
-		}
-	}
-	
 	//ncf font
 	wp_dequeue_style( 'ncf_lato_font' );
 	

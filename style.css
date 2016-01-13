@@ -611,10 +611,7 @@ h5.job-title{
 	text-align:center;
 }
 
-/*agenda*/
-article.agenda {
-	background-color:#fff;
-}
+
 /*contact form styling*/
 div.wpcf7-validation-errors, div.wpcf7-mail-sent-ok{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -679,8 +676,13 @@ span.wpcf7-not-valid-tip {
 
 
 /*
-Styling voor event calendar
+Styling voor agenda
 */
+
+article.agenda {
+	background-color:#fff;
+}
+
 ul.siw_events{
 	padding:0px;
 	list-style-type:none;
@@ -702,19 +704,6 @@ h4.siw_event_title{
 	margin-bottom:0px;
 }
 
-
-li.tribe-events-list-widget-events h4 a::before{
-    color: #fff;
-    display: inline-block;
-    height: 40px;
-    left: 15px;
-    vertical-align: middle;
-    width: 30px;
-	background-color: transparent;
-    font-family: kt-icon;
-	content:"\e115";
-}
-
 .siw_event_duration, .siw_agenda_page_link{
 	font-weight: bold;
 }
@@ -722,22 +711,7 @@ li.tribe-events-list-widget-events h4 a::before{
 	font-style:italic;
 }
 
-.tribe-events-list-widget ol{
-	padding:0px;
-	list-style-type:none;
-}
 
-.tribe-events-cal-links, a.tribe-events-ical{
-	display:none !important;
-}
-
-.tribe-events-list .tribe-events-event-image img{
-	width:auto;
-}
-
-.tribe-events-list-widget .duration, .tribe-events-widget-link a {
-    font-weight: 700;
-}
 
 /*
 Styling voor contactform

@@ -13,11 +13,6 @@ add_filter( 'widget_text', 'do_shortcode' );
 add_filter('kadence_display_sidebar', 'siw_remove_sidebar');
 
 function siw_remove_sidebar( $sidebar ) {
-  if ( function_exists('tribe_is_event_query')){
-	if (tribe_is_event_query() ) {
-		return false;
-	}
-  } 
   if ( get_post_type() == 'wpm-testimonial'){
 	return false;
   } 
