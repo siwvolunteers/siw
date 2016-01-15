@@ -15,7 +15,6 @@ function siw_remove_admin_bar_items( $wp_admin_bar ) {
 	$wp_admin_bar->remove_menu( 'wp-logo' );
 	$wp_admin_bar->remove_menu( 'comments' );
 	$wp_admin_bar->remove_menu( 'wpseo-menu' );
-	$wp_admin_bar->remove_menu( 'tribe-events' );
 	$wp_admin_bar->remove_menu( 'vfbp-admin-toolbar' );	
 	
 }
@@ -51,7 +50,6 @@ function siw_remove_dashboard_widgets(){
 add_action( 'do_meta_boxes', 'siw_remove_plugin_metaboxes' );
 
 function siw_remove_plugin_metaboxes(){
-    remove_meta_box( 'tribe_dashboard_widget', 'dashboard', 'normal' ); 
 	remove_meta_box( 'woocommerce_dashboard_recent_reviews', 'dashboard', 'normal' ); 
 	remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'normal' ); 	
 }
