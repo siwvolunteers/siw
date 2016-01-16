@@ -41,45 +41,21 @@ Algemene styling
 	color: #fff !important;
 }
 
-/*tekst in widget-invoervelden grijs*/
-.widget_wysija_cont .wysija-paragraph .wysija-input {
+/*SIW-mailpoet widget*/
+.widget_siw_mailpoet_subscription input{
 	color:#444;
 	box-shadow:none;
 }
-
-.widget_wysija_cont .wysija-paragraph .wysija-input:focus {
+.widget_siw_mailpoet_subscription input:focus{
 	box-shadow:none;
 }
 
-.widget_wysija_cont .wysija-paragraph .formError{
-	position:static !important;
-	opacity:1 !important;
-	cursor: pointer;
-	z-index: 5000;
-}
-.wysija-paragraph .formError .formErrorContent, .widget_wysija_cont .allmsgs{
-	background: none;
-	font-family: inherit;
+#newsletter_message, #newsletter_email_message{
+    color: #59ab9c;
 	font-size:11px;
 	border: 1px solid #59ab9c;
 	border-radius: 4px;
-    color: #59ab9c;
-	margin-bottom:4px;
-	padding: 4px 10px;
-	position: relative;
-    width: 100%;
-    z-index: 5001;	
 }
-
-.widget_wysija_cont .abs-req {
-    display: none;
-}
-
-.widget_wysija_cont .allmsgs li {
-    list-style-type: none;
-}
-
-
 
 
 h3{

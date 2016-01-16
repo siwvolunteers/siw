@@ -12,7 +12,9 @@ function siw_custom_js(){
 	wp_register_script('siw_custom_js', get_stylesheet_directory_uri() . '/assets/js/siw-scripts.js', array('jquery'), '', TRUE);
 	$site_url = site_url();
 	$parameters = array(
-		'ajax_url' => get_stylesheet_directory_uri().'/siw-ajax.php'
+		'ajax_url' => get_stylesheet_directory_uri().'/siw-ajax.php',
+		'invalid_email' => 'Vul een geldig e-mailadres in.',
+		'sending' => 'Verzenden..',
 	);
 	wp_localize_script( 'siw_custom_js', 'parameters', $parameters );
 	wp_enqueue_script('siw_custom_js');

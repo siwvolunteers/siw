@@ -64,8 +64,62 @@
 		return false;
     });
 	
+	$("#siw_newsletter_subscription").submit(function(event){
+		event.preventDefault();
+		
+		var name = $("#newsletter_name").val();
+		var email = $("#newsletter_email").val();
+		var list = $("#newsletter_list_id").val();
 
+		if ((name != '') && (email != '') && (list != '')){
+			$( "#siw_newsletter_subscription" ).addClass( "hidden" );
+			$( "#newsletter_message" ).removeClass( "hidden" );
+			$( "#newsletter_message" ).text(parameters.sending);
+			$.ajax({
+				url : parameters.ajax_url,
+				type : 'post',
+				dataType: 'json',
+				data : {
+					action : 'newsletter_subscription',
+					name : name,
+					email : email,
+					list : list
+				},
+				success: function(result) {
+					if(result.success == 1) {
+						$( "#newsletter_message" ).text(result.message);
+					}
+					else {
+						$( "#newsletter_message" ).text(result.message);
+						$( "#siw_newsletter_subscription" ).removeClass( "hidden" );
+					}             
+				},
+			});		
+		
+		}
+	});
+
+	//E-mailvalidatie
+	var validations ={
+		email: [/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/, parameters.invalid_email]
+	};
+
+	$(document).ready(function(){
+		$("#newsletter_email").change( function(){
+			validation = new RegExp(validations['email'][0]);
+			if (!validation.test(this.value)){
+				this.setCustomValidity(validations['email'][1]);
+				return false;
+			} else {
+				this.setCustomValidity('');
+			}
+		});
+	})	
 })(jQuery);
+
+
+
+
 
 /*! mCheckable - v1.0.2 - 2015-03-01
 * https://github.com/mIRUmd/mCheckable/

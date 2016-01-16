@@ -13,7 +13,7 @@ if (!isset( $_REQUEST['action']))
 
 require_once('../../../wp-load.php');
 
-//zet hedaders
+//zet headers
 @header( 'Content-Type: text/html; charset=' . get_option( 'blog_charset' ) );
 @header( 'X-Robots-Tag: noindex' );
 send_nosniff_header();
@@ -23,9 +23,10 @@ nocache_headers();
 //actie uit request halen
 $action = esc_attr(trim($_REQUEST['action']));
 
-//toegestande acties
+//toegestane acties
 $allowed_actions = array(
-	'postcode_lookup'
+	'postcode_lookup',
+	'newsletter_subscription',
 );
 
 //uitvoeren toegestane actie

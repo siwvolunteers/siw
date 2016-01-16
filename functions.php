@@ -12,6 +12,7 @@ import
 require_once('includes/siw-agenda.php');
 require_once('includes/siw-login.php');
 require_once('includes/siw-admin.php');
+require_once('includes/siw-newsletter.php');
 require_once('includes/siw-analytics.php');
 require_once('includes/siw-js-css.php');
 require_once('includes/siw-woocommerce.php');
