@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /*custom javascript/jQuery functies*/
 add_action('wp_enqueue_scripts', 'siw_custom_js');
 function siw_custom_js(){
-	wp_register_script('siw_custom_js', get_stylesheet_directory_uri() . '/assets/js/siw-scripts.js', array('jquery'), '', TRUE);
+	wp_register_script('siw_custom_js', get_stylesheet_directory_uri() . '/assets/js/siw-scripts.js', array('jquery'), wp_get_theme()->version, TRUE);
 	$site_url = site_url();
 	$parameters = array(
 		'ajax_url' => get_stylesheet_directory_uri().'/siw-ajax.php',
@@ -23,7 +23,7 @@ function siw_custom_js(){
 
 add_action('wp_enqueue_scripts', 'siw_wc_checkout_scripts_js');
 function siw_wc_checkout_scripts_js(){
-	wp_register_script('siw-wc-checkout-scripts', get_stylesheet_directory_uri() . '/assets/js/siw-wc-checkout-scripts.js', array('jquery'), '', TRUE);
+	wp_register_script('siw-wc-checkout-scripts', get_stylesheet_directory_uri() . '/assets/js/siw-wc-checkout-scripts.js', array('jquery'), wp_get_theme()->version, TRUE);
 	$site_url = site_url();
 	$parameters = array(
 		'ajax_url' => get_stylesheet_directory_uri().'/siw-ajax.php'
