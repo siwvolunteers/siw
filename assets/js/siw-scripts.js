@@ -88,6 +88,7 @@
 				success: function(result) {
 					if(result.success == 1) {
 						$( "#newsletter_message" ).text(result.message);
+						ga('send', 'event', 'Nieuwsbrief', 'Aanmelden');
 					}
 					else {
 						$( "#newsletter_message" ).text(result.message);
