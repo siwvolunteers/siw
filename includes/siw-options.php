@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'admin_menu', 'siw_add_settings_menu' );
+add_action( 'admin_menu', 'siw_settings_general_init');
 add_action( 'admin_init', 'siw_settings_signatures_init' );
 add_action( 'admin_init', 'siw_settings_plato_init' );
 add_action( 'admin_init', 'siw_settings_tariffs_init' );
@@ -18,16 +19,56 @@ add_action( 'admin_init', 'siw_settings_forms_init');
 
 function siw_add_settings_menu(){ 
 	add_menu_page( 'Instellingen SIW', 'Instellingen SIW', 'manage_options', 'siw_settings', 'siw_settings_page','dashicons-admin-settings',110);
-	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Algemeen', 'manage_options', 'siw_settings');
-	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Ondertekening', 'manage_options', 'admin.php?page=siw_settings&tab=signatures');
-	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Tarieven', 'manage_options', 'admin.php?page=siw_settings&tab=tariffs');
-	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'PLATO', 'manage_options', 'admin.php?page=siw_settings&tab=plato');
-	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'EVS', 'manage_options', 'admin.php?page=siw_settings&tab=evs');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Agenda', 'manage_options', 'siw_settings');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Algemeen', 'manage_options', 'admin.php?page=siw_settings&tab=general');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'API keys', 'manage_options', 'admin.php?page=siw_settings&tab=api');
-	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Vacatures', 'manage_options', 'admin.php?page=siw_settings&tab=jobs');
-	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Agenda', 'manage_options', 'admin.php?page=siw_settings&tab=agenda');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'EVS', 'manage_options', 'admin.php?page=siw_settings&tab=evs');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Formulieren', 'manage_options', 'admin.php?page=siw_settings&tab=forms');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Ondertekening', 'manage_options', 'admin.php?page=siw_settings&tab=signatures');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'PLATO', 'manage_options', 'admin.php?page=siw_settings&tab=plato');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Tarieven', 'manage_options', 'admin.php?page=siw_settings&tab=tariffs');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Vacatures', 'manage_options', 'admin.php?page=siw_settings&tab=jobs');
 }
+
+function siw_settings_general_init(){ 
+
+	register_setting( 'siw_general', 'siw_general_iban' );
+	register_setting( 'siw_general', 'siw_general_kvk' );
+	register_setting( 'siw_general', 'siw_general_phone' );
+	
+	//secties
+	add_settings_section(
+		'siw_general', 
+		__( 'Algemeen', 'siw' ), 
+		'__return_false', 
+		'siw_general'
+	);
+	add_settings_field( 
+		'siw_general_iban', 
+		__( 'IBAN', 'siw' ), 
+		'siw_settings_show_text_field', 
+		'siw_general',
+		'siw_general', 
+		'siw_general_iban' 
+	);
+	add_settings_field( 
+		'siw_general_kvk', 
+		__( 'KvK nummer', 'siw' ), 
+		'siw_settings_show_text_field', 
+		'siw_general',
+		'siw_general', 
+		'siw_general_kvk' 
+	);
+	add_settings_field( 
+		'siw_general_phone', 
+		__( 'Telefoonnummer', 'siw' ), 
+		'siw_settings_show_text_field', 
+		'siw_general',
+		'siw_general', 
+		'siw_general_phone' 
+	);	
+}
+
 
 function siw_settings_signatures_init(){ 
 	//ondertekening e-mails
@@ -530,18 +571,18 @@ function siw_settings_page(  ) {?>
     <div class="wrap">  
         <h2>Instellingen SIW</h2>
         <?php settings_errors();
-		$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'signatures';
+		$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'agenda';
 		?>        
 		<h2 class="nav-tab-wrapper">
-			<!--<a href="?page=siw_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>">Algemeen</a>-->
-			<a href="?page=siw_settings&tab=signatures" class="nav-tab <?php echo $active_tab == 'signatures' ? 'nav-tab-active' : ''; ?>">Ondertekening</a>
-			<a href="?page=siw_settings&tab=tariffs" class="nav-tab <?php echo $active_tab == 'tariffs' ? 'nav-tab-active' : ''; ?>">Tarieven</a>
-			<a href="?page=siw_settings&tab=plato" class="nav-tab <?php echo $active_tab == 'plato' ? 'nav-tab-active' : ''; ?>">PLATO</a>
-			<a href="?page=siw_settings&tab=evs" class="nav-tab <?php echo $active_tab == 'evs' ? 'nav-tab-active' : ''; ?>">EVS</a>			
+			<a href="?page=siw_settings&tab=agenda" class="nav-tab <?php echo $active_tab == 'agenda' ? 'nav-tab-active' : ''; ?>">Agenda</a>	
+			<a href="?page=siw_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>">Algemeen</a>
 			<a href="?page=siw_settings&tab=api" class="nav-tab <?php echo $active_tab == 'api' ? 'nav-tab-active' : ''; ?>">API keys</a>
+			<a href="?page=siw_settings&tab=evs" class="nav-tab <?php echo $active_tab == 'evs' ? 'nav-tab-active' : ''; ?>">EVS</a>
+			<a href="?page=siw_settings&tab=forms" class="nav-tab <?php echo $active_tab == 'forms' ? 'nav-tab-active' : ''; ?>">Formulieren</a>
+			<a href="?page=siw_settings&tab=signatures" class="nav-tab <?php echo $active_tab == 'signatures' ? 'nav-tab-active' : ''; ?>">Ondertekening</a>
+			<a href="?page=siw_settings&tab=plato" class="nav-tab <?php echo $active_tab == 'plato' ? 'nav-tab-active' : ''; ?>">PLATO</a>
+			<a href="?page=siw_settings&tab=tariffs" class="nav-tab <?php echo $active_tab == 'tariffs' ? 'nav-tab-active' : ''; ?>">Tarieven</a>
 			<a href="?page=siw_settings&tab=jobs" class="nav-tab <?php echo $active_tab == 'jobs' ? 'nav-tab-active' : ''; ?>">Vacatures</a>
-			<a href="?page=siw_settings&tab=agenda" class="nav-tab <?php echo $active_tab == 'agenda' ? 'nav-tab-active' : ''; ?>">Agenda</a>		
-			<a href="?page=siw_settings&tab=forms" class="nav-tab <?php echo $active_tab == 'forms' ? 'nav-tab-active' : ''; ?>">Formulieren</a>					
 		</h2>        
         <form method="post" action="options.php">
 			<?php  

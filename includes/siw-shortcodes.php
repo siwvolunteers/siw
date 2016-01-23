@@ -11,6 +11,21 @@ add_filter('kadence_shortcodes', 'siw_shortcodes');
 
 function siw_shortcodes( $pinnacle_shortcodes ){
 
+	$pinnacle_shortcodes['siw_algemene_informatie'] = array(
+		'title'	=>	__('SIW: Algemene informatie', 'siw'), 
+		'attr'	=>	array(
+			'type' => array(
+				'type'=>'select', 
+				'title'=>__('Type', 'siw'),
+				'values' => array(
+					"iban"		=> __('IBAN','siw'),
+					"kvk"		=> __('KvK-nummer','siw'),
+					"telefoon"	=> __('Telefoonnummer','siw'),
+				),
+			),
+		),
+	);
+
 	$pinnacle_shortcodes['siw_evs_volgende_deadline'] = array(
 		'title' =>	__('SIW: Volgende EVS deadline', 'siw'), 
 	);
@@ -117,4 +132,19 @@ function siw_shortcode_fee_workcamp( $args ){
 
 	$fee = siw_get_fee_workcamp( $tariff );
 	return $fee;
+}
+
+//algemene informatie
+
+add_shortcode('siw_algemene_informatie', 'siw_shortcode_general_information');
+function siw_shortcode_general_information( $args ){
+    $attributes = shortcode_atts(
+		array(
+			'type' => '',
+		),
+	$args);
+	$type = $attributes ['type'];
+
+	$information = siw_get_general_information( $type );
+	return $information;
 }

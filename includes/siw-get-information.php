@@ -25,6 +25,19 @@ function siw_get_pingdom_rum_id(){
 	return $pingdom_rum_id;
 }
 
+function siw_get_general_information ( $type ){
+	switch ( $type ){
+		case "iban":
+			$iban = get_option('siw_general_iban');
+			return $iban;
+		case "kvk":
+			$kvk = get_option('siw_general_kvk');
+			return $kvk;		
+		case "telefoon":
+			$phone = get_option('siw_general_phone');
+			return $phone;		
+	}
+}
 
 //pagina's
 function siw_get_parent_page( $type ){
