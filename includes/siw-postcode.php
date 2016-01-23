@@ -6,9 +6,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-add_action( 'siw_ajax_nopriv_postcode_lookup', 'siw_postcode_lookup' );
-add_action( 'siw_ajax_postcode_lookup', 'siw_postcode_lookup' );
+add_filter( 'siw_ajax_allowed_actions', function($actions){
+	$actions[]='postcode_lookup';
+	return $actions;
+});
 
+add_action( 'siw_ajax_postcode_lookup', 'siw_postcode_lookup' );
 function siw_postcode_lookup() {
 
 	$api_key = siw_get_postcode_api_key();

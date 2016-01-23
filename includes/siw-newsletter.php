@@ -6,9 +6,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-add_action( 'siw_ajax_nopriv_newsletter_subscription', 'siw_newsletter_subscription' );
-add_action( 'siw_ajax_newsletter_subscription', 'siw_newsletter_subscription' );
+add_filter( 'siw_ajax_allowed_actions', function($actions){
+	$actions[]='newsletter_subscription';
+	return $actions;
+});
 
+
+add_action( 'siw_ajax_newsletter_subscription', 'siw_newsletter_subscription' );
 function siw_newsletter_subscription() {
 		$name = $_POST['name'];
 		$email = $_POST['email'];

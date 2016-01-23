@@ -24,17 +24,11 @@ nocache_headers();
 $action = esc_attr(trim($_REQUEST['action']));
 
 //toegestane acties
-$allowed_actions = array(
-	'postcode_lookup',
-	'newsletter_subscription',
-);
+$allowed_actions = apply_filters('siw_ajax_allowed_actions',array());
 
 //uitvoeren toegestane actie
 if(in_array($action, $allowed_actions)) {
-	if(is_user_logged_in())
-		do_action('siw_ajax_'.$action);
-	else
-		do_action('siw_ajax_nopriv_'.$action);
+	do_action('siw_ajax_'.$action);
 } else {
 	die('-1');
 }
