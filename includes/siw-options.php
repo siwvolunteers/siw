@@ -284,6 +284,7 @@ function siw_settings_tariffs_init(){
 
 
 function siw_settings_evs_init(){
+	register_setting( 'siw_evs', 'siw_evs_weeks_before_deadline' );
 	register_setting( 'siw_evs', 'siw_evs_deadline_1' );
 	register_setting( 'siw_evs', 'siw_evs_deadline_2' );
 	register_setting( 'siw_evs', 'siw_evs_deadline_3' );
@@ -296,6 +297,14 @@ function siw_settings_evs_init(){
 		__( 'Deadlines', 'siw' ), 
 		'siw_settings_evs_deadlines_header', 
 		'siw_evs'
+	);
+	add_settings_field( 
+		'siw_evs_weeks_before_deadline', 
+		__( 'Aantal weken voor deadline', 'siw' ), 
+		'siw_settings_show_number_field', 
+		'siw_evs',
+		'siw_evs_deadlines', 
+		'siw_evs_weeks_before_deadline' 
 	);
 	add_settings_field( 
 		'siw_evs_deadline_1', 

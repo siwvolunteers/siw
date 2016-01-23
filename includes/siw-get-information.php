@@ -90,14 +90,14 @@ function siw_get_files_backup_time(){
 
 //EVS
 function siw_get_evs_next_deadline(){
-	$evs_deadlines[]= get_option( 'siw_evs_deadline_1' );
-	$evs_deadlines[]= get_option( 'siw_evs_deadline_2' );
-	$evs_deadlines[]= get_option( 'siw_evs_deadline_3' );
-	$evs_deadlines[]= get_option( 'siw_evs_deadline_4' );
-	$evs_deadlines[]= get_option( 'siw_evs_deadline_5' );
+	$evs_deadlines[]= get_option('siw_evs_deadline_1');
+	$evs_deadlines[]= get_option('siw_evs_deadline_2');
+	$evs_deadlines[]= get_option('siw_evs_deadline_3');
+	$evs_deadlines[]= get_option('siw_evs_deadline_4');
+	$evs_deadlines[]= get_option('siw_evs_deadline_5');
 	
 	asort($evs_deadlines);
-	$weeks = 3;
+	$weeks = get_option( 'siw_evs_weeks_before_deadline' );
 	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$weeks." weeks"));
 
 	foreach($evs_deadlines as $evs_deadline => $evs_deadline_date) {
