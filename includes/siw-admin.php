@@ -25,7 +25,9 @@ remove_action( 'welcome_panel', 'wp_welcome_panel' );
 //ongebruikte menu-items verwijderen	
 add_action( 'admin_menu', 'siw_remove_admin_menu_items' );
 function siw_remove_admin_menu_items(){
-	remove_menu_page( 'edit-comments.php' );       
+	remove_menu_page( 'edit-comments.php' );     
+	remove_menu_page( 'edit.php' );
+	remove_menu_page( 'link-manager.php' );
 }
 
 
