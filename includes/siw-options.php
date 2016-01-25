@@ -454,6 +454,9 @@ function siw_settings_forms_init(){
 	register_setting( 'siw_forms', 'siw_forms_community_day' );
 	register_setting( 'siw_forms', 'siw_forms_evs' );
 	register_setting( 'siw_forms', 'siw_forms_op_maat' );
+	register_setting( 'siw_forms', 'siw_forms_algemeen' );
+	register_setting( 'siw_forms', 'siw_forms_project' );
+	register_setting( 'siw_forms', 'siw_forms_begeleider' );
 	
 	//secties
 	add_settings_section(
@@ -485,6 +488,30 @@ function siw_settings_forms_init(){
 		'siw_forms',
 		'siw_forms', 
 		'siw_forms_op_maat' 
+	);
+	add_settings_field( 
+		'siw_forms_algemeen', 
+		__( 'Contactformulier algemeen', 'siw' ), 
+		'siw_settings_show_cf7_form_select', 
+		'siw_forms',
+		'siw_forms', 
+		'siw_forms_algemeen' 
+	);
+	add_settings_field( 
+		'siw_forms_project', 
+		__( 'Contactformulier project', 'siw' ), 
+		'siw_settings_show_cf7_form_select', 
+		'siw_forms',
+		'siw_forms', 
+		'siw_forms_project' 
+	);
+	add_settings_field( 
+		'siw_forms_begeleider', 
+		__( 'Projectbegeleider', 'siw' ), 
+		'siw_settings_show_cf7_form_select', 
+		'siw_forms',
+		'siw_forms', 
+		'siw_forms_begeleider' 
 	);
 }
 
@@ -557,11 +584,30 @@ function siw_settings_show_vfb_form_select( $option ) {
 
     if (!empty($forms)) {
 		echo '<select name="', $option, '">';
-		  foreach ($forms as $form) {
-		    echo '<option value="', $form[id], '"', get_option($option) == $form[id] ? ' selected="selected"' : '', '>', $form[title], '</option>';
-		  }
-		  echo '</select>'; 
+		foreach ($forms as $form) {
+			echo '<option value="', $form[id], '"', get_option($option) == $form[id] ? ' selected="selected"' : '', '>', $form[title], '</option>';
+		}
+		echo '</select>'; 
 	}
+}
+
+function siw_settings_show_cf7_form_select( $option ) {
+	$args = array(
+		'posts_per_page'	=> -1,
+		'orderby'			=> 'title',
+		'order'				=> 'ASC',
+		'post_type'			=> 'wpcf7_contact_form',
+		'fields' 			=> 'ids'
+	);
+	$forms = get_posts( $args ); 
+	
+    if (!empty($forms)) {
+		echo '<select name="', $option, '">';
+		foreach ($forms as $form) {
+			echo '<option value="', $form, '"', get_option($option) == $form ? ' selected="selected"' : '', '>', get_the_title($form), '</option>';
+		}
+		echo '</select>'; 
+	}	
 }
 
 
