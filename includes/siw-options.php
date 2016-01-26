@@ -16,12 +16,14 @@ add_action( 'admin_init', 'siw_settings_api_init' );
 add_action( 'admin_init', 'siw_settings_jobs_init');
 add_action( 'admin_init', 'siw_settings_agenda_init');
 add_action( 'admin_init', 'siw_settings_forms_init');
+add_action( 'admin_init', 'siw_settings_community_day_init');
 
 function siw_add_settings_menu(){ 
 	add_menu_page( 'Instellingen SIW', 'Instellingen SIW', 'manage_options', 'siw_settings', 'siw_settings_page','dashicons-admin-settings',110);
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Agenda', 'manage_options', 'siw_settings');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Algemeen', 'manage_options', 'admin.php?page=siw_settings&tab=general');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'API keys', 'manage_options', 'admin.php?page=siw_settings&tab=api');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Community Day', 'manage_options', 'admin.php?page=siw_settings&tab=community_day');	
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'EVS', 'manage_options', 'admin.php?page=siw_settings&tab=evs');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Formulieren', 'manage_options', 'admin.php?page=siw_settings&tab=forms');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Ondertekening', 'manage_options', 'admin.php?page=siw_settings&tab=signatures');
@@ -515,10 +517,79 @@ function siw_settings_forms_init(){
 	);
 }
 
+
+function siw_settings_community_day_init(){
+	register_setting( 'siw_community_day', 'siw_community_day_1' );
+	register_setting( 'siw_community_day', 'siw_community_day_2' );
+	register_setting( 'siw_community_day', 'siw_community_day_3' );
+	register_setting( 'siw_community_day', 'siw_community_day_4' );
+	register_setting( 'siw_community_day', 'siw_community_day_5' );
+	register_setting( 'siw_community_day', 'siw_community_day_6' );
+	
+	//secties
+	add_settings_section(
+		'siw_community_day', 
+		__( 'Community days', 'siw' ), 
+		'siw_settings_community_day_header', 
+		'siw_community_day'
+	);
+	add_settings_field( 
+		'siw_community_day_1', 
+		__( 'Community day 1', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_1' 
+	);
+	add_settings_field( 
+		'siw_community_day_2', 
+		__( 'Community day 2', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_2' 
+	);
+	add_settings_field( 
+		'siw_community_day_3', 
+		__( 'Community day 3', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_3' 
+	);
+	add_settings_field( 
+		'siw_community_day_4', 
+		__( 'Community day 4', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_4' 
+	);
+	add_settings_field( 
+		'siw_community_day_5', 
+		__( 'Community day 5', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_5' 
+	);
+	add_settings_field( 
+		'siw_community_day_6', 
+		__( 'Community day 6', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_6' 
+	);
+}
+
 //functies op secties te tonen
 
 function siw_settings_plato_outgoing_placements_header() { 
 	echo __( 'Afzender van de aanmelding bij export naar PLATO', 'siw' );
+}
+function siw_settings_community_day_header() { 
+	echo __( 'Gebruikt in shortcode [siw_volgende_community_day]', 'siw' );
 }
 function siw_settings_tariffs_evs_header() { 
 	echo __( 'Gebruikt in shortcode [siw_evs_borg]', 'siw' );
@@ -632,6 +703,7 @@ function siw_settings_page(  ) {?>
 			<a href="?page=siw_settings&tab=agenda" class="nav-tab <?php echo $active_tab == 'agenda' ? 'nav-tab-active' : ''; ?>">Agenda</a>	
 			<a href="?page=siw_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>">Algemeen</a>
 			<a href="?page=siw_settings&tab=api" class="nav-tab <?php echo $active_tab == 'api' ? 'nav-tab-active' : ''; ?>">API keys</a>
+			<a href="?page=siw_settings&tab=community_day" class="nav-tab <?php echo $active_tab == 'community_day' ? 'nav-tab-active' : ''; ?>">Community Day</a>			
 			<a href="?page=siw_settings&tab=evs" class="nav-tab <?php echo $active_tab == 'evs' ? 'nav-tab-active' : ''; ?>">EVS</a>
 			<a href="?page=siw_settings&tab=forms" class="nav-tab <?php echo $active_tab == 'forms' ? 'nav-tab-active' : ''; ?>">Formulieren</a>
 			<a href="?page=siw_settings&tab=signatures" class="nav-tab <?php echo $active_tab == 'signatures' ? 'nav-tab-active' : ''; ?>">Ondertekening</a>
@@ -676,6 +748,10 @@ function siw_settings_page(  ) {?>
 			else if( $active_tab == 'forms' ) {
 				settings_fields( 'siw_forms' );
 				do_settings_sections( 'siw_forms' );
+			} 
+			else if( $active_tab == 'community_day' ) {
+				settings_fields( 'siw_community_day' );
+				do_settings_sections( 'siw_community_day' );
 			} 				
 			submit_button();
 			?>

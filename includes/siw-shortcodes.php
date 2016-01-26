@@ -35,6 +35,9 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 	$pinnacle_shortcodes['siw_evs_borg'] = array( 
 		'title'=>__('SIW: EVS borg', 'siw'), 
 	);
+	$pinnacle_shortcodes['siw_volgende_community_day'] = array( 
+		'title'=>__('SIW: Volgende Community Day', 'siw'), 
+	);
 	$pinnacle_shortcodes['siw_inschrijfgeld_op_maat'] = array(
 		'title'	=>	__('SIW: Inschrijfgeld project op maat', 'siw'), 
 		'attr'	=>	array(
@@ -68,10 +71,12 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 }
 
 
-
-
-
-
+//volgende community day
+add_shortcode('siw_volgende_community_day', 'siw_shortcode_next_community_day');
+function siw_shortcode_next_community_day() {
+	$next_community_day = siw_get_date_in_text( siw_get_next_community_day(), false);
+	return $next_community_day;
+}
 
 //Volgende EVS deadline
 add_shortcode('siw_evs_volgende_deadline', 'siw_shortcode_evs_next_deadline');

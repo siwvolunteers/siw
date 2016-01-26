@@ -109,6 +109,25 @@ function siw_get_evs_next_deadline(){
 	return $evs_next_deadline;
 }
 
+function siw_get_next_community_day(){
+	$community_days[]= get_option('siw_community_day_1');
+	$community_days[]= get_option('siw_community_day_2');
+	$community_days[]= get_option('siw_community_day_3');
+	$community_days[]= get_option('siw_community_day_4');
+	$community_days[]= get_option('siw_community_day_5');
+	$community_days[]= get_option('siw_community_day_6');
+	
+	asort( $community_days );
+	$today = date("Y-m-d");
+	
+	foreach($community_days as $community_day => $community_day_date) {
+		if ($community_day_date > $today){
+			$next_community_day = $community_day_date;
+			break;
+		}
+	}
+	return $next_community_day;	
+}
 
 //afzender plato export
 function siw_get_outgoing_placements_officer(){
