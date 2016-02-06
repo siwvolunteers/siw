@@ -39,6 +39,16 @@ function siw_get_general_information ( $type ){
 	}
 }
 
+//ip whitelist
+function siw_get_ip_whitelist(){
+	$ip_whitelist[]= get_option('siw_login_whitelist_ip_1');
+	$ip_whitelist[]= get_option('siw_login_whitelist_ip_2');
+	$ip_whitelist[]= get_option('siw_login_whitelist_ip_3');
+	$ip_whitelist[]= get_option('siw_login_whitelist_ip_4');
+	$ip_whitelist[]= get_option('siw_login_whitelist_ip_5');
+	return $ip_whitelist;
+}
+
 //pagina's
 function siw_get_parent_page( $type ){
     switch ($type) {

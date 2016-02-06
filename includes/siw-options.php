@@ -17,6 +17,7 @@ add_action( 'admin_init', 'siw_settings_jobs_init');
 add_action( 'admin_init', 'siw_settings_agenda_init');
 add_action( 'admin_init', 'siw_settings_forms_init');
 add_action( 'admin_init', 'siw_settings_community_day_init');
+add_action( 'admin_init', 'siw_settings_login_init');
 
 function siw_add_settings_menu(){ 
 	add_menu_page( 'Instellingen SIW', 'Instellingen SIW', 'manage_options', 'siw_settings', 'siw_settings_page','dashicons-admin-settings',110);
@@ -26,6 +27,7 @@ function siw_add_settings_menu(){
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Community Day', 'manage_options', 'admin.php?page=siw_settings&tab=community_day');	
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'EVS', 'manage_options', 'admin.php?page=siw_settings&tab=evs');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Formulieren', 'manage_options', 'admin.php?page=siw_settings&tab=forms');
+	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Login', 'manage_options', 'admin.php?page=siw_settings&tab=login');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Ondertekening', 'manage_options', 'admin.php?page=siw_settings&tab=signatures');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'PLATO', 'manage_options', 'admin.php?page=siw_settings&tab=plato');
 	add_submenu_page( 'siw_settings', 'Instellingen SIW', 'Tarieven', 'manage_options', 'admin.php?page=siw_settings&tab=tariffs');
@@ -583,6 +585,67 @@ function siw_settings_community_day_init(){
 	);
 }
 
+
+
+
+//login
+
+function siw_settings_login_init(){
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_1' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_2' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_3' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_4' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_5' );
+	
+	//secties
+	add_settings_section(
+		'siw_login_whitelist', 
+		__( 'Whitelist', 'siw' ), 
+		'__return_false', 
+		'siw_login'
+	);
+	add_settings_field( 
+		'siw_login_whitelist_ip_1', 
+		__( 'IP 1', 'siw' ), 
+		'siw_settings_show_ip_field', 
+		'siw_login',
+		'siw_login_whitelist', 
+		'siw_login_whitelist_ip_1' 
+	);
+	add_settings_field( 
+		'siw_login_whitelist_ip_2', 
+		__( 'IP 2', 'siw' ), 
+		'siw_settings_show_ip_field', 
+		'siw_login',
+		'siw_login_whitelist', 
+		'siw_login_whitelist_ip_2' 
+	);
+	add_settings_field( 
+		'siw_login_whitelist_ip_3', 
+		__( 'IP 3', 'siw' ), 
+		'siw_settings_show_ip_field', 
+		'siw_login',
+		'siw_login_whitelist', 
+		'siw_login_whitelist_ip_3' 
+	);
+	add_settings_field( 
+		'siw_login_whitelist_ip_4', 
+		__( 'IP 4', 'siw' ), 
+		'siw_settings_show_ip_field', 
+		'siw_login',
+		'siw_login_whitelist', 
+		'siw_login_whitelist_ip_4' 
+	);
+	add_settings_field( 
+		'siw_login_whitelist_ip_5', 
+		__( 'IP 5', 'siw' ), 
+		'siw_settings_show_ip_field', 
+		'siw_login',
+		'siw_login_whitelist', 
+		'siw_login_whitelist_ip_5' 
+	);
+}
+
 //functies op secties te tonen
 
 function siw_settings_plato_outgoing_placements_header() { 
@@ -639,6 +702,12 @@ function siw_settings_show_number_field( $option ) {
 function siw_settings_show_date_field( $option ) { 
 	?>
 	<input type='date' name='<?php echo $option; ?>' value='<?php echo get_option($option); ?>'> 
+	<?php
+}
+
+function siw_settings_show_ip_field( $option ){
+	?>
+	<input type='text' name='<?php echo $option; ?>' value='<?php echo get_option($option); ?>' placeholder='172.16.254.1' pattern='((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$'">
 	<?php
 }
 
@@ -706,6 +775,7 @@ function siw_settings_page(  ) {?>
 			<a href="?page=siw_settings&tab=community_day" class="nav-tab <?php echo $active_tab == 'community_day' ? 'nav-tab-active' : ''; ?>">Community Day</a>			
 			<a href="?page=siw_settings&tab=evs" class="nav-tab <?php echo $active_tab == 'evs' ? 'nav-tab-active' : ''; ?>">EVS</a>
 			<a href="?page=siw_settings&tab=forms" class="nav-tab <?php echo $active_tab == 'forms' ? 'nav-tab-active' : ''; ?>">Formulieren</a>
+			<a href="?page=siw_settings&tab=login" class="nav-tab <?php echo $active_tab == 'login' ? 'nav-tab-active' : ''; ?>">Login</a>
 			<a href="?page=siw_settings&tab=signatures" class="nav-tab <?php echo $active_tab == 'signatures' ? 'nav-tab-active' : ''; ?>">Ondertekening</a>
 			<a href="?page=siw_settings&tab=plato" class="nav-tab <?php echo $active_tab == 'plato' ? 'nav-tab-active' : ''; ?>">PLATO</a>
 			<a href="?page=siw_settings&tab=tariffs" class="nav-tab <?php echo $active_tab == 'tariffs' ? 'nav-tab-active' : ''; ?>">Tarieven</a>
@@ -752,7 +822,11 @@ function siw_settings_page(  ) {?>
 			else if( $active_tab == 'community_day' ) {
 				settings_fields( 'siw_community_day' );
 				do_settings_sections( 'siw_community_day' );
-			} 				
+			} 	
+			else if( $active_tab == 'login' ) {
+				settings_fields( 'siw_login' );
+				do_settings_sections( 'siw_login' );
+			} 			
 			submit_button();
 			?>
 		</form>     
