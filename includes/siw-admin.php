@@ -53,7 +53,9 @@ add_action( 'do_meta_boxes', 'siw_remove_plugin_metaboxes' );
 
 function siw_remove_plugin_metaboxes(){
 	remove_meta_box( 'woocommerce_dashboard_recent_reviews', 'dashboard', 'normal' ); 
+	remove_meta_box( 'woocommerce_dashboard_status', 'dashboard', 'normal');
 	remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'normal' ); 	
+	remove_meta_box( 'vfbp-dashboard', 'dashboard', 'normal');
 }
 
 add_action( 'admin_notices', 'siw_admin_notice_show_site_url' );

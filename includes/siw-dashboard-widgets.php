@@ -27,8 +27,7 @@ function siw_register_evs_applications_widget() {
 		'siw_display_applications_widget',
 		'',
 		array(
-			'form'=>'evs',
-			'results'=>5
+			'applications'=>siw_get_vfb_applications_per_month('evs', 5),
 		)			
 	);
 }
@@ -41,8 +40,7 @@ function siw_register_op_maat_applications_widget() {
 		'siw_display_applications_widget',
 		'',
 		array(
-			'form'=>'op_maat',
-			'results'=>5
+			'applications'=>siw_get_vfb_applications_per_month('op_maat', 5),
 		)
 	);
 }
@@ -55,40 +53,28 @@ function siw_register_community_day_applications_widget() {
 		'siw_display_applications_widget',
 		'',
 		array(
-			'form'=>'community_day',
-			'results'=>5
+			'applications'=>siw_get_vfb_applications_per_month('community_day', 5),
 		)
 	);
 }
 
+add_action( 'wp_dashboard_setup', 'siw_register_woocommerce_applications_widget' );
+function siw_register_woocommerce_applications_widget() {
+	wp_add_dashboard_widget(
+		'siw_woocommerce_applications_widget',
+		'Groepsprojecten aanmeldingen',
+		'siw_display_applications_widget',
+		'',
+		array(
+			'applications'			=> siw_get_woocommerce_application_per_month(5),
+		)
+	);
+}
 
 function siw_display_applications_widget( $var, $args ) {
-	
-	$form_id = siw_get_vfb_form_id($args['args']['form']);
-	$results = $args['args']['results'];
-	global $wpdb;
-	if (!isset($wpdb->vfbp_forms)) {
-		$wpdb->vfbp_forms = $wpdb->prefix . 'vfbp_forms';
-	}
-	
+	$applications=$args['args']['applications'];
+	$latest_applications = $args['args']['latest_applications'];
 	$months = siw_get_array('months');
-	$query =	"SELECT Year($wpdb->posts.post_date)  AS application_year, 
-						Month($wpdb->posts.post_date) AS application_month, 
-						Count(*) 				      AS application_count 
-					FROM   $wpdb->posts 
-						JOIN $wpdb->postmeta 
-							ON $wpdb->posts.id = $wpdb->postmeta.post_id 
-					WHERE  $wpdb->posts.post_type = 'vfb_entry' 
-						AND $wpdb->postmeta.meta_key = '_vfb_form_id' 
-						AND $wpdb->postmeta.meta_value = %d 
-					GROUP  BY application_year, 
-							application_month 
-					ORDER  BY application_year DESC, 
-							application_month DESC 
-					LIMIT  %d; ";
-
-	$applications = $wpdb->get_results( $wpdb->prepare( $query, $form_id, $results ), ARRAY_A);
-
 	if (!empty($applications)){
 		
 		foreach ( $applications as $application ){
@@ -119,11 +105,58 @@ function siw_display_applications_widget( $var, $args ) {
 		<?php endforeach ?>
 		</div>
 		<div class='comment-stat-caption'>Aanmeldingen van de afgelopen <?php echo $data_points?> maanden</div>
-		<?php
+
+		<?php 
 	}
 	else{
 	?>
 	<div class='comment-stat-caption'>Geen aanmeldingen gevonden</div>
 	<?php
 	}
+}
+
+
+
+
+function siw_get_vfb_applications_per_month( $form, $results ){
+	$form_id = siw_get_vfb_form_id($form);
+	global $wpdb;
+	$query =	"SELECT Year($wpdb->posts.post_date)  AS application_year, 
+						Month($wpdb->posts.post_date) AS application_month, 
+						Count(*) 				      AS application_count 
+					FROM   $wpdb->posts 
+						JOIN $wpdb->postmeta 
+							ON $wpdb->posts.id = $wpdb->postmeta.post_id 
+					WHERE  $wpdb->posts.post_type = 'vfb_entry' 
+						AND $wpdb->postmeta.meta_key = '_vfb_form_id' 
+						AND $wpdb->postmeta.meta_value = %d 
+					GROUP  BY application_year, 
+							application_month 
+					ORDER  BY application_year DESC, 
+							application_month DESC 
+					LIMIT  %d; ";
+
+	$applications = $wpdb->get_results( $wpdb->prepare( $query, $form_id, $results ), ARRAY_A);
+
+	return $applications;
+}
+
+
+function siw_get_woocommerce_application_per_month( $results ){
+
+	global $wpdb;
+	$query =	"SELECT Year($wpdb->posts.post_date)  AS application_year, 
+						Month($wpdb->posts.post_date) AS application_month, 
+						Count(*) 				      AS application_count 
+					FROM   $wpdb->posts 
+					WHERE  $wpdb->posts.post_type = 'shop_order' 
+						AND $wpdb->posts.post_status IN ('wc-processing', 'wc-completed') 
+					GROUP  BY application_year, 
+							application_month 
+					ORDER  BY application_year DESC, 
+							application_month DESC 
+					LIMIT  %d; ";
+	$applications_per_month = $wpdb->get_results( $wpdb->prepare( $query, $results ), ARRAY_A);
+	return $applications_per_month;
+
 }
