@@ -36,9 +36,9 @@ function siw_add_settings_menu(){
 
 function siw_settings_general_init(){ 
 
-	register_setting( 'siw_general', 'siw_general_iban' );
-	register_setting( 'siw_general', 'siw_general_kvk' );
-	register_setting( 'siw_general', 'siw_general_phone' );
+	register_setting( 'siw_general', 'siw_general_iban', 'sanitize_text_field' );
+	register_setting( 'siw_general', 'siw_general_kvk', 'sanitize_text_field' );
+	register_setting( 'siw_general', 'siw_general_phone', 'sanitize_text_field' );
 	
 	//secties
 	add_settings_section(
@@ -76,13 +76,13 @@ function siw_settings_general_init(){
 
 function siw_settings_signatures_init(){ 
 	//ondertekening e-mails
-	register_setting( 'siw_signatures', 'siw_signature_general' );
-	register_setting( 'siw_signatures', 'siw_signature_project' );
-	register_setting( 'siw_signatures', 'siw_signature_camp_leader' );
-	register_setting( 'siw_signatures', 'siw_signature_evs' );
-	register_setting( 'siw_signatures', 'siw_signature_op_maat' );
-	register_setting( 'siw_signatures', 'siw_signature_community_day' );
-	register_setting( 'siw_signatures', 'siw_signature_workcamp' );	
+	register_setting( 'siw_signatures', 'siw_signature_general', 'sanitize_text_field' );
+	register_setting( 'siw_signatures', 'siw_signature_project', 'sanitize_text_field' );
+	register_setting( 'siw_signatures', 'siw_signature_camp_leader', 'sanitize_text_field' );
+	register_setting( 'siw_signatures', 'siw_signature_evs', 'sanitize_text_field' );
+	register_setting( 'siw_signatures', 'siw_signature_op_maat', 'sanitize_text_field' );
+	register_setting( 'siw_signatures', 'siw_signature_community_day', 'sanitize_text_field' );
+	register_setting( 'siw_signatures', 'siw_signature_workcamp', 'sanitize_text_field' );	
 
 	//secties
 	add_settings_section(
@@ -159,10 +159,10 @@ function siw_settings_signatures_init(){
 
 //instellingen voor plato
 function siw_settings_plato_init(){ 
-	register_setting( 'siw_plato', 'siw_plato_outgoing_placements_name' );
-	register_setting( 'siw_plato', 'siw_plato_outgoing_placements_email' );
-	register_setting( 'siw_plato', 'siw_plato_nr_of_days_before_start_to_hide_project' );		
-	register_setting( 'siw_plato', 'siw_plato_organization_web_key' );	
+	register_setting( 'siw_plato', 'siw_plato_outgoing_placements_name', 'sanitize_text_field' );
+	register_setting( 'siw_plato', 'siw_plato_outgoing_placements_email', 'sanitize_email' );
+	register_setting( 'siw_plato', 'siw_plato_nr_of_days_before_start_to_hide_project', 'absint' );		
+	register_setting( 'siw_plato', 'siw_plato_organization_web_key', 'sanitize_text_field' );	
 
 	//secties
 	add_settings_section(
@@ -219,11 +219,11 @@ function siw_settings_plato_init(){
 }
 
 function siw_settings_tariffs_init(){
-	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_student' );
-	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_regular' );
-	register_setting( 'siw_tariffs', 'siw_tariffs_op_maat_student' );
-	register_setting( 'siw_tariffs', 'siw_tariffs_op_maat_regular' );
-	register_setting( 'siw_tariffs', 'siw_tariffs_evs_deposit' );
+	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_student', 'absint' );
+	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_regular', 'absint'  );
+	register_setting( 'siw_tariffs', 'siw_tariffs_op_maat_student', 'absint'  );
+	register_setting( 'siw_tariffs', 'siw_tariffs_op_maat_regular', 'absint'  );
+	register_setting( 'siw_tariffs', 'siw_tariffs_evs_deposit', 'absint'  );
 	
 	//secties
 	add_settings_section(
@@ -288,12 +288,12 @@ function siw_settings_tariffs_init(){
 
 
 function siw_settings_evs_init(){
-	register_setting( 'siw_evs', 'siw_evs_weeks_before_deadline' );
-	register_setting( 'siw_evs', 'siw_evs_deadline_1' );
-	register_setting( 'siw_evs', 'siw_evs_deadline_2' );
-	register_setting( 'siw_evs', 'siw_evs_deadline_3' );
-	register_setting( 'siw_evs', 'siw_evs_deadline_4' );
-	register_setting( 'siw_evs', 'siw_evs_deadline_5' );
+	register_setting( 'siw_evs', 'siw_evs_weeks_before_deadline', 'absint'  );
+	register_setting( 'siw_evs', 'siw_evs_deadline_1', 'sanitize_text_field' );
+	register_setting( 'siw_evs', 'siw_evs_deadline_2', 'sanitize_text_field' );
+	register_setting( 'siw_evs', 'siw_evs_deadline_3', 'sanitize_text_field' );
+	register_setting( 'siw_evs', 'siw_evs_deadline_4', 'sanitize_text_field' );
+	register_setting( 'siw_evs', 'siw_evs_deadline_5', 'sanitize_text_field' );
 	
 	//secties
 	add_settings_section(
@@ -354,9 +354,9 @@ function siw_settings_evs_init(){
 
 
 function siw_settings_api_init(){
-	register_setting( 'siw_api', 'siw_api_google_analytics_id' );
-	register_setting( 'siw_api', 'siw_api_postcode_api_key' );
-	register_setting( 'siw_api', 'siw_api_pingdom_rum_id' );
+	register_setting( 'siw_api', 'siw_api_google_analytics_id', 'sanitize_text_field' );
+	register_setting( 'siw_api', 'siw_api_postcode_api_key', 'sanitize_text_field' );
+	register_setting( 'siw_api', 'siw_api_pingdom_rum_id', 'sanitize_text_field' );
 	
 	//secties
 	add_settings_section(
@@ -394,9 +394,9 @@ function siw_settings_api_init(){
 
 
 function siw_settings_jobs_init(){
-	register_setting( 'siw_jobs', 'siw_jobs_company_profile' );
-	register_setting( 'siw_jobs', 'siw_jobs_mission_statement' );
-	register_setting( 'siw_jobs', 'siw_jobs_parent_page' );
+	register_setting( 'siw_jobs', 'siw_jobs_company_profile', 'wp_kses_post' );
+	register_setting( 'siw_jobs', 'siw_jobs_mission_statement', 'wp_kses_post' );
+	register_setting( 'siw_jobs', 'siw_jobs_parent_page', 'absint');
 
 	
 	//secties
@@ -434,7 +434,7 @@ function siw_settings_jobs_init(){
 
 
 function siw_settings_agenda_init(){
-	register_setting( 'siw_agenda', 'siw_agenda_parent_page' );
+	register_setting( 'siw_agenda', 'siw_agenda_parent_page', 'absint' );
 
 	
 	//secties
@@ -455,12 +455,12 @@ function siw_settings_agenda_init(){
 }
 
 function siw_settings_forms_init(){
-	register_setting( 'siw_forms', 'siw_forms_community_day' );
-	register_setting( 'siw_forms', 'siw_forms_evs' );
-	register_setting( 'siw_forms', 'siw_forms_op_maat' );
-	register_setting( 'siw_forms', 'siw_forms_algemeen' );
-	register_setting( 'siw_forms', 'siw_forms_project' );
-	register_setting( 'siw_forms', 'siw_forms_begeleider' );
+	register_setting( 'siw_forms', 'siw_forms_community_day', 'absint'  );
+	register_setting( 'siw_forms', 'siw_forms_evs', 'absint'  );
+	register_setting( 'siw_forms', 'siw_forms_op_maat', 'absint'  );
+	register_setting( 'siw_forms', 'siw_forms_algemeen', 'absint'  );
+	register_setting( 'siw_forms', 'siw_forms_project', 'absint'  );
+	register_setting( 'siw_forms', 'siw_forms_begeleider', 'absint'  );
 	
 	//secties
 	add_settings_section(
@@ -521,12 +521,12 @@ function siw_settings_forms_init(){
 
 
 function siw_settings_community_day_init(){
-	register_setting( 'siw_community_day', 'siw_community_day_1' );
-	register_setting( 'siw_community_day', 'siw_community_day_2' );
-	register_setting( 'siw_community_day', 'siw_community_day_3' );
-	register_setting( 'siw_community_day', 'siw_community_day_4' );
-	register_setting( 'siw_community_day', 'siw_community_day_5' );
-	register_setting( 'siw_community_day', 'siw_community_day_6' );
+	register_setting( 'siw_community_day', 'siw_community_day_1', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_2', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_3', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_4', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_5', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_6', 'sanitize_text_field' );
 	
 	//secties
 	add_settings_section(
@@ -591,11 +591,11 @@ function siw_settings_community_day_init(){
 //login
 
 function siw_settings_login_init(){
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_1' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_2' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_3' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_4' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_5' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_1', 'sanitize_text_field' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_2', 'sanitize_text_field' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_3', 'sanitize_text_field' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_4', 'sanitize_text_field' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_5', 'sanitize_text_field' );
 	
 	//secties
 	add_settings_section(
@@ -673,48 +673,48 @@ function siw_settings_evs_deadlines_header() {
 //functies om velden te tonen
 function siw_settings_show_text_field( $option ) {
 	?>
-	<input type='text' name='<?php echo $option; ?>' value='<?php echo get_option($option); ?>' size="50">
+	<input type='text' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' size="50">
 	<?php
 }
 
 function siw_settings_show_textarea_field( $option ) {
 	?>
-	<textarea name='<?php echo $option; ?>' maxlength="2000" rows="10" cols="100"><?php echo get_option($option); ?></textarea>
+	<textarea name='<?php echo esc_attr( $option ); ?>' maxlength="2000" rows="10" cols="100"><?php echo esc_textarea( get_option( $option ) ); ?></textarea>
 	<?php
 }
 
 function siw_settings_show_amount_field( $option ){
 	?> &euro;
-	<input type='number' name='<?php echo $option; ?>' value='<?php echo get_option($option); ?>' min="1" max="1000">
+	<input type='number' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' min="1" max="1000">
 	<?php
 }
 
 function siw_settings_show_email_field( $option ){
 	?>
-	<input type='email' name='<?php echo $option; ?>' value='<?php echo get_option($option); ?>' size="50">
+	<input type='email' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' size="50">
 	<?php
 }
 function siw_settings_show_number_field( $option ) { 
 	?>
-	<input type='number' name='<?php echo $option; ?>' value='<?php echo get_option($option); ?>' min="1" max="30"> 
+	<input type='number' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' min="1" max="30"> 
 	<?php
 }
 function siw_settings_show_date_field( $option ) { 
 	?>
-	<input type='date' name='<?php echo $option; ?>' value='<?php echo get_option($option); ?>'> 
+	<input type='date' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>'> 
 	<?php
 }
 
 function siw_settings_show_ip_field( $option ){
 	?>
-	<input type='text' name='<?php echo $option; ?>' value='<?php echo get_option($option); ?>' placeholder='172.16.254.1' pattern='((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$'">
+	<input type='text' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' placeholder='172.16.254.1' pattern='((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$'">
 	<?php
 }
 
 function siw_settings_show_vfb_form_select( $option ) {
 
 	global $wpdb;
-	if (!isset($wpdb->vfbp_forms)) {
+	if (!isset( $wpdb->vfbp_forms )) {
 		$wpdb->vfbp_forms = $wpdb->prefix . 'vfbp_forms';
 	}
 	
@@ -723,9 +723,9 @@ function siw_settings_show_vfb_form_select( $option ) {
 	$forms = $wpdb->get_results($query, ARRAY_A);
 
     if (!empty($forms)) {
-		echo '<select name="', $option, '">';
-		foreach ($forms as $form) {
-			echo '<option value="', $form[id], '"', get_option($option) == $form[id] ? ' selected="selected"' : '', '>', $form[title], '</option>';
+		echo '<select name="', esc_attr( $option ), '">';
+		foreach ( $forms as $form ) {
+			echo '<option value="', esc_attr( $form[id] ), '"', get_option( $option ) == $form[id] ? ' selected="selected"' : '', '>', esc_html( $form[title] ), '</option>';
 		}
 		echo '</select>'; 
 	}
@@ -742,9 +742,9 @@ function siw_settings_show_cf7_form_select( $option ) {
 	$forms = get_posts( $args ); 
 	
     if (!empty($forms)) {
-		echo '<select name="', $option, '">';
-		foreach ($forms as $form) {
-			echo '<option value="', $form, '"', get_option($option) == $form ? ' selected="selected"' : '', '>', get_the_title($form), '</option>';
+		echo '<select name="', esc_attr( $option ), '">';
+		foreach ( $forms as $form ) {
+			echo '<option value="', $form, '"', get_option( $option ) == $form ? ' selected="selected"' : '', '>', esc_html( get_the_title( $form ) ), '</option>';
 		}
 		echo '</select>'; 
 	}	
@@ -754,9 +754,9 @@ function siw_settings_show_cf7_form_select( $option ) {
 function siw_settings_show_page_select( $option ) {
 	$pages = get_pages(); 
     if (!empty($pages)) {
-		echo '<select name="', $option, '">';
-		  foreach ($pages as $page) {
-		    echo '<option value="', $page->ID, '"', get_option($option) == $page->ID ? ' selected="selected"' : '', '>',(($page->post_parent)?'-- ':''), $page->post_title, '</option>';
+		echo '<select name="', esc_attr( $option ), '">';
+		  foreach ( $pages as $page ) {
+		    echo '<option value="', $page->ID, '"', get_option( $option ) == $page->ID ? ' selected="selected"' : '', '>',(($page->post_parent)?'-- ':''), esc_html( $page->post_title ), '</option>';
 		  }
 		  echo '</select>'; 
 	}
