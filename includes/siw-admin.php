@@ -16,7 +16,16 @@ function siw_remove_admin_bar_items( $wp_admin_bar ) {
 	$wp_admin_bar->remove_menu( 'comments' );
 	$wp_admin_bar->remove_menu( 'wpseo-menu' );
 	$wp_admin_bar->remove_menu( 'vfbp-admin-toolbar' );	
-	
+	//nieuwe content
+	$wp_admin_bar->remove_node( 'new-post' );
+	$wp_admin_bar->remove_node( 'new-link' );
+	$wp_admin_bar->remove_node( 'new-media' );
+	$wp_admin_bar->remove_node( 'new-kadslider' );
+	$wp_admin_bar->remove_node( 'new-product' );
+	$wp_admin_bar->remove_node( 'new-shop_order' );
+	$wp_admin_bar->remove_node( 'new-shop_coupon' );
+	$wp_admin_bar->remove_node( 'new-user' );
+	$wp_admin_bar->remove_node( 'new-redirect_rule' );	
 }
 
 //welcome panel verwijderen
