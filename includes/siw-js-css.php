@@ -6,6 +6,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+add_action( 'wp_enqueue_scripts', 'siw_add_version_to_theme_css',999);
+function siw_add_version_to_theme_css(){
+	global $wp_styles;
+	if ($wp_styles->registered['pinnacle_child']){
+		$wp_styles->registered['pinnacle_child']->ver = wp_get_theme()->version;
+	}
+}
+
+
 /*custom javascript/jQuery functies*/
 add_action('wp_enqueue_scripts', 'siw_custom_js');
 function siw_custom_js(){
