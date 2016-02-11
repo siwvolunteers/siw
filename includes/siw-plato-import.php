@@ -153,10 +153,11 @@ function siw_wc_is_family_project( $family, $project_type ){
 }
 
 
-function siw_wc_is_teenage_project( $minimum_age, $project_type ){
+function siw_wc_is_teenage_project( $minimum_age, $maximum_age, $project_type ){
 	$minimum_age = (integer) $minimum_age;
+	$maximum_age = (integer) $maximum_age;
 	$teenage_project = '';
-	if (( $minimum_age < 17 and $minimum_age > 12) or $project_type == 'TEEN'){
+	if (( $minimum_age < 17 and $minimum_age > 12 and $maximum_age < 20 ) or $project_type == 'TEEN'){
 		$teenage_project = 'tieners';
 	}
 	return $teenage_project;
@@ -253,7 +254,7 @@ function siw_wc_project_summary( $project_type, $country, $workcode, $startdate,
 	
 	$project_duration_in_days = siw_wc_project_duration_in_days( $startdate, $enddate );
 	$project_duration_in_text = siw_wc_project_duration_in_text( $startdate, $enddate );
-	$teenage_project = siw_wc_is_teenage_project( $minimum_age, $project_type );
+	$teenage_project = siw_wc_is_teenage_project( $minimum_age, $maximum_age, $project_type );
 	$family_project = siw_wc_is_family_project( $family, $project_type );
 
 	$project_summary = '';
