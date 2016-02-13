@@ -45,8 +45,8 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 				'type'=>'select', 
 				'title'=>__('Tarief', 'siw'),
 				'values' => array(
-					"student" => __('Student','pinnacle'),
-					"regulier" => __('Regulier','pinnacle'),
+					"student" => __('Student','siw'),
+					"regulier" => __('Regulier','siw'),
 
 				),
 			),
@@ -59,8 +59,8 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 				'type'=>'select', 
 				'title'=>__('Tarief', 'siw'),
 				'values' => array(
-					"student" => __('Student','pinnacle'),
-					"regulier" => __('Regulier','pinnacle'),
+					"student" => __('Student','siw'),
+					"regulier" => __('Regulier','siw'),
 
 				),
 			),
@@ -74,20 +74,14 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 //volgende community day
 add_shortcode('siw_volgende_community_day', 'siw_shortcode_next_community_day');
 function siw_shortcode_next_community_day() {
-	$next_community_day = siw_get_date_in_text( siw_get_next_community_day(), false);
+	$next_community_day = siw_get_date_in_text( siw_get_next_community_day(), false );
 	return $next_community_day;
 }
 
 //Volgende EVS deadline
 add_shortcode('siw_evs_volgende_deadline', 'siw_shortcode_evs_next_deadline');
 function siw_shortcode_evs_next_deadline() {
-	$evs_next_deadline = date_parse(siw_get_evs_next_deadline());	
-	$month_array = siw_get_array('month_to_text');
-	$day = $evs_next_deadline['day'];
-	$month = $month_array[$evs_next_deadline['month']];
-	$year = $evs_next_deadline['year'];
-	$evs_next_deadline = $day . ' ' . $month . ' ' . $year;
-	
+	$evs_next_deadline = siw_get_date_in_text( siw_get_evs_next_deadline(), true );	
 	return $evs_next_deadline;
 }
 
