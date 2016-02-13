@@ -8,7 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /*
 Extra functies
 */
-
+//aantal toegestane redirects aanpassen
+add_filter( 'srm_max_redirects', function() { return 250; } );
 
 //permalink van testimonials aanpassen van 'testimonial' naar 'ervaring'
 add_action( 'init', 'siw_change_permalink_structure' );
