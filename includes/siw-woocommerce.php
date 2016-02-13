@@ -45,7 +45,8 @@ function siw_wc_enquiry_tab( $tabs ){
 	return $tabs;
 }
 function siw_wc_product_enquiry_form(){
-	echo do_shortcode('[contact-form-7 id="36" title="Contactformulier product"]');
+	$contact_form_id = siw_get_cf7_form_id('project');
+	echo do_shortcode('[contact-form-7 id="' . $contact_form_id . '"]');
 }
 
 //trailing slash toevoegen bij AJAX-filtering
