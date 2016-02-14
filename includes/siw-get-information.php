@@ -603,6 +603,11 @@ function siw_get_array( $array ){
 					'name'  	=> 'Zwitserland' ,
 					'continent'	=> 'europa',
 				); 	
+				$project_countries['CHN'] = array(
+					'slug'		=> 'china',
+					'name'  	=> 'China' ,
+					'continent'	=> 'azie',
+				); 				
 				$project_countries['CZE'] = array(
 					'slug'		=> 'tsjechie',
 					'name'  	=> 'Tsjechië' ,
@@ -711,6 +716,11 @@ function siw_get_array( $array ){
 				$project_countries['KOR'] = array(
 					'slug'		=> 'zuid-korea',
 					'name'  	=> 'Zuid-Korea' ,
+					'continent'	=> 'azie',
+				);
+				$project_countries['LKA'] = array(
+					'slug'		=> 'sri-lanka',
+					'name'  	=> 'Sri Lanka' ,
 					'continent'	=> 'azie',
 				);
 				$project_countries['LTU'] = array(
