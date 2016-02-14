@@ -623,6 +623,11 @@ function siw_get_array( $array ){
 					'name'  	=> 'Denemarken' ,
 					'continent'	=> 'europa',
 				);
+				$project_countries['ECU'] = array(
+					'slug'		=> 'ecuador',
+					'name'  	=> 'Ecuador' ,
+					'continent'	=> 'latijns-amerika',
+				);
 				$project_countries['ESP'] = array(
 					'slug'		=> 'spanje',
 					'name'  	=> 'Spanje' ,
