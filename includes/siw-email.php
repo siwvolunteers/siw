@@ -26,13 +26,10 @@ function siw_update_all_mail_templates(){
 
 //update vfb mailtemplates
 
-function siw_update_vfb_mail_template($form){
+function siw_update_vfb_mail_template( $form ){
 
-	$vfb_form_titles = array(
-		'evs' 			=>	'EVS',
-		'op_maat' 		=>	'Vrijwilligerswerk op maat',
-		'community_day'	=>	'Aanmelden SIW Community Day',
-	);
+	$vfb_form_id = siw_get_vfb_form_id( $form );
+
 	//haal mail-template
 	global $wp_filesystem;
 	$directory = $wp_filesystem->wp_themes_dir('siw');
@@ -45,9 +42,6 @@ function siw_update_vfb_mail_template($form){
 
 	//update template
 	global $wpdb;
-	if (!isset($wpdb->vfbp_forms)) {
-		$wpdb->vfbp_forms = $wpdb->prefix . 'vfbp_forms';
-	}
 	if (!isset($wpdb->vfbp_formmeta)) {
 		$wpdb->vfbp_formmeta = $wpdb->prefix . 'vfbp_formmeta';
 	}
@@ -56,11 +50,9 @@ function siw_update_vfb_mail_template($form){
 			"UPDATE $wpdb->vfbp_formmeta
 			SET meta_value = %s
 				WHERE $wpdb->vfbp_formmeta.meta_key  = 'email-template'
-				AND $wpdb->vfbp_formmeta.form_id = (SELECT $wpdb->vfbp_forms.id 
-														FROM   $wpdb->vfbp_forms 
-														WHERE  $wpdb->vfbp_forms.title = %s)",
+				AND $wpdb->vfbp_formmeta.form_id = %d",
 			$template,
-			$vfb_form_titles[ $form ]
+			$vfb_form_id
         )
 	);
 }
@@ -93,12 +85,12 @@ function siw_update_mailpoet_mail_template(){
 
 //update cf7 emails
 
-function siw_update_cf7_mail_template($form){
+function siw_update_cf7_mail_template( $form ){
 
 	$cf7_form_titles = array(
-		'algemeen' 			=>	'Contactformulier algemeen',
-		'project' 		=>	'Contactformulier product',
-		'begeleider'	=>	'Projectbegeleider',
+		'algemeen' 		=> 'Contactformulier algemeen',
+		'project' 		=> 'Contactformulier product',
+		'begeleider'	=> 'Projectbegeleider',
 	);
 
 	//haal mail-templates op

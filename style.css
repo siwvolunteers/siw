@@ -4,7 +4,7 @@ Theme URI: http://www.siw.nl
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 1.4
+Version: 1.5
 GitHub Theme URI: https://github.com/siwvolunteers/siw
 */
 
@@ -41,45 +41,21 @@ Algemene styling
 	color: #fff !important;
 }
 
-/*tekst in widget-invoervelden grijs*/
-.widget_wysija_cont .wysija-paragraph .wysija-input {
+/*SIW-mailpoet widget*/
+.widget_siw_mailpoet_subscription input{
 	color:#444;
 	box-shadow:none;
 }
-
-.widget_wysija_cont .wysija-paragraph .wysija-input:focus {
+.widget_siw_mailpoet_subscription input:focus{
 	box-shadow:none;
 }
 
-.widget_wysija_cont .wysija-paragraph .formError{
-	position:static !important;
-	opacity:1 !important;
-	cursor: pointer;
-	z-index: 5000;
-}
-.wysija-paragraph .formError .formErrorContent, .widget_wysija_cont .allmsgs{
-	background: none;
-	font-family: inherit;
+#newsletter_message, #newsletter_email_message{
+    color: #59ab9c;
 	font-size:11px;
 	border: 1px solid #59ab9c;
 	border-radius: 4px;
-    color: #59ab9c;
-	margin-bottom:4px;
-	padding: 4px 10px;
-	position: relative;
-    width: 100%;
-    z-index: 5001;	
 }
-
-.widget_wysija_cont .abs-req {
-    display: none;
-}
-
-.widget_wysija_cont .allmsgs li {
-    list-style-type: none;
-}
-
-
 
 
 h3{
@@ -611,10 +587,7 @@ h5.job-title{
 	text-align:center;
 }
 
-/*agenda*/
-article.agenda {
-	background-color:#fff;
-}
+
 /*contact form styling*/
 div.wpcf7-validation-errors, div.wpcf7-mail-sent-ok{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -679,8 +652,13 @@ span.wpcf7-not-valid-tip {
 
 
 /*
-Styling voor event calendar
+Styling voor agenda
 */
+
+article.agenda {
+	background-color:#fff;
+}
+
 ul.siw_events{
 	padding:0px;
 	list-style-type:none;
@@ -702,19 +680,6 @@ h4.siw_event_title{
 	margin-bottom:0px;
 }
 
-
-li.tribe-events-list-widget-events h4 a::before{
-    color: #fff;
-    display: inline-block;
-    height: 40px;
-    left: 15px;
-    vertical-align: middle;
-    width: 30px;
-	background-color: transparent;
-    font-family: kt-icon;
-	content:"\e115";
-}
-
 .siw_event_duration, .siw_agenda_page_link{
 	font-weight: bold;
 }
@@ -722,22 +687,7 @@ li.tribe-events-list-widget-events h4 a::before{
 	font-style:italic;
 }
 
-.tribe-events-list-widget ol{
-	padding:0px;
-	list-style-type:none;
-}
 
-.tribe-events-cal-links, a.tribe-events-ical{
-	display:none !important;
-}
-
-.tribe-events-list .tribe-events-event-image img{
-	width:auto;
-}
-
-.tribe-events-list-widget .duration, .tribe-events-widget-link a {
-    font-weight: 700;
-}
 
 /*
 Styling voor contactform

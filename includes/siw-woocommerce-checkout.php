@@ -407,6 +407,26 @@ function siw_woocommerce_multistep_checkout_scripts(){
 	}
 }
 
+/*Voorwaarden link vervangen door modal  */
+add_filter('woocommerce_checkout_show_terms', '__return_false');
+add_action('woocommerce_review_order_after_submit', 'siw_woocommerce_show_terms_link');
+
+function siw_woocommerce_show_terms_link(){
+$terms_page = get_post( woocommerce_get_page_id('terms') );
+?>
+<p class="form-row terms">
+	<label for="terms" class="checkbox"><?php printf( __( 'Ik heb de <a id="open-terms-and-conditions" data-toggle="modal" data-target="#kt-modal-terms" >inschrijfvoorwaarden</a> gelezen en ga akkoord ', 'siw' ), esc_url( wc_get_page_permalink( 'terms' ) ) ); ?></label>
+	<input type="checkbox" class="input-checkbox" name="terms" <?php checked( apply_filters( 'woocommerce_terms_is_checked_default', isset( $_POST['terms'] ) ), true ); ?> id="terms" />
+</p>
+<div class="hide-button">
+<?php echo do_shortcode( '[kad_modal btnsize="small" id = "terms" btntitle="voorwaarden" btncolor="#ffffff" title="' . $terms_page->post_title . '"]' . apply_filters('the_content', $terms_page->post_content) . '[/kad_modal]' );?>
+</div>
+<?php
+}
+
+
+
+
 /**
 Opslaan dat gebruiker akkoord is gegaan met voorwaarden
 

@@ -25,6 +25,29 @@ function siw_get_pingdom_rum_id(){
 	return $pingdom_rum_id;
 }
 
+function siw_get_general_information ( $type ){
+	switch ( $type ){
+		case "iban":
+			$iban = get_option('siw_general_iban');
+			return $iban;
+		case "kvk":
+			$kvk = get_option('siw_general_kvk');
+			return $kvk;		
+		case "telefoon":
+			$phone = get_option('siw_general_phone');
+			return $phone;		
+	}
+}
+
+//ip whitelist
+function siw_get_ip_whitelist(){
+	$ip_whitelist[]= get_option('siw_login_whitelist_ip_1');
+	$ip_whitelist[]= get_option('siw_login_whitelist_ip_2');
+	$ip_whitelist[]= get_option('siw_login_whitelist_ip_3');
+	$ip_whitelist[]= get_option('siw_login_whitelist_ip_4');
+	$ip_whitelist[]= get_option('siw_login_whitelist_ip_5');
+	return $ip_whitelist;
+}
 
 //pagina's
 function siw_get_parent_page( $type ){
@@ -53,7 +76,20 @@ function siw_get_vfb_form_id( $type ){
 	}
 }
 
-		
+function siw_get_cf7_form_id( $type ){
+    switch ($type) {
+        case  "algemeen":
+			$form_id = get_option('siw_forms_algemeen');
+			return $form_id;
+        case  "project":
+			$form_id = get_option('siw_forms_project');
+			return $form_id;
+        case  "begeleider":
+			$form_id = get_option('siw_forms_begeleider');
+			return $form_id;
+	}
+}
+	
 function siw_get_jobs_company_profile(){
 	$company_profile = get_option('siw_jobs_company_profile');
 	return $company_profile;
@@ -77,14 +113,14 @@ function siw_get_files_backup_time(){
 
 //EVS
 function siw_get_evs_next_deadline(){
-	$evs_deadlines[]= get_option( 'siw_evs_deadline_1' );
-	$evs_deadlines[]= get_option( 'siw_evs_deadline_2' );
-	$evs_deadlines[]= get_option( 'siw_evs_deadline_3' );
-	$evs_deadlines[]= get_option( 'siw_evs_deadline_4' );
-	$evs_deadlines[]= get_option( 'siw_evs_deadline_5' );
+	$evs_deadlines[]= get_option('siw_evs_deadline_1');
+	$evs_deadlines[]= get_option('siw_evs_deadline_2');
+	$evs_deadlines[]= get_option('siw_evs_deadline_3');
+	$evs_deadlines[]= get_option('siw_evs_deadline_4');
+	$evs_deadlines[]= get_option('siw_evs_deadline_5');
 	
 	asort($evs_deadlines);
-	$weeks = 3;
+	$weeks = get_option( 'siw_evs_weeks_before_deadline' );
 	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$weeks." weeks"));
 
 	foreach($evs_deadlines as $evs_deadline => $evs_deadline_date) {
@@ -96,6 +132,25 @@ function siw_get_evs_next_deadline(){
 	return $evs_next_deadline;
 }
 
+function siw_get_next_community_day(){
+	$community_days[]= get_option('siw_community_day_1');
+	$community_days[]= get_option('siw_community_day_2');
+	$community_days[]= get_option('siw_community_day_3');
+	$community_days[]= get_option('siw_community_day_4');
+	$community_days[]= get_option('siw_community_day_5');
+	$community_days[]= get_option('siw_community_day_6');
+	
+	asort( $community_days );
+	$today = date("Y-m-d");
+	
+	foreach($community_days as $community_day => $community_day_date) {
+		if ($community_day_date > $today){
+			$next_community_day = $community_day_date;
+			break;
+		}
+	}
+	return $next_community_day;	
+}
 
 //afzender plato export
 function siw_get_outgoing_placements_officer(){
@@ -548,6 +603,11 @@ function siw_get_array( $array ){
 					'name'  	=> 'Zwitserland' ,
 					'continent'	=> 'europa',
 				); 	
+				$project_countries['CHN'] = array(
+					'slug'		=> 'china',
+					'name'  	=> 'China' ,
+					'continent'	=> 'azie',
+				); 				
 				$project_countries['CZE'] = array(
 					'slug'		=> 'tsjechie',
 					'name'  	=> 'Tsjechië' ,
@@ -562,6 +622,11 @@ function siw_get_array( $array ){
 					'slug'		=> 'denemarken',
 					'name'  	=> 'Denemarken' ,
 					'continent'	=> 'europa',
+				);
+				$project_countries['ECU'] = array(
+					'slug'		=> 'ecuador',
+					'name'  	=> 'Ecuador' ,
+					'continent'	=> 'latijns-amerika',
 				);
 				$project_countries['ESP'] = array(
 					'slug'		=> 'spanje',
@@ -656,6 +721,11 @@ function siw_get_array( $array ){
 				$project_countries['KOR'] = array(
 					'slug'		=> 'zuid-korea',
 					'name'  	=> 'Zuid-Korea' ,
+					'continent'	=> 'azie',
+				);
+				$project_countries['LKA'] = array(
+					'slug'		=> 'sri-lanka',
+					'name'  	=> 'Sri Lanka' ,
 					'continent'	=> 'azie',
 				);
 				$project_countries['LTU'] = array(

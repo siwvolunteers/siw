@@ -28,29 +28,29 @@ function siw_wc_define_xml_structure( $order_format, $order ) {
 	$outgoing_placements_officer = siw_get_outgoing_placements_officer();
 	$outgoing_placements_email = siw_get_outgoing_placements_email();
 	
-	$firstname		= $order->billing_first_name;
-	$lastname		= $order->billing_last_name;
-	$sex			= $order->billing_gender;
-	$birthdate		= date( 'Y-m-d', strtotime($order->billing_dob));
-	$email			= $order->billing_email;
-	$nationality	= $order->billing_nationality;
-	$telephone 		= $order->billing_phone;
-	$address1 		= $order->billing_address_1 . ' ' . $order->billing_housenumber;
-	$zip 			= $order->billing_postcode;
-	$city 			= $order->billing_city;
-	$country 		= $order->billing_country;//TODO
-	$occupation 	= 'OTH';
-	$emergency_contact = get_post_meta($order->id, 'emergencyContactName', true) . ' ' . get_post_meta($order->id, 'emergencyContactPhone', true);
-	$language1 		= get_post_meta( $order->id, 'language1', true );
-	$language2 		= get_post_meta( $order->id, 'language2', true );
-	$language3 		= get_post_meta( $order->id, 'language3', true );
-	$langlevel1 	= get_post_meta( $order->id, 'language1Skill', true );	
-	$langlevel2		= get_post_meta( $order->id, 'language2Skill', true );	
-	$langlevel3 	= get_post_meta( $order->id, 'language3Skill', true );
-	$special_needs 	= get_post_meta( $order->id, 'healthIssues', true );	
-	$experience_text =get_post_meta( $order->id, 'volunteerExperience', true );
-	$motivation 	= get_post_meta( $order->id, 'motivation', true );
-	$together_with 	= get_post_meta( $order->id, 'togetherWith', true );	
+	$firstname			= $order->billing_first_name;
+	$lastname			= $order->billing_last_name;
+	$sex				= $order->billing_gender;
+	$birthdate			= date( 'Y-m-d', strtotime($order->billing_dob));
+	$email				= $order->billing_email;
+	$nationality		= $order->billing_nationality;
+	$telephone 			= $order->billing_phone;
+	$address1 			= $order->billing_address_1 . ' ' . $order->billing_housenumber;
+	$zip 				= $order->billing_postcode;
+	$city 				= $order->billing_city;
+	$country 			= $order->billing_country;//TODO
+	$occupation 		= 'OTH';
+	$emergency_contact	= get_post_meta($order->id, 'emergencyContactName', true) . ' ' . get_post_meta($order->id, 'emergencyContactPhone', true);
+	$language1 			= get_post_meta( $order->id, 'language1', true );
+	$language2 			= get_post_meta( $order->id, 'language2', true );
+	$language3 			= get_post_meta( $order->id, 'language3', true );
+	$langlevel1 		= get_post_meta( $order->id, 'language1Skill', true );	
+	$langlevel2			= get_post_meta( $order->id, 'language2Skill', true );	
+	$langlevel3 		= get_post_meta( $order->id, 'language3Skill', true );
+	$special_needs 		= get_post_meta( $order->id, 'healthIssues', true );	
+	$experience			= get_post_meta( $order->id, 'volunteerExperience', true );
+	$motivation 		= get_post_meta( $order->id, 'motivation', true );
+	$together_with 		= get_post_meta( $order->id, 'togetherWith', true );	
 	
 
 	//bepaal projectcode
@@ -60,33 +60,33 @@ function siw_wc_define_xml_structure( $order_format, $order ) {
 	}
 
 	return array(
-		'firstname' => $firstname,
-		'lastname' => $lastname,
-		'sex' => $sex,
-		'birthdate' => $birthdate,
-		'email' => $email,
-		'nationality' => $nationality,
-		'telephone' => $telephone,
-		'address1' => $address1,
-		'zip' => $zip,
-		'city' => $city,
-		'country' => $country,//TODO
-		'occupation' => $occupation,
-		'emergency_contact' => $emergency_contact,
-		'choice1' => $projectcode,
-		'language1' => $language1,
-		'language2' => $language2,
-		'language3' =>	$language3,	
-		'langlevel1' => $langlevel1,	
-		'langlevel2' => $langlevel2,	
-		'langlevel3' => $langlevel3,
-		'special_needs' => $special_needs,	
-		'experience_text' =>$experience_text,
-		'motivation' => $motivation,
-		'together_with' => $together_with,	
-		'req_sent_by' => $outgoing_placements_officer,
-		'req_sender_email'  => $outgoing_placements_email,
-		'date_filed'  => date( 'Y-m-d')
+		'firstname'			=> $firstname,
+		'lastname'			=> $lastname,
+		'sex' 				=> $sex,
+		'birthdate'			=> $birthdate,
+		'email' 			=> $email,
+		'nationality'		=> $nationality,
+		'telephone'			=> $telephone,
+		'address1'			=> $address1,
+		'zip'				=> $zip,
+		'city'				=> $city,
+		'country'			=> $country,//TODO
+		'occupation'		=> $occupation,
+		'emergency_contact'	=> $emergency_contact,
+		'choice1'			=> $projectcode,
+		'language1'			=> $language1,
+		'language2'			=> $language2,
+		'language3'			=> $language3,	
+		'langlevel1'		=> $langlevel1,	
+		'langlevel2'		=> $langlevel2,	
+		'langlevel3'		=> $langlevel3,
+		'special_needs'		=> $special_needs,	
+		'experience'		=>$experience,
+		'motivation'		=> $motivation,
+		'together_with'		=> $together_with,	
+		'req_sent_by'		=> $outgoing_placements_officer,
+		'req_sender_email'	=> $outgoing_placements_email,
+		'date_filed'		=> date( 'Y-m-d')
 	);
 }
 

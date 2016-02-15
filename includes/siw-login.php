@@ -6,21 +6,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-
 //login
-
-add_action('login_head', 'siw_custom_login');
-function siw_custom_login() {
-	echo '<link rel="stylesheet" type="text/css" href="' . get_stylesheet_directory_uri()  . '/assets/css/siw-login-styles.css" />';
+add_action( 'login_enqueue_scripts', 'siw_login_css');
+function siw_login_css(){
+	wp_enqueue_style( 'siw-login-css', get_stylesheet_directory_uri() . '/assets/css/siw-login-styles.css', array(), wp_get_theme()->version );
 }
 
-add_filter( 'login_headerurl', 'siw_login_logo_url' );
-function siw_login_logo_url() {
+add_filter( 'login_headerurl', 'siw_login_headerurl' );
+function siw_login_headerurl() {
 	return get_home_url('','','http');
 }
 
-add_filter( 'login_headertitle', 'siw_login_logo_url_title' );
-function siw_login_logo_url_title() {
+add_filter( 'login_headertitle', 'siw_login_headertitle' );
+function siw_login_headertitle() {
 	return 'SIW Internationale Vrijwilligersprojecten';
 }
 
@@ -33,7 +31,12 @@ function siw_login_message( $message ) {
     }
 }
 
-add_filter('login_errors', 'siw_failed_login');
-function siw_failed_login() {
-    return 'Incorrecte logingegevens.';
+//whitelisten ip's
+add_filter('limit_login_whitelist_ip', 'siw_login_ip_whitelist', 10, 2);
+function siw_login_ip_whitelist($allow, $ip) {
+	$ip_whitelist = siw_get_ip_whitelist();
+	if ( in_array( $ip, $ip_whitelist ) ){
+		$allow = true;
+	}
+	return $allow;
 }

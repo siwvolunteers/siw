@@ -6,13 +6,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+add_action( 'wp_enqueue_scripts', 'siw_add_version_to_theme_css',999);
+function siw_add_version_to_theme_css(){
+	global $wp_styles;
+	if ($wp_styles->registered['pinnacle_child']){
+		$wp_styles->registered['pinnacle_child']->ver = wp_get_theme()->version;
+	}
+}
+
+
 /*custom javascript/jQuery functies*/
 add_action('wp_enqueue_scripts', 'siw_custom_js');
 function siw_custom_js(){
-	wp_register_script('siw_custom_js', get_stylesheet_directory_uri() . '/assets/js/siw-scripts.js', array('jquery'), '', TRUE);
+	wp_register_script('siw_custom_js', get_stylesheet_directory_uri() . '/assets/js/siw-scripts.js', array('jquery'), wp_get_theme()->version, TRUE);
 	$site_url = site_url();
 	$parameters = array(
-		'ajax_url' => get_stylesheet_directory_uri().'/siw-ajax.php'
+		'ajax_url' => get_stylesheet_directory_uri().'/siw-ajax.php',
+		'invalid_email' => 'Vul een geldig e-mailadres in.',
+		'sending' => 'Verzenden..',
 	);
 	wp_localize_script( 'siw_custom_js', 'parameters', $parameters );
 	wp_enqueue_script('siw_custom_js');
@@ -21,7 +32,7 @@ function siw_custom_js(){
 
 add_action('wp_enqueue_scripts', 'siw_wc_checkout_scripts_js');
 function siw_wc_checkout_scripts_js(){
-	wp_register_script('siw-wc-checkout-scripts', get_stylesheet_directory_uri() . '/assets/js/siw-wc-checkout-scripts.js', array('jquery'), '', TRUE);
+	wp_register_script('siw-wc-checkout-scripts', get_stylesheet_directory_uri() . '/assets/js/siw-wc-checkout-scripts.js', array('jquery'), wp_get_theme()->version, TRUE);
 	$site_url = site_url();
 	$parameters = array(
 		'ajax_url' => get_stylesheet_directory_uri().'/siw-ajax.php'
@@ -63,16 +74,6 @@ function siw_remove_unnecessary_scripts(){
 	if (! is_front_page() ){
 		wp_dequeue_script('kadence_slider_js');
 		wp_dequeue_style('kadence_slider_css');
-	}
-	
-	//events calendar
-	if ( function_exists('tribe_is_event_query')){
-		if((! tribe_is_event_query()) && (! tribe_is_event()) ){
-			wp_dequeue_style('tribe-events-full-calendar-style');
-			wp_dequeue_style('tribe-events-calendar-style');		
-			wp_dequeue_style('tribe-events-calendar-full-mobile-style');	
-			wp_dequeue_style('tribe-events-calendar-mobile-style');	
-		}
 	}
 	
 	//ncf font
