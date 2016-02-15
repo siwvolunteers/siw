@@ -73,8 +73,7 @@
 
 		if ((name != '') && (email != '') && (list != '')){
 			$( "#siw_newsletter_subscription" ).addClass( "hidden" );
-			$( "#newsletter_message" ).removeClass( "hidden" );
-			$( "#newsletter_message" ).text(parameters.sending);
+			$( "#newsletter_loading" ).removeClass( "hidden" );
 			$.ajax({
 				url : parameters.ajax_url,
 				type : 'post',
@@ -87,10 +86,14 @@
 				},
 				success: function(result) {
 					if(result.success == 1) {
+						$( "#newsletter_message" ).removeClass( "hidden" );
+						$( "#newsletter_loading" ).addClass( "hidden" );
 						$( "#newsletter_message" ).text(result.message);
 						ga('send', 'event', 'Nieuwsbrief', 'Aanmelden');
 					}
 					else {
+						$( "#newsletter_message" ).removeClass( "hidden" );
+						$( "#newsletter_loading" ).addClass( "hidden" );
 						$( "#newsletter_message" ).text(result.message);
 						$( "#siw_newsletter_subscription" ).removeClass( "hidden" );
 					}             
