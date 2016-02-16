@@ -59,6 +59,8 @@ function siw_remove_unnecessary_scripts(){
 	//woocommerce
 	wp_dequeue_script( 'woocommerce' );
 	
+	//wp-embed
+	wp_deregister_script( 'wp-embed' );
 	
 	//search&filter
 	wp_dequeue_style('search-filter-chosen-styles');
