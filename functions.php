@@ -6,11 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-/*
-import
-*/
-
-
 /*backend*/
 require_once('includes/siw-admin.php');
 require_once('includes/siw-dashboard-widgets.php');
@@ -25,7 +20,7 @@ require_once('includes/siw-jobs.php');
 /*frontend functionaliteit*/
 require_once('includes/siw-js-css.php');
 require_once('includes/siw-display.php');
-
+require_once('includes/siw-frontend-widgets.php');
 require_once('includes/siw-newsletter.php');
 require_once('includes/siw-postcode.php');
 require_once('includes/siw-search.php');

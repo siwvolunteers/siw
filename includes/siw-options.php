@@ -39,6 +39,7 @@ function siw_settings_general_init(){
 	register_setting( 'siw_general', 'siw_general_iban', 'sanitize_text_field' );
 	register_setting( 'siw_general', 'siw_general_kvk', 'sanitize_text_field' );
 	register_setting( 'siw_general', 'siw_general_phone', 'sanitize_text_field' );
+	register_setting( 'siw_general', 'siw_general_email', 'sanitize_email' );
 	
 	//secties
 	add_settings_section(
@@ -70,6 +71,14 @@ function siw_settings_general_init(){
 		'siw_general',
 		'siw_general', 
 		'siw_general_phone' 
+	);
+	add_settings_field( 
+		'siw_general_email', 
+		__( 'E-mail', 'siw' ), 
+		'siw_settings_show_email_field', 
+		'siw_general',
+		'siw_general', 
+		'siw_general_email' 
 	);	
 }
 

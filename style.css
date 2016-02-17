@@ -41,6 +41,12 @@ Algemene styling
 	color: #fff !important;
 }
 
+/*SIW contact widget*/
+.widget_siw_contact_information .vcard p {
+    margin-bottom: 5px;
+}
+
+
 /*SIW-mailpoet widget*/
 .widget_siw_mailpoet_subscription input{
 	color:#444;

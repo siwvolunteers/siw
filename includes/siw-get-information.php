@@ -36,6 +36,12 @@ function siw_get_general_information ( $type ){
 		case "telefoon":
 			$phone = get_option('siw_general_phone');
 			return $phone;		
+		case "email":
+			$email = get_option('siw_general_email');
+			return $email;		
+		case "naam":
+			$naam = get_bloginfo('name');
+			return $naam;
 	}
 }
 
