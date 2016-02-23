@@ -27,6 +27,7 @@ require_once('includes/siw-search.php');
 
 /*Groepsprojecten (PLATO en WooCommerce)*/
 require_once('includes/siw-woocommerce.php');
+require_once('includes/siw-woocommerce-email.php');
 require_once('includes/siw-woocommerce-checkout.php');
 require_once('includes/siw-plato-import.php');
 require_once('includes/siw-plato-export.php');
