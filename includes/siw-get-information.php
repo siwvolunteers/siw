@@ -679,6 +679,11 @@ function siw_get_array( $array ){
 					'name'  	=> 'Hongarije' ,
 					'continent'	=> 'europa',
 				);
+				$project_countries['HTE'] = array(
+					'slug'		=> 'haiti',
+					'name'  	=> 'Haïti' ,
+					'continent'	=> 'latijns-amerika',
+				);
 				$project_countries['IDN'] = array(
 					'slug'		=> 'indonesie',
 					'name'  	=> 'Indonesië' ,
@@ -774,6 +779,11 @@ function siw_get_array( $array ){
 					'name'  	=> 'Nepal' ,
 					'continent'	=> 'azie',
 				);
+				$project_countries['PER'] = array(
+					'slug'		=> 'peru',
+					'name'  	=> 'Peru' ,
+					'continent'	=> 'latijns-amerika',
+				);
 				$project_countries['POL'] = array(
 					'slug'		=> 'polen',
 					'name'  	=> 'Polen' ,
@@ -798,6 +808,11 @@ function siw_get_array( $array ){
 					'slug'		=> 'slowakije',
 					'name'  	=> 'Slowakije' ,
 					'continent'	=> 'europa',
+				);
+				$project_countries['TGO'] = array(
+					'slug'		=> 'togo',
+					'name'  	=> 'Togo' ,
+					'continent'	=> 'afrika-midden-oosten',
 				);
 				$project_countries['THA'] = array(
 					'slug'		=> 'thailand',
