@@ -278,6 +278,11 @@ function siw_wc_project_metaboxes( array $meta_boxes ){
 				'id'      => 'manual_visibility',
 				'type'    => 'select',
 				'options' => $visibility_options,
+			),
+			array(
+				'name'    => 'Opnieuw importeren',
+				'id'      => 'import_again',
+				'type'    => 'checkbox',
 			),	
 		),
 	);
