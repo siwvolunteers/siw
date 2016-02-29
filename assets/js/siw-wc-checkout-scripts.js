@@ -4,16 +4,6 @@
 
 
 (function($) {
-	/*datepicker toevoegen*/
-	$(document).ready(function() {
-		$('#billing_dob').datepicker({
-		format: "dd-mm-yyyy",
-		endDate: "-14y",
-		startView: 2,
-		language: "nl",
-		autoclose: true
-		});
-	})
 
 	/*workaround om de betaalmethode te selecteren als op de gestylde radiobuttons geklikt wordt.*/
 	$(document).on('click', 'li.payment_method_mollie_wc_gateway_ideal div', function(){

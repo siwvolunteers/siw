@@ -4,6 +4,7 @@ jQuery(document).ready(function ($) {
 
     jQuery('form.checkout').show(); 
 	jQuery("form.checkout .validate-required .input-radio").attr("required", "required");
+	jQuery("form.checkout .validate-required select").attr("required", "required");
     jQuery("form.checkout .validate-required .input-text").attr("required", "required");
     jQuery("form.checkout .validate-email .input-text").addClass("email");
 
