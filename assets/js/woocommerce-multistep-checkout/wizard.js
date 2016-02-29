@@ -7,6 +7,8 @@ jQuery(document).ready(function ($) {
 	jQuery("form.checkout .validate-required select").attr("required", "required");
     jQuery("form.checkout .validate-required .input-text").attr("required", "required");
     jQuery("form.checkout .validate-email .input-text").addClass("email");
+	jQuery("form.checkout .validate-required #billing_dob").addClass("dateNL");
+	jQuery("form.checkout .validate-required #billing_postcode").addClass("postalcodeNL");
 
     if (wmc_wizard.isAuthorizedUser == false && wmc_wizard.include_login != "false" && wmc_wizard.woo_include_login != "no") {
         var nextButtonTitle = wmc_wizard.no_account_btn
