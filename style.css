@@ -4,7 +4,7 @@ Theme URI: http://www.siw.nl
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 1.5
+Version: 1.6
 GitHub Theme URI: https://github.com/siwvolunteers/siw
 */
 
@@ -41,6 +41,12 @@ Algemene styling
 	color: #fff !important;
 }
 
+/*SIW contact widget*/
+.widget_siw_contact_information .vcard p {
+    margin-bottom: 5px;
+}
+
+
 /*SIW-mailpoet widget*/
 .widget_siw_mailpoet_subscription input{
 	color:#444;
@@ -55,6 +61,22 @@ Algemene styling
 	font-size:11px;
 	border: 1px solid #59ab9c;
 	border-radius: 4px;
+}
+
+/*loading-animatie*/
+#newsletter_loading {
+    border: 10px solid #f3f3f3; 
+    border-top: 10px solid #59ab9c; 
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    animation: spin 2s linear infinite;
+	margin: 0 auto; 
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 

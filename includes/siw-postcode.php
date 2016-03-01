@@ -18,18 +18,15 @@ function siw_postcode_lookup() {
 	$postcode = strtoupper(siw_strip_url($_GET['postcode']));
 	$houseNumber = siw_strip_url($_GET['housenumber']);
 
-	$headers = array();
-	$headers[] = 'X-Api-Key: '.$api_key;
 	$url = 'https://postcode-api.apiwise.nl/v2/addresses/?postcode=' . str_replace(' ', '', $postcode) . '&number=' . $houseNumber;
-	$curl = curl_init();
-	curl_setopt($curl, CURLOPT_URL, $url);
-	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
-	curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
-	$json_response = curl_exec($curl);
-	$response = json_decode($json_response);
-	curl_close($curl);
+	$args = array(
+		'timeout'		=> 10,
+		'redirection'	=> 0,
+		'headers'		=> array(
+			'X-Api-Key'	=> $api_key,
+			),
+	);
+	$response = json_decode( wp_safe_remote_get( $url, $args )['body'] );
 
 	if ($response->_embedded->addresses){
 		$street = $response->_embedded->addresses[0]->street;

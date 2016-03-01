@@ -25,7 +25,7 @@ $site_url = site_url('', 'http' );
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td width="10%">&nbsp;</td>
-										<td height="20" style="margin-left:10%; m-right:10%;border-bottom:thin solid #ff9900"></td>
+										<td height="20" style="margin-left:10%; margin-right:10%; border-bottom:thin solid #ff9900"></td>
 										<td width="10%">&nbsp;</td>
 									</tr>
 									<tr>

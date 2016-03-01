@@ -4,16 +4,14 @@
 
 
 (function($) {
-	/*datepicker toevoegen*/
-	$(document).ready(function() {
-		$('#billing_dob').datepicker({
-		format: "dd-mm-yyyy",
-		endDate: "-14y",
-		startView: 2,
-		language: "nl",
-		autoclose: true
-		});
-	})
+
+	$.validator.addMethod( "dateNL", function( value, element ) {
+		return this.optional( element ) || /^(0?[1-9]|[12]\d|3[01])[\-](0?[1-9]|1[012])[\-]([12]\d)?(\d\d)$/.test( value );
+	}, "Dit is geen geldige datum");
+
+	$.validator.addMethod( "postalcodeNL", function( value, element ) {
+		return this.optional( element ) || /^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test( value );
+	}, "Dit is geen geldige postcode" );
 
 	/*workaround om de betaalmethode te selecteren als op de gestylde radiobuttons geklikt wordt.*/
 	$(document).on('click', 'li.payment_method_mollie_wc_gateway_ideal div', function(){

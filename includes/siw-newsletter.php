@@ -114,6 +114,7 @@ class siw_mailpoet_subscription extends WP_Widget {
 		}?>
 		<div>
 			<div id="newsletter_message" class="text-center hidden"></div>	
+			<div id="newsletter_loading" class="text-center hidden"></div>
 			<form id="siw_newsletter_subscription" method="post" autocomplete="on">
 				<p>
 					Meld je aan voor onze nieuwsbrief en voeg je bij de <?php echo do_shortcode('[wysija_subscribers_count list_id="' . $list . '" ]');?> abonnees.

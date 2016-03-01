@@ -23,7 +23,6 @@ function siw_custom_js(){
 	$parameters = array(
 		'ajax_url' => get_stylesheet_directory_uri().'/siw-ajax.php',
 		'invalid_email' => 'Vul een geldig e-mailadres in.',
-		'sending' => 'Verzenden..',
 	);
 	wp_localize_script( 'siw_custom_js', 'parameters', $parameters );
 	wp_enqueue_script('siw_custom_js');
@@ -60,6 +59,8 @@ function siw_remove_unnecessary_scripts(){
 	//woocommerce
 	wp_dequeue_script( 'woocommerce' );
 	
+	//wp-embed
+	wp_deregister_script( 'wp-embed' );
 	
 	//search&filter
 	wp_dequeue_style('search-filter-chosen-styles');

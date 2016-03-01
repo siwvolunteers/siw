@@ -54,8 +54,8 @@ $site_url = site_url('', 'http' );
 													</td>
 												</tr>
 												<tr>
-													<td height="38" style="vertical-align:bottom;border-bottom: solid #ff9900;" align="center">
-														<font style="font-family:'Open Sans', Verdana, normal; color:#666666; font-size:13px; font-weight:bold;">
+													<td height="38" style="vertical-align:bottom;border-bottom: thin solid #ff9900;" align="center">
+														<font style="font-family:'Open Sans', Verdana, normal; color:#666666; font-size:14px; font-weight:bold;">
 															<?php echo $email_heading; ?>
 														</font>
 													</td>

@@ -107,44 +107,6 @@ function siw_wc_shortcode_add_orderby_random ( $args, $atts) {
 }
 
 
-// mail sturen bij statusovergang van 'on hold' naar 'in processing'
-add_action( 'woocommerce_email', 'siw_wc_order_status_on_hold_to_processing_email' );
- 
-function siw_wc_order_status_on_hold_to_processing_email( $email_class ) {
-	add_action( 'woocommerce_order_status_on-hold_to_processing_notification', array( $email_class->emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
-}
-
-
-//functie om tabelrij in Woocommerce-emails te genereren
-
-function siw_wc_generate_email_table_row( $name, $value = '&nbsp;'){?>
-	<tr>
-		<td width="35%">
-			<font style="font-family:'Open Sans', Verdana, normal; color:#444; font-size:14px; ">
-				<?php echo $name; ?>
-			</font></td>
-		<td width="5%"><font style="font-family:'Open Sans', Verdana, normal; color:#444; font-size:14px; "></font></td>
-		<td width="50%">
-			<font style="font-family:'Open Sans', Verdana, normal; color:#444; font-size:14px; font-style:italic">
-				<?php echo $value; ?>
-			</font>
-		</td>
-	</tr>
-<?php
-}
-function siw_wc_generate_email_table_header_row( $name ){?>
-	<tr>
-		<td width="35%">
-			<font style="font-family:'Open Sans', Verdana, normal; color:#444; font-size:14px; font-weight:bold">
-				<?php echo $name; ?>
-			</font></td>
-		<td width="5%"><font style="font-family:'Open Sans', Verdana, normal; color:#444; font-size:14px; "></font></td>
-		<td width="50%"><font style="font-family:'Open Sans', Verdana, normal; color:#444; font-size:14px; "></font></td>
-	</tr>	
-<?php
-}
-
-
 
 //custom fields verbergen op orderscherm en projectscherm
 add_action( 'admin_menu' , 'siw_wc_hide_custom_fields' );
@@ -316,6 +278,11 @@ function siw_wc_project_metaboxes( array $meta_boxes ){
 				'id'      => 'manual_visibility',
 				'type'    => 'select',
 				'options' => $visibility_options,
+			),
+			array(
+				'name'    => 'Opnieuw importeren',
+				'id'      => 'import_again',
+				'type'    => 'checkbox',
 			),	
 		),
 	);

@@ -432,7 +432,15 @@ function siw_wc_set_variations_prices( $product_id ){
 	}
 }
 
-
+add_filter('wp_all_import_is_post_to_update', 'siw_wc_is_post_to_update', 10, 1);
+function siw_wc_is_post_to_update( $product_id ) {
+	$update = false;
+	$import_again = get_post_meta( $product_id, 'import_again', true);
+	if ( $import_again ){
+		$update = true;
+	}
+	return $update;
+}
 
 add_action('pmxi_after_xml_import', 'siw_wc_hide_projects_after_import', 10, 1);
 function siw_wc_hide_projects_after_import($import_id){
