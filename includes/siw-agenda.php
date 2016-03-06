@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -397,33 +397,33 @@ public function __construct() {
 			?>
 				<li class="siw_event">
 					<h4 class="siw_event_title">
-					<a href="<?php the_permalink(); ?>" class="siw_event_link"><?php the_title(); ?></a>
+					<a href="<?php esc_url( the_permalink() ); ?>" class="siw_event_link"><?php esc_html( the_title() ); ?></a>
 					</h4>
 					<span class="siw_event_duration" >
-						<?php echo $date_range;?> <br/>
-						<?php echo $start_time, ' - ',$end_time;?><br/>
+						<?php echo esc_html( $date_range );?> <br/>
+						<?php echo esc_html( $start_time . '&nbsp;-&nbsp;' . $end_time );?><br/>
 					</span>
-					<span class="siw_event_location"><?php echo $location, ', ', $city;?></span>
+					<span class="siw_event_location"><?php echo esc_html( $location. ',&nbsp;' . $city );?></span>
 					<script type="application/ld+json">
 [{
 "@context" : "http://schema.org",
-"name" : "<?php the_title();?>",
+"name" : "<?php esc_attr( the_title() );?>",
 "@type" : "event",
-"startDate" : "<?php echo date('Y-m-d',$start_ts); ?>",
-"endDate" : "<?php echo date('Y-m-d',$end_ts); ?>",
+"startDate" : "<?php echo esc_attr( date('Y-m-d',$start_ts ) ); ?>",
+"endDate" : "<?php echo esc_attr( date('Y-m-d',$end_ts ) ); ?>",
 "location" : {
 	"@type" : "Place",
-	"name" : "<?php echo $location; ?>",
-	"address" : "<?php echo $address, ', ',$postal_code,' ',$city; ?>"
+	"name" : "<?php echo esc_attr( $location ); ?>",
+	"address" : "<?php echo esc_attr( $address . ', ' .$postal_code . ' ' . $city ); ?>"
 },
-"url": "<?php echo the_permalink(); ?>"
+"url": "<?php echo esc_url( the_permalink() ); ?>"
 }]
 					</script>
 					</li>
 			<?php endwhile;?>
 		</ul>
 		<p class="siw_agenda_page_link">
-			<a href="<?php echo get_page_link( $agenda_page ); ?>">Bekijk de volledige agenda</a>
+			<a href="<?php echo esc_url( get_page_link( $agenda_page ) ); ?>"><?php _e('Bekijk de volledige agenda.', 'siw'); ?></a>
 		</p>
 		<?php else: ?>
 		<p><?php _e('Er zijn momenteel geen geplande activiteiten.', 'siw'); ?></p>
