@@ -613,6 +613,11 @@ function siw_get_array( $array ){
 					'slug'		=> 'china',
 					'name'  	=> 'China' ,
 					'continent'	=> 'azie',
+				); 
+				$project_countries['CRI'] = array(
+					'slug'		=> 'costa-rica',
+					'name'  	=> 'Costa Rica' ,
+					'continent'	=> 'latijns-amerika',
 				); 				
 				$project_countries['CZE'] = array(
 					'slug'		=> 'tsjechie',
