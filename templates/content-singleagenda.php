@@ -32,11 +32,11 @@
 			<div class="postclass">
 				<header class="agenda-header">
 					<h1><?php the_title();?></h1>
-					<h2><?php echo $date_range, ', ',$start_time, ' - ', $end_time;?></h2>					
+					<h2><?php echo esc_html( $date_range  . ', ' . $start_time  . '&nbsp;-&nbsp;' . $end_time );?></h2>
 				</header>
 				<div class="row">
 					<div class="col-md-10">
-						<?php echo wpautop($description); ?>			
+						<?php echo wp_kses_post( wpautop( $description ) ); ?>			
 					</div>
 				</div>
 				<div class="row">
@@ -48,10 +48,10 @@
 						foreach ( (array) $program as $key => $item ) {
 						?>
 							<div class="col-md-3">
-								<p><b><?php echo date("H:i", strtotime($item['starttijd'])), ' - ', date("H:i", strtotime($item['eindtijd']));?></b></p>
+								<p><b><?php echo esc_html( date("H:i", strtotime($item['starttijd'])) .  '&nbsp;-&nbsp;' . date("H:i", strtotime( $item['eindtijd'] ) ) );?></b></p>
 							</div>
 							<div class="col-md-9">
-								<?php echo wpautop($item['omschrijving']);?>
+								<?php echo wp_kses_post( wpautop( $item['omschrijving'] ) );?>
 							</div>		
 						<?php }?>
 						</div>
@@ -60,26 +60,30 @@
 						<h3>Locatie</h3>
 						<p>
 							<b>
-							<?php echo $location; ?><br/>
-							<?php echo $address; ?><br/>
-							<?php echo $postal_code, ' ', $city; ?><br/>
+							<?php echo esc_html( $location ); ?><br/>
+							<?php echo esc_html( $address ); ?><br/>
+							<?php echo esc_html( $postal_code . ' ' . $city ); ?><br/>
 							</b>
 						</p>
 						<?php echo do_shortcode( $location_map );?>
 					</div>
 					<div class="col-md-6">
 						<h3>Aanmelden</h3>
+						<?php if($start_ts >= time()):?>
 						<?php if ($application == 'formulier'){
 							echo do_shortcode( '[vfb id=' . $vfb_form_id . ']' );
 						}else{?>
-							<?php echo wpautop($application_explanation); ?>				
+							<?php echo wp_kses_post( wpautop( $application_explanation )); ?>				
 						<?php
 							if ( $application_link_url){?>
-							<a href="<?php echo $application_link_url;?>" target="_blank"><?php echo (($application_link_text)? $application_link_text : $application_link_url)?> <i class="kt-icon-newtab"></i></a>
+							<a href="<?php echo esc_url( $application_link_url );?>" target="_blank"><?php echo ( $application_link_text )? esc_html( $application_link_text ) : esc_html( $application_link_url )?> <i class="kt-icon-newtab"></i></a>
 						
 						<?php
 							}
 						} ?>
+						<?php else: ?>
+						<p>Het is helaas niet meer mogelijk om je aan te melden.</p>
+						<?php endif; ?>
 					</div>
 				</div>
 				<footer class="single-footer clearfix">
@@ -92,7 +96,7 @@
 				$agenda_category = join( ", ", $agenda_categories );
 				}
 				if ( $agenda_category ) {
-					?> <span class="postedinbottom"><i class="kt-icon-tag4"></i> <?php echo $agenda_category; ?></span><?php
+					?> <span class="postedinbottom"><i class="kt-icon-tag4"></i> <?php echo esc_html( $agenda_category ); ?></span><?php
 				}?>
 				</footer>
 			</div>
