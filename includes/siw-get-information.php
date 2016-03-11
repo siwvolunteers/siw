@@ -68,6 +68,15 @@ function siw_get_parent_page( $type ){
 }
 
 //formulieren
+function siw_get_vfb_field_id( $type ){
+	switch ($type) {
+		case "community_day_datums":
+		$field_id = get_option('siw_community_day_vfb_dates_field');
+		return $field_id;
+	}
+}
+
+
 function siw_get_vfb_form_id( $type ){
     switch ($type) {
         case  "community_day":
