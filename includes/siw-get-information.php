@@ -592,6 +592,11 @@ function siw_get_array( $array ){
 					'slug'		=> 'armenie',
 					'name'  	=> 'Armenië' ,
 					'continent'	=> 'europa',
+				); 			
+				$project_countries['AUT'] = array(
+					'slug'		=> 'oostenrijk',
+					'name'  	=> 'Oostenrijk' ,
+					'continent'	=> 'europa',
 				); 				
 				$project_countries['BDI'] = array(
 					'slug'		=> 'burundi',
