@@ -432,9 +432,17 @@ function siw_wc_set_variations_prices( $product_id ){
 	}
 }
 
-add_filter('wp_all_import_is_post_to_update', 'siw_wc_is_post_to_update', 10, 1);
-function siw_wc_is_post_to_update( $product_id ) {
+add_filter('wp_all_import_is_post_to_update', 'siw_wc_is_post_to_update', 10, 2);
+function siw_wc_is_post_to_update( $product_id, $xml ) {
 	$update = false;
+	
+	//bepalen of het de fpl-import is
+	$is_fpl = array_key_exists( 'reserved', $xml );
+	if( $is_fpl ){
+		$update = true;
+	}
+	
+	//bepalen of het project gemarkeerd is om opnieuw te importeren
 	$import_again = get_post_meta( $product_id, 'import_again', true);
 	if ( $import_again ){
 		$update = true;
