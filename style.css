@@ -127,6 +127,14 @@ a::after, .kad-post-navigation .kad-previous-link a span::before, .kad-post-navi
 }	
 
 
+/*blockquote*/
+blockquote{
+	font-size:14px;
+}
+blockquote footer{
+	font-size:100%;
+}
+
 /*styling voor home-carousel*/
 .kad-slider-btn{
 	background: rgba(51,51,51, 0.5) !important;
