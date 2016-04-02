@@ -536,6 +536,9 @@ function siw_settings_community_day_init(){
 	register_setting( 'siw_community_day', 'siw_community_day_4', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_5', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_6', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_7', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_8', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_9', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_vfb_dates_field', 'absint' );
 	
 	//secties
@@ -598,6 +601,30 @@ function siw_settings_community_day_init(){
 		'siw_community_day',
 		'siw_community_day', 
 		'siw_community_day_6' 
+	);
+	add_settings_field( 
+		'siw_community_day_7', 
+		__( 'Community day 7', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_7' 
+	);
+	add_settings_field( 
+		'siw_community_day_8', 
+		__( 'Community day 8', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_8' 
+	);
+	add_settings_field( 
+		'siw_community_day_9', 
+		__( 'Community day 9', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_9' 
 	);
 	add_settings_field( 
 		'siw_community_day_vfb_dates_field', 
@@ -910,5 +937,6 @@ add_action( 'update_option_siw_community_day_3', 'siw_update_community_day_optio
 add_action( 'update_option_siw_community_day_4', 'siw_update_community_day_options', 10, 3 );
 add_action( 'update_option_siw_community_day_5', 'siw_update_community_day_options', 10, 3 );
 add_action( 'update_option_siw_community_day_6', 'siw_update_community_day_options', 10, 3 );
-
-
+add_action( 'update_option_siw_community_day_7', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_8', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_9', 'siw_update_community_day_options', 10, 3 );

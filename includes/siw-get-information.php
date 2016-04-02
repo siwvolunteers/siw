@@ -154,6 +154,9 @@ function siw_get_next_community_day(){
 	$community_days[]= get_option('siw_community_day_4');
 	$community_days[]= get_option('siw_community_day_5');
 	$community_days[]= get_option('siw_community_day_6');
+	$community_days[]= get_option('siw_community_day_7');
+	$community_days[]= get_option('siw_community_day_8');
+	$community_days[]= get_option('siw_community_day_9');
 	
 	asort( $community_days );
 	$today = date("Y-m-d");
