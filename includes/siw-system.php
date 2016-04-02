@@ -158,8 +158,6 @@ add_action('wp_head','siw_dns_prefetch', 0);
 function siw_dns_prefetch(){
 	echo '
 	<meta http-equiv="x-dns-prefetch-control" content="on">
-	<link rel="dns-prefetch" href="//rum-static.pingdom.net"/>
-	<link rel="dns-prefetch" href="//rum-collector.pingdom.net"/>
 	<link rel="dns-prefetch" href="//www.google-analytics.com"/>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com"/>
 	<link rel="dns-prefetch" href="//fonts.gstatic.com"/>
