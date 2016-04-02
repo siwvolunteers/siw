@@ -69,9 +69,9 @@ function siw_remove_plugin_metaboxes(){
 
 add_action( 'admin_notices', 'siw_admin_notice_show_site_url' );
 function siw_admin_notice_show_site_url() {
-   echo ' <div class="updated">
-                 <h1>Je bent ingelogd op: '. site_url('', '' ) . '</h1>
-          </div>';
+	echo ' <div class="updated">
+		<h1>Je bent ingelogd op: '. site_url('', '' ) . '</h1>
+	</div>';
 }
 
 //woothemes update nag verwijderen
@@ -79,8 +79,8 @@ remove_action( 'admin_notices', 'woothemes_updater_notice' );
 
 
 //footer van admin
-add_filter('admin_footer_text', 'siw_change_admin_footer');
-function siw_change_admin_footer () { 
+add_filter('admin_footer_text', 'siw_admin_footer_text');
+function siw_admin_footer_text() { 
 	echo '&copy;' . date("Y") . ' SIW Internationale Vrijwilligersprojecten'; 
 } 
 

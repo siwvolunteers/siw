@@ -165,10 +165,10 @@ function siw_wc_is_teenage_project( $minimum_age, $maximum_age, $project_type ){
 
 
 function siw_wc_project_languages( $languages ){
-	$languageCodeArray = explode(",", $languages );
+	$language_codes = explode(",", $languages );
 	$project_languages = siw_get_array('project_languages');
 	$languages = '';
-	foreach ( $languageCodeArray as $code ) {
+	foreach ( $language_codes as $code ) {
 		$languages .= $project_languages[strtoupper( $code )] . "|";
 	}
 	return $languages;

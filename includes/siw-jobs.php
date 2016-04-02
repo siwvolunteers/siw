@@ -12,7 +12,7 @@ function siw_cpt_vacatures() {
 		'name'                => _x( 'Vacatures', 'Post Type General Name', 'siw' ),
 		'singular_name'       => _x( 'Vacature', 'Post Type Singular Name', 'siw' ),
 		'menu_name'           => __( 'Vacatures', 'siw' ),
-		'name_admin_bar'      => __( 'Vacatures', 'siw' ),
+		'name_admin_bar'      => __( 'Vacature', 'siw' ),
 		'parent_item_colon'   => __( 'Parent Item:', 'siw' ),
 		'all_items'           => __( 'Alle vacatures', 'siw' ),
 		'add_new_item'        => __( 'Vacature toevoegen', 'siw' ),
