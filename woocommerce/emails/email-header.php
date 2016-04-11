@@ -35,7 +35,7 @@ $site_url = site_url('', 'http' );
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td width="10%">&nbsp;</td>
-										<td width="20%"><a href="<?php echo $site_url; ?>/" target="_blank"><img src="<?php echo $site_url; ?>/wp-content/themes/siw/assets/images/mail/logo.png" width="144" height="76" border="0" alt="logo" title="Bezoek onze website"/></a></td>
+										<td width="20%"><a href="<?php echo $site_url; ?>/" target="_blank"><img src="<?php echo $site_url; ?>/wp-content/themes/siw/assets/images/mail/logo_transparant.png" width="144" height="76" border="0" alt="logo" title="Bezoek onze website"/></a></td>
 										<td width="60%">
 											<table width="100%" border="0" cellspacing="0" cellpadding="0">
 												<tr>
