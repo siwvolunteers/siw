@@ -147,3 +147,9 @@ function siw_shortcode_general_information( $args ){
 	$information = siw_get_general_information( $type );
 	return $information;
 }
+
+/*break*/
+function siw_shortcode_br() {
+	return '<br>';
+}
+add_shortcode( 'br', 'siw_shortcode_br' );

@@ -68,6 +68,15 @@ function siw_get_parent_page( $type ){
 }
 
 //formulieren
+function siw_get_vfb_field_id( $type ){
+	switch ($type) {
+		case "community_day_datums":
+		$field_id = get_option('siw_community_day_vfb_dates_field');
+		return $field_id;
+	}
+}
+
+
 function siw_get_vfb_form_id( $type ){
     switch ($type) {
         case  "community_day":
@@ -145,6 +154,9 @@ function siw_get_next_community_day(){
 	$community_days[]= get_option('siw_community_day_4');
 	$community_days[]= get_option('siw_community_day_5');
 	$community_days[]= get_option('siw_community_day_6');
+	$community_days[]= get_option('siw_community_day_7');
+	$community_days[]= get_option('siw_community_day_8');
+	$community_days[]= get_option('siw_community_day_9');
 	
 	asort( $community_days );
 	$today = date("Y-m-d");
@@ -583,6 +595,11 @@ function siw_get_array( $array ){
 					'slug'		=> 'armenie',
 					'name'  	=> 'Armenië' ,
 					'continent'	=> 'europa',
+				); 			
+				$project_countries['AUT'] = array(
+					'slug'		=> 'oostenrijk',
+					'name'  	=> 'Oostenrijk' ,
+					'continent'	=> 'europa',
 				); 				
 				$project_countries['BDI'] = array(
 					'slug'		=> 'burundi',
@@ -613,6 +630,11 @@ function siw_get_array( $array ){
 					'slug'		=> 'china',
 					'name'  	=> 'China' ,
 					'continent'	=> 'azie',
+				); 
+				$project_countries['CRI'] = array(
+					'slug'		=> 'costa-rica',
+					'name'  	=> 'Costa Rica' ,
+					'continent'	=> 'latijns-amerika',
 				); 				
 				$project_countries['CZE'] = array(
 					'slug'		=> 'tsjechie',

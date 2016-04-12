@@ -4,7 +4,7 @@ Theme URI: http://www.siw.nl
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 1.6
+Version: 1.7
 GitHub Theme URI: https://github.com/siwvolunteers/siw
 */
 
@@ -126,6 +126,14 @@ a::after, .kad-post-navigation .kad-previous-link a span::before, .kad-post-navi
     content: none !important;
 }	
 
+
+/*blockquote*/
+blockquote{
+	font-size:14px;
+}
+blockquote footer{
+	font-size:100%;
+}
 
 /*styling voor home-carousel*/
 .kad-slider-btn{

@@ -536,6 +536,10 @@ function siw_settings_community_day_init(){
 	register_setting( 'siw_community_day', 'siw_community_day_4', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_5', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_6', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_7', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_8', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_9', 'sanitize_text_field' );
+	register_setting( 'siw_community_day', 'siw_community_day_vfb_dates_field', 'absint' );
 	
 	//secties
 	add_settings_section(
@@ -544,6 +548,12 @@ function siw_settings_community_day_init(){
 		'siw_settings_community_day_header', 
 		'siw_community_day'
 	);
+	add_settings_section(
+		'siw_community_day_vfb_fields', 
+		__( 'Formuliervragen', 'siw' ), 
+		'__return_false', 
+		'siw_community_day'
+	);	
 	add_settings_field( 
 		'siw_community_day_1', 
 		__( 'Community day 1', 'siw' ), 
@@ -591,6 +601,38 @@ function siw_settings_community_day_init(){
 		'siw_community_day',
 		'siw_community_day', 
 		'siw_community_day_6' 
+	);
+	add_settings_field( 
+		'siw_community_day_7', 
+		__( 'Community day 7', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_7' 
+	);
+	add_settings_field( 
+		'siw_community_day_8', 
+		__( 'Community day 8', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_8' 
+	);
+	add_settings_field( 
+		'siw_community_day_9', 
+		__( 'Community day 9', 'siw' ), 
+		'siw_settings_show_date_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_9' 
+	);
+	add_settings_field( 
+		'siw_community_day_vfb_dates_field', 
+		__( 'Datums', 'siw' ), 
+		'siw_settings_show_vfb_field', 
+		'siw_community_day',
+		'siw_community_day_vfb_fields', 
+		'siw_community_day_vfb_dates_field' 
 	);
 }
 
@@ -759,6 +801,32 @@ function siw_settings_show_cf7_form_select( $option ) {
 	}	
 }
 
+function siw_settings_show_vfb_field( $option ){
+
+	$form_id = siw_get_vfb_form_id('community_day');
+
+	global $wpdb;
+	if (!isset( $wpdb->vfbp_fields )) {
+		$wpdb->vfbp_fields = $wpdb->prefix . 'vfbp_fields';
+	}
+	
+	$query = "SELECT $wpdb->vfbp_fields.id, $wpdb->vfbp_fields.data FROM $wpdb->vfbp_fields WHERE $wpdb->vfbp_fields.form_id = %d ORDER BY $wpdb->vfbp_fields.field_order ASC";
+	$fields = $wpdb->get_results( $wpdb->prepare( $query, $form_id), ARRAY_A);
+
+	if(!empty($fields)){
+		echo '<select name="', esc_attr( $option ), '">';
+		foreach ( $fields as $field){
+			$id = $field['id'];
+			$label = maybe_unserialize( $field['data'] )['label'];
+			echo '<option value="', $id, '"', get_option( $option ) == $id ? ' selected="selected"' : '', '>', esc_html( $label ), '</option>';
+		
+		}
+		echo '</select>'; 
+	}
+
+}
+
+
 
 function siw_settings_show_page_select( $option ) {
 	$pages = get_pages(); 
@@ -862,3 +930,13 @@ function siw_update_email_template_community_day($old_value, $value ) {
 	siw_update_vfb_mail_template('community_day');
 }
 
+//cd-opties bijwerken nu update datums
+add_action( 'update_option_siw_community_day_1', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_2', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_3', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_4', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_5', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_6', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_7', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_8', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_9', 'siw_update_community_day_options', 10, 3 );

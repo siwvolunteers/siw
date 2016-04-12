@@ -165,10 +165,10 @@ function siw_wc_is_teenage_project( $minimum_age, $maximum_age, $project_type ){
 
 
 function siw_wc_project_languages( $languages ){
-	$languageCodeArray = explode(",", $languages );
+	$language_codes = explode(",", $languages );
 	$project_languages = siw_get_array('project_languages');
 	$languages = '';
-	foreach ( $languageCodeArray as $code ) {
+	foreach ( $language_codes as $code ) {
 		$languages .= $project_languages[strtoupper( $code )] . "|";
 	}
 	return $languages;
@@ -432,9 +432,17 @@ function siw_wc_set_variations_prices( $product_id ){
 	}
 }
 
-add_filter('wp_all_import_is_post_to_update', 'siw_wc_is_post_to_update', 10, 1);
-function siw_wc_is_post_to_update( $product_id ) {
+add_filter('wp_all_import_is_post_to_update', 'siw_wc_is_post_to_update', 10, 2);
+function siw_wc_is_post_to_update( $product_id, $xml ) {
 	$update = false;
+	
+	//bepalen of het de fpl-import is
+	$is_fpl = array_key_exists( 'reserved', $xml );
+	if( $is_fpl ){
+		$update = true;
+	}
+	
+	//bepalen of het project gemarkeerd is om opnieuw te importeren
 	$import_again = get_post_meta( $product_id, 'import_again', true);
 	if ( $import_again ){
 		$update = true;

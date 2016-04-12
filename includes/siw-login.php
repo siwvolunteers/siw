@@ -24,16 +24,16 @@ function siw_login_headertitle() {
 
 add_filter( 'login_message', 'siw_login_message' );
 function siw_login_message( $message ) {
-	if ( empty($message) ){
+	if ( empty( $message ) ){
 		return "<p class='message'>Welkom bij SIW. Log in om verder te gaan.</p>";
-    } else {
+	} else {
 		return $message;
-    }
+	}
 }
 
 //whitelisten ip's
 add_filter('limit_login_whitelist_ip', 'siw_login_ip_whitelist', 10, 2);
-function siw_login_ip_whitelist($allow, $ip) {
+function siw_login_ip_whitelist( $allow, $ip ) {
 	$ip_whitelist = siw_get_ip_whitelist();
 	if ( in_array( $ip, $ip_whitelist ) ){
 		$allow = true;

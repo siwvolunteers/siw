@@ -22,17 +22,17 @@
         <?php $textsize = $kt_portraittext;
         get_template_part('templates/post', 'excerpt-portraitimg');
 		?>
-		<div class="<?php echo esc_attr($textsize);?> postcontent">
+		<div class="<?php echo esc_attr( $textsize );?> postcontent">
             <header>
 			
 				<a href="<?php the_permalink() ?>" rel="bookmark" class="url">
 				<?php echo '<h2 class="entry-title" itemprop="name headline">';  the_title(); echo '</h2>'; ?>
-				<h4><?php echo $date_range, ', ',$start_time, ' - ', $end_time;?></h4>
+				<h4><?php echo esc_html( $date_range  . ', ' .  $start_time . '&nbsp;-&nbsp;' . $end_time );?></h4>
 				</a>
 
             </header>
             <div class="entry-content" itemprop="articleBody">
-			<p class="agenda-location"><?php echo $location, '<br/>',$address,'<br/>'.$postal_code, ' ',$city; ?></p>
+			<p class="agenda-location"><?php echo esc_html( $location ) . '<br/>'. esc_html( $address) . '<br/>' . esc_html( $postal_code . ' ' . $city) ; ?></p>
             <?php
 				the_excerpt();
             ?>
@@ -50,7 +50,7 @@
 				$agenda_category = join( ", ", $agenda_categories );
 			}
 			if ( $agenda_category ) {?>
-				<span class="postedinbottom"><i class="kt-icon-tag4"></i> <?php echo $agenda_category; ?></span><?php
+				<span class="postedinbottom"><i class="kt-icon-tag4"></i> <?php echo esc_html( $agenda_category ); ?></span><?php
 			}?>
 		</footer>
         </div>

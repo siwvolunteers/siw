@@ -107,10 +107,6 @@ function siw_backup_time_files(){
 }
 
 
-
-
-
-
 /*
 VFB-pro aanpassingen
 */
@@ -162,8 +158,6 @@ add_action('wp_head','siw_dns_prefetch', 0);
 function siw_dns_prefetch(){
 	echo '
 	<meta http-equiv="x-dns-prefetch-control" content="on">
-	<link rel="dns-prefetch" href="//rum-static.pingdom.net"/>
-	<link rel="dns-prefetch" href="//rum-collector.pingdom.net"/>
 	<link rel="dns-prefetch" href="//www.google-analytics.com"/>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com"/>
 	<link rel="dns-prefetch" href="//fonts.gstatic.com"/>
@@ -174,4 +168,54 @@ function siw_dns_prefetch(){
 	<link rel="dns-prefetch" href="//mts1.googleapis.com"/>
 	<link rel="dns-prefetch" href="//mts0.googleapis.com"/>
 	';
+}
+
+
+
+//cd-opties
+//add_action('init','siw_update_cd_options');
+
+function siw_update_community_day_options(){
+
+	//haal cd-datums op
+	$community_days[]= get_option('siw_community_day_1');
+	$community_days[]= get_option('siw_community_day_2');
+	$community_days[]= get_option('siw_community_day_3');
+	$community_days[]= get_option('siw_community_day_4');
+	$community_days[]= get_option('siw_community_day_5');
+	$community_days[]= get_option('siw_community_day_6');
+	$community_days[]= get_option('siw_community_day_7');
+	$community_days[]= get_option('siw_community_day_8');
+	$community_days[]= get_option('siw_community_day_9');
+	asort( $community_days );
+	
+	$today = date("Y-m-d");
+	foreach($community_days as $community_day => $community_day_date) {
+		if( $community_day_date > $today ){
+			$future_community_days[]['label']= siw_get_date_in_text($community_day_date, false);		
+		}
+	}
+
+	//zoek cd-formuliervraag
+	$field_id = siw_get_vfb_field_id('community_day_datums');
+	
+	global $wpdb;
+	if (!isset($wpdb->vfbp_fields)) {
+		$wpdb->vfbp_fields = $wpdb->prefix . 'vfbp_fields';
+	}
+	
+	$query = "SELECT $wpdb->vfbp_fields.data
+				FROM $wpdb->vfbp_fields
+				WHERE $wpdb->vfbp_fields.id = %d";
+	
+	$data = $wpdb->get_var( $wpdb->prepare( $query, $field_id));
+	$data = maybe_unserialize( $data );
+	
+	//update formuliervraag
+	$data['options'] = $future_community_days;
+	$query = "update $wpdb->vfbp_fields set $wpdb->vfbp_fields.data = %s where $wpdb->vfbp_fields.id = %d;";
+	$wpdb->query(
+		$wpdb->prepare($query, maybe_serialize( $data ), $field_id)
+	);
+	
 }
