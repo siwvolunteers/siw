@@ -115,6 +115,10 @@ function siw_get_jobs_mission_statement(){
 	return $mission;
 
 }
+function siw_get_cron_time(){
+	$cron_time = '02:00';
+	return $cron_time;
+}
 
 function siw_get_db_backup_time(){
 	$db_backup_time = '03:00';
