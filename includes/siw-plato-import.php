@@ -348,52 +348,55 @@ function siw_wc_select_project_image( $country_code, $work_codes ) {
 	$continent = siw_wc_continent_from_country( $country_code );	
 	$work_array = siw_wc_project_work( $work_codes, 'array' );
 	$work_array = array_filter( $work_array );
-	
 	$url='';
-	foreach ( $work_array as $work ){
-		$relative_directory = $continent . '/' . $work . '/'.$country;
-		$dir = $base_directory . $relative_directory;
-		if (file_exists( $dir )){
-			$files = array_diff( scandir($dir), array(".", "..", "Thumbs.db") );	
-			$files = array_filter( $files, "siw_is_file");
-			
-			if (sizeof( $files ) > 0){			
-				$random_image = array_rand($files, 1);
-				$filename = $files[ $random_image ];
-				$url = $relative_directory . '/' . $filename;
-				break;
-			}
-		}
-	}
 	
-	if ($url == ''){
+	//alleen een afbeelding zoeken als er een continent gevonden is.
+	if ( $continent ){
 		foreach ( $work_array as $work ){
-			$relative_directory = $continent.'/'.$work;
+			$relative_directory = $continent . '/' . $work . '/'.$country;
 			$dir = $base_directory . $relative_directory;
 			if (file_exists( $dir )){
-				$files = array_diff( scandir( $dir ), array(".", "..", "Thumbs.db") );
+				$files = array_diff( scandir($dir), array(".", "..", "Thumbs.db") );	
 				$files = array_filter( $files, "siw_is_file");
-			
-				if (sizeof( $files ) > 0){	
-					$random_image = array_rand( $files, 1);
+				
+				if (sizeof( $files ) > 0){			
+					$random_image = array_rand($files, 1);
 					$filename = $files[ $random_image ];
 					$url = $relative_directory . '/' . $filename;
 					break;
 				}
 			}
 		}
-	}
-	if ($url == ''){
-		$relative_directory = $continent;
-		$dir = $base_directory . $relative_directory;
-		if (file_exists( $dir )){
-			$files = array_diff( scandir( $dir ), array(".", "..", "Thumbs.db") );		
-			$files = array_filter( $files, "siw_is_file");
-			
-			if (sizeof( $files ) > 0){	
-				$random_image = array_rand( $files, 1);
-				$filename = $files[ $random_image ];
-				$url = $relative_directory . '/' . $filename;			
+		
+		if ($url == ''){
+			foreach ( $work_array as $work ){
+				$relative_directory = $continent.'/'.$work;
+				$dir = $base_directory . $relative_directory;
+				if (file_exists( $dir )){
+					$files = array_diff( scandir( $dir ), array(".", "..", "Thumbs.db") );
+					$files = array_filter( $files, "siw_is_file");
+				
+					if (sizeof( $files ) > 0){	
+						$random_image = array_rand( $files, 1);
+						$filename = $files[ $random_image ];
+						$url = $relative_directory . '/' . $filename;
+						break;
+					}
+				}
+			}
+		}
+		if ($url == ''){
+			$relative_directory = $continent;
+			$dir = $base_directory . $relative_directory;
+			if (file_exists( $dir )){
+				$files = array_diff( scandir( $dir ), array(".", "..", "Thumbs.db") );		
+				$files = array_filter( $files, "siw_is_file");
+				
+				if (sizeof( $files ) > 0){	
+					$random_image = array_rand( $files, 1);
+					$filename = $files[ $random_image ];
+					$url = $relative_directory . '/' . $filename;			
+				}
 			}
 		}
 	}
