@@ -381,9 +381,9 @@ public function __construct() {
 			echo $before_title . $title . $after_title;
 		}
 		?>
-		
+		<?php if ($siw_agenda->have_posts()):?>
 		<ul class="siw_events">
-			<?php if ($siw_agenda->have_posts()):
+		<?php	
 			while( $siw_agenda->have_posts() ): $siw_agenda->the_post();
 				$start_ts = get_post_meta( get_the_ID(), 'siw_agenda_start', true );
 				$end_ts = get_post_meta( get_the_ID(), 'siw_agenda_eind', true );
