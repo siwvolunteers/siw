@@ -1,4 +1,4 @@
-/*
+/*!
 Theme Name: SIW
 Theme URI: http://www.siw.nl
 Description: Thema voor www.siw.nl
@@ -206,11 +206,11 @@ Styling voor testimonialpagina
 	border-radius:4px;
 	padding:10px;	
 }
-.testimonial .inner .content .photo{
+.testimonial .testimonial-inner .testimonial-content .testimonial-image{
 	margin: 10px;
 }
 
-.testimonial .inner .readmore a{
+.testimonial .testimonial-inner .readmore a{
 	float:right;
 }
 
@@ -218,7 +218,7 @@ Styling voor testimonialpagina
 	.strong-content .testimonial{
 		width:45%;
 	}
-	.testimonial .inner .content{
+	.testimonial .testimonial-inner .testimonial-content{
 		display:flex;
 	}
 	
