@@ -42,7 +42,7 @@ if ( $product_cat_taxonomy !='product_cat' and $month =='' ){
  	echo '<a href="/groepsprojecten/" class="kad-btn kad-btn-primary">Bekijk alle projecten</a>';
 }
 else if( $product_cat_taxonomy !='product_cat' and $month !='' ){
-	echo '<a href="/groepsprojecten?filter_maand=' . $month_id . '/" class="kad-btn kad-btn-primary">Bekijk alle projecten in ' . $month_name . '</a>';
+	echo '<a href="/groepsprojecten/?filter_maand=' . $month_id . '" class="kad-btn kad-btn-primary">Bekijk alle projecten in ' . $month_name . '</a>';
 } 
 else if ( $product_cat_taxonomy =='product_cat' and $month !='' ){
 	echo '<a href="/groepsprojecten-in/'.$product_cat_slug.'/?filter_maand=' . $month_id . '" class="kad-btn kad-btn-primary">Bekijk alle projecten in '.$product_cat_name.' in ' . $month_name . '</a>';
