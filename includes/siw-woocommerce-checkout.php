@@ -252,7 +252,7 @@ function siw_wc_checkout_extra_information( $checkout ) {
 			'required'  => false,
 			'clear'     => true,  
 			'options'   => $language_skill
-		), $checkout->get_value( 'language1Skill' )
+		), $checkout->get_value( 'language2Skill' )
 	);		
 
 	woocommerce_form_field('language3', array(
@@ -361,7 +361,7 @@ function siw_wc_checkout_save_checkout_fields( $order_id ) {
 	}
 	if (!empty($_POST['language2'])) {
 		update_post_meta($order_id, 'language2', esc_attr($_POST['language2']));
-		update_post_meta($order_id, 'language2Skill', esc_attr($_POST['language3Skill']));
+		update_post_meta($order_id, 'language2Skill', esc_attr($_POST['language2Skill']));
 	}	
 	if (!empty($_POST['language3'])) {
 		update_post_meta($order_id, 'language3', esc_attr($_POST['language3']));
