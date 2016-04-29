@@ -820,6 +820,11 @@ function siw_get_array( $array ){
 					'name'  	=> 'Portugal' ,
 					'continent'	=> 'europa',
 				);
+				$project_countries['ROU'] = array(
+					'slug'		=> 'roemenie',
+					'name'  	=> 'Roemenië' ,
+					'continent'	=> 'europa',
+				);				
 				$project_countries['RUS'] = array(
 					'slug'		=> 'rusland',
 					'name'  	=> 'Rusland' ,
