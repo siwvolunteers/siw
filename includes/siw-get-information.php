@@ -307,6 +307,11 @@ function siw_wc_get_nr_of_days_before_start_to_hide_project(){
 	return $nr_of_days_before_start_to_hide_project;
 }
 
+function siw_wc_get_force_full_import(){
+	$force_full_import = get_option('siw_plato_force_full_import');
+	return $force_full_import;
+}
+
 function siw_get_array( $array ){
 
     switch ($array) {

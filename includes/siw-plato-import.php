@@ -450,6 +450,13 @@ function siw_wc_is_post_to_update( $product_id, $xml ) {
 	if ( $import_again ){
 		$update = true;
 	}
+	
+	//controleer optie 'Forceer volledige import'
+	$force_full_import = siw_wc_get_force_full_import();
+	if ( $force_full_import ){
+		$update = true;
+	}
+
 	return $update;
 }
 

@@ -171,6 +171,7 @@ function siw_settings_plato_init(){
 	register_setting( 'siw_plato', 'siw_plato_outgoing_placements_name', 'sanitize_text_field' );
 	register_setting( 'siw_plato', 'siw_plato_outgoing_placements_email', 'sanitize_email' );
 	register_setting( 'siw_plato', 'siw_plato_nr_of_days_before_start_to_hide_project', 'absint' );		
+	register_setting( 'siw_plato', 'siw_plato_force_full_import', 'siw_sanitize_checkbox');
 	register_setting( 'siw_plato', 'siw_plato_organization_web_key', 'sanitize_text_field' );	
 
 	//secties
@@ -217,6 +218,14 @@ function siw_settings_plato_init(){
 		'siw_plato_import', 
 		'siw_plato_nr_of_days_before_start_to_hide_project' 
 	);	
+	add_settings_field( 
+		'siw_plato_force_full_import', 
+		__( 'Forceer volledige import', 'siw' ), 
+		'siw_settings_show_checkbox_field', 
+		'siw_plato',
+		'siw_plato_import', 
+		'siw_plato_force_full_import' 
+	);		
 	add_settings_field( 
 		'siw_plato_organization_web_key', 
 		__( 'Organization key', 'siw' ), 
@@ -756,6 +765,13 @@ function siw_settings_show_date_field( $option ) {
 	<?php
 }
 
+function siw_settings_show_checkbox_field( $option ){
+	?>
+	<input type='checkbox' name='<?php echo esc_attr( $option ); ?>' <?php checked( esc_attr( get_option( $option ) ), 1 ); ?> value='1'>
+	<?php
+}	
+
+
 function siw_settings_show_ip_field( $option ){
 	?>
 	<input type='text' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' placeholder='172.16.254.1' pattern='((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$'">
@@ -908,6 +924,13 @@ function siw_settings_page(  ) {?>
 			?>
 		</form>     
     </div><?php
+}
+
+/*
+Sanitize-functies
+*/
+function siw_sanitize_checkbox( $checked ) {
+	return ( ( isset( $checked ) && true == $checked ) ? true : false );
 }
 
 
