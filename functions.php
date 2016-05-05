@@ -34,6 +34,7 @@ require_once('includes/siw-plato-export.php');
 
 /*systeemfunctionaliteit*/
 require_once('includes/siw-analytics.php');
+require_once('includes/siw-cron.php');
 require_once('includes/siw-email.php');
 require_once('includes/siw-get-information.php');
 require_once('includes/siw-system.php');

@@ -171,6 +171,7 @@ function siw_settings_plato_init(){
 	register_setting( 'siw_plato', 'siw_plato_outgoing_placements_name', 'sanitize_text_field' );
 	register_setting( 'siw_plato', 'siw_plato_outgoing_placements_email', 'sanitize_email' );
 	register_setting( 'siw_plato', 'siw_plato_nr_of_days_before_start_to_hide_project', 'absint' );		
+	register_setting( 'siw_plato', 'siw_plato_force_full_import', 'siw_sanitize_checkbox');
 	register_setting( 'siw_plato', 'siw_plato_organization_web_key', 'sanitize_text_field' );	
 
 	//secties
@@ -218,6 +219,14 @@ function siw_settings_plato_init(){
 		'siw_plato_nr_of_days_before_start_to_hide_project' 
 	);	
 	add_settings_field( 
+		'siw_plato_force_full_import', 
+		__( 'Forceer volledige import', 'siw' ), 
+		'siw_settings_show_checkbox_field', 
+		'siw_plato',
+		'siw_plato_import', 
+		'siw_plato_force_full_import' 
+	);		
+	add_settings_field( 
 		'siw_plato_organization_web_key', 
 		__( 'Organization key', 'siw' ), 
 		'siw_settings_show_text_field', 
@@ -230,6 +239,8 @@ function siw_settings_plato_init(){
 function siw_settings_tariffs_init(){
 	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_student', 'absint' );
 	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_regular', 'absint'  );
+	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_discount_second_project', 'absint');
+	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_discount_third_project', 'absint');
 	register_setting( 'siw_tariffs', 'siw_tariffs_op_maat_student', 'absint'  );
 	register_setting( 'siw_tariffs', 'siw_tariffs_op_maat_regular', 'absint'  );
 	register_setting( 'siw_tariffs', 'siw_tariffs_evs_deposit', 'absint'  );
@@ -269,6 +280,22 @@ function siw_settings_tariffs_init(){
 		'siw_tarrifs_workcamp', 
 		'siw_tariffs_workcamp_regular' 
 	);	
+	add_settings_field( 
+		'siw_tariffs_workcamp_discount_second_project', 
+		__( 'Korting 2e project', 'siw' ), 
+		'siw_settings_show_percentage_field', 
+		'siw_tariffs',
+		'siw_tarrifs_workcamp', 
+		'siw_tariffs_workcamp_discount_second_project' 
+	);		
+	add_settings_field( 
+		'siw_tariffs_workcamp_discount_third_project', 
+		__( 'Korting 3e project', 'siw' ), 
+		'siw_settings_show_percentage_field', 
+		'siw_tariffs',
+		'siw_tarrifs_workcamp', 
+		'siw_tariffs_workcamp_discount_third_project' 
+	);			
 	add_settings_field( 
 		'siw_tariffs_op_maat_student', 
 		__( 'Student', 'siw' ), 
@@ -709,7 +736,7 @@ function siw_settings_tariffs_evs_header() {
 	echo __( 'Gebruikt in shortcode [siw_evs_borg]', 'siw' );
 }
 function siw_settings_tarrifs_workcamp_header() { 
-	echo __( 'Gebruikt in PLATO-import en in shortcode [siw_inschrijfgeld_groepsproject tarief="regulier|student"]', 'siw' );
+	echo __( 'Gebruikt in PLATO-import en in shortcode [siw_inschrijfgeld_groepsproject tarief="regulier|student"] en [siw_korting_groepsproject aantal="tweede|derde"]', 'siw' );
 }
 function siw_settings_tariffs_op_maat_header() { 
 	echo __( 'Gebruikt in shortcode [siw_inschrijfgeld_op_maat tarief="regulier|student"]', 'siw' );
@@ -739,6 +766,11 @@ function siw_settings_show_amount_field( $option ){
 	<input type='number' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' min="1" max="1000">
 	<?php
 }
+function siw_settings_show_percentage_field( $option ){
+	?>
+	<input type='number' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' min="1" max="99">%
+	<?php
+}
 
 function siw_settings_show_email_field( $option ){
 	?>
@@ -755,6 +787,13 @@ function siw_settings_show_date_field( $option ) {
 	<input type='date' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>'> 
 	<?php
 }
+
+function siw_settings_show_checkbox_field( $option ){
+	?>
+	<input type='checkbox' name='<?php echo esc_attr( $option ); ?>' <?php checked( esc_attr( get_option( $option ) ), 1 ); ?> value='1'>
+	<?php
+}	
+
 
 function siw_settings_show_ip_field( $option ){
 	?>
@@ -908,6 +947,13 @@ function siw_settings_page(  ) {?>
 			?>
 		</form>     
     </div><?php
+}
+
+/*
+Sanitize-functies
+*/
+function siw_sanitize_checkbox( $checked ) {
+	return ( ( isset( $checked ) && true == $checked ) ? true : false );
 }
 
 

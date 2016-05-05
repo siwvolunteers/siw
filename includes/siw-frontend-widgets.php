@@ -69,7 +69,7 @@ class siw_contact_information extends WP_Widget {
 			<h5 class="fn org"><b><?php echo esc_html( $name );?></b></h5>
 			<p class="adr">
 				<span class="street-address"><?php echo esc_html( $address );?></span><br/>
-				<span class="postal-code"><?php echo esc_html( $postal_code );?></span>&nbsp;<span class="locality"><?php echo esc_html( $city );?><span>
+				<span class="postal-code"><?php echo esc_html( $postal_code );?></span>&nbsp;<span class="locality"><?php echo esc_html( $city );?></span>
 			</p>
 			<p class="tel fixedtel"><i class="kt-icon-phone3"></i>&nbsp;<?php echo esc_html( $phone );?></p>
 			<p><a href="mailto:<?php echo antispambot( $email );?>" class="email"><i class="kt-icon-envelop"></i>&nbsp;<?php echo antispambot( $email );?></a></p>

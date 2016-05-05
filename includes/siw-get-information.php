@@ -115,6 +115,10 @@ function siw_get_jobs_mission_statement(){
 	return $mission;
 
 }
+function siw_get_cron_time(){
+	$cron_time = '02:00';
+	return $cron_time;
+}
 
 function siw_get_db_backup_time(){
 	$db_backup_time = '03:00';
@@ -238,6 +242,17 @@ function siw_get_fee_workcamp( $tariff ){
 	}
 }
 
+function siw_get_discount_workcamp( $type ){
+	switch ( $type ){
+		case "second":
+			$discount = get_option('siw_tariffs_workcamp_discount_second_project');
+			return $discount;
+		case "third":
+			$discount = get_option('siw_tariffs_workcamp_discount_third_project');
+			return $discount;
+	}
+}
+
 function siw_get_evs_deposit(){
 	$evs_deposit = get_option('siw_tariffs_evs_deposit');
 	return $evs_deposit;
@@ -301,6 +316,11 @@ function siw_wc_get_tariff_array(){
 function siw_wc_get_nr_of_days_before_start_to_hide_project(){
 	$nr_of_days_before_start_to_hide_project = get_option('siw_plato_nr_of_days_before_start_to_hide_project');
 	return $nr_of_days_before_start_to_hide_project;
+}
+
+function siw_wc_get_force_full_import(){
+	$force_full_import = get_option('siw_plato_force_full_import');
+	return $force_full_import;
 }
 
 function siw_get_array( $array ){
@@ -816,6 +836,11 @@ function siw_get_array( $array ){
 					'name'  	=> 'Portugal' ,
 					'continent'	=> 'europa',
 				);
+				$project_countries['ROU'] = array(
+					'slug'		=> 'roemenie',
+					'name'  	=> 'Roemenië' ,
+					'continent'	=> 'europa',
+				);				
 				$project_countries['RUS'] = array(
 					'slug'		=> 'rusland',
 					'name'  	=> 'Rusland' ,

@@ -107,9 +107,11 @@ function siw_wc_email_show_application_details( $order ){
 	//talenkennis
 	$language_1 = $languages[get_post_meta( $order->id, 'language1', true )];
 	$language_1_skill = $language_skill[get_post_meta( $order->id, 'language1Skill', true )];
-	$language_2 = $languages[get_post_meta( $order->id, 'language2', true )];
+	$language_2_code = get_post_meta( $order->id, 'language2', true );
+	$language_2 = $languages[$language_2_code];
 	$language_2_skill = $language_skill[get_post_meta( $order->id, 'language2Skill', true )];	
-	$language_3 = $languages[get_post_meta( $order->id, 'language3', true )];
+	$language_3_code = get_post_meta( $order->id, 'language3', true );
+	$language_3 = $languages[$language_3_code];
 	$language_3_skill = $language_skill[get_post_meta( $order->id, 'language3Skill', true )];	
 
 	//gegevens voor PO
@@ -139,10 +141,10 @@ function siw_wc_email_show_application_details( $order ){
 	//talenkennis
 	siw_wc_generate_email_table_header_row('Talenkennis');		
 	siw_wc_generate_email_table_row( $language_1, $language_1_skill );		
-	if ( $language_2 ){
+	if ( $language_2_code != '' ){
 		siw_wc_generate_email_table_row( $language_2, $language_2_skill );	
 	}	
-	if ( $language_3 ){
+	if ( $language_3_code != '' ){
 		siw_wc_generate_email_table_row( $language_3, $language_3_skill );	
 	}	
 

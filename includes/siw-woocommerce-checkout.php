@@ -12,29 +12,13 @@ Extra functies voor woocommerce checkout
 
 
 /*
-Datepicker toevoegen
+Checkout scripts toevoegen
 */
 add_action('wp_enqueue_scripts', 'siw_wc_checkout_scripts');
 function siw_wc_checkout_scripts(){
 	if (is_checkout()){
-
-
 		wp_enqueue_script( 'siw-wc-checkout-scripts' );
 	}
-}
-
-/*
-Kortingscodeveld verbergen als er 1 is ingevuld
- */
-add_filter( 'woocommerce_coupons_enabled', 'siw_hide_coupon_field_on_checkout' );
-function siw_hide_coupon_field_on_checkout( $coupons_enabled ) {
-  
-    global $woocommerce;
-    
-    if ( ! empty( $woocommerce->cart->applied_coupons ) ) {
-        return false;
-    }
-    return $coupons_enabled;
 }
 
 //verwijderen verzendadres
@@ -86,37 +70,7 @@ function siw_wc_checkout_address_fields($fields){
 		'placeholder'   => __('dd-mm-jjjj'),
 		'type'  		=> 'text',
     );
-/*	
-	$days = siw_get_array('days');	
-	$months = siw_get_array('months');
-	$years = siw_get_array('years');
 
-	$address_fields['day'] = array(
-		'label'     	=> __('Geboortedatum<abbr class="required" title="verplicht">&nbsp*</abbr>', 'woocommerce'),
-		'required'  	=> false,
-		'class'     	=> array('form-row-day'),
-		'placeholder'	=> 'Dag',
-		'type'  		=> 'select',
-		'options'		=> $days,
-    );
-	$address_fields['month'] = array(
-		'label'     	=> __('&nbsp', 'woocommerce'),
-		'required'  	=> false,
-		'class'     	=> array('form-row-month'),
-		'placeholder'	=> 'Maand',
-		'type'  		=> 'select',
-		'options'		=> $months,
-    );		
-	$address_fields['year'] = array(
-		'label'     	=> __('&nbsp', 'woocommerce'),
-		'required'  	=> false,
-		'class'     	=> array('form-row-year'),
-		'type'  		=> 'select',
-		'placeholder'	=> 'Jaar',
-		'options'		=> $years,
-    );
-
-*/
 	//toevoegen nationaliteit
 	$address_fields['nationality'] = array(
 		'label'     => __('Nationaliteit', 'woocommerce'),
@@ -252,7 +206,7 @@ function siw_wc_checkout_extra_information( $checkout ) {
 			'required'  => false,
 			'clear'     => true,  
 			'options'   => $language_skill
-		), $checkout->get_value( 'language1Skill' )
+		), $checkout->get_value( 'language2Skill' )
 	);		
 
 	woocommerce_form_field('language3', array(
@@ -361,7 +315,7 @@ function siw_wc_checkout_save_checkout_fields( $order_id ) {
 	}
 	if (!empty($_POST['language2'])) {
 		update_post_meta($order_id, 'language2', esc_attr($_POST['language2']));
-		update_post_meta($order_id, 'language2Skill', esc_attr($_POST['language3Skill']));
+		update_post_meta($order_id, 'language2Skill', esc_attr($_POST['language2Skill']));
 	}	
 	if (!empty($_POST['language3'])) {
 		update_post_meta($order_id, 'language3', esc_attr($_POST['language3']));

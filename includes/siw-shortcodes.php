@@ -66,7 +66,20 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 			),
 		),
 	);
-	
+	$pinnacle_shortcodes['siw_korting_groepsproject'] = array(
+		'title'	=>	__('SIW: Korting groepsproject', 'siw'), 
+		'attr'	=>	array(
+			'aantal' => array(
+				'type'=>'select', 
+				'title'=>__('Aantal', 'siw'),
+				'values' => array(
+					"tweede" => __('2e','siw'),
+					"derde" => __('3e','siw'),
+
+				),
+			),
+		),
+	);	
 	return $pinnacle_shortcodes;
 }
 
@@ -131,6 +144,25 @@ function siw_shortcode_fee_workcamp( $args ){
 
 	$fee = siw_get_fee_workcamp( $tariff );
 	return $fee;
+}
+
+
+//korting 
+add_shortcode('siw_korting_groepsproject', 'siw_shortcode_discount_workcamp');
+function siw_shortcode_discount_workcamp( $args ){
+    $attributes = shortcode_atts(
+		array(
+			'aantal' => 'tweede',
+		),
+	$args);	
+	$soort = $attributes ['aantal'];
+	
+	$type = array(
+		'tweede'	=> 'second',
+		'derde'		=> 'third',
+	);
+	$discount = siw_get_discount_workcamp( $type[ $soort ] );
+	return $discount;
 }
 
 //algemene informatie
