@@ -42,7 +42,9 @@ function siw_wc_project_work( $work_codes, $format='string' ){
 	$work='';
 
 	foreach ($work_types as $work_type) {
-		$work .= $project_work[ $work_type ]."|";
+		if (array_key_exists($work_type,$project_work)){
+			$work .= $project_work[ $work_type ]."|";
+		}
 	}	
 
 	if ($format == 'array'){
