@@ -239,6 +239,8 @@ function siw_settings_plato_init(){
 function siw_settings_tariffs_init(){
 	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_student', 'absint' );
 	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_regular', 'absint'  );
+	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_discount_second_project', 'absint');
+	register_setting( 'siw_tariffs', 'siw_tariffs_workcamp_discount_third_project', 'absint');
 	register_setting( 'siw_tariffs', 'siw_tariffs_op_maat_student', 'absint'  );
 	register_setting( 'siw_tariffs', 'siw_tariffs_op_maat_regular', 'absint'  );
 	register_setting( 'siw_tariffs', 'siw_tariffs_evs_deposit', 'absint'  );
@@ -278,6 +280,22 @@ function siw_settings_tariffs_init(){
 		'siw_tarrifs_workcamp', 
 		'siw_tariffs_workcamp_regular' 
 	);	
+	add_settings_field( 
+		'siw_tariffs_workcamp_discount_second_project', 
+		__( 'Korting 2e project', 'siw' ), 
+		'siw_settings_show_percentage_field', 
+		'siw_tariffs',
+		'siw_tarrifs_workcamp', 
+		'siw_tariffs_workcamp_discount_second_project' 
+	);		
+	add_settings_field( 
+		'siw_tariffs_workcamp_discount_third_project', 
+		__( 'Korting 3e project', 'siw' ), 
+		'siw_settings_show_percentage_field', 
+		'siw_tariffs',
+		'siw_tarrifs_workcamp', 
+		'siw_tariffs_workcamp_discount_third_project' 
+	);			
 	add_settings_field( 
 		'siw_tariffs_op_maat_student', 
 		__( 'Student', 'siw' ), 
@@ -718,7 +736,7 @@ function siw_settings_tariffs_evs_header() {
 	echo __( 'Gebruikt in shortcode [siw_evs_borg]', 'siw' );
 }
 function siw_settings_tarrifs_workcamp_header() { 
-	echo __( 'Gebruikt in PLATO-import en in shortcode [siw_inschrijfgeld_groepsproject tarief="regulier|student"]', 'siw' );
+	echo __( 'Gebruikt in PLATO-import en in shortcode [siw_inschrijfgeld_groepsproject tarief="regulier|student"] en [siw_korting_groepsproject aantal="tweede|derde"]', 'siw' );
 }
 function siw_settings_tariffs_op_maat_header() { 
 	echo __( 'Gebruikt in shortcode [siw_inschrijfgeld_op_maat tarief="regulier|student"]', 'siw' );
@@ -746,6 +764,11 @@ function siw_settings_show_textarea_field( $option ) {
 function siw_settings_show_amount_field( $option ){
 	?> &euro;
 	<input type='number' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' min="1" max="1000">
+	<?php
+}
+function siw_settings_show_percentage_field( $option ){
+	?>
+	<input type='number' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' min="1" max="99">%
 	<?php
 }
 

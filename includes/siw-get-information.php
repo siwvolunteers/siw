@@ -242,6 +242,17 @@ function siw_get_fee_workcamp( $tariff ){
 	}
 }
 
+function siw_get_discount_workcamp( $type ){
+	switch ( $type ){
+		case "second":
+			$discount = get_option('siw_tariffs_workcamp_discount_second_project');
+			return $discount;
+		case "third":
+			$discount = get_option('siw_tariffs_workcamp_discount_third_project');
+			return $discount;
+	}
+}
+
 function siw_get_evs_deposit(){
 	$evs_deposit = get_option('siw_tariffs_evs_deposit');
 	return $evs_deposit;
