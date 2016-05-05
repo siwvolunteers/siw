@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -30,6 +30,12 @@ function siw_login_message( $message ) {
 		return $message;
 	}
 }
+
+add_action('login_head', 'siw_login_error');
+function siw_login_error() {
+	remove_action('login_head', 'wp_shake_js', 12);
+}
+
 
 //whitelisten ip's
 add_filter('limit_login_whitelist_ip', 'siw_login_ip_whitelist', 10, 2);
