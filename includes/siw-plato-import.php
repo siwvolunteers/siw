@@ -38,11 +38,11 @@ function siw_wc_project_duration_in_days( $startdate, $enddate ){
 
 function siw_wc_project_work( $work_codes, $format='string' ){
 	$work_types = explode(",", $work_codes);
-	$project_work=siw_get_array('project_work');
+	$project_work = siw_get_array('project_work');
 	$work='';
 
 	foreach ($work_types as $work_type) {
-		if (array_key_exists($work_type,$project_work)){
+		if (isset ( $project_work[ $work_type ])){
 			$work .= $project_work[ $work_type ]."|";
 		}
 	}	
