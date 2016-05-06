@@ -170,7 +170,17 @@ function siw_dns_prefetch(){
 	';
 }
 
-
+//auteurinfo verwijderen uit oembed
+add_filter('oembed_response_data', 'siw_oembed_response_data', 10, 1);
+function siw_oembed_response_data( $data ){
+	if ( isset ( $data['author_name'] ) ){
+		unset( $data['author_name'] );
+	}
+	if ( isset ( $data['author_url'] ) ){
+		unset( $data['author_url'] );
+	}
+	return $data;
+}
 
 //cd-opties
 //add_action('init','siw_update_cd_options');
