@@ -32,19 +32,19 @@ $cat_obj = get_term_by('slug', $product_cat_slug, 'product_cat', 'ARRAY_A');
 $product_cat_name = $cat_obj['name'];
 $product_cat_taxonomy = $cat_obj['taxonomy'];
 
-$month = get_query_var('_sft_pa_maand');
-$month_obj = get_term_by('slug', $month, 'pa_maand', 'ARRAY_A');
+$month_slug = get_query_var('_sft_pa_maand');
+$month_obj = get_term_by('slug', $month_slug, 'pa_maand', 'ARRAY_A');
 $month_id = $month_obj['term_id'];
 $month_name = strtolower( $month_obj['name']);
 
 echo '<div style="text-align:center">';		
-if ( $product_cat_taxonomy !='product_cat' and $month =='' ){
+if ( $product_cat_slug =='' and $month_slug =='' ){
  	echo '<a href="/groepsprojecten/" class="kad-btn kad-btn-primary">Bekijk alle projecten</a>';
 }
-else if( $product_cat_taxonomy !='product_cat' and $month !='' ){
+else if( $product_cat_slug =='' and $month_slug !='' ){
 	echo '<a href="/groepsprojecten/?filter_maand=' . $month_id . '" class="kad-btn kad-btn-primary">Bekijk alle projecten in ' . $month_name . '</a>';
 } 
-else if ( $product_cat_taxonomy =='product_cat' and $month !='' ){
+else if ( $product_cat_slug !='' and $month_slug !='' ){
 	echo '<a href="/groepsprojecten-in/'.$product_cat_slug.'/?filter_maand=' . $month_id . '" class="kad-btn kad-btn-primary">Bekijk alle projecten in '.$product_cat_name.' in ' . $month_name . '</a>';
 	}
 else{				
