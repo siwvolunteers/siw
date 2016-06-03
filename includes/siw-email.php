@@ -66,6 +66,7 @@ function siw_update_mailpoet_mail_template(){
 	$directory = $wp_filesystem->wp_themes_dir('siw');
 	$filename =  $directory . '/siw/assets/html/mail/mailpoet.html';
 	$template = $wp_filesystem->get_contents($filename);
+	$template = str_replace(array("\n\r", "\r", "\n"), '', $template);
 	
 	//update template
 	global $wpdb;

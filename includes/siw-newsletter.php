@@ -30,7 +30,7 @@ function siw_newsletter_subscription() {
 			
 			$user_id = WYSIJA::get( 'user', 'helper' )->addSubscriber( $data_subscriber );
 			if ( is_numeric( $user_id ) ){
-				$data = array('success' => 1, 'message' => 'Controleer de inbox- of spammap nu om je aanmelding te bevestigen.');
+				$data = array('success' => 1, 'message' => 'Je bent er bijna! Check je inbox voor de bevestigingsmail om je aanmelding voor de nieuwsbrief te bevestigen.');
 			}
 			elseif ( $user_id  ){
 				$data = array('success' => 1, 'message' => 'Je bent al ingeschreven.');
