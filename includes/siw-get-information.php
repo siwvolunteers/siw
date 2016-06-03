@@ -20,6 +20,13 @@ function siw_get_google_analytics_id(){
 	$google_analytics_id = get_option('siw_api_google_analytics_id');
 	return $google_analytics_id;
 }
+
+function siw_get_google_analytics_enable_linkid(){
+	$google_analytics_enable_linkid = get_option('siw_api_google_analytics_enable_linkid');
+	return $google_analytics_enable_linkid;
+}
+
+
 function siw_get_pingdom_rum_id(){
 	$pingdom_rum_id = get_option('siw_api_pingdom_rum_id');
 	return $pingdom_rum_id;

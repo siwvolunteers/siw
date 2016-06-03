@@ -391,6 +391,7 @@ function siw_settings_evs_init(){
 
 function siw_settings_api_init(){
 	register_setting( 'siw_api', 'siw_api_google_analytics_id', 'sanitize_text_field' );
+	register_setting( 'siw_api', 'siw_api_google_analytics_enable_linkid', 'siw_sanitize_checkbox' );
 	register_setting( 'siw_api', 'siw_api_postcode_api_key', 'sanitize_text_field' );
 	register_setting( 'siw_api', 'siw_api_pingdom_rum_id', 'sanitize_text_field' );
 	
@@ -409,6 +410,14 @@ function siw_settings_api_init(){
 		'siw_api_keys', 
 		'siw_api_google_analytics_id' 
 	);
+	add_settings_field( 
+		'siw_api_google_analytics_enable_linkid', 
+		__( 'Enhanced link attribution', 'siw' ), 
+		'siw_settings_show_checkbox_field', 
+		'siw_api',
+		'siw_api_keys', 
+		'siw_api_google_analytics_enable_linkid' 
+	);	
 	add_settings_field( 
 		'siw_api_postcode_api_key', 
 		__( 'Postcode API key', 'siw' ), 
