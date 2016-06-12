@@ -119,9 +119,6 @@ function siw_wc_hide_custom_fields() {
 Functies voor tonen order op adminscherm
 */
 
-/*Mollie refund-knop verwijderen TODO: Werkt die nog met nieuwe mollie-plugin?*/
-remove_action('woocommerce_admin_order_data_after_order_details', array( $mpm, 'show_refund_button'));
-
 //tonen adresgegevens op adminscherm
 add_filter('woocommerce_admin_billing_fields', 'siw_wc_admin_address_fields');
 
