@@ -18,6 +18,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 				'type'=>'select', 
 				'title'=>__('Type', 'siw'),
 				'values' => array(
+					"email"		=> __('E-mail','siw'),
 					"iban"		=> __('IBAN','siw'),
 					"kvk"		=> __('KvK-nummer','siw'),
 					"telefoon"	=> __('Telefoonnummer','siw'),
