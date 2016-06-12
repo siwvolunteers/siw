@@ -593,6 +593,7 @@ function siw_get_array( $array ){
 				'HEB' => 'hebreeuws',
 				'ITA' => 'italiaans',
 				'JAP' => 'japans',
+				'JPN' => 'japans',
 				'KOR' => 'koreaans',
 				'HOL' => 'nederlands',
 				'UKR' => 'oekraiens',
