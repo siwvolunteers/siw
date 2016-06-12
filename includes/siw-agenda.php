@@ -295,7 +295,7 @@ function siw_agenda_start_column_sorting( $columns ) {
 
 add_filter( 'request', 'siw_agenda_start_column_orderby' );
 function siw_agenda_start_column_orderby( $vars ) {
-    if ( (!isset( $vars['orderby'] ) && $vars['post_type'] == 'agenda' )|| ( isset( $vars['orderby'] ) && 'start' == $vars['orderby'] ) ) {
+    if ( (!isset( $vars['post_type'] ) && $vars['post_type'] == 'agenda' )|| ( isset( $vars['orderby'] ) && 'start' == $vars['orderby'] ) ) {
         $vars = array_merge( $vars, array(
             'meta_key' => 'siw_agenda_start',
             'orderby' => 'meta_value'
