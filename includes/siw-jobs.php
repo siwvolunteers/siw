@@ -112,7 +112,7 @@ function siw_vacature_deadline_column_sorting( $columns ) {
 
 add_filter( 'request', 'siw_vacature_deadline_column_orderby' );
 function siw_vacature_deadline_column_orderby( $vars ) {
-    if ( ( !isset( $vars['orderby'] ) && $vars['post_type'] == 'vacatures' ) || ( isset( $vars['orderby'] ) && 'deadline' == $vars['orderby'] ) ) {
+    if ( ( !isset( $vars['post_type'] ) && $vars['post_type'] == 'vacatures' ) || ( isset( $vars['orderby'] ) && 'deadline' == $vars['orderby'] ) ) {
         $vars = array_merge( $vars, array(
             'meta_key' => 'siw_vacature_deadline',
             'orderby' => 'meta_value'
