@@ -83,6 +83,16 @@ function siw_wc_country_name( $country_code ){
 	return $country_name;
 }
 
+/*bepalen of land toegestaan is/aangeboden wordt*/
+function siw_wc_is_country_allowed( $country_code ){
+	$allowed = 'no';
+	$project_countries = siw_get_array('project_countries');	
+	if (isset ( $project_countries[ $country_code ]['allowed'])){
+		$allowed = $project_countries[ $country_code ]['allowed'];
+	}
+	return $allowed;	
+}
+
 
 
 function siw_wc_local_fee( $local_fee_amount, $local_fee_currency ){
@@ -484,8 +494,9 @@ function siw_wc_hide_projects() {
 		$startdate = get_post_meta( $product_id, 'startdatum', true);
 		$startdate = date("Y-m-d",strtotime($startdate));
 		$freeplaces = get_post_meta( $product_id, 'freeplaces', true);
+		$allowed = get_post_meta( $product_id, 'allowed', true );
 		$manual_visibility = get_post_meta( $product_id, 'manual_visibility', true);
-		if (( $startdate <= $limit ) or ( $freeplaces == 'no' and $freeplaces != '') or ( $manual_visibility == 'hide')){
+		if (( $startdate <= $limit ) or ( 'no' == $freeplaces and '' != $freeplaces ) or ( 'hide' == $manual_visibility ) or ( 'no' == $allowed )){
 			update_post_meta( $product_id, '_visibility', 'hidden');
 			update_post_meta( $product_id, '_stock_status', 'outofstock');
 			update_post_meta( $product_id, '_featured', 'no');		
