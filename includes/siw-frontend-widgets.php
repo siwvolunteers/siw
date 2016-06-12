@@ -50,7 +50,6 @@ class siw_contact_information extends WP_Widget {
     public function widget( $args, $instance ) {
 		extract( $args );
 		$title = apply_filters( 'widget_title', $instance['title'] );
-		$list = $instance['list'];
 
 		//ophalen gegevens
 		$name = siw_get_general_information('naam');;
