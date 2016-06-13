@@ -353,7 +353,7 @@ remove_filter('woocommerce_locate_template', 'wcmultichecout_woocommerce_locate_
 add_action('wp_enqueue_scripts', 'siw_woocommerce_multistep_checkout_scripts');
 function siw_woocommerce_multistep_checkout_scripts(){
 	global $wp_scripts;
-	if ($wp_scripts->registered['wmc-wizard']){
+	if ( is_checkout() && $wp_scripts->registered['wmc-wizard']){
 		$wp_scripts->registered['wmc-wizard']->src = get_stylesheet_directory_uri() . '/assets/js/woocommerce-multistep-checkout/wizard.js';
 	}
 	if ($wp_scripts->registered['jquery-validate']){
