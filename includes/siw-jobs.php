@@ -95,30 +95,30 @@ function siw_vacature_admin_deadline_column_header($columns) {
 
 add_action('manage_vacatures_posts_custom_column', 'siw_vacature_admin_deadline_column_value', 10, 2);
 function siw_vacature_admin_deadline_column_value($column_name, $post_id) {
-    if ($column_name == 'deadline') {
-        $deadline = get_post_meta( $post_id, 'siw_vacature_deadline', true );
-        if ($deadline) {
-            echo date('j F Y', $deadline);;
-        }
-    }
+	if ( 'deadline' == $column_name) {
+		$deadline = get_post_meta( $post_id, 'siw_vacature_deadline', true );
+		if ($deadline) {
+			echo date('j F Y', $deadline);;
+		}
+	}
 }
 
 /*sorteren op deadline*/
 add_filter( 'manage_edit-vacatures_sortable_columns', 'siw_vacature_deadline_column_sorting' );
 function siw_vacature_deadline_column_sorting( $columns ) {
-  $columns['deadline'] = 'deadline';
-  return $columns;
+	$columns['deadline'] = 'deadline';
+	return $columns;
 }
 
 add_filter( 'request', 'siw_vacature_deadline_column_orderby' );
 function siw_vacature_deadline_column_orderby( $vars ) {
-    if ( ( !isset( $vars['post_type'] ) && $vars['post_type'] == 'vacatures' ) || ( isset( $vars['orderby'] ) && 'deadline' == $vars['orderby'] ) ) {
-        $vars = array_merge( $vars, array(
-            'meta_key' => 'siw_vacature_deadline',
-            'orderby' => 'meta_value'
-        ) );
-    }
-    return $vars;
+	if ( ( isset( $vars['post_type'] ) && 'vacatures' == $vars['post_type'] ) || ( isset( $vars['orderby'] ) && 'deadline' == $vars['orderby'] ) ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'siw_vacature_deadline',
+			'orderby' => 'meta_value'
+		) );
+	}
+	return $vars;
 }
 
 
@@ -270,20 +270,20 @@ function siw_jobs_metaboxes( array $meta_boxes ){
 
 	//instellingen vacature pagina
 	$meta_boxes[] = array(
-		'id'         => 'siw_vacatures_metabox',
-		'title'      => __('Vacatures grid opties', 'siw'),
-		'pages'      => array( 'page' ), 
-		'show_on' => array('key' => 'page-template', 'value' => array('template-vacatures-grid.php')),
-		'context'    => 'normal',
-		'priority'   => 'high',
-		'show_names' => true,
+		'id'		=> 'siw_vacatures_metabox',
+		'title'		=> __('Vacatures grid opties', 'siw'),
+		'pages'		=> array( 'page' ), 
+		'show_on'	=> array('key' => 'page-template', 'value' => array('template-vacatures-grid.php')),
+		'context'	=> 'normal',
+		'priority'	=> 'high',
+		'show_names'	=> true,
 		'fields' => array(
 			array(
-				'name'    => __('Kies het aantal kolommen:', 'siw'),
-				'desc'    => '',
-				'id'      => $prefix . 'columns',
-				'type'    => 'select',
-				'options' => array(
+				'name'		=> __('Kies het aantal kolommen:', 'siw'),
+				'desc'		=> '',
+				'id'		=> $prefix . 'columns',
+				'type'		=> 'select',
+				'options'	=> array(
 					array( 'name' => __('Vier kolommen', 'siw'), 'value' => '4', ),
 					array( 'name' => __('Drie kolommen', 'siw'), 'value' => '3', ),
 					array( 'name' => __('Twee kolommen', 'siw'), 'value' => '2', ),

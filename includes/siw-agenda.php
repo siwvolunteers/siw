@@ -262,7 +262,7 @@ function siw_agenda_metaboxes( array $meta_boxes ){
 
 function siw_event_show_custom_application_fields($field){
 	$application = get_post_meta( $field->object_id, 'siw_agenda_aanmelden', 1 );
-	if ( $application == 'aangepast'){
+	if ( 'aangepast' == $application ){
 		return true;
 	}
 	return false;
@@ -278,7 +278,7 @@ function siw_agenda_admin_start_column_header($columns) {
 
 add_action('manage_agenda_posts_custom_column', 'siw_agenda_admin_start_column_value', 10, 2);
 function siw_agenda_admin_start_column_value($column_name, $post_id) {
-    if ($column_name == 'start') {
+    if ( 'start' == $column_name ) {
         $start = get_post_meta( $post_id, 'siw_agenda_start', true );
         if ($start) {
             echo date('j F Y H:i', $start);;
@@ -295,7 +295,7 @@ function siw_agenda_start_column_sorting( $columns ) {
 
 add_filter( 'request', 'siw_agenda_start_column_orderby' );
 function siw_agenda_start_column_orderby( $vars ) {
-    if ( (!isset( $vars['post_type'] ) && $vars['post_type'] == 'agenda' )|| ( isset( $vars['orderby'] ) && 'start' == $vars['orderby'] ) ) {
+    if ( (isset( $vars['post_type'] ) && 'agenda' == $vars['post_type'] )|| ( isset( $vars['orderby'] ) && 'start' == $vars['orderby'] ) ) {
         $vars = array_merge( $vars, array(
             'meta_key' => 'siw_agenda_start',
             'orderby' => 'meta_value'
