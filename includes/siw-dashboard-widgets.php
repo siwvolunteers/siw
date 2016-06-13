@@ -27,7 +27,7 @@ function siw_register_evs_applications_widget() {
 		'siw_display_applications_widget',
 		'',
 		array(
-			'applications'=>siw_get_vfb_applications_per_month('evs', 5),
+			'applications' => siw_get_vfb_applications_per_month('evs', 5),
 		)			
 	);
 }
@@ -40,7 +40,7 @@ function siw_register_op_maat_applications_widget() {
 		'siw_display_applications_widget',
 		'',
 		array(
-			'applications'=>siw_get_vfb_applications_per_month('op_maat', 5),
+			'applications' => siw_get_vfb_applications_per_month('op_maat', 5),
 		)
 	);
 }
@@ -53,7 +53,7 @@ function siw_register_community_day_applications_widget() {
 		'siw_display_applications_widget',
 		'',
 		array(
-			'applications'=>siw_get_vfb_applications_per_month('community_day', 5),
+			'applications' => siw_get_vfb_applications_per_month('community_day', 5),
 		)
 	);
 }
@@ -66,20 +66,19 @@ function siw_register_woocommerce_applications_widget() {
 		'siw_display_applications_widget',
 		'',
 		array(
-			'applications'			=> siw_get_woocommerce_application_per_month(5),
+			'applications' => siw_get_woocommerce_application_per_month(5),
 		)
 	);
 }
 
 function siw_display_applications_widget( $var, $args ) {
 	$applications=$args['args']['applications'];
-	$latest_applications = $args['args']['latest_applications'];
 	$months = siw_get_array('months');
 	if (!empty($applications)){
 		
 		foreach ( $applications as $application ){
-			$application_months[] = $months[ $application[application_month] ] . ' (' . $application[application_count] . ')';
-			$application_counts[] = (integer) $application[application_count];
+			$application_months[] = $months[ $application['application_month'] ] . ' (' . $application['application_count'] . ')';
+			$application_counts[] = (integer) $application['application_count'];
 		}
 		$application_months = array_reverse( $application_months );
 		$application_counts = array_reverse( $application_counts );
