@@ -894,61 +894,61 @@ function siw_settings_page(  ) {?>
 		$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'agenda';
 		?>        
 		<h2 class="nav-tab-wrapper">
-			<a href="?page=siw_settings&tab=agenda" class="nav-tab <?php echo $active_tab == 'agenda' ? 'nav-tab-active' : ''; ?>">Agenda</a>	
-			<a href="?page=siw_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>">Algemeen</a>
-			<a href="?page=siw_settings&tab=api" class="nav-tab <?php echo $active_tab == 'api' ? 'nav-tab-active' : ''; ?>">API keys</a>
-			<a href="?page=siw_settings&tab=community_day" class="nav-tab <?php echo $active_tab == 'community_day' ? 'nav-tab-active' : ''; ?>">Community Day</a>			
-			<a href="?page=siw_settings&tab=evs" class="nav-tab <?php echo $active_tab == 'evs' ? 'nav-tab-active' : ''; ?>">EVS</a>
-			<a href="?page=siw_settings&tab=forms" class="nav-tab <?php echo $active_tab == 'forms' ? 'nav-tab-active' : ''; ?>">Formulieren</a>
-			<a href="?page=siw_settings&tab=login" class="nav-tab <?php echo $active_tab == 'login' ? 'nav-tab-active' : ''; ?>">Login</a>
-			<a href="?page=siw_settings&tab=signatures" class="nav-tab <?php echo $active_tab == 'signatures' ? 'nav-tab-active' : ''; ?>">Ondertekening</a>
-			<a href="?page=siw_settings&tab=plato" class="nav-tab <?php echo $active_tab == 'plato' ? 'nav-tab-active' : ''; ?>">PLATO</a>
-			<a href="?page=siw_settings&tab=tariffs" class="nav-tab <?php echo $active_tab == 'tariffs' ? 'nav-tab-active' : ''; ?>">Tarieven</a>
-			<a href="?page=siw_settings&tab=jobs" class="nav-tab <?php echo $active_tab == 'jobs' ? 'nav-tab-active' : ''; ?>">Vacatures</a>
+			<a href="?page=siw_settings&tab=agenda" class="nav-tab <?php echo 'agenda' == $active_tab ? 'nav-tab-active' : ''; ?>">Agenda</a>	
+			<a href="?page=siw_settings&tab=general" class="nav-tab <?php echo 'general' == $active_tab ? 'nav-tab-active' : ''; ?>">Algemeen</a>
+			<a href="?page=siw_settings&tab=api" class="nav-tab <?php echo 'api' == $active_tab ? 'nav-tab-active' : ''; ?>">API keys</a>
+			<a href="?page=siw_settings&tab=community_day" class="nav-tab <?php echo 'community_day' == $active_tab ? 'nav-tab-active' : ''; ?>">Community Day</a>			
+			<a href="?page=siw_settings&tab=evs" class="nav-tab <?php echo 'evs' == $active_tab ? 'nav-tab-active' : ''; ?>">EVS</a>
+			<a href="?page=siw_settings&tab=forms" class="nav-tab <?php echo 'forms' == $active_tab ? 'nav-tab-active' : ''; ?>">Formulieren</a>
+			<a href="?page=siw_settings&tab=login" class="nav-tab <?php echo 'login' == $active_tab ? 'nav-tab-active' : ''; ?>">Login</a>
+			<a href="?page=siw_settings&tab=signatures" class="nav-tab <?php echo 'signatures' == $active_tab ? 'nav-tab-active' : ''; ?>">Ondertekening</a>
+			<a href="?page=siw_settings&tab=plato" class="nav-tab <?php echo 'plato' == $active_tab ? 'nav-tab-active' : ''; ?>">PLATO</a>
+			<a href="?page=siw_settings&tab=tariffs" class="nav-tab <?php echo 'tariffs' == $active_tab ? 'nav-tab-active' : ''; ?>">Tarieven</a>
+			<a href="?page=siw_settings&tab=jobs" class="nav-tab <?php echo 'jobs' == $active_tab ? 'nav-tab-active' : ''; ?>">Vacatures</a>
 		</h2>        
         <form method="post" action="options.php">
 			<?php  
-			if( $active_tab == 'general' ) {
+			if( 'general' == $active_tab ) {
 				settings_fields( 'siw_general' );
 				do_settings_sections( 'siw_general' );
 			}
-			else if( $active_tab == 'signatures' ) {
+			else if( 'signatures' == $active_tab ) {
 				settings_fields( 'siw_signatures' );
 				do_settings_sections( 'siw_signatures' );
 			}
-			else if( $active_tab == 'tariffs' ) {
+			else if( 'tariffs' == $active_tab ) {
 				settings_fields( 'siw_tariffs' );
 				do_settings_sections( 'siw_tariffs' );				
 			}
-			else if( $active_tab == 'plato' ) {
+			else if( 'plato' == $active_tab ) {
 				settings_fields( 'siw_plato' );
 				do_settings_sections( 'siw_plato' );
 			}
-			else if( $active_tab == 'evs' ) {
+			else if( 'evs' == $active_tab ) {
 				settings_fields( 'siw_evs' );
 				do_settings_sections( 'siw_evs' );
 			} 
-			else if( $active_tab == 'api' ) {
+			else if( 'api' == $active_tab ) {
 				settings_fields( 'siw_api' );
 				do_settings_sections( 'siw_api' );
 			}
-			else if( $active_tab == 'jobs' ) {
+			else if( 'jobs' == $active_tab ) {
 				settings_fields( 'siw_jobs' );
 				do_settings_sections( 'siw_jobs' );
 			}
-			else if( $active_tab == 'agenda' ) {
+			else if( 'agenda' == $active_tab ) {
 				settings_fields( 'siw_agenda' );
 				do_settings_sections( 'siw_agenda' );
 			}
-			else if( $active_tab == 'forms' ) {
+			else if( 'forms' == $active_tab ) {
 				settings_fields( 'siw_forms' );
 				do_settings_sections( 'siw_forms' );
 			} 
-			else if( $active_tab == 'community_day' ) {
+			else if( 'community_day' == $active_tab ) {
 				settings_fields( 'siw_community_day' );
 				do_settings_sections( 'siw_community_day' );
 			} 	
-			else if( $active_tab == 'login' ) {
+			else if( 'login' == $active_tab ) {
 				settings_fields( 'siw_login' );
 				do_settings_sections( 'siw_login' );
 			} 			
