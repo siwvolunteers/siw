@@ -15,11 +15,11 @@ add_action('woocommerce_after_shop_loop_item_title','siw_wc_show_duration_and_pr
 
 function siw_wc_show_duration_and_project_code(){
 	global $product;
-	$duration = get_post_meta($product->id, 'projectduur', true);
-	$project_code = get_post_meta($product->id, '_sku', true);
+	$duration = get_post_meta( $product->id, 'projectduur', true);
+	$project_code = get_post_meta( $product->id, '_sku', true);
 
-	echo '<p>' . $duration . '</p><hr style="margin:5px;">';	
-	echo '<p style="margin-bottom:5px;"><small>' . $project_code . '</small></p>';
+	echo '<p>' . esc_html( $duration ) . '</p><hr style="margin:5px;">';	
+	echo '<p style="margin-bottom:5px;"><small>' . esc_html( $project_code ) . '</small></p>';
 
 }
 
@@ -46,7 +46,7 @@ function siw_wc_enquiry_tab( $tabs ){
 }
 function siw_wc_product_enquiry_form(){
 	$contact_form_id = siw_get_cf7_form_id('project');
-	echo do_shortcode('[contact-form-7 id="' . $contact_form_id . '"]');
+	echo do_shortcode('[contact-form-7 id="' . esc_attr( $contact_form_id ) . '"]');
 }
 
 //trailing slash toevoegen bij AJAX-filtering
@@ -96,8 +96,8 @@ function siw_wc_catalog_orderby( $sortby ) {
 //random volgorde toevoegen aan woocommerce shortcodes
 add_filter('woocommerce_shortcode_products_query', 'siw_wc_shortcode_add_orderby_random', 10, 2);
 
-function siw_wc_shortcode_add_orderby_random ( $args, $atts) {
-	if ($atts['orderby'] == "random") {
+function siw_wc_shortcode_add_orderby_random ( $args, $atts ) {
+	if ( 'random' == $atts['orderby'] ) {
 		$args['orderby']  = 'rand';
 		$args['order']    = '';
 		$args['meta_key'] = '';
@@ -124,21 +124,20 @@ add_filter('woocommerce_admin_billing_fields', 'siw_wc_admin_address_fields');
 
 function siw_wc_admin_address_fields( $fields ){
  
-    $email = $fields['email']; 
-    $phone = $fields['phone']; 
+	$email = $fields['email']; 
+	$phone = $fields['phone']; 
 	
 	//zelfe volgorde + extra velden als bij checkout gebruiken
 	$fields = siw_wc_checkout_address_fields($fields);
 
 	//geslacht tonen als select i.p.v. drowdown.
-    $fields['gender']['type'] = 'select';
+	$fields['gender']['type'] = 'select';
 	
-    //reassign email and phone fields
-    $fields['email'] = $email;
-    $fields['phone'] = $phone;
-    
+	//reassign email and phone fields
+	$fields['email'] = $email;
+	$fields['phone'] = $phone;
 
-    return $fields;
+	return $fields;
 }
 
 //ordergegevens in metaboxes
@@ -167,40 +166,40 @@ function siw_wc_order_meta_boxes( array $meta_boxes ){
 				'id'	=> 'language_skill'
 			),			
 			array(
-				'name'    => 'Taal 1',
-				'id'      => 'language1',
-				'type'    => 'select',
-				'options' => $languages,
+				'name'		=> 'Taal 1',
+				'id'		=> 'language1',
+				'type'		=> 'select',
+				'options'	=> $languages,
 			),		
 			array(
-				'name'    => 'Niveau taal 1',
-				'id'      => 'language1Skill',
-				'type'    => 'radio_inline',
-				'options' => $language_skill,
+				'name'		=> 'Niveau taal 1',
+				'id'		=> 'language1Skill',
+				'type'		=> 'radio_inline',
+				'options'	=> $language_skill,
 			),
 			array(
-				'name'    => 'Taal 2',
-				'id'      => 'language2',
-				'type'    => 'select',
-				'options' => $languages,
+				'name'		=> 'Taal 2',
+				'id'		=> 'language2',
+				'type'		=> 'select',
+				'options'	=> $languages,
 			),		
 			array(
-				'name'    => 'Niveau taal 2',
-				'id'      => 'language2Skill',
-				'type'    => 'radio_inline',
-				'options' => $language_skill,
+				'name'		=> 'Niveau taal 2',
+				'id'		=> 'language2Skill',
+				'type'		=> 'radio_inline',
+				'options'	=> $language_skill,
 			),
 			array(
-				'name'    => 'Taal 3',
-				'id'      => 'language3',
-				'type'    => 'select',
-				'options' => $languages,
+				'name'		=> 'Taal 3',
+				'id'		=> 'language3',
+				'type'		=> 'select',
+				'options'	=> $languages,
 			),		
 			array(
-				'name'    => 'Niveau taal 3',
-				'id'      => 'language3Skill',
-				'type'    => 'radio_inline',
-				'options' => $language_skill,
+				'name'		=> 'Niveau taal 3',
+				'id'		=> 'language3Skill',
+				'type'		=> 'radio_inline',
+				'options'	=> $language_skill,
 			),				
 			array(
 				'name'	=> 'Gegevens voor PO',
@@ -256,30 +255,30 @@ add_filter( 'cmb_meta_boxes', 'siw_wc_project_metaboxes' );
 function siw_wc_project_metaboxes( array $meta_boxes ){
 
 	$visibility_options = array(
-		'' 		=> 'Automatisch',
+		''		=> 'Automatisch',
 		'hide'	=> 'Verbergen',
 		//'show'	=> 'Tonen',
 	);
 
 	$meta_boxes[] = array(
-		'id'         => 'woocommerce_project_meta',
-		'title'      => 'Extra opties',
-		'pages'      => array( 'product' ), 
-		'context'    => 'normal',
-		'priority'   => 'default',
-		'show_names' => true,
-		'fields' => array(
+		'id'			=> 'woocommerce_project_meta',
+		'title'			=> 'Extra opties',
+		'pages'			=> array( 'product' ), 
+		'context'		=> 'normal',
+		'priority'		=> 'default',
+		'show_names'	=> true,
+		'fields'		=> array(
 			
 			array(
-				'name'    => 'Zichtbaarheid',
-				'id'      => 'manual_visibility',
-				'type'    => 'select',
-				'options' => $visibility_options,
+				'name'		=> 'Zichtbaarheid',
+				'id'		=> 'manual_visibility',
+				'type'		=> 'select',
+				'options'	=> $visibility_options,
 			),
 			array(
-				'name'    => 'Opnieuw importeren',
-				'id'      => 'import_again',
-				'type'    => 'checkbox',
+				'name'		=> 'Opnieuw importeren',
+				'id'		=> 'import_again',
+				'type'		=> 'checkbox',
 			),	
 		),
 	);
