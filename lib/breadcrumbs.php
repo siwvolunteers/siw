@@ -46,7 +46,7 @@ function kadence_breadcrumbs() {
   global $post, $wp_query, $pinnacle;
   
   $delimiter = '/'; // delimiter between crumbs
-  if(!empty($pinnacle['home_breadcrumb_text'])) {$home = $pinnacle['home_breadcrumb_text'];} else {$home = 'Home';}
+  if(!empty($pinnacle['home_breadcrumb_text'])) {$home = $pinnacle['home_breadcrumb_text'];} else {$home = __('Home', 'pinnacle');}
   $showCurrent = 1; // 1 - show current post/page title in breadcrumbs, 0 - don't show
   $before = '<span class="kad-breadcurrent">'; // tag before the current crumb
   $after = '</span>'; // tag after the current crumb
