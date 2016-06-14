@@ -71,7 +71,8 @@ class siw_mailpoet_subscription extends WP_Widget {
  
 	public function form( $instance ) {
 		$widget_defaults = array(
-			'title'			=>	'Blijf op de hoogte',
+			'title'	=> 'Blijf op de hoogte',
+			'list'	=> '',
 		);
 		$instance  = wp_parse_args( (array) $instance, $widget_defaults );
 		
