@@ -2,11 +2,11 @@
 
 jQuery(document).ready(function ($) {
 
-    jQuery('form.checkout').show(); 
+	jQuery('form.checkout').show(); 
 	jQuery("form.checkout .validate-required .input-radio").attr("required", "required");
 	jQuery("form.checkout .validate-required select").attr("required", "required");
-    jQuery("form.checkout .validate-required .input-text").attr("required", "required");
-    jQuery("form.checkout .validate-email .input-text").addClass("email");
+	jQuery("form.checkout .validate-required .input-text").attr("required", "required");
+	jQuery("form.checkout .validate-email .input-text").addClass("email");
 	jQuery("form.checkout .validate-required #billing_dob").addClass("dateNL");
 	jQuery("form.checkout .validate-required #billing_postcode").addClass("postalcodeNL");
 
@@ -97,6 +97,12 @@ jQuery(document).ready(function ($) {
         });
     }
 
+    
+    jQuery.extend(jQuery.validator.messages, {
+        required: wmc_wizard.error_msg,
+        email: wmc_wizard.email_error_msg
+    });
+
 
     jQuery(".actions > ul li:last a").addClass("finish-btn");
 
@@ -104,6 +110,7 @@ jQuery(document).ready(function ($) {
 
         if (jQuery('input[name="legal"]').length) {
             if (jQuery('input[name="legal"]').is(":checked")) {
+                jQuery('input[name="legal"]').parent().removeAttr("style");
                 jQuery("#place_order").trigger("click");
                 return true
             } else {
@@ -114,6 +121,7 @@ jQuery(document).ready(function ($) {
         } else {
             if (jQuery('input[name="terms"]').length) {
                 if (jQuery('input[name="terms"]').is(":checked")) {
+                    jQuery('input[name="terms"]').parent().removeAttr("style");
                     jQuery("#place_order").trigger("click");
                     return true
                 } else {
@@ -128,11 +136,6 @@ jQuery(document).ready(function ($) {
     });
 
 
-    //customize form error message
-    jQuery.extend(jQuery.validator.messages, {
-        required: wmc_wizard.error_msg,
-        email: wmc_wizard.email_error_msg
-    });
 
     //add class based on step
     var total_steps = jQuery("#wizard ul[role='tablist'] > li").length;
@@ -151,38 +154,40 @@ jQuery(document).ready(function ($) {
         $("#wizard .steps ul li").css("width", step_width + "%");
     }
 
-/*
-    jQuery('body').on('change', '#billing_country', function ()
-    {
-        if ($("#billing_country").is(":visible")) {
-            checkPostCode('billing');
-        }
-    });
+    if (wmc_wizard.zipcode_validation == 'true') {
+        jQuery('body').on('change', '#billing_country', function ()
+        {
+            if ($("#billing_country").is(":visible")) {
+                checkPostCode('billing');
+            }
+        });
 
-    jQuery('body').on('blur', '#billing_postcode', function ()
-    {
-        if ($("#billing_postcode").is(":visible")) {
-            checkPostCode('billing');
-        }
-    });
+        jQuery('body').on('blur', '#billing_postcode', function ()
+        {
+            if ($("#billing_postcode").is(":visible")) {
+                checkPostCode('billing');
+            }
+        });
 
 
-    jQuery('body').on('change', '#shipping_country', function ()
-    {
-        if ($("#shipping_country").is(":visible")) {
-            checkPostCode('shipping');
-        }
+        jQuery('body').on('change', '#shipping_country', function ()
+        {
+            if ($("#shipping_country").is(":visible")) {
+                checkPostCode('shipping');
+            }
 
-    });
+        });
 
-    jQuery('body').on('blur', '#shipping_postcode', function ()
-    {
-        if ($("#shipping_postcode").is(":visible")) {
-            checkPostCode('shipping');
-        }
+        jQuery('body').on('blur', '#shipping_postcode', function ()
+        {
+            if ($("#shipping_postcode").is(":visible")) {
+                checkPostCode('shipping');
+            }
 
-    });
-*/
+        });
+    }
+
+
 
     function checkPostCode(type)
     {
@@ -192,25 +197,22 @@ jQuery(document).ready(function ($) {
 
         if (result) {
 
-
             var data = {
                 action: 'valid_post_code',
                 country: jQuery("#" + type + "_country").val(),
                 postCode: jQuery("#" + type + "_postcode").val()
             };
 
-            $(document).ajaxStart($.blockUI(
-                    {
-                        message: null,
-                        overlayCSS:
-                                {
-                                    background: "#fff url('" + wmc_wizard.loading_img + "') no-repeat center center",
-                                    opacity: 0.6
-                                }
-                    }
-            )).ajaxStop($.unblockUI);
+            $("#wizard").block({
+                message: null,
+                overlayCSS: {
+                    background: '#fff',
+                    opacity: 0.6
+                }
+            });
 
             jQuery.post(wmc_wizard.ajaxurl, data, function (response) {
+                $("#wizard").unblock();
                 if (response == false) {
                     jQuery("#" + type + "_postcode").parent().removeClass("woocommerce-validated").addClass("woocommerce-invalid woocommerce-invalid-required-field");
                     return false;
@@ -228,14 +230,11 @@ jQuery(document).ready(function ($) {
     function validate_checkoutform() {
         //       
         var form_valid = false;
-        /// jQuery("#wizard").validate().settings.ignore = ":disabled,:hidden";
-
-        if (jQuery("form.checkout").valid()) {
+        //jQuery("#wizard").validate().settings.ignore = ":disabled,:hidden";
+    
+        if(jQuery('form.checkout').valid()){
             form_valid = true;
         }
-
-
-
 
         if (wmc_wizard.isAuthorizedUser == false) {
             if ($("#shipping_state_field").is(":visible")) {
@@ -308,10 +307,11 @@ jQuery(document).ready(function ($) {
         }
 
 
+        if (wmc_wizard.zipcode_validation == 'true') {
+            if (jQuery("#billing_postcode").closest("#billing_postcode_field").hasClass("woocommerce-invalid")) {
 
-        if (jQuery("#billing_postcode").closest("#billing_postcode_field").hasClass("woocommerce-invalid")) {
-
-            form_valid = false;
+                form_valid = false;
+            }
         }
 
         //validating billing phone
@@ -329,14 +329,14 @@ jQuery(document).ready(function ($) {
             }
         }
 
-
-        if (jQuery("#ship-to-different-address-checkbox").closest("h1.title").hasClass("current")) {
-            if (jQuery("#ship-to-different-address-checkbox").is(":checked")) {
-                if (jQuery("#shipping_postcode").closest("#shipping_postcode_field").hasClass("woocommerce-invalid")) {
+        if (wmc_wizard.zipcode_validation == 'true') {
+            if (jQuery("#ship-to-different-address-checkbox").is(":checked") && jQuery("#ship-to-different-address-checkbox").is(":visible")) {
+                if (!jQuery("#shipping_postcode").closest("#shipping_postcode_field").hasClass("woocommerce-validated")) {
 
                     form_valid = false;
                 }
             }
+
         }
 
         return form_valid;
@@ -405,16 +405,13 @@ jQuery(document).ready(function ($) {
                 rememberme = true;
             }
 
-            $(document).ajaxStart($.blockUI(
-                    {
-                        message: null,
-                        overlayCSS:
-                                {
-                                    background: "#fff url('" + wmc_wizard.loading_img + "') no-repeat center center",
-                                    opacity: 0.6
-                                }
-                    }
-            )).ajaxStop($.unblockUI);
+            $("#wizard").block({
+                message: null,
+                overlayCSS: {
+                    background: '#fff',
+                    opacity: 0.6
+                }
+            });
 
             var data = {
                 action: 'wmc_check_user_login',
@@ -425,6 +422,7 @@ jQuery(document).ready(function ($) {
             };
 
             jQuery.post(wmc_wizard.ajaxurl, data, function (response) {
+                $("#wizard").unblock();
                 if (response == 'successfully') {
                     location.reload();
                 } else {
@@ -483,11 +481,13 @@ jQuery(document).ready(function ($) {
     }
 
     /**Disable form submission through Keyboard enter **/
-    $("form.checkout").on('submit', function (e) {
+    $("form.checkout").on('submit', function (keyCode) {
 
         if (keyCode === 13) {
             e.preventDefault();
             return false;
         }
     });
+
+
 });
