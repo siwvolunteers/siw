@@ -10,41 +10,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 function siw_cpt_agenda() {
 
 	$labels = array(
-		'name'                => _x( 'Agenda', 'Post Type General Name', 'siw' ),
-		'singular_name'       => _x( 'Agenda', 'Post Type Singular Name', 'siw' ),
-		'menu_name'           => __( 'Agenda', 'siw' ),
-		'name_admin_bar'      => __( 'Agenda', 'siw' ),
-		'parent_item_colon'   => __( 'Parent Item:', 'siw' ),
-		'all_items'           => __( 'Alle evenementen', 'siw' ),
-		'add_new_item'        => __( 'Evenement toevoegen', 'siw' ),
-		'add_new'             => __( 'Toevoegen', 'siw' ),
-		'new_item'            => __( 'Nieuw evenement', 'siw' ),
-		'edit_item'           => __( 'Bewerk evenement', 'siw' ),
-		'update_item'         => __( 'Update evenement', 'siw' ),
-		'view_item'           => __( 'Bekijk evenement', 'siw' ),
-		'search_items'        => __( 'Zoek evenement', 'siw' ),
-		'not_found'           => __( 'Niet gevonden', 'siw' ),
-		'not_found_in_trash'  => __( 'Niet gevonden in de prullenbak', 'siw' ),
+		'name'					=> _x( 'Agenda', 'Post Type General Name', 'siw' ),
+		'singular_name'			=> _x( 'Agenda', 'Post Type Singular Name', 'siw' ),
+		'menu_name'				=> __( 'Agenda', 'siw' ),
+		'name_admin_bar'		=> __( 'Agenda', 'siw' ),
+		'parent_item_colon'		=> __( 'Parent Item:', 'siw' ),
+		'all_items'				=> __( 'Alle evenementen', 'siw' ),
+		'add_new_item'			=> __( 'Evenement toevoegen', 'siw' ),
+		'add_new'				=> __( 'Toevoegen', 'siw' ),
+		'new_item'				=> __( 'Nieuw evenement', 'siw' ),
+		'edit_item'				=> __( 'Bewerk evenement', 'siw' ),
+		'update_item'			=> __( 'Update evenement', 'siw' ),
+		'view_item'				=> __( 'Bekijk evenement', 'siw' ),
+		'search_items'			=> __( 'Zoek evenement', 'siw' ),
+		'not_found'				=> __( 'Niet gevonden', 'siw' ),
+		'not_found_in_trash'	=> __( 'Niet gevonden in de prullenbak', 'siw' ),
 	);
 	$args = array(
-		'label'               => __( 'Evenement', 'siw' ),
-		'description'         => __( 'Evenement', 'siw' ),
-		'labels'              => $labels,
-		'supports'            => array( 'title', 'excerpt', 'thumbnail', 'revisions', ),
-		'taxonomies'          => array( 'agenda_type' ),
-		'hierarchical'        => false,
-		'public'              => true,
-		'show_ui'             => true,
-		'show_in_menu'        => true,
-		'menu_position'       => 5,
-		'menu_icon'           => 'dashicons-calendar-alt',
-		'show_in_admin_bar'   => true,
-		'show_in_nav_menus'   => true,
-		'can_export'          => true,
-		'has_archive'         => false,		
-		'exclude_from_search' => false,
-		'publicly_queryable'  => true,
-		'capability_type'     => 'post',
+		'label'					=> __( 'Evenement', 'siw' ),
+		'description'			=> __( 'Evenement', 'siw' ),
+		'labels'				=> $labels,
+		'supports'				=> array( 'title', 'excerpt', 'thumbnail', 'revisions', ),
+		'taxonomies'			=> array( 'agenda_type' ),
+		'hierarchical'			=> false,
+		'public'				=> true,
+		'show_ui'				=> true,
+		'show_in_menu'			=> true,
+		'menu_position'			=> 5,
+		'menu_icon'				=> 'dashicons-calendar-alt',
+		'show_in_admin_bar'		=> true,
+		'show_in_nav_menus'		=> true,
+		'can_export'			=> true,
+		'has_archive'			=> false,
+		'exclude_from_search'	=> false,
+		'publicly_queryable'	=> true,
+		'capability_type'		=> 'post',
 	);
 	register_post_type( 'agenda', $args );
 
@@ -55,32 +55,32 @@ add_action( 'init', 'siw_cpt_agenda', 0 );
 function siw_taxonomy_agenda_type() {
 
 	$labels = array(
-		'name'                       => _x( 'Soort evenement', 'Taxonomy General Name', 'siw' ),
-		'singular_name'              => _x( 'Taxonomy', 'Taxonomy Singular Name', 'siw' ),
-		'menu_name'                  => __( 'Soort evement', 'siw' ),
-		'all_items'                  => __( 'All Items', 'siw' ),
-		'parent_item'                => __( 'Parent Item', 'siw' ),
-		'parent_item_colon'          => __( 'Parent Item:', 'siw' ),
-		'new_item_name'              => __( 'New Item Name', 'siw' ),
-		'add_new_item'               => __( 'Add New Item', 'siw' ),
-		'edit_item'                  => __( 'Edit Item', 'siw' ),
-		'update_item'                => __( 'Update Item', 'siw' ),
-		'view_item'                  => __( 'View Item', 'siw' ),
-		'separate_items_with_commas' => __( 'Separate items with commas', 'siw' ),
-		'add_or_remove_items'        => __( 'Add or remove items', 'siw' ),
-		'choose_from_most_used'      => __( 'Choose from the most used', 'siw' ),
-		'popular_items'              => __( 'Popular Items', 'siw' ),
-		'search_items'               => __( 'Search Items', 'siw' ),
-		'not_found'                  => __( 'Not Found', 'siw' ),
+		'name'							=> _x( 'Soort evenement', 'Taxonomy General Name', 'siw' ),
+		'singular_name'					=> _x( 'Taxonomy', 'Taxonomy Singular Name', 'siw' ),
+		'menu_name'						=> __( 'Soort evement', 'siw' ),
+		'all_items'						=> __( 'All Items', 'siw' ),
+		'parent_item'					=> __( 'Parent Item', 'siw' ),
+		'parent_item_colon'				=> __( 'Parent Item:', 'siw' ),
+		'new_item_name'					=> __( 'New Item Name', 'siw' ),
+		'add_new_item'					=> __( 'Add New Item', 'siw' ),
+		'edit_item'						=> __( 'Edit Item', 'siw' ),
+		'update_item'					=> __( 'Update Item', 'siw' ),
+		'view_item'						=> __( 'View Item', 'siw' ),
+		'separate_items_with_commas'	=> __( 'Separate items with commas', 'siw' ),
+		'add_or_remove_items'			=> __( 'Add or remove items', 'siw' ),
+		'choose_from_most_used'			=> __( 'Choose from the most used', 'siw' ),
+		'popular_items'					=> __( 'Popular Items', 'siw' ),
+		'search_items'					=> __( 'Search Items', 'siw' ),
+		'not_found'						=> __( 'Not Found', 'siw' ),
 	);
 	$args = array(
-		'labels'                     => $labels,
-		'hierarchical'               => true,
-		'public'                     => true,
-		'show_ui'                    => true,
-		'show_admin_column'          => true,
-		'show_in_nav_menus'          => true,
-        'query_var' => true,
+		'labels'						=> $labels,
+		'hierarchical'					=> true,
+		'public'						=> true,
+		'show_ui'						=> true,
+		'show_admin_column'				=> true,
+		'show_in_nav_menus'				=> true,
+        'query_var'						=> true,
 	);
 	register_taxonomy( 'soort_evenement', array( 'agenda' ), $args );
 
@@ -96,163 +96,163 @@ add_filter( 'cmb_meta_boxes', 'siw_agenda_metaboxes' );
 function siw_agenda_metaboxes( array $meta_boxes ){
 	$prefix = 'siw_agenda_';
 	$meta_boxes[] = array(
-		'id'         => 'agenda_meta',
-		'title'      => 'Agenda',
-		'pages'      => array( 'agenda' ), 
-		'context'    => 'normal',
-		'priority'   => 'default',
-		'show_names' => true,
-		'fields' => array(
+		'id'			=> 'agenda_meta',
+		'title'			=> 'Agenda',
+		'pages'			=> array( 'agenda' ), 
+		'context'		=> 'normal',
+		'priority'		=> 'default',
+		'show_names'	=> true,
+		'fields'		=> array(
 			array(
-				'name'    => 'Beschrijving? *',
-				'id'      => $prefix . 'beschrijving',
-				'type'    => 'wysiwyg',
-				'options' => array(
-					'wpautop' => true, 
-					'media_buttons' => false, 
-					'teeny' => true, 
+				'name'			=> 'Beschrijving? *',
+				'id'			=> $prefix . 'beschrijving',
+				'type'			=> 'wysiwyg',
+				'options'		=> array(
+					'wpautop'		=> true, 
+					'media_buttons'	=> false, 
+					'teeny'			=> true, 
 				),
-			    'attributes'  => array(
-					'required'    => 'required',
+			    'attributes'	=> array(
+					'required'		=> 'required',
 				),
 			),		
 			array(
-				'name' => 'Tijden',
-				'type' => 'title',
-				'id' => $prefix . 'tijden_title'
+				'name'			=> 'Tijden',
+				'type'			=> 'title',
+				'id'			=> $prefix . 'tijden_title'
 			),
 			array(
-				'name'    => 'Start *',
-				'id'      => $prefix . 'start',
-				'type' => 'text_datetime_timestamp',
-				'date_format' => 'Y-m-d',
-				'time_format' => 'H:i',
-			    'attributes'  => array(
-					'required'    => 'required',
+				'name'			=> 'Start *',
+				'id'			=> $prefix . 'start',
+				'type'			=> 'text_datetime_timestamp',
+				'date_format'	=> 'Y-m-d',
+				'time_format'	=> 'H:i',
+			    'attributes'	=> array(
+					'required'		=> 'required',
 				),
 			),
 			array(
-				'name'    => 'Eind *',
-				'id'      => $prefix . 'eind',
-				'type' => 'text_datetime_timestamp',
-				'date_format' => 'Y-m-d',
-				'time_format' => 'H:i',
-			    'attributes'  => array(
-					'required'    => 'required',
+				'name'			=> 'Eind *',
+				'id'			=> $prefix . 'eind',
+				'type'			=> 'text_datetime_timestamp',
+				'date_format'	=> 'Y-m-d',
+				'time_format'	=> 'H:i',
+			    'attributes'	=> array(
+					'required'		=> 'required',
 				),
 			),
 			array(
-				'name' => 'Locatie',
-				'type' => 'title',
-				'id' => $prefix . 'locatie_title'
+				'name'			=> 'Locatie',
+				'type'			=> 'title',
+				'id'			=> $prefix . 'locatie_title'
 			),
 			array(
-				'name'    => 'Locatie *',
-				'id'      => $prefix . 'locatie',
-				'type'    => 'text_medium',
-				'attributes'  => array(
-					'required'    => 'required',
+				'name'			=> 'Locatie *',
+				'id'			=> $prefix . 'locatie',
+				'type'			=> 'text_medium',
+				'attributes'	=> array(
+					'required'		=> 'required',
 				),
 			),			
 			array(
-				'name'    => 'Adres *',
-				'id'      => $prefix . 'adres',
-				'type'    => 'text_medium',
-			    'attributes'  => array(
-					'required'    => 'required',
+				'name'			=> 'Adres *',
+				'id'			=> $prefix . 'adres',
+				'type'			=> 'text_medium',
+			    'attributes'	=> array(
+					'required'		=> 'required',
 				),
 			),
 			array(
-				'name'    => 'Postcode *',
-				'id'      => $prefix . 'postcode',
-				'type'    => 'text_medium',
-			    'attributes'  => array(
-					'required'    => 'required',
+				'name'			=> 'Postcode *',
+				'id'			=> $prefix . 'postcode',
+				'type'			=> 'text_medium',
+			    'attributes'	=> array(
+					'required'		=> 'required',
 				),
 			),
 			array(
-				'name'    => 'Plaats *',
-				'id'      => $prefix . 'plaats',
-				'type'    => 'text_medium',
-			    'attributes'  => array(
-					'required'    => 'required',
+				'name'			=> 'Plaats *',
+				'id'			=> $prefix . 'plaats',
+				'type'			=> 'text_medium',
+			    'attributes'	=> array(
+					'required'		=> 'required',
 				),
 			),
 			array(
-				'name' => 'Aanmelden',
-				'type' => 'title',
-				'id' => $prefix . 'aanmelden_title'
+				'name'			=> 'Aanmelden',
+				'type'			=> 'title',
+				'id'			=> $prefix . 'aanmelden_title'
 			),
 			array(
-				'name'    => 'Aanmelden via: *',
-				'desc'    => 'Eventuele extra velden verschijnen na opslaan',
-				'id'      => $prefix . 'aanmelden',
-				'type'    => 'radio_inline',
-				'options' => array(
-					'formulier' => __( 'Aanmeldformulier Community day', 'siw' ),
-					'aangepast'   => __( 'Aangepaste tekst en link', 'siw' ),
+				'name'			=> 'Aanmelden via: *',
+				'desc'			=> 'Eventuele extra velden verschijnen na opslaan',
+				'id'			=> $prefix . 'aanmelden',
+				'type'			=> 'radio_inline',
+				'options'		=> array(
+					'formulier'		=> __( 'Aanmeldformulier Community day', 'siw' ),
+					'aangepast'		=> __( 'Aangepaste tekst en link', 'siw' ),
 
 				),
-			    'attributes'  => array(
-					'required'    => 'required',
+			    'attributes'	=> array(
+					'required'		=> 'required',
 				),
 			),
 			array(
-				'name'    => 'Toelichting aanmelden *',
-				'id'      => $prefix . 'aanmelden_toelichting',
-				'type'    => 'wysiwyg',
-				'options' => array(
-					'wpautop' => true, 
-					'media_buttons' => false, 
-					'teeny' => true, 
+				'name'			=> 'Toelichting aanmelden *',
+				'id'			=> $prefix . 'aanmelden_toelichting',
+				'type'			=> 'wysiwyg',
+				'options'		=> array(
+					'wpautop'		=> true, 
+					'media_buttons'	=> false, 
+					'teeny'			=> true, 
 				),
-			    'attributes'  => array(
-					'required'    => 'required',
+			    'attributes'	=> array(
+					'required'		=> 'required',
 				),
-				'show_on_cb' => 'siw_event_show_custom_application_fields', 
+				'show_on_cb'	=> 'siw_event_show_custom_application_fields', 
 			),
 			array(
-				'name' => __( 'Link om aan te melden', 'siw' ),
-				'id'   => $prefix . 'aanmelden_link_url',
-				'type' => 'text_url',
-				'show_on_cb' => 'siw_event_show_custom_application_fields', 
+				'name'			=> __( 'Link om aan te melden', 'siw' ),
+				'id'			=> $prefix . 'aanmelden_link_url',
+				'type'			=> 'text_url',
+				'show_on_cb'	=> 'siw_event_show_custom_application_fields', 
 			),	
 			array(
-				'name' => __( 'Tekst voor link', 'siw' ),
-				'id'   => $prefix . 'aanmelden_link_tekst',
-				'type' => 'text_medium',
-				'show_on_cb' => 'siw_event_show_custom_application_fields', 
+				'name'			=> __( 'Tekst voor link', 'siw' ),
+				'id'			=> $prefix . 'aanmelden_link_tekst',
+				'type'			=> 'text_medium',
+				'show_on_cb'	=> 'siw_event_show_custom_application_fields', 
 			),			
 			array(
-				'id'          => $prefix . 'programma',
-				'type'        => 'group',
-				'description' => 'Programma',
-				'options'     => array(
-					'group_title'   => 'Onderdeel {#}',
-					'add_button'    => 'Onderdeel toevoegen',
-					'remove_button' => 'Verwijder onderdeel',
-					'sortable'      => true, // beta
+				'id'			=> $prefix . 'programma',
+				'type'			=> 'group',
+				'description'	=> 'Programma',
+				'options'		=> array(
+					'group_title'	=> 'Onderdeel {#}',
+					'add_button'	=> 'Onderdeel toevoegen',
+					'remove_button'	=> 'Verwijder onderdeel',
+					'sortable'		=> true, // beta
 				),
-				'fields'      => array(
+				'fields'		=> array(
 					array(
-						'name' => 'Starttijd',
-						'id' => 'starttijd',
-						'type' => 'text_time',
-						'time_format' => 'H:i',
+						'name'			=> 'Starttijd',
+						'id'			=> 'starttijd',
+						'type'			=> 'text_time',
+						'time_format'	=> 'H:i',
 					),
 					array(
-						'name' => 'Eindtijd',
-						'id' => 'eindtijd',
-						'type' => 'text_time',
-						'time_format' => 'H:i',
+						'name'			=> 'Eindtijd',
+						'id'			=> 'eindtijd',
+						'type'			=> 'text_time',
+						'time_format'	=> 'H:i',
 					),
 					array(
-						'name' => 'Omschrijving',
-						'id'   => 'omschrijving',
-						'type' => 'textarea_small',
+						'name'			=> 'Omschrijving',
+						'id'			=> 'omschrijving',
+						'type'			=> 'textarea_small',
 					),
 				),
-			),			
+			),
 		),
 	);
 
@@ -272,36 +272,36 @@ function siw_event_show_custom_application_fields($field){
 add_filter('manage_agenda_posts_columns', 'siw_agenda_admin_start_column_header', 10);
 
 function siw_agenda_admin_start_column_header($columns) {
-    $columns['start'] = 'Start';
-    return $columns;
+	$columns['start'] = 'Start';
+	return $columns;
 }
 
 add_action('manage_agenda_posts_custom_column', 'siw_agenda_admin_start_column_value', 10, 2);
 function siw_agenda_admin_start_column_value($column_name, $post_id) {
-    if ( 'start' == $column_name ) {
-        $start = get_post_meta( $post_id, 'siw_agenda_start', true );
-        if ($start) {
-            echo date('j F Y H:i', $start);;
-        }
-    }
+	if ( 'start' == $column_name ) {
+		$start = get_post_meta( $post_id, 'siw_agenda_start', true );
+		if ($start) {
+			echo date('j F Y H:i', $start);;
+		}
+	}
 }
 
 /*sorteren op deadline*/
 add_filter( 'manage_edit-agenda_sortable_columns', 'siw_agenda_start_column_sorting' );
 function siw_agenda_start_column_sorting( $columns ) {
-  $columns['start'] = 'start';
-  return $columns;
+	$columns['start'] = 'start';
+	return $columns;
 }
 
 add_filter( 'request', 'siw_agenda_start_column_orderby' );
 function siw_agenda_start_column_orderby( $vars ) {
-    if ( (isset( $vars['post_type'] ) && 'agenda' == $vars['post_type'] )|| ( isset( $vars['orderby'] ) && 'start' == $vars['orderby'] ) ) {
-        $vars = array_merge( $vars, array(
-            'meta_key' => 'siw_agenda_start',
-            'orderby' => 'meta_value'
-        ) );
-    }
-    return $vars;
+	if ( (isset( $vars['post_type'] ) && 'agenda' == $vars['post_type'] )|| ( isset( $vars['orderby'] ) && 'start' == $vars['orderby'] ) ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'siw_agenda_start',
+			'orderby' => 'meta_value'
+		) );
+	}
+	return $vars;
 }
 
 
@@ -317,24 +317,24 @@ function siw_register_agenda_widget() {
 class siw_agenda extends WP_Widget {
  
 public function __construct() {
-    $widget_ops = array(
-        'class'         =>   'siw_agenda',
-        'description'   =>   __( 'Toont het eerstvolgende evenement', 'siw' )
-    );
- 
-    parent::__construct(
-        'siw_agenda',          //base id
-        __( 'SIW: Agenda', 'siw' ), //title
-        $widget_ops
-    );
+	$widget_ops = array(
+		'class'			=> 'siw_agenda',
+		'description'	=> __( 'Toont het eerstvolgende evenement', 'siw' )
+	);
+
+	parent::__construct(
+		'siw_agenda',
+		__( 'SIW: Agenda', 'siw' ),
+		$widget_ops
+	);
 }
  
  
 	public function form( $instance ) {
 		$widget_defaults = array(
-			'title'			=>	'Agenda',
+			'title'	=> 'Agenda',
 		);
-		$instance  = wp_parse_args( (array) $instance, $widget_defaults );
+		$instance = wp_parse_args( (array) $instance, $widget_defaults );
 		?>
 
 		<p>

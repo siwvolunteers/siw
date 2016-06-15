@@ -39,13 +39,13 @@ function siw_get_general_information ( $type ){
 			return $iban;
 		case "kvk":
 			$kvk = get_option('siw_general_kvk');
-			return $kvk;		
+			return $kvk;
 		case "telefoon":
 			$phone = get_option('siw_general_phone');
-			return $phone;		
+			return $phone;
 		case "email":
 			$email = get_option('siw_general_email');
-			return $email;		
+			return $email;
 		case "naam":
 			$naam = get_bloginfo('name');
 			return $naam;
@@ -149,8 +149,8 @@ function siw_get_evs_next_deadline(){
 	$weeks = get_option( 'siw_evs_weeks_before_deadline' );
 	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$weeks." weeks"));
 
-	foreach($evs_deadlines as $evs_deadline => $evs_deadline_date) {
-		if ($evs_deadline_date > $limit){
+	foreach( $evs_deadlines as $evs_deadline => $evs_deadline_date ) {
+		if ( $evs_deadline_date > $limit ){
 			$evs_next_deadline = $evs_deadline_date;
 			break;
 		}
@@ -172,8 +172,8 @@ function siw_get_next_community_day(){
 	asort( $community_days );
 	$today = date("Y-m-d");
 	
-	foreach($community_days as $community_day => $community_day_date) {
-		if ($community_day_date > $today){
+	foreach( $community_days as $community_day => $community_day_date ) {
+		if ( $community_day_date > $today ){
 			$next_community_day = $community_day_date;
 			break;
 		}
@@ -221,7 +221,7 @@ function siw_get_mail_signature_name( $type ){
 			
         case  "aanmelding_community_day":
 			$signature_name = get_option('siw_signature_community_day');
-			return $signature_name;		
+			return $signature_name;
 	}
 }
 //tarieven
@@ -233,7 +233,7 @@ function siw_get_fee_op_maat( $tariff ){
 			
         case  "regulier":
 			$fee = get_option('siw_tariffs_op_maat_regular');
-			return $fee;					
+			return $fee;
 	}
 }
 
@@ -245,7 +245,7 @@ function siw_get_fee_workcamp( $tariff ){
 			
         case  "regulier":
 			$fee = get_option('siw_tariffs_workcamp_regular');
-			return $fee;					
+			return $fee;
 	}
 }
 
@@ -271,7 +271,7 @@ function siw_get_date_in_text( $date, $year = true ){
 	$date_array = date_parse( $date );
 	$month_array = siw_get_array('month_to_text');
 	$day = $date_array['day'];
-	$month = $month_array[$date_array['month']];
+	$month = $month_array[ $date_array['month'] ];
 	$date_in_text = $day . ' ' . $month;
 	if ($year){
 		$year = $date_array['year'];
@@ -293,14 +293,14 @@ function siw_get_date_range_in_text ($date_start, $date_end, $year = true){
 	
 		$date_range_in_text = $date_start_array['day'];
 		if ( $date_start_array['month'] != $date_end_array['month']){
-			$date_range_in_text .= ' ' . $month_array[$date_start_array['month']];
+			$date_range_in_text .= ' ' . $month_array[ $date_start_array['month'] ];
 		}
-		if ( ($date_start_array['year'] != $date_end_array['year']) and $year){
+		if ( ($date_start_array['year'] != $date_end_array['year'] ) and $year ){
 			$date_range_in_text .= ' ' . $date_start_array['year'];
 		}
 		$date_range_in_text .= ' t/m ';
 		$date_range_in_text .= $date_end_array['day'];
-		$date_range_in_text .= ' ' . $month_array[$date_end_array['month']];
+		$date_range_in_text .= ' ' . $month_array[ $date_end_array['month'] ];
 		if ( $year ){
 			$date_range_in_text .= ' ' . $date_end_array['year'];
 		}
@@ -313,8 +313,8 @@ function siw_get_date_range_in_text ($date_start, $date_end, $year = true){
 //PLATO import
 function siw_wc_get_tariff_array(){
 	$tariff_array = array(
-		"regulier"=>number_format(get_option('siw_tariffs_workcamp_regular'),2),
-		"student"=>number_format(get_option('siw_tariffs_workcamp_student'),2)
+		"regulier" => number_format( get_option('siw_tariffs_workcamp_regular'),2),
+		"student" => number_format( get_option('siw_tariffs_workcamp_student'),2)
 	);
 	return $tariff_array;
 }
@@ -616,355 +616,355 @@ function siw_get_array( $array ){
 				$project_countries = array();
 				$project_countries['ARG'] = array(
 					'slug'		=> 'argentinie',
-					'name'  	=> 'Argentinië',
+					'name'		=> 'Argentinië',
 					'continent'	=> 'latijns-amerika',
 					'allowed'	=> 'no',
 				); 
 				$project_countries['ARM'] = array(
 					'slug'		=> 'armenie',
-					'name'  	=> 'Armenië',
+					'name'		=> 'Armenië',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				); 			
 				$project_countries['AUT'] = array(
 					'slug'		=> 'oostenrijk',
-					'name'  	=> 'Oostenrijk',
+					'name'		=> 'Oostenrijk',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				); 				
 				$project_countries['BDI'] = array(
 					'slug'		=> 'burundi',
-					'name'  	=> 'Burundi',
+					'name'		=> 'Burundi',
 					'continent'	=> 'afrika-midden-oosten',
 					'allowed'	=> 'no',
 				); 					
 				$project_countries['BEL'] = array(
 					'slug'		=> 'belgie',
-					'name'  	=> 'België',
+					'name'		=> 'België',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				); 	
 				$project_countries['BLR'] = array(
 					'slug'		=> 'wit-rusland',
-					'name'  	=> 'Wit-Rusland',
+					'name'		=> 'Wit-Rusland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				); 	
 				$project_countries['CAN'] = array(
 					'slug'		=> 'canada',
-					'name'  	=> 'Canada',
+					'name'		=> 'Canada',
 					'continent'	=> 'noord-amerika',
 					'allowed'	=> 'yes',
 				); 	
 				$project_countries['CHE'] = array(
 					'slug'		=> 'zwitserland',
-					'name'  	=> 'Zwitserland',
+					'name'		=> 'Zwitserland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				); 	
 				$project_countries['CHN'] = array(
 					'slug'		=> 'china',
-					'name'  	=> 'China',
+					'name'		=> 'China',
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				); 
 				$project_countries['CRI'] = array(
 					'slug'		=> 'costa-rica',
-					'name'  	=> 'Costa Rica',
+					'name'		=> 'Costa Rica',
 					'continent'	=> 'latijns-amerika',
 					'allowed'	=> 'no',
 				); 				
 				$project_countries['CZE'] = array(
 					'slug'		=> 'tsjechie',
-					'name'  	=> 'Tsjechië',
+					'name'		=> 'Tsjechië',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				); 	
 				$project_countries['DEU'] = array(
 					'slug'		=> 'duitsland',
-					'name'  	=> 'Duitsland',
+					'name'		=> 'Duitsland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				); 
 				$project_countries['DNK'] = array(
 					'slug'		=> 'denemarken',
-					'name'  	=> 'Denemarken',
+					'name'		=> 'Denemarken',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['ECU'] = array(
 					'slug'		=> 'ecuador',
-					'name'  	=> 'Ecuador',
+					'name'		=> 'Ecuador',
 					'continent'	=> 'latijns-amerika',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['ESP'] = array(
 					'slug'		=> 'spanje',
-					'name'  	=> 'Spanje',
+					'name'		=> 'Spanje',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['EST'] = array(
 					'slug'		=> 'estland',
-					'name'  	=> 'Estland',
+					'name'		=> 'Estland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['FIN'] = array(
 					'slug'		=> 'finland',
-					'name'  	=> 'Finland',
+					'name'		=> 'Finland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['FRA'] = array(
 					'slug'		=> 'frankrijk',
-					'name'  	=> 'Frankrijk',
+					'name'		=> 'Frankrijk',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['GBR'] = array(
 					'slug'		=> 'verenigd-koninkrijk',
-					'name'  	=> 'Verenigd Koninkrijk',
+					'name'		=> 'Verenigd Koninkrijk',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['GEO'] = array(
 					'slug'		=> 'georgie',
-					'name'  	=> 'Georgië',
+					'name'		=> 'Georgië',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['GRC'] = array(
 					'slug'		=> 'griekenland',
-					'name'  	=> 'Griekenland',
+					'name'		=> 'Griekenland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['HKG'] = array(
 					'slug'		=> 'hong-kong',
-					'name'  	=> 'Hong Kong',
+					'name'		=> 'Hong Kong',
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				);
 				$project_countries['HUN'] = array(
 					'slug'		=> 'hongarije',
-					'name'  	=> 'Hongarije',
+					'name'		=> 'Hongarije',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['HTE'] = array(
 					'slug'		=> 'haiti',
-					'name'  	=> 'Haïti',
+					'name'		=> 'Haïti',
 					'continent'	=> 'latijns-amerika',
 					'allowed'	=> 'no',
 				);
 				$project_countries['IDN'] = array(
 					'slug'		=> 'indonesie',
-					'name'  	=> 'Indonesië',
+					'name'		=> 'Indonesië',
 					'continent'	=> 'azie',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['IND'] = array(
 					'slug'		=> 'india',
-					'name'  	=> 'India',
+					'name'		=> 'India',
 					'continent'	=> 'azie',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['IRL'] = array(
 					'slug'		=> 'ierland',
-					'name'  	=> 'Ierland',
+					'name'		=> 'Ierland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['ISL'] = array(
 					'slug'		=> 'ijsland',
-					'name'  	=> 'IJsland',
+					'name'		=> 'IJsland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['ITA'] = array(
 					'slug'		=> 'italie',
-					'name'  	=> 'Italië',
+					'name'		=> 'Italië',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['JPN'] = array(
 					'slug'		=> 'japan',
-					'name'  	=> 'Japan',
+					'name'		=> 'Japan',
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				);
 				$project_countries['KEN'] = array(
 					'slug'		=> 'kenia',
-					'name'  	=> 'Kenia',
+					'name'		=> 'Kenia',
 					'continent'	=> 'afrika-midden-oosten',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['KGZ'] = array(
 					'slug'		=> 'kirgizie',
-					'name'  	=> 'Kirgizië',
+					'name'		=> 'Kirgizië',
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				);
 				$project_countries['KHM'] = array(
 					'slug'		=> 'cambodja',
-					'name'  	=> 'Cambodja',
+					'name'		=> 'Cambodja',
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				);
 				$project_countries['KOR'] = array(
 					'slug'		=> 'zuid-korea',
-					'name'  	=> 'Zuid-Korea',
+					'name'		=> 'Zuid-Korea',
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				);
 				$project_countries['LKA'] = array(
 					'slug'		=> 'sri-lanka',
-					'name'  	=> 'Sri Lanka',
+					'name'		=> 'Sri Lanka',
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				);
 				$project_countries['LTU'] = array(
 					'slug'		=> 'litouwen',
-					'name'  	=> 'Litouwen',
+					'name'		=> 'Litouwen',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['LVA'] = array(
 					'slug'		=> 'letland',
-					'name'  	=> 'Letland',
+					'name'		=> 'Letland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['MAR'] = array(
 					'slug'		=> 'marokko',
-					'name'  	=> 'Marokko',
+					'name'		=> 'Marokko',
 					'continent'	=> 'afrika-midden-oosten',
 					'allowed'	=> 'no',
 				);
 				$project_countries['MEX'] = array(
 					'slug'		=> 'mexico',
-					'name'  	=> 'Mexico',
+					'name'		=> 'Mexico',
 					'continent'	=> 'latijns-amerika',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['MNE'] = array(
 					'slug'		=> 'montenegro',
-					'name'  	=> 'Montenegro',
+					'name'		=> 'Montenegro',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['MNG'] = array(
 					'slug'		=> 'mongolie',
-					'name'  	=> 'Mongolië',
+					'name'		=> 'Mongolië',
 					'continent'	=> 'azie',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['NLD'] = array(
 					'slug'		=> 'nederland',
-					'name'  	=> 'Nederland',
+					'name'		=> 'Nederland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'no',
 				);
 				$project_countries['NPL'] = array(
 					'slug'		=> 'nepal',
-					'name'  	=> 'Nepal',
+					'name'		=> 'Nepal',
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				);
 				$project_countries['PER'] = array(
 					'slug'		=> 'peru',
-					'name'  	=> 'Peru',
+					'name'		=> 'Peru',
 					'continent'	=> 'latijns-amerika',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['POL'] = array(
 					'slug'		=> 'polen',
-					'name'  	=> 'Polen',
+					'name'		=> 'Polen',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['PRT'] = array(
 					'slug'		=> 'portugal',
-					'name'  	=> 'Portugal',
+					'name'		=> 'Portugal',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['ROU'] = array(
 					'slug'		=> 'roemenie',
-					'name'  	=> 'Roemenië',
+					'name'		=> 'Roemenië',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);				
 				$project_countries['RUS'] = array(
 					'slug'		=> 'rusland',
-					'name'  	=> 'Rusland',
+					'name'		=> 'Rusland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['SRB'] = array(
 					'slug'		=> 'servie',
-					'name'  	=> 'Servië',
+					'name'		=> 'Servië',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['SVK'] = array(
 					'slug'		=> 'slowakije',
-					'name'  	=> 'Slowakije',
+					'name'		=> 'Slowakije',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['TGO'] = array(
 					'slug'		=> 'togo',
-					'name'  	=> 'Togo',
+					'name'		=> 'Togo',
 					'continent'	=> 'afrika-midden-oosten',
 					'allowed'	=> 'no',
 				);
 				$project_countries['THA'] = array(
 					'slug'		=> 'thailand',
-					'name'  	=> 'Thailand',
+					'name'		=> 'Thailand',
 					'continent'	=> 'azie',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['TUN'] = array(
 					'slug'		=> 'tunesie',
-					'name'  	=> 'Tunesië',
+					'name'		=> 'Tunesië',
 					'continent'	=> 'afrika-midden-oosten',
 					'allowed'	=> 'no',
 				);
 				$project_countries['TUR'] = array(
 					'slug'		=> 'turkije',
-					'name'  	=> 'Turkije',
+					'name'		=> 'Turkije',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['TWN'] = array(
 					'slug'		=> 'taiwan',
-					'name'  	=> 'Taiwan',
+					'name'		=> 'Taiwan',
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				);
 				$project_countries['UGA'] = array(
 					'slug'		=> 'uganda',
-					'name'  	=> 'Uganda',
+					'name'		=> 'Uganda',
 					'continent'	=> 'afrika-midden-oosten',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['UKR'] = array(
 					'slug'		=> 'oekraine',
-					'name'  	=> 'Oekraïne',
+					'name'		=> 'Oekraïne',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['USA'] = array(
 					'slug'		=> 'verenigde-staten',
-					'name'  	=> 'Verenigde Staten',
+					'name'		=> 'Verenigde Staten',
 					'continent'	=> 'noord-amerika',
 					'allowed'	=> 'yes',
 				);
 				$project_countries['VNM'] = array(
 					'slug'		=> 'vietnam',
-					'name'  	=> 'Vietnam',
+					'name'		=> 'Vietnam',
 					'continent'	=> 'azie',
 					'allowed'	=> 'yes',
 				);

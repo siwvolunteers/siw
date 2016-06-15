@@ -21,14 +21,14 @@ nocache_headers();
 
 
 //actie uit request halen
-$action = esc_attr(trim($_REQUEST['action']));
+$action = esc_attr( trim( $_REQUEST['action']) );
 
 //toegestane acties
-$allowed_actions = apply_filters('siw_ajax_allowed_actions',array());
+$allowed_actions = apply_filters('siw_ajax_allowed_actions',array() );
 
 //uitvoeren toegestane actie
-if(in_array($action, $allowed_actions)) {
-	do_action('siw_ajax_'.$action);
+if( in_array( $action, $allowed_actions ) ) {
+	do_action('siw_ajax_'.$action );
 } else {
 	die('-1');
 }

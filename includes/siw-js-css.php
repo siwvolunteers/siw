@@ -52,7 +52,7 @@ function siw_remove_unnecessary_scripts(){
 		wp_dequeue_script('wc-add-to-cart-variation');
 	}
 	//woocommerce ajax filter
-	if ((! is_shop()) && (! is_product_category()) && (! is_product_tag()) ){
+	if ( (! is_shop() ) && (! is_product_category() ) && (! is_product_tag() ) ){
 		wp_dequeue_script('yith-wcan-script');
 		wp_dequeue_style('yith-wcan-frontend');
 	}

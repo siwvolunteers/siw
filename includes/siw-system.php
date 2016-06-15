@@ -96,13 +96,13 @@ add_filter('updraftplus_schedule_firsttime_files', 'siw_backup_time_files');
 
 function siw_backup_time_db(){
 	$db_backup_time = siw_get_db_backup_time();
-	$time = strtotime( 'tomorrow '.$db_backup_time);
+	$time = strtotime( 'tomorrow '.$db_backup_time );
 	return $time;
 }
 
 function siw_backup_time_files(){
 	$files_backup_time = siw_get_files_backup_time();
-	$time = strtotime( 'tomorrow ' . $files_backup_time);
+	$time = strtotime( 'tomorrow ' . $files_backup_time );
 	return $time;
 }
 
@@ -114,10 +114,10 @@ VFB-pro aanpassingen
 add_action('wp_enqueue_scripts', 'siw_vfb_pro_scripts');
 function siw_vfb_pro_scripts(){
 	global $wp_scripts;
-	if ($wp_scripts->registered['vfbp-js']){
+	if ( $wp_scripts->registered['vfbp-js'] ){
 		$wp_scripts->registered['vfbp-js']->src = get_stylesheet_directory_uri() . '/assets/js/vfb-pro/vfb-js.min.js';
 	}
-	if ($wp_scripts->registered['jquery-intl-tel']){
+	if ( $wp_scripts->registered['jquery-intl-tel'] ){
 		wp_register_script( 'jquery-phone-format', VFB_PLUGIN_URL . "public/assets/js/vendors/phone-format.min.js",array(), null, true);	
 		$wp_scripts->registered['jquery-intl-tel']->deps[] = 'jquery-phone-format';
 	}
@@ -127,7 +127,7 @@ function siw_vfb_pro_scripts(){
 add_filter( 'cmb_meta_box_url', 'siw_cmb_meta_box_url', 10, 1 );
 
 function siw_cmb_meta_box_url( $cmb_url ){
-	$cmb_url = str_replace("http://", "//", $cmb_url);
+	$cmb_url = str_replace("http://", "//", $cmb_url );
     return $cmb_url;
 }
 
@@ -148,7 +148,7 @@ function siw_set_image_srcset_to_ssl($sources) {
 add_action('admin_enqueue_scripts', 'siw_cmb_admin_scripts');
 function siw_cmb_admin_scripts(){
 	global $wp_scripts;
-	if ($wp_scripts->registered['cmb-scripts']){
+	if ( $wp_scripts->registered['cmb-scripts'] ){
 		$wp_scripts->registered['cmb-scripts']->src = get_stylesheet_directory_uri() . '/assets/js/kadence-slider/cmb.min.js';
 	}
 } 
@@ -202,7 +202,7 @@ function siw_update_community_day_options(){
 	$today = date("Y-m-d");
 	foreach($community_days as $community_day => $community_day_date) {
 		if( $community_day_date > $today ){
-			$future_community_days[]['label']= siw_get_date_in_text($community_day_date, false);		
+			$future_community_days[]['label']= siw_get_date_in_text( $community_day_date, false);
 		}
 	}
 
@@ -210,7 +210,7 @@ function siw_update_community_day_options(){
 	$field_id = siw_get_vfb_field_id('community_day_datums');
 	
 	global $wpdb;
-	if (!isset($wpdb->vfbp_fields)) {
+	if ( !isset($wpdb->vfbp_fields) ) {
 		$wpdb->vfbp_fields = $wpdb->prefix . 'vfbp_fields';
 	}
 	
@@ -225,7 +225,7 @@ function siw_update_community_day_options(){
 	$data['options'] = $future_community_days;
 	$query = "update $wpdb->vfbp_fields set $wpdb->vfbp_fields.data = %s where $wpdb->vfbp_fields.id = %d;";
 	$wpdb->query(
-		$wpdb->prepare($query, maybe_serialize( $data ), $field_id)
+		$wpdb->prepare( $query, maybe_serialize( $data ), $field_id )
 	);
 	
 }
