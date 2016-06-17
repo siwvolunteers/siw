@@ -46,3 +46,33 @@ function siw_login_ip_whitelist( $allow, $ip ) {
 	}
 	return $allow;
 }
+
+
+//logging van laatste login
+add_action('wp_login','siw_capture_user_last_login', 10, 2);
+function siw_capture_user_last_login( $user_login, $user ){
+	update_user_meta($user->ID, 'last_login', current_time('mysql'));
+}
+
+//tonen laatste login op adminscherm
+add_filter( 'manage_users_columns', 'siw_user_last_login_column_header');
+function siw_user_last_login_column_header( $columns ){
+	$columns['lastlogin'] = __('Laatste login', 'siw');
+	return $columns;
+}
+ 
+add_action( 'manage_users_custom_column',  'siw_user_last_login_column_value', 10, 3); 
+function siw_user_last_login_column_value($value, $column_name, $user_id ) {
+	if ( 'lastlogin' == $column_name ){	
+		$last_login = get_user_meta( $user_id, 'last_login', true);
+		if( !empty( $last_login ) ){
+			$time = mysql2date("H:i", $last_login, false);
+			$date = siw_get_date_in_text( mysql2date("Y-m-d", $last_login, false), true);
+			$value = $date . ' ' . $time;
+		}
+		else{
+			$value = 'Nog nooit ingelogd';
+		}
+	}	
+	return $value;
+}
