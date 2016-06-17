@@ -281,7 +281,9 @@ function siw_agenda_admin_start_column_value($column_name, $post_id) {
 	if ( 'start' == $column_name ) {
 		$start = get_post_meta( $post_id, 'siw_agenda_start', true );
 		if ($start) {
-			echo date('j F Y H:i', $start);;
+			$time = date("H:i", $start );
+			$date = siw_get_date_in_text( date("Y-m-d", $start ), true);
+			echo $date . ' ' . $time;
 		}
 	}
 }

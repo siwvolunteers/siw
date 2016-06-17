@@ -98,7 +98,7 @@ function siw_vacature_admin_deadline_column_value( $column_name, $post_id ) {
 	if ( 'deadline' == $column_name) {
 		$deadline = get_post_meta( $post_id, 'siw_vacature_deadline', true );
 		if ($deadline) {
-			echo date('j F Y', $deadline);;
+			echo siw_get_date_in_text( date("Y-m-d",$deadline), true);
 		}
 	}
 }
