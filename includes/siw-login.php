@@ -47,6 +47,15 @@ function siw_login_ip_whitelist( $allow, $ip ) {
 	return $allow;
 }
 
+add_filter('woocommerce_prevent_admin_access', 'siw_allow_admin_access');
+function siw_allow_admin_access( $prevent_access ){
+	if ( current_user_can( 'edit_products' ) ){
+		$prevent_access = false;
+	}
+	return $prevent_access;
+}
+
+
 
 //logging van laatste login
 add_action('wp_login','siw_capture_user_last_login', 10, 2);
