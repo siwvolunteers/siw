@@ -18,6 +18,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 				'type'=>'select', 
 				'title'=>__('Type', 'siw'),
 				'values' => array(
+					"email"		=> __('E-mail','siw'),
 					"iban"		=> __('IBAN','siw'),
 					"kvk"		=> __('KvK-nummer','siw'),
 					"telefoon"	=> __('Telefoonnummer','siw'),
@@ -122,7 +123,7 @@ function siw_shortcode_evs_deposit(){
 
 add_shortcode('siw_inschrijfgeld_op_maat', 'siw_shortcode_fee_op_maat');
 function siw_shortcode_fee_op_maat( $args ){
-    $attributes = shortcode_atts(
+	$attributes = shortcode_atts(
 		array(
 			'tarief' => 'regulier',
 		),
@@ -150,7 +151,7 @@ function siw_shortcode_fee_workcamp( $args ){
 //korting 
 add_shortcode('siw_korting_groepsproject', 'siw_shortcode_discount_workcamp');
 function siw_shortcode_discount_workcamp( $args ){
-    $attributes = shortcode_atts(
+	$attributes = shortcode_atts(
 		array(
 			'aantal' => 'tweede',
 		),
@@ -169,7 +170,7 @@ function siw_shortcode_discount_workcamp( $args ){
 
 add_shortcode('siw_algemene_informatie', 'siw_shortcode_general_information');
 function siw_shortcode_general_information( $args ){
-    $attributes = shortcode_atts(
+	$attributes = shortcode_atts(
 		array(
 			'type' => '',
 		),

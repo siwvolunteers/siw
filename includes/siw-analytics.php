@@ -12,6 +12,8 @@ add_action( 'after_setup_theme', 'siw_after_theme_setup' );
 function siw_after_theme_setup() {
 	$google_analytics_id = siw_get_google_analytics_id();
 	define('GOOGLE_ANALYTICS_ID', $google_analytics_id); 
+	$google_analytics_enable_linkid = siw_get_google_analytics_enable_linkid();
+	define('GOOGLE_ANALYTICS_ENABLE_LINKID', $google_analytics_enable_linkid );
 	if (GOOGLE_ANALYTICS_ID) {
 		remove_action('wp_footer', 'kadence_google_analytics', 20);
 		add_action( 'wp_footer', 'siw_google_analytics', 20 );
@@ -34,9 +36,11 @@ function siw_google_analytics() {?>
 	r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
 	ga('create','<?php echo GOOGLE_ANALYTICS_ID; ?>',{'siteSpeedSampleRate': 100});
 	ga('set', 'anonymizeIp', true);
+	<?php if (GOOGLE_ANALYTICS_ENABLE_LINKID){?>
 	ga('require', 'linkid', {
 		'levels': 5
 	});
+	<?php }?>
 	ga('send','pageview');
 </script>
 <?php }

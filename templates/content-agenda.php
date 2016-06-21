@@ -5,15 +5,17 @@
     // Get summary setting
 	$postsummery = 'img_portrait';
 	
-	$start_ts = get_post_meta( $post->ID, 'siw_agenda_start', true );
-	$end_ts = get_post_meta( $post->ID, 'siw_agenda_eind', true );
-	$date_range = siw_get_date_range_in_text( date("Y-m-d",$start_ts),  date("Y-m-d",$end_ts), false );
-	$start_time = date("H:i",$start_ts);	
-	$end_time = date("H:i",$end_ts);	
-	$location = get_post_meta( $post->ID, 'siw_agenda_locatie', true ); 
-	$address = get_post_meta( $post->ID, 'siw_agenda_adres', true );
-	$postal_code = get_post_meta( $post->ID, 'siw_agenda_postcode', true );
-	$city = get_post_meta( $post->ID, 'siw_agenda_plaats', true );	
+	$id = $post->ID;
+	
+	$start_ts		= get_post_meta( $id, 'siw_agenda_start', true );
+	$end_ts			= get_post_meta( $id, 'siw_agenda_eind', true );
+	$date_range		= siw_get_date_range_in_text( date("Y-m-d",$start_ts),  date("Y-m-d",$end_ts), false );
+	$start_time		= date("H:i",$start_ts);	
+	$end_time		= date("H:i",$end_ts);	
+	$location		= get_post_meta( $id, 'siw_agenda_locatie', true ); 
+	$address		= get_post_meta( $id, 'siw_agenda_adres', true );
+	$postal_code	= get_post_meta( $id, 'siw_agenda_postcode', true );
+	$city			= get_post_meta( $id, 'siw_agenda_plaats', true );	
 	
 
 ?>

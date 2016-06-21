@@ -31,8 +31,9 @@ add_action('siw_update_community_day_options', 'siw_update_community_day_options
 add_action('siw_no_index_past_events', 'siw_no_index_past_events');
 function siw_no_index_past_events(){
 	$args = array(
-		'post_type'		=> 'agenda',
-		'fields' 		=> 'ids'
+		'post_type'			=> 'agenda',
+		'fields'			=> 'ids',
+		'posts_per_page'	=> -1,
 	);
 	$events = get_posts( $args ); 
 	foreach ( $events as $event_id ) {
@@ -49,8 +50,9 @@ function siw_no_index_past_events(){
 add_action('siw_no_index_expired_jobs', 'siw_no_index_expired_jobs');
 function siw_no_index_expired_jobs(){
 	$args = array(
-		'post_type'		=> 'vacatures',
-		'fields' 		=> 'ids'
+		'post_type'			=> 'vacatures',
+		'fields'			=> 'ids',
+		'posts_per_page'	=> -1,
 	);
 	$jobs = get_posts( $args ); 
 	foreach ( $jobs as $job_id ){

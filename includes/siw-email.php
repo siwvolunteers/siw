@@ -11,7 +11,7 @@ add_action('wppusher_theme_was_updated', 'siw_update_all_mail_templates', 10, 1)
 
 function siw_update_all_mail_templates(){
 	//vfb templates
-    siw_update_vfb_mail_template('evs');
+	siw_update_vfb_mail_template('evs');
 	siw_update_vfb_mail_template('op_maat');
 	siw_update_vfb_mail_template('community_day');
 	
@@ -38,11 +38,11 @@ function siw_update_vfb_mail_template( $form ){
 		
 	//ondertekening naam
 	$signature = siw_get_mail_signature_name("aanmelding_{$form}");
-	$template = str_replace("[_signature_{$form}]", $signature, $template);
+	$template = str_replace("[_signature_{$form}]", $signature, $template );
 
 	//update template
 	global $wpdb;
-	if (!isset($wpdb->vfbp_formmeta)) {
+	if (!isset( $wpdb->vfbp_formmeta )) {
 		$wpdb->vfbp_formmeta = $wpdb->prefix . 'vfbp_formmeta';
 	}
 	$wpdb->query(
@@ -53,7 +53,7 @@ function siw_update_vfb_mail_template( $form ){
 				AND $wpdb->vfbp_formmeta.form_id = %d",
 			$template,
 			$vfb_form_id
-        )
+		)
 	);
 }
 
@@ -65,7 +65,8 @@ function siw_update_mailpoet_mail_template(){
 	global $wp_filesystem;
 	$directory = $wp_filesystem->wp_themes_dir('siw');
 	$filename =  $directory . '/siw/assets/html/mail/mailpoet.html';
-	$template = $wp_filesystem->get_contents($filename);
+	$template = $wp_filesystem->get_contents( $filename );
+	$template = str_replace(array("\n\r", "\r", "\n"), '', $template );
 	
 	//update template
 	global $wpdb;

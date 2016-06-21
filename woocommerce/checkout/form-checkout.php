@@ -84,7 +84,7 @@ $get_checkout_url = apply_filters('woocommerce_get_checkout_url', WC()->cart->ge
         <?php do_action('woocommerce_multistep_checkout_before_order_info'); ?>  
 
 
-        <?php if (get_option('wmc_merge_order_payment_tabs') != "true" || get_option('wmc_merge_order_payment_tabs') == ""): ?>
+        <?php if (get_option('wmc_merge_order_payment_tabs') != "true"): ?>
             <h1 class="title-order-info"><?php echo get_option('wmc_orderinfo_label') ? __(get_option('wmc_orderinfo_label'), 'woocommerce-multistep-checkout') : __('Order Information', 'woocommerce-multistep-checkout'); ?></h1>
             <div class="shipping-tab">
                 <?php do_action('woocommerce_multistep_checkout_before_order_contents'); ?>

@@ -45,15 +45,15 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 <p>Beste <?php echo $order->billing_first_name ?>,<br/><br/>
 <?php if($order->has_status( 'on-hold' )){?>
 Heel erg bedankt voor je aanmelding voor een vrijwilligersproject via SIW! We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!<br/><br/>Je inschrijving wordt pas in behandeling genomen als we je betaling ontvangen hebben.<br/><br/>
-Je kunt je betaling overmaken naar <?php echo $iban;?> o.v.v. je aanmeldnummer (<?php echo $application_number;?>).<br/>
+Je kunt je betaling overmaken naar <?php echo esc_html( $iban );?> o.v.v. je aanmeldnummer (<?php echo $application_number;?>).<br/>
 
 <?php
 }
-if ($order->has_status( 'processing' ) && ('bacs' != $order->payment_method)){?>
+if ( $order->has_status( 'processing' ) && ('bacs' != $order->payment_method )){?>
 Heel erg bedankt voor je aanmelding en betaling voor een vrijwilligersproject via SIW! We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!<br/><br/>
 <?php
 }
-if ($order->has_status( 'processing' ) && ('bacs' === $order->payment_method)){?>
+if ( $order->has_status( 'processing' ) && ('bacs' === $order->payment_method )){?>
 Heel erg bedankt voor je betaling.<br/><br/>
 <?php
 }
@@ -66,11 +66,11 @@ We willen je er nadrukkelijk op wijzen dat deze email nog geen bevestiging is va
 ?>
 Als je nog vragen hebt, aarzel dan niet om contact met ons op te nemen.<br/><br/>
 Met vriendelijke groet,<br/><br/>
-<?php echo $signature?> 
+<?php echo esc_html( $signature )?> 
 </p>
 </font>
 
-<?php siw_wc_email_show_project_details( $order, $application_number);?>
+<?php siw_wc_email_show_project_details( $order, $application_number );?>
 
 <?php siw_wc_email_show_application_details( $order );?>
 

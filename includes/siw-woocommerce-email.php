@@ -48,7 +48,7 @@ function siw_wc_email_show_project_details( $order, $application_number){
 	?>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<?php
-	siw_wc_generate_email_table_header_row('Aanmelding');		
+	siw_wc_generate_email_table_header_row('Aanmelding');
 	siw_wc_generate_email_table_row('Aanmeldnummer', $application_number );	
 
 	foreach ( $order->get_items() as $item_id => $item ) {
@@ -96,9 +96,9 @@ function siw_wc_email_show_application_details( $order ){
 	$nationality = $nationalities[ $order->billing_nationality ];
 
 	//adres formatteren
-	$adress = $order->billing_address_1 . ' ' . $order->billing_housenumber . '<br/>'.$order->billing_postcode . ' ' . $order->billing_city . '<br/>' . $order->billing_country;
+	$adress = $order->billing_address_1 . ' ' . $order->billing_housenumber . '<br/>' . $order->billing_postcode . ' ' . $order->billing_city . '<br/>' . $order->billing_country;
 	$email = $order->billing_email;
-	$phone = $order->billing_phone;		
+	$phone = $order->billing_phone;
 
 	//gegevens noodcontact
 	$emergency_contact_name = get_post_meta( $order->id, 'emergencyContactName', true );
@@ -106,13 +106,13 @@ function siw_wc_email_show_application_details( $order ){
 
 	//talenkennis
 	$language_1 = $languages[get_post_meta( $order->id, 'language1', true )];
-	$language_1_skill = $language_skill[get_post_meta( $order->id, 'language1Skill', true )];
+	$language_1_skill = $language_skill[ get_post_meta( $order->id, 'language1Skill', true ) ];
 	$language_2_code = get_post_meta( $order->id, 'language2', true );
 	$language_2 = $languages[$language_2_code];
-	$language_2_skill = $language_skill[get_post_meta( $order->id, 'language2Skill', true )];	
+	$language_2_skill = $language_skill[ get_post_meta( $order->id, 'language2Skill', true ) ];	
 	$language_3_code = get_post_meta( $order->id, 'language3', true );
 	$language_3 = $languages[$language_3_code];
-	$language_3_skill = $language_skill[get_post_meta( $order->id, 'language3Skill', true )];	
+	$language_3_skill = $language_skill[ get_post_meta( $order->id, 'language3Skill', true ) ];	
 
 	//gegevens voor PO
 	$motivation = get_post_meta( $order->id, 'motivation', true );	
@@ -124,33 +124,33 @@ function siw_wc_email_show_application_details( $order ){
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<?php 
 	//Persoonsgegevens
-	siw_wc_generate_email_table_header_row('Persoonsgegevens');		
-	siw_wc_generate_email_table_row('Naam', $full_name );		
-	siw_wc_generate_email_table_row('Geboortedatum', $date_of_birth );		
-	siw_wc_generate_email_table_row('Geslacht', $gender );	
-	siw_wc_generate_email_table_row('Nationaliteit', $nationality );	
-	siw_wc_generate_email_table_row('Adres', $adress );	
-	siw_wc_generate_email_table_row('E-mailadres', $email );		
-	siw_wc_generate_email_table_row('Telefoonnummer', $phone );		
+	siw_wc_generate_email_table_header_row('Persoonsgegevens');
+	siw_wc_generate_email_table_row('Naam', $full_name );
+	siw_wc_generate_email_table_row('Geboortedatum', $date_of_birth );
+	siw_wc_generate_email_table_row('Geslacht', $gender );
+	siw_wc_generate_email_table_row('Nationaliteit', $nationality );
+	siw_wc_generate_email_table_row('Adres', $adress );
+	siw_wc_generate_email_table_row('E-mailadres', $email );
+	siw_wc_generate_email_table_row('Telefoonnummer', $phone );
 
 	//gegevens noodcontact
-	siw_wc_generate_email_table_header_row('Noodcontact');	
-	siw_wc_generate_email_table_row('Naam', $emergency_contact_name );		
-	siw_wc_generate_email_table_row('Telefoonnummer', $emergency_contact_phone );			
+	siw_wc_generate_email_table_header_row('Noodcontact');
+	siw_wc_generate_email_table_row('Naam', $emergency_contact_name );
+	siw_wc_generate_email_table_row('Telefoonnummer', $emergency_contact_phone );
 
 	//talenkennis
-	siw_wc_generate_email_table_header_row('Talenkennis');		
-	siw_wc_generate_email_table_row( $language_1, $language_1_skill );		
-	if ( $language_2_code != '' ){
-		siw_wc_generate_email_table_row( $language_2, $language_2_skill );	
+	siw_wc_generate_email_table_header_row('Talenkennis');
+	siw_wc_generate_email_table_row( $language_1, $language_1_skill );
+	if ( $language_2_code ){
+		siw_wc_generate_email_table_row( $language_2, $language_2_skill );
 	}	
-	if ( $language_3_code != '' ){
-		siw_wc_generate_email_table_row( $language_3, $language_3_skill );	
+	if ( $language_3_code ){
+		siw_wc_generate_email_table_row( $language_3, $language_3_skill );
 	}	
 
 	//gegevens voor PO
-	siw_wc_generate_email_table_header_row('Informatie voor partnerorganisatie');	
-	siw_wc_generate_email_table_row('Motivation', $motivation);	
+	siw_wc_generate_email_table_header_row('Informatie voor partnerorganisatie');
+	siw_wc_generate_email_table_row('Motivation', $motivation );
 	if ( $health_issues ){
 		siw_wc_generate_email_table_row('Health issues', $health_issues );
 	}

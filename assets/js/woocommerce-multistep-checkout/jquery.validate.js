@@ -272,14 +272,14 @@ $.extend($.validator, {
 		highlight: function( element, errorClass, validClass ) {
 			if ( element.type === "radio" ) {
 				this.findByName(element.name).addClass(errorClass).removeClass(validClass);
-			}else {
+			} else {
 				$(element).addClass(errorClass).removeClass(validClass);
 			}
 		},
 		unhighlight: function( element, errorClass, validClass ) {
 			if ( element.type === "radio" ) {
 				this.findByName(element.name).removeClass(errorClass).addClass(validClass);
-			}else {
+			} else {
 				$(element).removeClass(errorClass).addClass(validClass);
 			}
 		},
