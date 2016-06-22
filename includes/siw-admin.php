@@ -87,12 +87,12 @@ function siw_admin_footer_text() {
 //overbodige gebruikersvelden verwijderen
 add_filter('user_contactmethods','siw_remove_user_contactmethods',10,1);
 function siw_remove_user_contactmethods( $contactmethods ) {
-	unset($contactmethods['aim']);
-	unset($contactmethods['jabber']);
-	unset($contactmethods['yim']);
-	unset($contactmethods['googleplus']);
-	unset($contactmethods['twitter']);
-	unset($contactmethods['facebook']);	
+	unset( $contactmethods['aim']);
+	unset( $contactmethods['jabber']);
+	unset( $contactmethods['yim']);
+	unset( $contactmethods['googleplus']);
+	unset( $contactmethods['twitter']);
+	unset( $contactmethods['facebook']);	
 
 	return $contactmethods;
 }
@@ -101,5 +101,12 @@ add_action ('admin_init','siw_remove_extra_profile_fields');
 function siw_remove_extra_profile_fields(){
 	remove_action( 'show_user_profile', 'kt_show_extra_profile_fields' );
 	remove_action( 'edit_user_profile', 'kt_show_extra_profile_fields' );
+	remove_action( 'personal_options_update', 'kt_save_extra_profile_fields' );
+	remove_action( 'edit_user_profile_update', 'kt_save_extra_profile_fields' );
+	
+	//woocommerce meta-velden
+	add_filter( 'woocommerce_customer_meta_fields',function( $show_fields ){
+		return array();
+	});
 }
 
