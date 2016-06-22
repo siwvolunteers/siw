@@ -23,7 +23,16 @@ function siw_schedule_custom_cron_jobs() {
 	//opties in aanmeldformulier Community Day bijwerken.
 	if ( ! wp_next_scheduled( 'siw_update_community_day_options' ) ) {
 		wp_schedule_event( $cron_timestamp , 'daily', 'siw_update_community_day_options' );
+	}
+
+
+	//cache opnieuw vullen
+	$cache_rebuild_time = siw_get_cache_rebuild_time();
+	$cache_rebuild_timestamp = strtotime( 'tomorrow ' . $cache_rebuild_time);
+	if ( ! wp_next_scheduled( 'siw_rebuild_cache' ) ) {
+		wp_schedule_event( $cache_rebuild_timestamp , 'daily', 'siw_rebuild_cache' );
 	}	
+	
 }
 //CD-formulier
 add_action('siw_update_community_day_options', 'siw_update_community_day_options');
@@ -64,3 +73,13 @@ function siw_no_index_expired_jobs(){
 		update_post_meta( $job_id, '_yoast_wpseo_meta-robots-noindex', $noindex);		
 	}
 }
+
+add_action('siw_rebuild_cache', 'siw_rebuild_cache');
+function siw_rebuild_cache(){
+	//WP rocket cache legen en opnieuw aanmaken
+	if ( defined('WP_ROCKET_VERSION') ) {
+		rocket_clean_domain();
+		run_rocket_sitemap_preload();
+	}	
+}
+

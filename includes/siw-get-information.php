@@ -127,6 +127,11 @@ function siw_get_cron_time(){
 	return $cron_time;
 }
 
+function siw_get_cache_rebuild_time(){
+	$cache_rebuild_time = '04:00';
+	return $cache_rebuild_time;
+}
+
 function siw_get_db_backup_time(){
 	$db_backup_time = '03:00';
 	return $db_backup_time;
