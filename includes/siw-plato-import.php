@@ -510,7 +510,10 @@ function siw_wc_hide_projects() {
 			$variations = get_posts( $varationsargs ); 
 			foreach ( $variations as $variation_id ) {
 				update_post_meta( $variation_id, '_stock_status', 'outofstock');
-			}				
+			}
+			
+			//search&filter cache bijwerken
+			do_action('search_filter_update_post_cache', $product_id );
 		}
 	}
 }
