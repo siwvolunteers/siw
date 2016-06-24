@@ -238,39 +238,23 @@ function siw_update_community_day_options(){
 	
 }
 
+//wp rocket cache niet legen bij alle standaard acties
+add_action( 'wp_rocket_loaded', 'siw_remove_wp_rocket_purge_hooks' );
 
-//add_action( 'wp_rocket_loaded', 'rocket_remove_all_purge_hooks' );
-// Disables the deletion of the entire cache.
-
-
-function rocket_remove_all_purge_hooks() {
+function siw_remove_wp_rocket_purge_hooks() {
 	remove_action( 'user_register', 'rocket_clean_domain' );
 	remove_action( 'profile_update', 'rocket_clean_domain' );
 	remove_action( 'deleted_user', 'rocket_clean_domain' );
 	remove_action( 'create_term', 'rocket_clean_domain');
 	remove_action( 'edited_terms', 'rocket_clean_domain');	
 	remove_action( 'delete_term', 'rocket_clean_domain');	
-
-	$clean_domain_hooks = array(
-		// When a custom menu is updated
-		'wp_update_nav_menu',
-		// When any theme modifications are updated
-		'update_option_theme_mods_' . get_option( 'stylesheet' ),
-		// When you change the order of widgets
-		'update_option_sidebars_widgets',
-
-
-		// When a link (post type) is added
-		'add_link',
-		// When a link (post type) is updated
-		'edit_link',
-		// When a link (post type) is deleted
-		'delete_link',
-		// When resulty are saved in the Customizer
-		'customize_save',
-
-	);
-
+	remove_action( 'wp_update_nav_menu', 'rocket_clean_domain');		
+	remove_action( 'update_option_theme_mods_' . get_option( 'stylesheet' ), 'rocket_clean_domain');
+	remove_action( 'update_option_sidebars_widgets', 'rocket_clean_domain');
+	remove_action( 'add_link', 'rocket_clean_domain');
+	remove_action( 'edit_link', 'rocket_clean_domain');	
+	remove_action( 'delete_link', 'rocket_clean_domain');
+	remove_action( 'customize_save', 'rocket_clean_domain');	
 
 	remove_filter( 'widget_update_callback'	, 'rocket_widget_update_callback' );
 }
