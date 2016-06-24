@@ -52,6 +52,9 @@ function siw_wc_product_enquiry_form(){
 //trailing slash toevoegen bij AJAX-filtering
 add_filter('yith_wcan_untrailingslashit', '__return_false');
 
+//AJAX-filtering ook op zoekresultaten-pagina
+add_filter( 'yith_wcan_is_search', '__return_false' );
+
 //sorteeropties aanpassen
 add_filter( 'woocommerce_get_catalog_ordering_args', 'siw_wc_catalog_ordering' );
 
