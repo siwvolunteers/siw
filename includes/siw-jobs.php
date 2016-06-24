@@ -43,7 +43,8 @@ function siw_cpt_vacatures() {
 		'has_archive'			=> false,
 		'exclude_from_search'	=> false,
 		'publicly_queryable'	=> true,
-		'capability_type'		=> 'post',
+		'capability_type'		=> 'job',
+		'map_meta_cap'			=> true,
 	);
 	register_post_type( 'vacatures', $args );
 

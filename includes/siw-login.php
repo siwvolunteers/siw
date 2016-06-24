@@ -49,7 +49,7 @@ function siw_login_ip_whitelist( $allow, $ip ) {
 
 add_filter('woocommerce_prevent_admin_access', 'siw_allow_admin_access');
 function siw_allow_admin_access( $prevent_access ){
-	if ( current_user_can( 'edit_products' ) ){
+	if ( current_user_can( 'edit_products' ) || current_user_can( 'edit_jobs' ) || current_user_can( 'edit_events' ) ){
 		$prevent_access = false;
 	}
 	return $prevent_access;
