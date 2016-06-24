@@ -324,6 +324,10 @@ function siw_wc_get_tariff_array(){
 	return $tariff_array;
 }
 
+function siw_wc_get_nr_of_months_after_start_to_delete_project(){
+	$nr_of_months_after_start_to_delete_project = 12;
+	return $nr_of_months_after_start_to_delete_project;
+}
 
 function siw_wc_get_nr_of_days_before_start_to_hide_project(){
 	$nr_of_days_before_start_to_hide_project = get_option('siw_plato_nr_of_days_before_start_to_hide_project');

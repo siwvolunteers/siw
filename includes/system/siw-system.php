@@ -17,6 +17,14 @@ function siw_change_permalink_structure() {
 	add_permastruct( 'wpm-testimonial', "ervaring/%wpm-testimonial%", array( 'slug' => 'ervaring' ) );
 }
 
+
+add_action( 'init', 'my_add_excerpts_to_pages' );
+
+function my_add_excerpts_to_pages() {
+     add_post_type_support( 'page', 'excerpt' );
+}
+
+
 //portfolio permalinks aanpassen
 add_filter('kadence_portfolio_type_slug', 'siw_portfolio_type_slug');
 function siw_portfolio_type_slug(){
@@ -228,4 +236,41 @@ function siw_update_community_day_options(){
 		$wpdb->prepare( $query, maybe_serialize( $data ), $field_id )
 	);
 	
+}
+
+
+//add_action( 'wp_rocket_loaded', 'rocket_remove_all_purge_hooks' );
+// Disables the deletion of the entire cache.
+
+
+function rocket_remove_all_purge_hooks() {
+	remove_action( 'user_register', 'rocket_clean_domain' );
+	remove_action( 'profile_update', 'rocket_clean_domain' );
+	remove_action( 'deleted_user', 'rocket_clean_domain' );
+	remove_action( 'create_term', 'rocket_clean_domain');
+	remove_action( 'edited_terms', 'rocket_clean_domain');	
+	remove_action( 'delete_term', 'rocket_clean_domain');	
+
+	$clean_domain_hooks = array(
+		// When a custom menu is updated
+		'wp_update_nav_menu',
+		// When any theme modifications are updated
+		'update_option_theme_mods_' . get_option( 'stylesheet' ),
+		// When you change the order of widgets
+		'update_option_sidebars_widgets',
+
+
+		// When a link (post type) is added
+		'add_link',
+		// When a link (post type) is updated
+		'edit_link',
+		// When a link (post type) is deleted
+		'delete_link',
+		// When resulty are saved in the Customizer
+		'customize_save',
+
+	);
+
+
+	remove_filter( 'widget_update_callback'	, 'rocket_widget_update_callback' );
 }
