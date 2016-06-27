@@ -112,10 +112,13 @@ function siw_wc_shortcode_add_orderby_random ( $args, $atts ) {
 
 
 //custom fields verbergen op orderscherm en projectscherm
-add_action( 'admin_menu' , 'siw_wc_hide_custom_fields' );
+add_action( 'add_meta_boxes' , 'siw_wc_hide_custom_fields', 999 );
 function siw_wc_hide_custom_fields() {
 	remove_meta_box( 'postcustom' , 'shop_order' , 'normal' ); 
+	remove_meta_box( 'woocommerce-order-downloads', 'shop_order', 'normal');
 	remove_meta_box( 'postcustom' , 'product' , 'normal' ); 
+	remove_meta_box( 'woocommerce-product-images' , 'product', 'side', 'low' );
+	remove_meta_box( 'commentsdiv' , 'product' , 'normal' ); 
 }
 
 /*
@@ -253,7 +256,7 @@ function siw_wc_order_meta_boxes( array $meta_boxes ){
 
 
 //projectgegevens in metaboxes
-add_filter( 'cmb_meta_boxes', 'siw_wc_project_metaboxes' );
+add_filter( 'cmb_meta_boxes', 'siw_wc_project_metaboxes' ,999 );
 
 function siw_wc_project_metaboxes( array $meta_boxes ){
 
@@ -285,6 +288,26 @@ function siw_wc_project_metaboxes( array $meta_boxes ){
 			),	
 		),
 	);
+	//verbergen
+	$sidebar = array_search('product_post_side_metabox', array_column( $meta_boxes, 'id'));
+	$meta_boxes[ $sidebar ]['pages'] = array();
+	
+	$video = array_search('product_post_metabox', array_column( $meta_boxes, 'id'));
+	$meta_boxes[ $video ]['pages'] = array();	
 
+	$tab_1 = array_search('kad_custom_tab_01', array_column( $meta_boxes, 'id'));
+	$meta_boxes[ $tab_1 ]['pages'] = array();	
+
+	$tab_2 = array_search('kad_custom_tab_02', array_column( $meta_boxes, 'id'));
+	$meta_boxes[ $tab_2 ]['pages'] = array();	
+
+	$tab_3 = array_search('kad_custom_tab_03', array_column( $meta_boxes, 'id'));
+	$meta_boxes[ $tab_3 ]['pages'] = array();	
+	
+	$subtitle_keys = array_keys( array_column($meta_boxes, 'id'), 'subtitle_metabox');
+	foreach( $subtitle_keys as $subtitle ){
+		$meta_boxes[ $subtitle ]['pages'] = array_diff( $meta_boxes[$subtitle]['pages'], array('product'));
+	}
+	
 	return $meta_boxes;
 }	
