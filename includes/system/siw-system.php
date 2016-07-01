@@ -242,19 +242,40 @@ function siw_update_community_day_options(){
 add_action( 'wp_rocket_loaded', 'siw_remove_wp_rocket_purge_hooks' );
 
 function siw_remove_wp_rocket_purge_hooks() {
-	remove_action( 'user_register', 'rocket_clean_domain' );
-	remove_action( 'profile_update', 'rocket_clean_domain' );
-	remove_action( 'deleted_user', 'rocket_clean_domain' );
-	remove_action( 'create_term', 'rocket_clean_domain');
-	remove_action( 'edited_terms', 'rocket_clean_domain');	
-	remove_action( 'delete_term', 'rocket_clean_domain');	
-	remove_action( 'wp_update_nav_menu', 'rocket_clean_domain');		
-	remove_action( 'update_option_theme_mods_' . get_option( 'stylesheet' ), 'rocket_clean_domain');
-	remove_action( 'update_option_sidebars_widgets', 'rocket_clean_domain');
-	remove_action( 'add_link', 'rocket_clean_domain');
-	remove_action( 'edit_link', 'rocket_clean_domain');	
-	remove_action( 'delete_link', 'rocket_clean_domain');
-	remove_action( 'customize_save', 'rocket_clean_domain');	
+	$clean_domain_hooks = array(
+		'switch_theme',
+		'user_register',
+		'profile_update',
+		'deleted_user',
+		'wp_update_nav_menu',
+		'update_option_theme_mods_' . get_option( 'stylesheet' ),
+		'update_option_sidebars_widgets',
+		'update_option_category_base',
+		'update_option_tag_base',
+		'permalink_structure_changed',
+		'create_term',
+		'edited_terms',
+		'delete_term',
+		'add_link',
+		'edit_link',
+		'delete_link',
+		'customize_save',
+	);
 
+	$clean_post_hooks = array(
+		'wp_trash_post',
+		'delete_post',
+		'clean_post_cache',
+		'wp_update_comment_count',
+	);
+
+	foreach ( $clean_domain_hooks as $key => $handle ) {
+		remove_action( $handle, 'rocket_clean_domain' );
+	}
+
+	foreach ( $clean_post_hooks as $key => $handle ) {
+		remove_action( $handle, 'rocket_clean_post' );
+	}
+	
 	remove_filter( 'widget_update_callback'	, 'rocket_widget_update_callback' );
 }
