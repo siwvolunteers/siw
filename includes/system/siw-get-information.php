@@ -623,6 +623,12 @@ function siw_get_array( $array ){
 
 			case "project_countries":	
 				$project_countries = array();
+				$project_countries['ALB'] = array(
+					'slug'		=> 'albanie',
+					'name'		=> 'Albanië',
+					'continent'	=> 'europa',
+					'allowed'	=> 'yes',
+				); 
 				$project_countries['ARG'] = array(
 					'slug'		=> 'argentinie',
 					'name'		=> 'Argentinië',
@@ -920,6 +926,12 @@ function siw_get_array( $array ){
 				$project_countries['SVK'] = array(
 					'slug'		=> 'slowakije',
 					'name'		=> 'Slowakije',
+					'continent'	=> 'europa',
+					'allowed'	=> 'yes',
+				);
+				$project_countries['SVN'] = array(
+					'slug'		=> 'slovenie',
+					'name'		=> 'Slovenië',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
