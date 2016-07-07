@@ -15,23 +15,15 @@ function siw_remove_admin_bar_items( $wp_admin_bar ) {
 	$wp_admin_bar->remove_menu( 'wp-logo' );
 	$wp_admin_bar->remove_menu( 'comments' );
 	$wp_admin_bar->remove_menu( 'wpseo-menu' );
-	$wp_admin_bar->remove_menu( 'vfbp-admin-toolbar' );	
-	//nieuwe content
-	$wp_admin_bar->remove_node( 'new-post' );
-	$wp_admin_bar->remove_node( 'new-link' );
-	$wp_admin_bar->remove_node( 'new-media' );
-	$wp_admin_bar->remove_node( 'new-kadslider' );
-	$wp_admin_bar->remove_node( 'new-product' );
-	$wp_admin_bar->remove_node( 'new-shop_order' );
-	$wp_admin_bar->remove_node( 'new-shop_coupon' );
-	$wp_admin_bar->remove_node( 'new-user' );
-	$wp_admin_bar->remove_node( 'new-redirect_rule' );	
+	$wp_admin_bar->remove_menu( 'vfbp-admin-toolbar' );
+	$wp_admin_bar->remove_menu('new-content');
+
 }
 
 //welcome panel verwijderen
 remove_action( 'welcome_panel', 'wp_welcome_panel' );
 
-//ongebruikte menu-items verwijderen	
+//ongebruikte menu-items verwijderen
 add_action( 'admin_menu', 'siw_remove_admin_menu_items' );
 function siw_remove_admin_menu_items(){
 	remove_menu_page( 'edit-comments.php' );     
@@ -87,12 +79,12 @@ function siw_admin_footer_text() {
 //overbodige gebruikersvelden verwijderen
 add_filter('user_contactmethods','siw_remove_user_contactmethods',10,1);
 function siw_remove_user_contactmethods( $contactmethods ) {
-	unset($contactmethods['aim']);
-	unset($contactmethods['jabber']);
-	unset($contactmethods['yim']);
-	unset($contactmethods['googleplus']);
-	unset($contactmethods['twitter']);
-	unset($contactmethods['facebook']);	
+	unset( $contactmethods['aim']);
+	unset( $contactmethods['jabber']);
+	unset( $contactmethods['yim']);
+	unset( $contactmethods['googleplus']);
+	unset( $contactmethods['twitter']);
+	unset( $contactmethods['facebook']);	
 
 	return $contactmethods;
 }
@@ -101,5 +93,12 @@ add_action ('admin_init','siw_remove_extra_profile_fields');
 function siw_remove_extra_profile_fields(){
 	remove_action( 'show_user_profile', 'kt_show_extra_profile_fields' );
 	remove_action( 'edit_user_profile', 'kt_show_extra_profile_fields' );
+	remove_action( 'personal_options_update', 'kt_save_extra_profile_fields' );
+	remove_action( 'edit_user_profile_update', 'kt_save_extra_profile_fields' );
+	
+	//woocommerce meta-velden
+	add_filter( 'woocommerce_customer_meta_fields',function( $show_fields ){
+		return array();
+	});
 }
 

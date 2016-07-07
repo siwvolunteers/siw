@@ -17,6 +17,14 @@ function siw_change_permalink_structure() {
 	add_permastruct( 'wpm-testimonial', "ervaring/%wpm-testimonial%", array( 'slug' => 'ervaring' ) );
 }
 
+
+add_action( 'init', 'my_add_excerpts_to_pages' );
+
+function my_add_excerpts_to_pages() {
+	add_post_type_support( 'page', 'excerpt' );
+}
+
+
 //portfolio permalinks aanpassen
 add_filter('kadence_portfolio_type_slug', 'siw_portfolio_type_slug');
 function siw_portfolio_type_slug(){
@@ -228,4 +236,46 @@ function siw_update_community_day_options(){
 		$wpdb->prepare( $query, maybe_serialize( $data ), $field_id )
 	);
 	
+}
+
+//wp rocket cache niet legen bij alle standaard acties
+add_action( 'wp_rocket_loaded', 'siw_remove_wp_rocket_purge_hooks' );
+
+function siw_remove_wp_rocket_purge_hooks() {
+	$clean_domain_hooks = array(
+		'switch_theme',
+		'user_register',
+		'profile_update',
+		'deleted_user',
+		'wp_update_nav_menu',
+		'update_option_theme_mods_' . get_option( 'stylesheet' ),
+		'update_option_sidebars_widgets',
+		'update_option_category_base',
+		'update_option_tag_base',
+		'permalink_structure_changed',
+		'create_term',
+		'edited_terms',
+		'delete_term',
+		'add_link',
+		'edit_link',
+		'delete_link',
+		'customize_save',
+	);
+
+	$clean_post_hooks = array(
+		'wp_trash_post',
+		'delete_post',
+		'clean_post_cache',
+		'wp_update_comment_count',
+	);
+
+	foreach ( $clean_domain_hooks as $key => $handle ) {
+		remove_action( $handle, 'rocket_clean_domain' );
+	}
+
+	foreach ( $clean_post_hooks as $key => $handle ) {
+		remove_action( $handle, 'rocket_clean_post' );
+	}
+	
+	remove_filter( 'widget_update_callback'	, 'rocket_widget_update_callback' );
 }

@@ -36,6 +36,7 @@ function siw_google_analytics() {?>
 	r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
 	ga('create','<?php echo GOOGLE_ANALYTICS_ID; ?>',{'siteSpeedSampleRate': 100});
 	ga('set', 'anonymizeIp', true);
+	ga('set', 'forceSSL', true);
 	<?php if (GOOGLE_ANALYTICS_ENABLE_LINKID){?>
 	ga('require', 'linkid', {
 		'levels': 5

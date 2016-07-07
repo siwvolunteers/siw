@@ -127,6 +127,11 @@ function siw_get_cron_time(){
 	return $cron_time;
 }
 
+function siw_get_cache_rebuild_time(){
+	$cache_rebuild_time = '04:00';
+	return $cache_rebuild_time;
+}
+
 function siw_get_db_backup_time(){
 	$db_backup_time = '03:00';
 	return $db_backup_time;
@@ -319,6 +324,10 @@ function siw_wc_get_tariff_array(){
 	return $tariff_array;
 }
 
+function siw_wc_get_nr_of_months_after_start_to_delete_project(){
+	$nr_of_months_after_start_to_delete_project = 12;
+	return $nr_of_months_after_start_to_delete_project;
+}
 
 function siw_wc_get_nr_of_days_before_start_to_hide_project(){
 	$nr_of_days_before_start_to_hide_project = get_option('siw_plato_nr_of_days_before_start_to_hide_project');
@@ -614,6 +623,12 @@ function siw_get_array( $array ){
 
 			case "project_countries":	
 				$project_countries = array();
+				$project_countries['ALB'] = array(
+					'slug'		=> 'albanie',
+					'name'		=> 'Albanië',
+					'continent'	=> 'europa',
+					'allowed'	=> 'yes',
+				); 
 				$project_countries['ARG'] = array(
 					'slug'		=> 'argentinie',
 					'name'		=> 'Argentinië',
@@ -911,6 +926,12 @@ function siw_get_array( $array ){
 				$project_countries['SVK'] = array(
 					'slug'		=> 'slowakije',
 					'name'		=> 'Slowakije',
+					'continent'	=> 'europa',
+					'allowed'	=> 'yes',
+				);
+				$project_countries['SVN'] = array(
+					'slug'		=> 'slovenie',
+					'name'		=> 'Slovenië',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);

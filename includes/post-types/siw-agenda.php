@@ -44,7 +44,8 @@ function siw_cpt_agenda() {
 		'has_archive'			=> false,
 		'exclude_from_search'	=> false,
 		'publicly_queryable'	=> true,
-		'capability_type'		=> 'post',
+		'capability_type'		=> 'event',
+		'map_meta_cap'			=> true,
 	);
 	register_post_type( 'agenda', $args );
 
