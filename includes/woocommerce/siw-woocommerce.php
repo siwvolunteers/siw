@@ -311,3 +311,18 @@ function siw_wc_project_metaboxes( array $meta_boxes ){
 	
 	return $meta_boxes;
 }	
+
+add_action( 'woocommerce_order_actions', 'siw_add_order_action_export_to_plato' );
+
+
+function siw_add_order_action_export_to_plato( $actions ) {
+	$actions['siw_export_to_plato'] = __( 'Exporteer naar PLATO', 'siw' );
+	return $actions;
+}
+
+// process the custom order meta box order action
+add_action( 'woocommerce_order_action_siw_export_to_plato', 'siw_export_application_to_plato' );
+
+function siw_export_application_to_plato( $order ) {
+	siw_wc_export_paid_applications ( $order->id );
+}
