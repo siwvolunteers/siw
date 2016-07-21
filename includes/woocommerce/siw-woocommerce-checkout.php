@@ -357,7 +357,7 @@ function siw_woocommerce_multistep_checkout_scripts(){
 		$wp_scripts->registered['wmc-wizard']->src = get_stylesheet_directory_uri() . '/assets/js/woocommerce-multistep-checkout/wizard.js';
 	}
 	if ($wp_scripts->registered['jquery-validate']){
-		$wp_scripts->registered['jquery-validate']->src = get_stylesheet_directory_uri() . '/assets/js/woocommerce-multistep-checkout/jquery.validate.js';
+		$wp_scripts->registered['jquery-validate']->src = get_stylesheet_directory_uri() . '/assets/js/woocommerce-multistep-checkout/jquery.validate.min.js';
 	}
 }
 

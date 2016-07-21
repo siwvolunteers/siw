@@ -24,6 +24,7 @@ if (!$checkout->enable_signup && !$checkout->enable_guest_checkout && !is_user_l
 // filter hook for include new pages inside the payment method
 $get_checkout_url = apply_filters('woocommerce_get_checkout_url', WC()->cart->get_checkout_url());
 ?>
+<div class="container-coupon-login-form"></div>
 
 <form  name="checkout" method="post" class="checkout" action="<?php echo esc_url($get_checkout_url); ?>">
     <div id="wizard"><!---Start of jQuery Wizard -->
@@ -38,47 +39,62 @@ $get_checkout_url = apply_filters('woocommerce_get_checkout_url', WC()->cart->ge
                 <h1><?php echo get_option('wmc_billing_label') ? __(get_option('wmc_billing_label'), 'woocommerce-multistep-checkout') : __('Billing', 'woocommerce-multistep-checkout') ?></h1>
             <?php endif; ?>
 
-            <div class="billing-tab-contents">
-                <?php
-                do_action('woocommerce_checkout_billing');
+            <?php
+            /**
+             * If Combine Billing and Shipping Steps **
+             */
+            if (get_option('wmc_merge_billing_shipping_tabs') == 'true') {?>                
+                <div class="billing-tab-contents">
+                    <?php
+                    do_action('woocommerce_checkout_billing');
+                    do_action('woocommerce_checkout_shipping');
+                    do_action('woocommerce_checkout_after_customer_details');
+                    ?>
+                </div>
+            <?php } else { ?>
 
-                //If cart don't needs shipping
-                if (!WC()->cart->needs_shipping_address()) :
+                <div class="billing-tab-contents">
+                    <?php
+                    do_action('woocommerce_checkout_billing');
 
-                    if (apply_filters('woocommerce_enable_order_notes_field', get_option('woocommerce_enable_order_comments', 'yes') === 'yes')) :
+                    //If cart don't needs shipping
+                    if (!WC()->cart->needs_shipping_address()) :
+                        //do_action('woocommerce_checkout_after_customer_details');
+                        //do_action('woocommerce_before_order_notes', $checkout);
 
-                        if (!WC()->cart->needs_shipping() || WC()->cart->ship_to_billing_address_only()) :
-                            ?>
+                        if (apply_filters('woocommerce_enable_order_notes_field', get_option('woocommerce_enable_order_comments', 'yes') === 'yes')) :
 
-                            <h3><?php _e('Additional Information', 'woocommerce'); ?></h3>
+                            if (!WC()->cart->needs_shipping() || WC()->cart->ship_to_billing_address_only()) :
+                                ?>
+
+                                <h3><?php _e('Additional Information', 'woocommerce'); ?></h3>
+
+                            <?php endif; ?>
+
+                            <?php foreach ($checkout->checkout_fields['order'] as $key => $field) : ?>
+
+                                <?php woocommerce_form_field($key, $field, $checkout->get_value($key)); ?>
+
+                            <?php endforeach; ?>
 
                         <?php endif; ?>
-
-                        <?php foreach ($checkout->checkout_fields['order'] as $key => $field) : ?>
-
-                            <?php woocommerce_form_field($key, $field, $checkout->get_value($key)); ?>
-
-                        <?php endforeach; ?>
-
+                        <?php //do_action('woocommerce_after_order_notes', $checkout); ?>
                     <?php endif; ?>
-                    <?php do_action('woocommerce_after_order_notes', $checkout); ?>
-                <?php endif; ?>
-            </div>
-
-
-            <?php if (true) : ?>
-
-                <?php do_action('woocommerce_multistep_checkout_before_shipping'); ?>
-
-                <h1 class="title-shipping"><?php echo get_option('wmc_shipping_label') ? __(get_option('wmc_shipping_label'), 'woocommerce-multistep-checkout') : __('Shipping', 'woocommerce-multistep-checkout') ?></h1>
-                <div class="shipping-tab-contents">
-                    <?php do_action('woocommerce_checkout_shipping'); ?>
-
-                    <?php do_action('woocommerce_checkout_after_customer_details'); ?>
                 </div>
-                <?php do_action('woocommerce_multistep_checkout_after_shipping'); ?>
-            <?php endif; ?>
 
+                <?php if (true) : ?>
+
+                    <?php do_action('woocommerce_multistep_checkout_before_shipping'); ?>
+
+                    <h1 class="title-shipping"><?php echo get_option('wmc_shipping_label') ? __(get_option('wmc_shipping_label'), 'woocommerce-multistep-checkout') : __('Shipping', 'woocommerce-multistep-checkout') ?></h1>
+                    <div class="shipping-tab-contents">
+                        <?php do_action('woocommerce_checkout_shipping'); ?>
+
+                        <?php do_action('woocommerce_checkout_after_customer_details'); ?>
+                    </div>
+                    <?php do_action('woocommerce_multistep_checkout_after_shipping'); ?>
+                <?php endif; ?>
+            <?php } ?>
         <?php endif; ?>
 
         <?php do_action('woocommerce_multistep_checkout_before_order_info'); ?>  

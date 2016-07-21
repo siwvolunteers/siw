@@ -34,8 +34,10 @@ jQuery(document).ready(function ($) {
             },
             onStepChanging: function (event, currentIndex, newIndex)
             {
-                if ((currentIndex == 0 && wmc_wizard.isAuthorizedUser == false && wmc_wizard.include_login != "false" && wmc_wizard.woo_include_login != "no") || currentIndex > newIndex || isCouponForm()) {
+                /*** You can attach your custom event hanlder here. Usefule for form valiation **/                
+                $(this).trigger("onStepChanging", [a = event, b = currentIndex, c = newIndex]);
 
+                if ((currentIndex == 0 && wmc_wizard.isAuthorizedUser == false && wmc_wizard.include_login != "false" && wmc_wizard.woo_include_login != "no") || currentIndex > newIndex || isCouponForm()) {
                     return true
                 } else {
                     return validate_checkoutform();
@@ -43,6 +45,9 @@ jQuery(document).ready(function ($) {
             },
             onStepChanged: function (event, currentIndex, priorIndex)
             {
+                //Add your custom funtions to this hanlder                
+                $(this).trigger("onStepChanged", [a = event, b = currentIndex, c = priorIndex]);
+
                 if (currentIndex > 0) {
                     $('.actions > ul > li:first-child').attr('style', '');
                 } else {
@@ -55,6 +60,9 @@ jQuery(document).ready(function ($) {
                     jQuery('form.checkout a[href="#next"]').html(wmc_wizard.next);
                     jQuery('form.checkout a[href="#previous"]').show();
                 }
+            },
+            onFinishing: function(event, currentIndex){
+                $(this).trigger('onFinishing');
             }
         });
     } else {
@@ -73,6 +81,9 @@ jQuery(document).ready(function ($) {
             },
             onStepChanging: function (event, currentIndex, newIndex)
             {
+                /*** You can attach your custom event hanlder here. Usefule for form valiation **/                
+                $(this).trigger("onStepChanging", [a = event, b = currentIndex, c = newIndex]);
+
                 if ((currentIndex == 0 && wmc_wizard.isAuthorizedUser == false && wmc_wizard.include_login != "false" && wmc_wizard.woo_include_login != "no") || currentIndex > newIndex || isCouponForm()) {
                     return true
                 } else {
@@ -81,6 +92,9 @@ jQuery(document).ready(function ($) {
             },
             onStepChanged: function (event, currentIndex, priorIndex)
             {
+                /***Add your customer functions to the onStepChanged Hander function **/
+                $(this).trigger("onStepChanged", [a = currentIndex, b = currentIndex, c = priorIndex]);
+
                 if (currentIndex > 0) {
                     $('.actions > ul > li:first-child').attr('style', '');
                 } else {
@@ -93,11 +107,14 @@ jQuery(document).ready(function ($) {
                     jQuery('form.checkout a[href="#next"]').html(wmc_wizard.next);
                     jQuery('form.checkout a[href="#previous"]').show();
                 }
+            },
+             onFinishing: function(event, currentIndex){
+                $(this).trigger('onFinishing');
             }
         });
     }
 
-    
+
     jQuery.extend(jQuery.validator.messages, {
         required: wmc_wizard.error_msg,
         email: wmc_wizard.email_error_msg
@@ -106,31 +123,10 @@ jQuery(document).ready(function ($) {
 
     jQuery(".actions > ul li:last a").addClass("finish-btn");
 
+    /****
+     * When Wizard is complete or checkout form is submitted
+     */
     jQuery(".finish-btn").click(function () {
-
-        if (jQuery('input[name="legal"]').length) {
-            if (jQuery('input[name="legal"]').is(":checked")) {
-                jQuery('input[name="legal"]').parent().removeAttr("style");
-                jQuery("#place_order").trigger("click");
-                return true
-            } else {
-                jQuery('input[name="legal"]').attr("required", "required");
-                jQuery('.terms').css('border', '1px solid #8a1f11');
-                return false;
-            }
-        } else {
-            if (jQuery('input[name="terms"]').length) {
-                if (jQuery('input[name="terms"]').is(":checked")) {
-                    jQuery('input[name="terms"]').parent().removeAttr("style");
-                    jQuery("#place_order").trigger("click");
-                    return true
-                } else {
-                    jQuery('input[name="terms"]').attr("required", "required");
-                    jQuery('input[name="terms"]').parent().css('border', '1px solid #8a1f11');
-                    return false;
-                }
-            }
-        }
         jQuery("#place_order").trigger("click");
 
     });
@@ -231,8 +227,8 @@ jQuery(document).ready(function ($) {
         //       
         var form_valid = false;
         //jQuery("#wizard").validate().settings.ignore = ":disabled,:hidden";
-    
-        if(jQuery('form.checkout').valid()){
+
+        if (jQuery('form.checkout').valid()) {
             form_valid = true;
         }
 
@@ -338,42 +334,18 @@ jQuery(document).ready(function ($) {
             }
 
         }
+        //Valite terms and conditions
+        if(!validate_terms()){
+            form_valid = false;
+        };
 
         return form_valid;
 
     }
 
-    function validate_phone() {
-        var data = {
-            action: 'validate_phone',
-            phone: jQuery("#billing_phone").val()
-        };
-
-        $(document).ajaxStart($.blockUI(
-                {
-                    message: null,
-                    overlayCSS:
-                            {
-                                background: "#fff url('" + wmc_wizard.loading_img + "') no-repeat center center",
-                                opacity: 0.6
-                            }
-                }
-        )).ajaxStop($.unblockUI);
-
-        jQuery.post(wmc_wizard.ajaxurl, data, function (response) {
-
-            if (response == false) {
-                jQuery("#billing_phone").parent().removeClass("woocommerce-validated").addClass("woocommerce-invalid woocommerce-invalid-required-field");
-                return false;
-            } else {
-                return true;
-            }
-
-        });
-    }
-
-    //Login form
-
+    /*** 
+     * When Login form is submitted
+     */
     jQuery('form.login').submit(function (evt)
     {
         if (wmc_wizard.include_login != "false") {
@@ -489,5 +461,98 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    /**
+     * Manipulate couopon form for Validatation purposes. Just because we don't need nested forms
+     * @returns 
+     */
+    function manipulate_coupon_form() {
+        if (jQuery(".coupon-step").hasClass("current")) {
+            if (wmc_wizard.transitionEffect === 'fade') {
+                jQuery("form.checkout_coupon").appendTo('.coupon-step').fadeIn(100);
+            } else {
+                jQuery("form.checkout_coupon").appendTo('.coupon-step').slideDown(100);
+            }
+
+        } else {
+            //move coupon form to some temp location...Just form validation
+            if (jQuery(".coupon-step").length) {
+                $("form.checkout_coupon").hide().appendTo(".container-coupon-login-form");
+            }
+        }
+    }
+
+    /**
+     * Manipulate login form for Validatation purposes. Just because we don't need nested forms
+     * @returns 
+     */
+
+    function manipulate_login_form() {
+        if (jQuery(".login-step").hasClass("current")) {
+            if (wmc_wizard.transitionEffect == 'fade') {
+                jQuery("form.login").appendTo('.login-step').fadeIn(100);
+            } else {
+                jQuery("form.login").appendTo('.login-step').slideDown(100);
+            }
+
+        } else {
+            //Move login form to temp location....Just for validation
+            if (jQuery(".login-step").length) {
+                jQuery("form.login").hide().appendTo('.container-coupon-login-form');
+            }
+        }
+    }
+
+
+
+    function validate_terms(event) {
+        var validate_form = true;
+        if (jQuery('input[name="legal"]').length && jQuery('input[name="legal"]').is(":visible")) {
+            if (jQuery('input[name="legal"]').is(":checked")) {
+                jQuery('input[name="legal"]').parent().removeAttr("style");
+                jQuery(".terms-error").remove();
+                validate_form = true;
+            } else {
+                jQuery('input[name="legal"]').attr("required", "required");
+                jQuery('.terms').css('border', '1px solid #8a1f11');
+                if (!$(".terms-error").length) {
+                    jQuery('<p class="terms-error">' + wmc_wizard.terms_error + '</p>').insertAfter(".wc-terms-and-conditions");
+                }
+                validate_form = false;
+                event.stopImmediatePropagation();
+            }
+        }
+        if (jQuery('input[name="terms"]').length && jQuery('input[name="terms"]').is(":visible")) {
+            if (jQuery('input[name="terms"]').is(":checked")) {
+                jQuery('input[name="terms"]').parent().removeAttr("style");
+                jQuery(".terms-error").remove();
+                validate_form = true;
+            } else {
+                jQuery('input[name="terms"]').attr("required", "required");
+                jQuery('input[name="terms"]').parent().css('border', '1px solid #8a1f11');
+                if (!$(".terms-error").length) {
+                    jQuery('<p class="terms-error">' + wmc_wizard.terms_error + '</p>').insertAfter(".wc-terms-and-conditions");
+                }
+                validate_form = false;                
+                event.stopImmediatePropagation();
+            }
+        }
+        return validate_form;
+
+    }
+    
+    /*** Manipulation of Coupon and login form, just becuase validaiton don't work on nested forms**/
+    jQuery("#wizard").on('onStepChanged', function (event, currentIndex, priorIndex) {
+        manipulate_coupon_form();
+        manipulate_login_form();        
+    });
+    
+    /***
+     * Handling terms and contions on the final step
+     */    
+    jQuery("#wizard").on('onFinishing', function (){
+        validate_terms();
+    });    
+
+    
 
 });
