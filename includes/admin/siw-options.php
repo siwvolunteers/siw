@@ -824,7 +824,7 @@ function siw_settings_show_vfb_form_select( $option ) {
     if (!empty($forms)) {
 		echo '<select name="', esc_attr( $option ), '">';
 		foreach ( $forms as $form ) {
-			echo '<option value="', esc_attr( $form[id] ), '"', get_option( $option ) == $form[id] ? ' selected="selected"' : '', '>', esc_html( $form[title] ), '</option>';
+			echo '<option value="', esc_attr( $form['id'] ), '"', get_option( $option ) == $form['id'] ? ' selected="selected"' : '', '>', esc_html( $form['title'] ), '</option>';
 		}
 		echo '</select>'; 
 	}

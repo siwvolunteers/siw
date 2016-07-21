@@ -191,7 +191,6 @@ function siw_oembed_response_data( $data ){
 }
 
 //cd-opties
-//add_action('init','siw_update_cd_options');
 
 function siw_update_community_day_options(){
 

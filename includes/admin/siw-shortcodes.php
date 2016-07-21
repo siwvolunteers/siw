@@ -17,6 +17,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 			'type' => array(
 				'type'=>'select', 
 				'title'=>__('Type', 'siw'),
+				'default' => '',
 				'values' => array(
 					"email"		=> __('E-mail','siw'),
 					"iban"		=> __('IBAN','siw'),
@@ -45,6 +46,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 			'tarief' => array(
 				'type'=>'select', 
 				'title'=>__('Tarief', 'siw'),
+				'default' => '',
 				'values' => array(
 					"student" => __('Student','siw'),
 					"regulier" => __('Regulier','siw'),
@@ -59,6 +61,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 			'tarief' => array(
 				'type'=>'select', 
 				'title'=>__('Tarief', 'siw'),
+				'default' => '',
 				'values' => array(
 					"student" => __('Student','siw'),
 					"regulier" => __('Regulier','siw'),
@@ -73,6 +76,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 			'aantal' => array(
 				'type'=>'select', 
 				'title'=>__('Aantal', 'siw'),
+				'default' => '',
 				'values' => array(
 					"tweede" => __('2e','siw'),
 					"derde" => __('3e','siw'),
