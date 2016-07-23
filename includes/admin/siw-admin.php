@@ -63,7 +63,7 @@ add_action( 'admin_notices', 'siw_admin_notice_show_site_url' );
 function siw_admin_notice_show_site_url() {?>
 <div class="updated">
 	<h1>Je bent ingelogd op: <?php echo site_url('', '' );?></h1>
-</div>';
+</div>
 <?php
 }
 
