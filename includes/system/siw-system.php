@@ -131,25 +131,6 @@ function siw_vfb_pro_scripts(){
 	}
 }
 
-//CMB meta box url protocol-onafhankelijk maken
-add_filter( 'cmb_meta_box_url', 'siw_cmb_meta_box_url', 10, 1 );
-
-function siw_cmb_meta_box_url( $cmb_url ){
-	$cmb_url = str_replace("http://", "//", $cmb_url );
-    return $cmb_url;
-}
-
-
-//afbeelding in admin over ssl i.v.m. mixed content
-add_filter('wp_calculate_image_srcset', 'siw_set_image_srcset_to_ssl');
-function siw_set_image_srcset_to_ssl($sources) {
-	if ( is_ssl() ){
-		foreach($sources as $size => &$source){
-			$source['url'] = set_url_scheme( $source['url'] ,'https');
-		}
-	}
-	return $sources;
-}
 
 /*
 */
