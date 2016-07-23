@@ -108,16 +108,15 @@ function siw_wc_checkout_address_fields($fields){
 remove_action( 'woocommerce_after_order_notes', 'on_checkout_page' );
 add_action( 'woocommerce_after_checkout_billing_form', 'on_checkout_page' );
 
-
-
-//informatie voor PO
-add_action( 'woocommerce_checkout_after_customer_details' ,'siw_wc_checkout_information_for_po' );
-
-function siw_wc_checkout_information_for_po(){ 
-
-    $checkout = WC()->checkout(); 
-	
-	//informatie voor PO
+//extra velden voor partner
+add_action( 'woocommerce_multistep_checkout_before_order_info', 'siw_wc_checkout_extra_information');
+function siw_wc_checkout_extra_information() {
+     $checkout = WC()->checkout(); 
+	//lijsten van talen en niveau
+	$languages = siw_get_array('languages');
+	$language_skill = siw_get_array('language_skill');
+	echo '<h1>Informatie voor partner</h1>';
+	echo '<div class="woocommerce-extra-fields">';
 	echo '<div id="infoForPartner"><h3>' . __('Informatie voor partnerorganisatie') . '</h3>';
   	woocommerce_form_field( 'motivation', array(
         'type'          => 'textarea',
@@ -156,17 +155,25 @@ function siw_wc_checkout_information_for_po(){
         ), $checkout->get_value( 'togetherWith' )
 	);
     echo '</div>';
-	
-}	
-
-add_action( 'woocommerce_before_order_notes', 'siw_wc_checkout_extra_information' );
- 
-function siw_wc_checkout_extra_information( $checkout ) {
- 
-	//lijsten van talen en niveau
-	$languages = siw_get_array('languages');
-	$language_skill = siw_get_array('language_skill');
-	
+	// gegevens noodcontact
+	echo '<div id="emergencyContact"><h3>' . __('Noodcontact') . '</h3>';
+	woocommerce_form_field( 'emergencyContactName', array(
+        'type'          => 'text',
+		'class'		=> array('form-row-first'),
+		'required'		=> true,
+		'label'         => __('Naam'),
+        ), $checkout->get_value( 'emergencyContactName' )
+	);
+   
+	woocommerce_form_field( 'emergencyContactPhone', array(
+        'type'          => 'text',
+		'class'		=> array('form-row-last'),
+		'required'		=> true,
+		'label'         => __('Telefoonnummer'),
+		'clear'         => true      
+        ), $checkout->get_value( 'emergencyContactPhone' )
+	);
+	echo '</div>';		
     echo '<div id="languageSkills"><h3>' . __('Talenkennis') . '</h3>';
  
 	woocommerce_form_field('language1', array(
@@ -232,27 +239,7 @@ function siw_wc_checkout_extra_information( $checkout ) {
 		
 		
     echo '</div>';
- 	
-	// gegevens noodcontact
-	echo '<div id="emergencyContact"><h3>' . __('Noodcontact') . '</h3>';
-	woocommerce_form_field( 'emergencyContactName', array(
-        'type'          => 'text',
-		'class'		=> array('form-row-first'),
-		'required'		=> true,
-		'label'         => __('Naam'),
-        ), $checkout->get_value( 'emergencyContactName' )
-	);
-   
-	woocommerce_form_field( 'emergencyContactPhone', array(
-        'type'          => 'text',
-		'class'		=> array('form-row-last'),
-		'required'		=> true,
-		'label'         => __('Telefoonnummer'),
-		'clear'         => true      
-        ), $checkout->get_value( 'emergencyContactPhone' )
-	);
-  
-    echo '</div>';	
+	echo '</div>';	
 }
 
 //controleren extra velden
@@ -348,7 +335,7 @@ function siw_wc_checkout_save_checkout_fields( $order_id ) {
 /*
 Multi-step checkout
 */
-remove_filter('woocommerce_locate_template', 'wcmultichecout_woocommerce_locate_template', 1, 3);
+//remove_filter('woocommerce_locate_template', 'wcmultichecout_woocommerce_locate_template', 1, 3);
 
 /*Voorwaarden link vervangen door modal  */
 add_filter('woocommerce_checkout_show_terms', '__return_false');

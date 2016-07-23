@@ -40,7 +40,7 @@
 		
 		//woocommerce checkout page
 		$('.woocommerce-billing-fields :radio').addClass('mCheck');	
-		$('.woocommerce-shipping-fields :radio').addClass('mCheck');		 
+		$('.woocommerce-extra-fields :radio').addClass('mCheck');		 
 	
 		//woocommerce mailpoet opt-in
 		$('#mailpoet_checkout_subscribe').addClass('mCheck');
