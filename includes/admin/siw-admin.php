@@ -103,3 +103,21 @@ function siw_remove_extra_profile_fields(){
 	});
 }
 
+
+add_action( 'admin_enqueue_scripts', 'siw_admin_js' );
+function siw_admin_js() {
+	wp_register_script('siw_admin_js', get_stylesheet_directory_uri() . '/assets/js/siw-admin-scripts.js', array('jquery'), wp_get_theme()->version, TRUE);
+    wp_enqueue_script( 'siw_admin_js' );
+}
+
+/*
+*/
+add_action('admin_enqueue_scripts', 'siw_cmb_timepicker');
+function siw_cmb_timepicker(){
+	global $wp_scripts;
+	if ( $wp_scripts->registered['cmb-timepicker'] ){
+		$wp_scripts->registered['cmb-timepicker']->src = get_stylesheet_directory_uri() . '/assets/js/kadence-slider/jquery.timePicker.min.js';
+	}
+} 
+
+
