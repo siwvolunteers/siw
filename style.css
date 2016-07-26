@@ -644,10 +644,10 @@ ul.siw_events{
 	list-style-type:none;
 }
 
-li.siw_event h4 a::before{
+li.siw_event h5 a::before{
     color: #fff;
     display: inline-block;
-    height: 40px;
+    height: 30px;
     left: 15px;
     vertical-align: middle;
     width: 30px;
@@ -656,8 +656,9 @@ li.siw_event h4 a::before{
 	content:"\e115";
 }
 
-h4.siw_event_title{
+h5.siw_event_title{
 	margin-bottom:0px;
+	font-weight:bold;
 }
 
 .siw_event_duration, .siw_agenda_page_link{
