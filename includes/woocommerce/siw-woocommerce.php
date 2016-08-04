@@ -313,17 +313,51 @@ function siw_wc_project_metaboxes( array $meta_boxes ){
 	return $meta_boxes;
 }	
 
+//actie 'Exporteer naar PLATO' toevoegen aan order-scherm
 add_action( 'woocommerce_order_actions', 'siw_add_order_action_export_to_plato' );
-
-
 function siw_add_order_action_export_to_plato( $actions ) {
 	$actions['siw_export_to_plato'] = __( 'Exporteer naar PLATO', 'siw' );
 	return $actions;
 }
 
-// process the custom order meta box order action
 add_action( 'woocommerce_order_action_siw_export_to_plato', 'siw_export_application_to_plato' );
-
 function siw_export_application_to_plato( $order ) {
-	siw_wc_export_paid_applications ( $order->id );
+	siw_wc_export_application_to_plato( $order->id );
+}
+
+
+
+//admin column voor export naar PLATO
+add_filter('manage_edit-shop_order_columns', 'siw_shop_order_admin_export_column_header', 10);
+
+function siw_shop_order_admin_export_column_header( $columns ) {
+	
+	$new_columns = array();
+	foreach ( $columns as $column_name => $column_info ) {
+		$new_columns[ $column_name ] = $column_info;
+		if ( 'order_status' == $column_name )
+			$new_columns['exported'] = __( 'Export naar PLATO', 'siw' );
+		}
+	return $new_columns;
+}
+
+add_action('manage_shop_order_posts_custom_column', 'siw_shop_order_admin_export_column_value', 10, 2);
+function siw_shop_order_admin_export_column_value( $column_name, $post_id ) {
+	if ( 'exported' == $column_name ) {
+		$exported = get_post_meta( $post_id, '_exported_to_plato', true );
+		
+		//export via xml export suite
+		$exported_via_xml_suite = get_post_meta( $post_id, '_wc_customer_order_xml_export_suite_is_exported', true );
+		
+		if ('success' == $exported or 1 == $exported_via_xml_suite ) {
+			$dashicon = 'yes';
+		}
+		else if ('failed' == $exported ){
+			$dashicon = 'no';
+		}
+		else{
+			$dashicon = 'minus';
+		}
+		echo sprintf('<span class="dashicons dashicons-%s"></span>', $dashicon );
+	}
 }

@@ -172,6 +172,7 @@ function siw_settings_plato_init(){
 	register_setting( 'siw_plato', 'siw_plato_outgoing_placements_email', 'sanitize_email' );
 	register_setting( 'siw_plato', 'siw_plato_nr_of_days_before_start_to_hide_project', 'absint' );		
 	register_setting( 'siw_plato', 'siw_plato_force_full_import', 'siw_sanitize_checkbox');
+	register_setting( 'siw_plato', 'siw_plato_webservice_url', 'esc_url_raw');
 	register_setting( 'siw_plato', 'siw_plato_organization_web_key', 'sanitize_text_field' );	
 
 	//secties
@@ -225,6 +226,14 @@ function siw_settings_plato_init(){
 		'siw_plato',
 		'siw_plato_import', 
 		'siw_plato_force_full_import' 
+	);
+	add_settings_field( 
+		'siw_plato_webservice_url', 
+		__( 'Webservice url', 'siw' ), 
+		'siw_settings_show_url_field', 
+		'siw_plato',
+		'siw_plato_webservice', 
+		'siw_plato_webservice_url' 
 	);		
 	add_settings_field( 
 		'siw_plato_organization_web_key', 
@@ -786,6 +795,13 @@ function siw_settings_show_email_field( $option ){
 	<input type='email' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' size="50">
 	<?php
 }
+
+function siw_settings_show_url_field( $option ){
+	?>
+	<input type='url' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' size="100">
+	<?php
+}
+
 function siw_settings_show_number_field( $option ) { 
 	?>
 	<input type='number' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' min="1" max="30"> 

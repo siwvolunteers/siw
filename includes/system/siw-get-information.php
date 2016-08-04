@@ -12,8 +12,13 @@ function siw_get_postcode_api_key(){
 }
 
 function siw_get_plato_organization_webkey(){
-	$organization_webkey = get_option('siw_plato_organization_web_key');//
+	$organization_webkey = get_option('siw_plato_organization_web_key');
 	return $organization_webkey;
+}
+
+function siw_get_plato_webservice_url(){
+	$plato_webservice_url = get_option('siw_plato_webservice_url');
+	return $plato_webservice_url;
 }
 
 function siw_get_google_analytics_id(){
