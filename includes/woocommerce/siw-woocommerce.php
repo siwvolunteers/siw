@@ -22,7 +22,8 @@ function siw_wc_show_duration_and_project_code(){
 	echo '<p style="margin-bottom:5px;"><small>' . esc_html( $project_code ) . '</small></p>';
 
 }
-
+//trailing nullen verbergen
+add_filter('woocommerce_price_trim_zeros', '__return_true');
 
 //projectpagina: meta-info verbergen (tags, categorie, SKU)
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
