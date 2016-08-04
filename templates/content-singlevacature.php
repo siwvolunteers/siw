@@ -51,7 +51,7 @@
 						</p>
 						<h3>Solliciteren?</h3>
 						<p>
-						<?php echo 'Je motivatie met cv kun je uiterlijk ', $deadline, ' sturen naar SIW Internationale Vrijwilligersprojecten t.a.v. ', $solliciteren_naam, (( $solliciteren_functie )?' (' . $solliciteren_functie . ')':''), 
+						<?php echo 'Je motivatie met cv kun je uiterlijk ', $deadline, ' sturen naar ', $solliciteren_naam, (( $solliciteren_functie )?' (' . $solliciteren_functie . ')':''), 
 						', <a class="email" href="mailto:', antispambot( $solliciteren_email ),'">', antispambot( $solliciteren_email ), '</a>, onder vermelding van "Sollicitatie ', the_title(),'".</p>';?>
 						<p><?php echo $gesprekken;?></p>
 						<?php else: ?>
