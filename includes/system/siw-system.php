@@ -11,6 +11,9 @@ Extra functies
 //aantal toegestane redirects aanpassen
 add_filter( 'srm_max_redirects', function() { return 250; } );
 
+//nonce-lifetime verdubbelen ivm cache
+add_filter( 'nonce_life', function () { return 2 * DAY_IN_SECONDS; } );
+
 //permalink van testimonials aanpassen van 'testimonial' naar 'ervaring'
 add_action( 'init', 'siw_change_permalink_structure' );
 function siw_change_permalink_structure() {
@@ -168,15 +171,9 @@ function siw_oembed_response_data( $data ){
 function siw_update_community_day_options(){
 
 	//haal cd-datums op
-	$community_days[]= get_option('siw_community_day_1');
-	$community_days[]= get_option('siw_community_day_2');
-	$community_days[]= get_option('siw_community_day_3');
-	$community_days[]= get_option('siw_community_day_4');
-	$community_days[]= get_option('siw_community_day_5');
-	$community_days[]= get_option('siw_community_day_6');
-	$community_days[]= get_option('siw_community_day_7');
-	$community_days[]= get_option('siw_community_day_8');
-	$community_days[]= get_option('siw_community_day_9');
+	for ($x = 1 ; $x <= 9; $x++) {
+		$community_days[]= get_option("siw_community_day_{$x}");
+	}
 	asort( $community_days );
 	
 	$today = date("Y-m-d");
@@ -208,4 +205,9 @@ function siw_update_community_day_options(){
 		$wpdb->prepare( $query, maybe_serialize( $data ), $field_id )
 	);
 	
+}
+
+//hulpfunctie t.b.v. logging
+function siw_log( $content ){
+	error_log(print_r($content,true),0);
 }
