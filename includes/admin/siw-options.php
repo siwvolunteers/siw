@@ -489,7 +489,8 @@ function siw_settings_jobs_init(){
 
 function siw_settings_agenda_init(){
 	register_setting( 'siw_agenda', 'siw_agenda_parent_page', 'absint' );
-
+	register_setting( 'siw_agenda', 'siw_agenda_show_topbar_days_before_event', 'absint' );
+	register_setting( 'siw_agenda', 'siw_agenda_hide_topbar_days_before_event', 'absint' );	
 	
 	//secties
 	add_settings_section(
@@ -506,6 +507,23 @@ function siw_settings_agenda_init(){
 		'siw_agenda', 
 		'siw_agenda_parent_page' 
 	);
+	add_settings_field( 
+		'siw_agenda_show_topbar_days_before_event', 
+		__( 'Toon topbar vanaf aantal dagen voor evenement', 'siw' ), 
+		'siw_settings_show_number_field', 
+		'siw_agenda',
+		'siw_agenda', 
+		'siw_agenda_show_topbar_days_before_event' 
+	);
+	add_settings_field( 
+		'siw_agenda_hide_topbar_days_before_event', 
+		__( 'Verberg topbar vanaf aantal dagen voor evenement', 'siw' ), 
+		'siw_settings_show_number_field', 
+		'siw_agenda',
+		'siw_agenda', 
+		'siw_agenda_hide_topbar_days_before_event' 
+	);
+
 }
 
 function siw_settings_forms_init(){

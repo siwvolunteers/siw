@@ -180,6 +180,16 @@ function siw_get_next_community_day(){
 	return $next_community_day;	
 }
 
+function siw_get_show_topbar_days_before_event(){
+	$show_topbar_days_before_event = get_option('siw_agenda_show_topbar_days_before_event');
+	return $show_topbar_days_before_event;
+}
+
+function siw_get_hide_topbar_days_before_event(){
+	$hide_topbar_days_before_event = get_option('siw_agenda_hide_topbar_days_before_event');
+	return $hide_topbar_days_before_event;
+}
+
 //afzender plato export
 function siw_get_outgoing_placements_officer(){
 	$outgoing_placements_officer = get_option('siw_plato_outgoing_placements_name');

@@ -24,6 +24,7 @@ require_once('includes/frontend/siw-frontend-widgets.php');
 require_once('includes/frontend/siw-js-css.php');
 require_once('includes/frontend/siw-newsletter.php');
 require_once('includes/frontend/siw-postcode.php');
+require_once('includes/frontend/siw-topbar.php');
 
 /*groepsprojecten (PLATO en WooCommerce)*/
 require_once('includes/woocommerce/siw-woocommerce.php');
