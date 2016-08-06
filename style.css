@@ -8,6 +8,31 @@ Version: 2.1
 GitHub Theme URI: https://github.com/siwvolunteers/siw
 */
 
+
+div.siw_quote_widget{
+	background: rgba(255,255,255, 0.7);
+	padding:15px;
+	border-radius: 5px;
+}
+
+.siw_quote_widget .widget-title{
+	padding-bottom:0px;
+}
+
+.siw_quote_widget .quote{
+	font-size:15px;
+}
+
+.siw_quote_widget .quote .text{
+	margin-bottom:10px;
+	font-style:italic;
+}
+
+.siw_quote_widget .name{
+	font-weight:bold;
+}
+
+
 #topbar{
 	height:40px;
 	background: #59ab9c;
