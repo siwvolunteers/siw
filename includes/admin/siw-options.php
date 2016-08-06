@@ -593,6 +593,7 @@ function siw_settings_forms_init(){
 
 
 function siw_settings_community_day_init(){
+	register_setting( 'siw_community_day', 'siw_community_day_hide_form_days_before_cd', 'absint' );
 	register_setting( 'siw_community_day', 'siw_community_day_1', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_2', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_3', 'sanitize_text_field' );
@@ -616,7 +617,15 @@ function siw_settings_community_day_init(){
 		__( 'Formuliervragen', 'siw' ), 
 		'__return_false', 
 		'siw_community_day'
-	);	
+	);
+	add_settings_field( 
+		'siw_community_day_hide_form_days_before_cd', 
+		__( 'Verberg formulier vanaf aantal dagen voor CD', 'siw' ), 
+		'siw_settings_show_number_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_hide_form_days_before_cd' 
+	);
 	add_settings_field( 
 		'siw_community_day_1', 
 		__( 'Community day 1', 'siw' ), 
@@ -1029,3 +1038,4 @@ add_action( 'update_option_siw_community_day_6', 'siw_update_community_day_optio
 add_action( 'update_option_siw_community_day_7', 'siw_update_community_day_options', 10, 3 );
 add_action( 'update_option_siw_community_day_8', 'siw_update_community_day_options', 10, 3 );
 add_action( 'update_option_siw_community_day_9', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_hide_form_days_before_cd', 'siw_update_community_day_options', 10, 3 );

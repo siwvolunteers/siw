@@ -21,7 +21,9 @@
 	$application_link_url		= get_post_meta( $id, 'siw_agenda_aanmelden_link_url', true );
 	$application_link_text		= get_post_meta( $id, 'siw_agenda_aanmelden_link_tekst', true );
 	$location_map				= '[gmap address="' . $address . ', ' . $postal_code . ' ' . $city . '" title="' . $location . '" zoom="15" maptype="ROADMAP"]';
-
+	$hide_form_days_before_cd = siw_get_hide_form_days_before_cd();
+	$hide_form_after = time() + ( $hide_form_days_before_cd * 24 * 60 * 60);
+	$agenda_page_url = get_permalink ( siw_get_parent_page('agenda') );
 ?>
 	
 <div id="content" class="container">
@@ -71,7 +73,13 @@
 						<h3>Aanmelden</h3>
 						<?php if($start_ts >= time()):?>
 						<?php if ('formulier' == $application ){
-							echo do_shortcode( '[vfb id=' . $vfb_form_id . ']' );
+							if ($start_ts >= $hide_form_after){
+								echo do_shortcode( '[vfb id=' . $vfb_form_id . ']' );
+							}
+							else{?>
+							<p>Het is niet meer mogelijk om je aan te melden. Je bent echter van harte welkom om gewoon langs te komen.</p>
+							<?php
+							}
 						}else{?>
 							<?php echo wp_kses_post( wpautop( $application_explanation )); ?>
 						<?php
@@ -82,7 +90,7 @@
 							}
 						} ?>
 						<?php else: ?>
-						<p>Het is helaas niet meer mogelijk om je aan te melden.</p>
+						<p>Dit evenement is helaas al afgelopen. Bekijk de toekomstige evenementen in de <a href="<?php echo esc_url($agenda_page_url);?>">agenda</a>.</p>
 						<?php endif; ?>
 					</div>
 				</div>

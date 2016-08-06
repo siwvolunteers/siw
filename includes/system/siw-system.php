@@ -175,10 +175,11 @@ function siw_update_community_day_options(){
 		$community_days[]= get_option("siw_community_day_{$x}");
 	}
 	asort( $community_days );
+	$hide_form_days_before_cd = siw_get_hide_form_days_before_cd();
+	$hide_option_after = date("Y-m-d", time() + ( $hide_form_days_before_cd * 24 * 60 * 60) );
 	
-	$today = date("Y-m-d");
 	foreach($community_days as $community_day => $community_day_date) {
-		if( $community_day_date > $today ){
+		if( $community_day_date > $hide_option_after ){
 			$future_community_days[]['label']= siw_get_date_in_text( $community_day_date, false);
 		}
 	}

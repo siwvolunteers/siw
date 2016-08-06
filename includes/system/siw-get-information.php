@@ -180,6 +180,11 @@ function siw_get_next_community_day(){
 	return $next_community_day;	
 }
 
+function siw_get_hide_form_days_before_cd(){
+	$hide_form_days_before_cd = get_option('siw_community_day_hide_form_days_before_cd');
+	return $hide_form_days_before_cd;
+}
+
 function siw_get_show_topbar_days_before_event(){
 	$show_topbar_days_before_event = get_option('siw_agenda_show_topbar_days_before_event');
 	return $show_topbar_days_before_event;
