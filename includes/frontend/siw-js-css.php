@@ -49,7 +49,7 @@ function siw_remove_unnecessary_scripts(){
 
 	//variatie als radiobuttons
 	if (! is_product() ){
-		wp_dequeue_script('wc-add-to-cart-variation');
+		wp_dequeue_script('kt-wc-add-to-cart-variation-radio');
 	}
 	//woocommerce ajax filter
 	if ( (! is_shop() ) && (! is_product_category() ) && (! is_product_tag() ) ){
