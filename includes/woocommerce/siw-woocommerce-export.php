@@ -47,8 +47,8 @@ function siw_wc_export_application_to_plato( $order_id){
 	
 	
 	//elk project per aanmelding apart exporteren.
-	$failed = 0;
-	$success = 0;
+	$failed_count = 0;
+	$success_count = 0;
 	
 	foreach( $order->get_items() as $item_id => $item_data ) {
 		//bepaal projectcode
@@ -73,14 +73,14 @@ function siw_wc_export_application_to_plato( $order_id){
 		if ( is_wp_error( $response ) ) {
 			$order->add_order_note('Er is een fout opgetreden bij de export naar PLATO. Neem contact op met ICT-beheer');
 			siw_log( $response );
-			$failed++;
+			$failed_count++;
 			break;
 		}
 		//zoek HTML-statuscode en breek af indien ongelijk aan 200
 		$status_code = $response['response']['code'];
 		if ('200' != $status_code ){
 			$order->add_order_note('Verbinding met PLATO mislukt. Neem contact op met ICT-beheer.');
-			$failed++;
+			$failed_count++;
 			break;
 		}
 		
@@ -91,7 +91,7 @@ function siw_wc_export_application_to_plato( $order_id){
 			//$imported_id = (string) $body->ImportedIds->string;
 			$note = sprintf("Aanmelding voor %s succesvol geëxporteerd naar PLATO.", $projectcode );
 			$order->add_order_note( $note );
-			$success++;		
+			$success_count++;		
 		}
 		else {
 			//foutmeldingen tonen bij order notes
@@ -101,15 +101,15 @@ function siw_wc_export_application_to_plato( $order_id){
 				$note .= '<br />-' . (string)$message;
 			}
 			$order->add_order_note( $note );
-			$failed++;			
+			$failed_count++;			
 		}
 	}
 	
 	//resultaat opslaan bij aanmelding
-	if (0 != $failed){
+	if (0 != $failed_count){
 		update_post_meta( $order->id, '_exported_to_plato', 'failed');			
 	}
-	elseif (0 != $success){
+	elseif (0 != $success_count){
 		update_post_meta( $order->id, '_exported_to_plato', 'success');		
 	}
 	
