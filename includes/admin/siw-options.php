@@ -714,11 +714,11 @@ function siw_settings_community_day_init(){
 //login
 
 function siw_settings_login_init(){
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_1', 'sanitize_text_field' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_2', 'sanitize_text_field' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_3', 'sanitize_text_field' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_4', 'sanitize_text_field' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_5', 'sanitize_text_field' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_1', 'siw_sanitize_ip_address' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_2', 'siw_sanitize_ip_address' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_3', 'siw_sanitize_ip_address' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_4', 'siw_sanitize_ip_address' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_5', 'siw_sanitize_ip_address' );
 	
 	//secties
 	add_settings_section(
@@ -1008,6 +1008,9 @@ function siw_sanitize_checkbox( $checked ) {
 	return ( ( isset( $checked ) && true == $checked ) ? true : false );
 }
 
+function siw_sanitize_ip_address( $ip_address ) {
+	return filter_var( $ip_address, FILTER_VALIDATE_IP );
+}
 
 /*
 E-mail templates bijwerken na aanpassen ondertekening
