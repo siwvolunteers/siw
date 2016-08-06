@@ -417,6 +417,12 @@ Radio buttons zichtbaar maken i.v.m. validatie
     cursor: not-allowed;
 }
 
+.terms input[type="checkbox"]{
+	display: inline !important;
+	left: -99999%;
+	opacity: 0;
+}
+
 /*
 Styling voor invoervelden
 */
