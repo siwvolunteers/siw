@@ -39,6 +39,8 @@ require_once('includes/system/siw-email.php');
 require_once('includes/system/siw-get-information.php');
 require_once('includes/system/siw-search.php');
 require_once('includes/system/siw-system.php');
+require_once('includes/system/siw-vfb.php');
+
 
 
 
