@@ -776,6 +776,12 @@ function siw_get_array( $array ){
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
+				$project_countries['HRV'] = array(
+					'slug'		=> 'kroatie',
+					'name'		=> 'Kroatië',
+					'continent'	=> 'europa',
+					'allowed'	=> 'yes',
+				);				
 				$project_countries['HTE'] = array(
 					'slug'		=> 'haiti',
 					'name'		=> 'Haïti',
