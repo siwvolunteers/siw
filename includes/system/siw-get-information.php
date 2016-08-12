@@ -154,6 +154,8 @@ function siw_get_evs_next_deadline(){
 	$weeks = get_option( 'siw_evs_weeks_before_deadline' );
 	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$weeks." weeks"));
 
+	
+	$evs_next_deadline = false;
 	foreach( $evs_deadlines as $evs_deadline => $evs_deadline_date ) {
 		if ( $evs_deadline_date > $limit ){
 			$evs_next_deadline = $evs_deadline_date;
@@ -171,6 +173,7 @@ function siw_get_next_community_day(){
 	asort( $community_days );
 	$today = date("Y-m-d");
 	
+	$next_community_day = false;	
 	foreach( $community_days as $community_day => $community_day_date ) {
 		if ( $community_day_date > $today ){
 			$next_community_day = $community_day_date;
