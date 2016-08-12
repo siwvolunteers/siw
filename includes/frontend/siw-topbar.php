@@ -31,15 +31,19 @@ function siw_next_event_topbar(){
 		'meta_key'				=>	'siw_agenda_start',
 		'orderby'				=>	'meta_value_num',
 		'order'					=>	'ASC',
-		'meta_query'			=>	$meta_query_args
+		'meta_query'			=>	$meta_query_args,
+		'fields' 				=> 'ids'
 	);
-	$siw_agenda = new WP_Query( $query_args );
-	if ( $siw_agenda->have_posts()){
-		while( $siw_agenda->have_posts() ): $siw_agenda->the_post();
-		$start_ts = get_post_meta( get_the_ID(), 'siw_agenda_start', true );
-		$end_ts = get_post_meta( get_the_ID(), 'siw_agenda_eind', true );
+	$next_event_for_topbar = get_posts( $query_args );
+
+	if(!empty( $next_event_for_topbar ) ){
+		$post_id = $next_event_for_topbar[0];
+		$start_ts = get_post_meta( $post_id, 'siw_agenda_start', true );
+		$end_ts = get_post_meta( $post_id, 'siw_agenda_eind', true );
 		$date_range = siw_get_date_range_in_text( date("Y-m-d",$start_ts),  date("Y-m-d",$end_ts), false );
-		?>
+		$permalink = get_permalink( $post_id );
+		$title = get_the_title( $post_id );
+	?>
 <div id="topbar" class="topclass">
 	<div class="container">
 		<div class="row">
@@ -52,8 +56,5 @@ function siw_next_event_topbar(){
 	</div>
 </div>
 <?php	
-
-		endwhile;
 	}
-	wp_reset_query();	
 }
