@@ -35,7 +35,7 @@ function siw_next_event_topbar(){
 		'fields' 				=> 'ids'
 	);
 	$next_event_for_topbar = get_posts( $query_args );
-
+	
 	if(!empty( $next_event_for_topbar ) ){
 		$post_id = $next_event_for_topbar[0];
 		$start_ts = get_post_meta( $post_id, 'siw_agenda_start', true );
@@ -49,7 +49,7 @@ function siw_next_event_topbar(){
 		<div class="row">
 			<div class="col-md-12">
 				<div id="eventbar">
-	<span class="hide_on_mobile"> Maak kennis met SIW. </span>Kom naar de <a href="<?php esc_url( the_permalink() ); ?>" title="Meer informatie over de <?php esc_attr( the_title() );?>"><?php esc_html( the_title() );?></a>  <?php echo ( (date("Y-m-d", $start_ts ) == date("Y-m-d", $end_ts ) ) ?'op ':'van '), esc_html( $date_range );?>!
+	<span class="hide_on_mobile"> Maak kennis met SIW. </span>Kom naar de <a href="<?php echo esc_url( $permalink ); ?>" title="Meer informatie over de <?php echo esc_attr( $title );?>"><?php echo esc_html( $title );?></a>  <?php echo ( (date("Y-m-d", $start_ts ) == date("Y-m-d", $end_ts ) ) ?'op ':'van '), esc_html( $date_range );?>!
 				</div>
 			</div>
 		</div>
