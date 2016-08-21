@@ -238,6 +238,9 @@ function siw_shortcode_general_information( $args ){
 	$type = $attributes ['type'];
 
 	$information = siw_get_general_information( $type );
+	if ('email' == $type){
+		$information = antispambot($information);
+	}
 	return $information;
 }
 
