@@ -594,6 +594,7 @@ function siw_settings_forms_init(){
 
 function siw_settings_community_day_init(){
 	register_setting( 'siw_community_day', 'siw_community_day_hide_form_days_before_cd', 'absint' );
+	register_setting( 'siw_community_day', 'siw_community_day_text_after_hide_form', 'wp_kses_post' );
 	register_setting( 'siw_community_day', 'siw_community_day_1', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_2', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_3', 'sanitize_text_field' );
@@ -604,6 +605,7 @@ function siw_settings_community_day_init(){
 	register_setting( 'siw_community_day', 'siw_community_day_8', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_9', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_vfb_dates_field', 'absint' );
+
 	
 	//secties
 	add_settings_section(
@@ -625,6 +627,14 @@ function siw_settings_community_day_init(){
 		'siw_community_day',
 		'siw_community_day', 
 		'siw_community_day_hide_form_days_before_cd' 
+	);
+	add_settings_field( 
+		'siw_community_day_text_after_hide_form', 
+		__( 'Tekst als aanmeldformulier verborgen is', 'siw' ), 
+		'siw_settings_show_textarea_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_text_after_hide_form' 
 	);
 	add_settings_field( 
 		'siw_community_day_1', 
