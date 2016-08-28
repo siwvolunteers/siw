@@ -64,6 +64,11 @@
 		return false;
     });
 	
+	//GA-event bij klikken op topbar
+	$(document).on('click', '#topbar_link', function(){
+		ga('send', 'event', 'Topbar', 'Klikken');
+	})	
+	
 	$("#siw_newsletter_subscription").submit(function(event){
 		event.preventDefault();
 		
