@@ -12,8 +12,13 @@ function siw_get_postcode_api_key(){
 }
 
 function siw_get_plato_organization_webkey(){
-	$organization_webkey = get_option('siw_plato_organization_web_key');//
+	$organization_webkey = get_option('siw_plato_organization_web_key');
 	return $organization_webkey;
+}
+
+function siw_get_plato_webservice_url(){
+	$plato_webservice_url = get_option('siw_plato_webservice_url');
+	return $plato_webservice_url;
 }
 
 function siw_get_google_analytics_id(){
@@ -54,11 +59,9 @@ function siw_get_general_information ( $type ){
 
 //ip whitelist
 function siw_get_ip_whitelist(){
-	$ip_whitelist[]= get_option('siw_login_whitelist_ip_1');
-	$ip_whitelist[]= get_option('siw_login_whitelist_ip_2');
-	$ip_whitelist[]= get_option('siw_login_whitelist_ip_3');
-	$ip_whitelist[]= get_option('siw_login_whitelist_ip_4');
-	$ip_whitelist[]= get_option('siw_login_whitelist_ip_5');
+	for ($x = 1 ; $x <= 5; $x++) {
+		$ip_whitelist[]= get_option("siw_login_whitelist_ip_{$x}");
+	}
 	return $ip_whitelist;
 }
 
@@ -144,16 +147,15 @@ function siw_get_files_backup_time(){
 
 //EVS
 function siw_get_evs_next_deadline(){
-	$evs_deadlines[]= get_option('siw_evs_deadline_1');
-	$evs_deadlines[]= get_option('siw_evs_deadline_2');
-	$evs_deadlines[]= get_option('siw_evs_deadline_3');
-	$evs_deadlines[]= get_option('siw_evs_deadline_4');
-	$evs_deadlines[]= get_option('siw_evs_deadline_5');
-	
+	for ($x = 1 ; $x <= 5; $x++) {
+		$evs_deadlines[]= get_option("siw_evs_deadline_{$x}");
+	}
 	asort($evs_deadlines);
 	$weeks = get_option( 'siw_evs_weeks_before_deadline' );
 	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$weeks." weeks"));
 
+	
+	$evs_next_deadline = false;
 	foreach( $evs_deadlines as $evs_deadline => $evs_deadline_date ) {
 		if ( $evs_deadline_date > $limit ){
 			$evs_next_deadline = $evs_deadline_date;
@@ -164,19 +166,14 @@ function siw_get_evs_next_deadline(){
 }
 
 function siw_get_next_community_day(){
-	$community_days[]= get_option('siw_community_day_1');
-	$community_days[]= get_option('siw_community_day_2');
-	$community_days[]= get_option('siw_community_day_3');
-	$community_days[]= get_option('siw_community_day_4');
-	$community_days[]= get_option('siw_community_day_5');
-	$community_days[]= get_option('siw_community_day_6');
-	$community_days[]= get_option('siw_community_day_7');
-	$community_days[]= get_option('siw_community_day_8');
-	$community_days[]= get_option('siw_community_day_9');
+	for ($x = 1 ; $x <= 9; $x++) {
+		$community_days[]= get_option("siw_community_day_{$x}");
+	}
 	
 	asort( $community_days );
 	$today = date("Y-m-d");
 	
+	$next_community_day = false;	
 	foreach( $community_days as $community_day => $community_day_date ) {
 		if ( $community_day_date > $today ){
 			$next_community_day = $community_day_date;
@@ -184,6 +181,26 @@ function siw_get_next_community_day(){
 		}
 	}
 	return $next_community_day;	
+}
+
+function siw_get_hide_form_days_before_cd(){
+	$hide_form_days_before_cd = get_option('siw_community_day_hide_form_days_before_cd');
+	return $hide_form_days_before_cd;
+}
+function siw_get_text_after_hide_cd_form(){
+	$text_after_hide_cd_form = get_option('siw_community_day_text_after_hide_form');
+	return $text_after_hide_cd_form;
+}
+
+
+function siw_get_show_topbar_days_before_event(){
+	$show_topbar_days_before_event = get_option('siw_agenda_show_topbar_days_before_event');
+	return $show_topbar_days_before_event;
+}
+
+function siw_get_hide_topbar_days_before_event(){
+	$hide_topbar_days_before_event = get_option('siw_agenda_hide_topbar_days_before_event');
+	return $hide_topbar_days_before_event;
 }
 
 //afzender plato export
@@ -767,6 +784,12 @@ function siw_get_array( $array ){
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
+				$project_countries['HRV'] = array(
+					'slug'		=> 'kroatie',
+					'name'		=> 'Kroatië',
+					'continent'	=> 'europa',
+					'allowed'	=> 'yes',
+				);				
 				$project_countries['HTE'] = array(
 					'slug'		=> 'haiti',
 					'name'		=> 'Haïti',
@@ -990,45 +1013,5 @@ function siw_get_array( $array ){
 					'allowed'	=> 'yes',
 				);
 				return $project_countries;	
-
-			case "days":
-				$days = array(
-					'' => '',
-				);
-				for ($x = 1 ; $x <= 31; $x++) {
-					$days[$x] = $x;
-				} 
-				return $days;
-				
-			case "months":
-				$months = array(
-					''	=> '',
-					'1' => 'Januari',
-					'2' => 'Februari',
-					'3' => 'Maart',
-					'4' => 'April',
-					'5' => 'Mei',
-					'6' => 'Juni',
-					'7' => 'Juli',
-					'8' => 'Augustus',
-					'9' => 'September',
-					'10' => 'Oktober',
-					'11' => 'November',
-					'12' => 'December',
-				);
-				return $months;
-				
-			case "years":
-				$current_year = (integer) date("Y");
-				$min_year = $current_year - 100;
-				$max_year = $current_year - 14;					
-				$years = array(
-					'' => '',
-				);
-				for ($x = $max_year ; $x >= $min_year; $x--) {
-					$years[$x] = $x;
-				} 
-				return $years;
-				
 	}
 }

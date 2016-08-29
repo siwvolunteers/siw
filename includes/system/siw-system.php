@@ -11,6 +11,9 @@ Extra functies
 //aantal toegestane redirects aanpassen
 add_filter( 'srm_max_redirects', function() { return 250; } );
 
+//nonce-lifetime verdubbelen ivm cache
+add_filter( 'nonce_life', function () { return 2 * DAY_IN_SECONDS; } );
+
 //permalink van testimonials aanpassen van 'testimonial' naar 'ervaring'
 add_action( 'init', 'siw_change_permalink_structure' );
 function siw_change_permalink_structure() {
@@ -18,9 +21,9 @@ function siw_change_permalink_structure() {
 }
 
 
-add_action( 'init', 'my_add_excerpts_to_pages' );
+add_action( 'init', 'siw_add_excerpts_to_pages' );
 
-function my_add_excerpts_to_pages() {
+function siw_add_excerpts_to_pages() {
 	add_post_type_support( 'page', 'excerpt' );
 }
 
@@ -45,33 +48,6 @@ function siw_custom_upload_mimes( $existing_mimes=array() ){
 	return $existing_mimes;
 }
 
-//attachment verwijderen nadat deze per mail verstuurd is.
-add_action( 'vfbp_after_email', 'siw_delete_attachment_after_mail', 10, 2 );
-function siw_delete_attachment_after_mail( $entry_id, $form_id ) {
-	global $wpdb;
-
-	$attachments_args = array(
-		'post_type' 	=> 'attachment',
-		'post_parent'	=> $entry_id,
-		'fields' 		=> 'ids'
-	);
-	$attachments = get_posts( $attachments_args ); 
-	foreach ( $attachments as $attachment ) {
-		$attachment_url = wp_get_attachment_url( $attachment );
-		wp_delete_attachment( $attachment );
-		
-		$wpdb->query(
-			$wpdb->prepare(
-				"UPDATE $wpdb->postmeta
-				SET meta_value = 'gemaild'
-					WHERE post_id = %d
-					AND meta_value = %s;",
-				$entry_id,
-				$attachment_url
-			)
-		);
-	}
-}
 
 
 /*disable emojis*/
@@ -96,8 +72,6 @@ function siw_disable_emojicons_tinymce( $plugins ) {
 	}
 }
 
-
-
 /*instellen starttijd Updraft Plus backup*/
 add_filter('updraftplus_schedule_firsttime_db', 'siw_backup_time_db');
 add_filter('updraftplus_schedule_firsttime_files', 'siw_backup_time_files');
@@ -114,52 +88,6 @@ function siw_backup_time_files(){
 	return $time;
 }
 
-
-/*
-VFB-pro aanpassingen
-*/
-
-add_action('wp_enqueue_scripts', 'siw_vfb_pro_scripts');
-function siw_vfb_pro_scripts(){
-	global $wp_scripts;
-	if ( $wp_scripts->registered['vfbp-js'] ){
-		$wp_scripts->registered['vfbp-js']->src = get_stylesheet_directory_uri() . '/assets/js/vfb-pro/vfb-js.min.js';
-	}
-	if ( $wp_scripts->registered['jquery-intl-tel'] ){
-		wp_register_script( 'jquery-phone-format', VFB_PLUGIN_URL . "public/assets/js/vendors/phone-format.min.js",array(), null, true);	
-		$wp_scripts->registered['jquery-intl-tel']->deps[] = 'jquery-phone-format';
-	}
-}
-
-//CMB meta box url protocol-onafhankelijk maken
-add_filter( 'cmb_meta_box_url', 'siw_cmb_meta_box_url', 10, 1 );
-
-function siw_cmb_meta_box_url( $cmb_url ){
-	$cmb_url = str_replace("http://", "//", $cmb_url );
-    return $cmb_url;
-}
-
-
-//afbeelding in admin over ssl i.v.m. mixed content
-add_filter('wp_calculate_image_srcset', 'siw_set_image_srcset_to_ssl');
-function siw_set_image_srcset_to_ssl($sources) {
-	if ( is_ssl() ){
-		foreach($sources as $size => &$source){
-			$source['url'] = set_url_scheme( $source['url'] ,'https');
-		}
-	}
-	return $sources;
-}
-
-/*
-*/
-add_action('admin_enqueue_scripts', 'siw_cmb_admin_scripts');
-function siw_cmb_admin_scripts(){
-	global $wp_scripts;
-	if ( $wp_scripts->registered['cmb-scripts'] ){
-		$wp_scripts->registered['cmb-scripts']->src = get_stylesheet_directory_uri() . '/assets/js/kadence-slider/cmb.min.js';
-	}
-} 
 /*dns-prefetch*/
 add_action('wp_head','siw_dns_prefetch', 0);
 
@@ -190,92 +118,9 @@ function siw_oembed_response_data( $data ){
 	return $data;
 }
 
-//cd-opties
-//add_action('init','siw_update_cd_options');
 
-function siw_update_community_day_options(){
 
-	//haal cd-datums op
-	$community_days[]= get_option('siw_community_day_1');
-	$community_days[]= get_option('siw_community_day_2');
-	$community_days[]= get_option('siw_community_day_3');
-	$community_days[]= get_option('siw_community_day_4');
-	$community_days[]= get_option('siw_community_day_5');
-	$community_days[]= get_option('siw_community_day_6');
-	$community_days[]= get_option('siw_community_day_7');
-	$community_days[]= get_option('siw_community_day_8');
-	$community_days[]= get_option('siw_community_day_9');
-	asort( $community_days );
-	
-	$today = date("Y-m-d");
-	foreach($community_days as $community_day => $community_day_date) {
-		if( $community_day_date > $today ){
-			$future_community_days[]['label']= siw_get_date_in_text( $community_day_date, false);
-		}
-	}
-
-	//zoek cd-formuliervraag
-	$field_id = siw_get_vfb_field_id('community_day_datums');
-	
-	global $wpdb;
-	if ( !isset($wpdb->vfbp_fields) ) {
-		$wpdb->vfbp_fields = $wpdb->prefix . 'vfbp_fields';
-	}
-	
-	$query = "SELECT $wpdb->vfbp_fields.data
-				FROM $wpdb->vfbp_fields
-				WHERE $wpdb->vfbp_fields.id = %d";
-	
-	$data = $wpdb->get_var( $wpdb->prepare( $query, $field_id));
-	$data = maybe_unserialize( $data );
-	
-	//update formuliervraag
-	$data['options'] = $future_community_days;
-	$query = "update $wpdb->vfbp_fields set $wpdb->vfbp_fields.data = %s where $wpdb->vfbp_fields.id = %d;";
-	$wpdb->query(
-		$wpdb->prepare( $query, maybe_serialize( $data ), $field_id )
-	);
-	
-}
-
-//wp rocket cache niet legen bij alle standaard acties
-add_action( 'wp_rocket_loaded', 'siw_remove_wp_rocket_purge_hooks' );
-
-function siw_remove_wp_rocket_purge_hooks() {
-	$clean_domain_hooks = array(
-		'switch_theme',
-		'user_register',
-		'profile_update',
-		'deleted_user',
-		'wp_update_nav_menu',
-		'update_option_theme_mods_' . get_option( 'stylesheet' ),
-		'update_option_sidebars_widgets',
-		'update_option_category_base',
-		'update_option_tag_base',
-		'permalink_structure_changed',
-		'create_term',
-		'edited_terms',
-		'delete_term',
-		'add_link',
-		'edit_link',
-		'delete_link',
-		'customize_save',
-	);
-
-	$clean_post_hooks = array(
-		'wp_trash_post',
-		'delete_post',
-		'clean_post_cache',
-		'wp_update_comment_count',
-	);
-
-	foreach ( $clean_domain_hooks as $key => $handle ) {
-		remove_action( $handle, 'rocket_clean_domain' );
-	}
-
-	foreach ( $clean_post_hooks as $key => $handle ) {
-		remove_action( $handle, 'rocket_clean_post' );
-	}
-	
-	remove_filter( 'widget_update_callback'	, 'rocket_widget_update_callback' );
+//hulpfunctie t.b.v. logging
+function siw_log( $content ){
+	error_log(print_r($content,true),0);
 }

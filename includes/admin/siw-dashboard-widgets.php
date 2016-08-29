@@ -73,7 +73,7 @@ function siw_register_woocommerce_applications_widget() {
 
 function siw_display_applications_widget( $var, $args ) {
 	$applications=$args['args']['applications'];
-	$months = siw_get_array('months');
+	$months = siw_get_array('month_to_text');
 	if (!empty($applications)){
 		
 		foreach ( $applications as $application ){
@@ -100,7 +100,7 @@ function siw_display_applications_widget( $var, $args ) {
 		</div>
 		<div class='comment-stat-labels'>
 			<?php foreach( $application_months as $month ) : ?>
-			<div class='comment-stat-label' style='width: <?php echo $bar_width ?>%;'><?php echo $month ?></div>
+			<div class='comment-stat-label' style='width: <?php echo $bar_width ?>%;'><?php echo ucfirst( $month ) ?></div>
 		<?php endforeach ?>
 		</div>
 		<div class='comment-stat-caption'>Aanmeldingen van de afgelopen <?php echo $data_points?> maanden</div>

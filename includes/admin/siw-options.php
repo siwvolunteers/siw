@@ -172,6 +172,7 @@ function siw_settings_plato_init(){
 	register_setting( 'siw_plato', 'siw_plato_outgoing_placements_email', 'sanitize_email' );
 	register_setting( 'siw_plato', 'siw_plato_nr_of_days_before_start_to_hide_project', 'absint' );		
 	register_setting( 'siw_plato', 'siw_plato_force_full_import', 'siw_sanitize_checkbox');
+	register_setting( 'siw_plato', 'siw_plato_webservice_url', 'esc_url_raw');
 	register_setting( 'siw_plato', 'siw_plato_organization_web_key', 'sanitize_text_field' );	
 
 	//secties
@@ -225,6 +226,14 @@ function siw_settings_plato_init(){
 		'siw_plato',
 		'siw_plato_import', 
 		'siw_plato_force_full_import' 
+	);
+	add_settings_field( 
+		'siw_plato_webservice_url', 
+		__( 'Webservice url', 'siw' ), 
+		'siw_settings_show_url_field', 
+		'siw_plato',
+		'siw_plato_webservice', 
+		'siw_plato_webservice_url' 
 	);		
 	add_settings_field( 
 		'siw_plato_organization_web_key', 
@@ -480,7 +489,8 @@ function siw_settings_jobs_init(){
 
 function siw_settings_agenda_init(){
 	register_setting( 'siw_agenda', 'siw_agenda_parent_page', 'absint' );
-
+	register_setting( 'siw_agenda', 'siw_agenda_show_topbar_days_before_event', 'absint' );
+	register_setting( 'siw_agenda', 'siw_agenda_hide_topbar_days_before_event', 'absint' );	
 	
 	//secties
 	add_settings_section(
@@ -497,6 +507,23 @@ function siw_settings_agenda_init(){
 		'siw_agenda', 
 		'siw_agenda_parent_page' 
 	);
+	add_settings_field( 
+		'siw_agenda_show_topbar_days_before_event', 
+		__( 'Toon topbar vanaf aantal dagen voor evenement', 'siw' ), 
+		'siw_settings_show_number_field', 
+		'siw_agenda',
+		'siw_agenda', 
+		'siw_agenda_show_topbar_days_before_event' 
+	);
+	add_settings_field( 
+		'siw_agenda_hide_topbar_days_before_event', 
+		__( 'Verberg topbar vanaf aantal dagen voor evenement', 'siw' ), 
+		'siw_settings_show_number_field', 
+		'siw_agenda',
+		'siw_agenda', 
+		'siw_agenda_hide_topbar_days_before_event' 
+	);
+
 }
 
 function siw_settings_forms_init(){
@@ -566,6 +593,8 @@ function siw_settings_forms_init(){
 
 
 function siw_settings_community_day_init(){
+	register_setting( 'siw_community_day', 'siw_community_day_hide_form_days_before_cd', 'absint' );
+	register_setting( 'siw_community_day', 'siw_community_day_text_after_hide_form', 'wp_kses_post' );
 	register_setting( 'siw_community_day', 'siw_community_day_1', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_2', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_3', 'sanitize_text_field' );
@@ -576,6 +605,7 @@ function siw_settings_community_day_init(){
 	register_setting( 'siw_community_day', 'siw_community_day_8', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_9', 'sanitize_text_field' );
 	register_setting( 'siw_community_day', 'siw_community_day_vfb_dates_field', 'absint' );
+
 	
 	//secties
 	add_settings_section(
@@ -589,7 +619,23 @@ function siw_settings_community_day_init(){
 		__( 'Formuliervragen', 'siw' ), 
 		'__return_false', 
 		'siw_community_day'
-	);	
+	);
+	add_settings_field( 
+		'siw_community_day_hide_form_days_before_cd', 
+		__( 'Verberg formulier vanaf aantal dagen voor CD', 'siw' ), 
+		'siw_settings_show_number_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_hide_form_days_before_cd' 
+	);
+	add_settings_field( 
+		'siw_community_day_text_after_hide_form', 
+		__( 'Tekst als aanmeldformulier verborgen is', 'siw' ), 
+		'siw_settings_show_textarea_field', 
+		'siw_community_day',
+		'siw_community_day', 
+		'siw_community_day_text_after_hide_form' 
+	);
 	add_settings_field( 
 		'siw_community_day_1', 
 		__( 'Community day 1', 'siw' ), 
@@ -678,11 +724,11 @@ function siw_settings_community_day_init(){
 //login
 
 function siw_settings_login_init(){
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_1', 'sanitize_text_field' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_2', 'sanitize_text_field' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_3', 'sanitize_text_field' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_4', 'sanitize_text_field' );
-	register_setting( 'siw_login', 'siw_login_whitelist_ip_5', 'sanitize_text_field' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_1', 'siw_sanitize_ip_address' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_2', 'siw_sanitize_ip_address' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_3', 'siw_sanitize_ip_address' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_4', 'siw_sanitize_ip_address' );
+	register_setting( 'siw_login', 'siw_login_whitelist_ip_5', 'siw_sanitize_ip_address' );
 	
 	//secties
 	add_settings_section(
@@ -786,6 +832,13 @@ function siw_settings_show_email_field( $option ){
 	<input type='email' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' size="50">
 	<?php
 }
+
+function siw_settings_show_url_field( $option ){
+	?>
+	<input type='url' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' size="100">
+	<?php
+}
+
 function siw_settings_show_number_field( $option ) { 
 	?>
 	<input type='number' name='<?php echo esc_attr( $option ); ?>' value='<?php echo esc_attr( get_option( $option ) ); ?>' min="1" max="30"> 
@@ -824,7 +877,7 @@ function siw_settings_show_vfb_form_select( $option ) {
     if (!empty($forms)) {
 		echo '<select name="', esc_attr( $option ), '">';
 		foreach ( $forms as $form ) {
-			echo '<option value="', esc_attr( $form[id] ), '"', get_option( $option ) == $form[id] ? ' selected="selected"' : '', '>', esc_html( $form[title] ), '</option>';
+			echo '<option value="', esc_attr( $form['id'] ), '"', get_option( $option ) == $form['id'] ? ' selected="selected"' : '', '>', esc_html( $form['title'] ), '</option>';
 		}
 		echo '</select>'; 
 	}
@@ -965,6 +1018,9 @@ function siw_sanitize_checkbox( $checked ) {
 	return ( ( isset( $checked ) && true == $checked ) ? true : false );
 }
 
+function siw_sanitize_ip_address( $ip_address ) {
+	return filter_var( $ip_address, FILTER_VALIDATE_IP );
+}
 
 /*
 E-mail templates bijwerken na aanpassen ondertekening
@@ -995,3 +1051,4 @@ add_action( 'update_option_siw_community_day_6', 'siw_update_community_day_optio
 add_action( 'update_option_siw_community_day_7', 'siw_update_community_day_options', 10, 3 );
 add_action( 'update_option_siw_community_day_8', 'siw_update_community_day_options', 10, 3 );
 add_action( 'update_option_siw_community_day_9', 'siw_update_community_day_options', 10, 3 );
+add_action( 'update_option_siw_community_day_hide_form_days_before_cd', 'siw_update_community_day_options', 10, 3 );

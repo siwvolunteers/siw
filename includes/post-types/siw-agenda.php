@@ -399,9 +399,9 @@ public function __construct() {
 				$end_time = date("H:i",$end_ts);
 			?>
 				<li class="siw_event">
-					<h4 class="siw_event_title">
+					<h5 class="siw_event_title">
 					<a href="<?php esc_url( the_permalink() ); ?>" class="siw_event_link"><?php esc_html( the_title() ); ?></a>
-					</h4>
+					</h5>
 					<span class="siw_event_duration" >
 						<?php echo esc_html( $date_range );?> <br/>
 						<?php echo esc_html( $start_time . '&nbsp;-&nbsp;' . $end_time );?><br/>

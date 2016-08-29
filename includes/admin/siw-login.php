@@ -56,7 +56,6 @@ function siw_allow_admin_access( $prevent_access ){
 }
 
 
-
 //logging van laatste login
 add_action('wp_login','siw_capture_user_last_login', 10, 2);
 function siw_capture_user_last_login( $user_login, $user ){
@@ -84,4 +83,16 @@ function siw_user_last_login_column_value($value, $column_name, $user_id ) {
 		}
 	}	
 	return $value;
+}
+
+
+//password protect
+add_action('password_protected_before_login_form', 'siw_password_protected_message');
+function siw_password_protected_message(){
+	echo"<p class='message'>Welkom op de testsite van SIW.<br/> Voer het wachtwoord in om toegang te krijgen. <br/> <br/> Klik <a href='//www.siw.nl'>hier</a> om naar de echte website van SIW te gaan.</p>";
+}
+
+add_action('password_protected_login_head', 'siw_password_protected_error');
+function siw_password_protected_error() {
+	remove_action('password_protected_login_head', 'wp_shake_js', 12);
 }

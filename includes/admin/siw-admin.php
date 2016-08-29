@@ -60,10 +60,11 @@ function siw_remove_plugin_metaboxes(){
 }
 
 add_action( 'admin_notices', 'siw_admin_notice_show_site_url' );
-function siw_admin_notice_show_site_url() {
-	echo ' <div class="updated">
-		<h1>Je bent ingelogd op: '. site_url('', '' ) . '</h1>
-	</div>';
+function siw_admin_notice_show_site_url() {?>
+<div class="updated">
+	<h1>Je bent ingelogd op: <?php echo site_url('', '' );?></h1>
+</div>
+<?php
 }
 
 //woothemes update nag verwijderen
@@ -101,4 +102,22 @@ function siw_remove_extra_profile_fields(){
 		return array();
 	});
 }
+
+
+add_action( 'admin_enqueue_scripts', 'siw_admin_js' );
+function siw_admin_js() {
+	wp_register_script('siw_admin_js', get_stylesheet_directory_uri() . '/assets/js/siw-admin-scripts.js', array('jquery'), wp_get_theme()->version, TRUE);
+    wp_enqueue_script( 'siw_admin_js' );
+}
+
+/*
+*/
+add_action('admin_enqueue_scripts', 'siw_cmb_timepicker');
+function siw_cmb_timepicker(){
+	global $wp_scripts;
+	if ( $wp_scripts->registered['cmb-timepicker'] ){
+		$wp_scripts->registered['cmb-timepicker']->src = get_stylesheet_directory_uri() . '/assets/js/kadence-slider/jquery.timePicker.min.js';
+	}
+} 
+
 

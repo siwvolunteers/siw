@@ -17,6 +17,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 			'type' => array(
 				'type'=>'select', 
 				'title'=>__('Type', 'siw'),
+				'default' => '',
 				'values' => array(
 					"email"		=> __('E-mail','siw'),
 					"iban"		=> __('IBAN','siw'),
@@ -29,15 +30,34 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 
 	$pinnacle_shortcodes['siw_evs_volgende_deadline'] = array(
 		'title' =>	__('SIW: Volgende EVS deadline', 'siw'), 
+		'attr'	=> array(
+			'onbekend' => array(
+				'type' => 'text',
+				'title'=>__('Tekst indien volgende deadline onbekend', 'siw'),
+			),
+		),
 	);
 	$pinnacle_shortcodes['siw_evs_volgende_vertrekmoment'] = array(
-		'title' =>	__('SIW: Volgende EVS-vertrekmoment', 'siw'), 
+		'title' =>	__('SIW: Volgende EVS-vertrekmoment', 'siw'),
+		'attr'	=> array(
+			'onbekend' => array(
+				'type' => 'text',
+				'title'=>__('Tekst indien volgende deadline onbekend', 'siw'),
+			),
+		),
 	);	
 	$pinnacle_shortcodes['siw_evs_borg'] = array( 
 		'title'=>__('SIW: EVS borg', 'siw'), 
 	);
 	$pinnacle_shortcodes['siw_volgende_community_day'] = array( 
-		'title'=>__('SIW: Volgende Community Day', 'siw'), 
+		'title'=>__('SIW: Volgende Community Day', 'siw'),
+		'attr'	=> array(
+			'onbekend' => array(
+				'type' => 'text',
+				'title'=>__('Tekst indien volgende CD onbekend', 'siw'),
+			),
+		),
+
 	);
 	$pinnacle_shortcodes['siw_inschrijfgeld_op_maat'] = array(
 		'title'	=>	__('SIW: Inschrijfgeld project op maat', 'siw'), 
@@ -45,6 +65,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 			'tarief' => array(
 				'type'=>'select', 
 				'title'=>__('Tarief', 'siw'),
+				'default' => '',
 				'values' => array(
 					"student" => __('Student','siw'),
 					"regulier" => __('Regulier','siw'),
@@ -59,6 +80,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 			'tarief' => array(
 				'type'=>'select', 
 				'title'=>__('Tarief', 'siw'),
+				'default' => '',
 				'values' => array(
 					"student" => __('Student','siw'),
 					"regulier" => __('Regulier','siw'),
@@ -73,6 +95,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 			'aantal' => array(
 				'type'=>'select', 
 				'title'=>__('Aantal', 'siw'),
+				'default' => '',
 				'values' => array(
 					"tweede" => __('2e','siw'),
 					"derde" => __('3e','siw'),
@@ -88,30 +111,67 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 //volgende community day
 add_shortcode('siw_volgende_community_day', 'siw_shortcode_next_community_day');
 function siw_shortcode_next_community_day() {
-	$next_community_day = siw_get_date_in_text( siw_get_next_community_day(), false );
-	return $next_community_day;
+	
+	$attributes = shortcode_atts(
+		array(
+			'onbekend' => '',
+		),
+	$args);
+	
+	$next_community_day = siw_get_next_community_day();	
+	if (! $next_community_day ){
+		$next_community_day =  $attributes ['onbekend'];	
+	}
+	else{
+		$next_community_day = siw_get_date_in_text( $next_community_day, true );
+	}
+	return $next_community_day;	
 }
 
 //Volgende EVS deadline
 add_shortcode('siw_evs_volgende_deadline', 'siw_shortcode_evs_next_deadline');
-function siw_shortcode_evs_next_deadline() {
-	$evs_next_deadline = siw_get_date_in_text( siw_get_evs_next_deadline(), true );	
+function siw_shortcode_evs_next_deadline( $args ) {
+	
+	$attributes = shortcode_atts(
+		array(
+			'onbekend' => '',
+		),
+	$args);
+	
+	$evs_next_deadline = siw_get_evs_next_deadline();	
+	if (! $evs_next_deadline ){
+		$evs_next_deadline =  $attributes ['onbekend'];	
+	}
+	else{
+		$evs_next_deadline = siw_get_date_in_text( $evs_next_deadline, true );
+	}
 	return $evs_next_deadline;
 }
 
 //Volgende EVS vertrekmoment
 add_shortcode('siw_evs_volgende_vertrekmoment', 'siw_shortcode_evs_next_start');
-function siw_shortcode_evs_next_start() {
+function siw_shortcode_evs_next_start($args) {
+	
+	$attributes = shortcode_atts(
+		array(
+			'onbekend' => '',
+		),
+	$args);
+	
 	$evs_next_deadline = siw_get_evs_next_deadline();
-	$month_array = siw_get_array('month_to_text');
-	$months = 3;
-	$weeks = 1;
-	$evs_next_start = date("Y-m-d",strtotime($evs_next_deadline."+".$months." months " . $weeks . " weeks"));	
-	$evs_next_start = date_parse($evs_next_start);
-	$month = $month_array[$evs_next_start['month']];
-	$year = $evs_next_start['year'];
-	$evs_next_start = $month . ' ' . $year;	
-
+	if (! $evs_next_deadline ){
+		$evs_next_start =  $attributes ['onbekend'];
+	}
+	else{
+		$month_array = siw_get_array('month_to_text');
+		$months = 3;
+		$weeks = 1;
+		$evs_next_start = date("Y-m-d",strtotime($evs_next_deadline."+".$months." months " . $weeks . " weeks"));	
+		$evs_next_start = date_parse($evs_next_start);
+		$month = $month_array[$evs_next_start['month']];
+		$year = $evs_next_start['year'];
+		$evs_next_start = $month . ' ' . $year;	
+	}
 	return $evs_next_start;
 }
 
@@ -178,6 +238,9 @@ function siw_shortcode_general_information( $args ){
 	$type = $attributes ['type'];
 
 	$information = siw_get_general_information( $type );
+	if ('email' == $type){
+		$information = antispambot($information);
+	}
 	return $information;
 }
 

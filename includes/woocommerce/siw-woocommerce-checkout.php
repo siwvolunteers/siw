@@ -24,12 +24,12 @@ function siw_wc_checkout_scripts(){
 //verwijderen verzendadres
 add_filter( 'woocommerce_shipping_fields', 'siw_wc_remove_shipping_fields' );
 function siw_wc_remove_shipping_fields($fields){
-    unset( $fields["shipping_country"] );
-    unset( $fields["shipping_address_1"] );
-    unset( $fields["shipping_city"] );
-    unset( $fields["shipping_state"] );
-    unset( $fields["shipping_postcode"] );
-    return $fields;
+	unset( $fields["shipping_country"] );
+	unset( $fields["shipping_address_1"] );
+	unset( $fields["shipping_city"] );
+	unset( $fields["shipping_state"] );
+	unset( $fields["shipping_postcode"] );
+	return $fields;
 }
 
 
@@ -53,41 +53,41 @@ function siw_wc_checkout_address_fields($fields){
  
 	//toevoegen geslacht
 	$address_fields['gender'] = array(
-		'label'     => __('Geslacht', 'woocommerce'),
-		'required'  => true,
-		'class'     => array('form-row-wide'),
-		'clear'     => true,
-		'type'  	=> 'radio',
-		'options'   => $gender,
+		'label'			=> __('Geslacht', 'siw'),
+		'required'		=> true,
+		'class'			=> array('form-row-wide'),
+		'clear'			=> true,
+		'type'			=> 'radio',
+		'options'		=> $gender,
     ); 
 	$address_fields['first_name'] = $fields['first_name'];
-	$address_fields['last_name'] = $fields['last_name'];	
-	/*toevoegen geboortedatum	*/
+	$address_fields['last_name'] = $fields['last_name'];
+	/*toevoegen geboortedatum*/
 	$address_fields['dob'] = array(
-		'label'     	=> __('Geboortedatum', 'woocommerce'),
-		'required'  	=> true,
-		'class'     	=> array('form-row-first'),
-		'placeholder'   => __('dd-mm-jjjj'),
-		'type'  		=> 'text',
+		'label'			=> __('Geboortedatum', 'siw'),
+		'required'		=> true,
+		'class'			=> array('form-row-first'),
+		'placeholder'	=> __('dd-mm-jjjj'),
+		'type'			=> 'text',
     );
 
 	//toevoegen nationaliteit
 	$address_fields['nationality'] = array(
-		'label'     => __('Nationaliteit', 'woocommerce'),
-		'required'  => true,
-		'class'     => array('form-row-last'),
-		'clear'     => true,
-		'type'  	=> 'select',
-		'options'   => $nationalities,
-		'default'	=> 'HOL'
+		'label'			=> __('Nationaliteit', 'siw'),
+		'required'		=> true,
+		'class'			=> array('form-row-last'),
+		'clear'			=> true,
+		'type'  		=> 'select',
+		'options'		=> $nationalities,
+		'default'		=> 'HOL'
     );
-	$address_fields['postcode'] = $fields['postcode'];	
+	$address_fields['postcode'] = $fields['postcode'];
 	$address_fields['housenumber'] = array(
-		'label'		=> 'Huisnummer',
-		'required'  => true,
-		'class'     => array('form-row-last'),
-		'clear'     => true,
-		'type'		=> 'text',
+		'label'			=> __('Huisnummer', 'siw'),
+		'required'		=> true,
+		'class'			=> array('form-row-last'),
+		'clear'			=> true,
+		'type'			=> 'text',
 	);
 	$address_fields['address_1'] = $fields['address_1'];
 	$address_fields['city'] = $fields['city'];
@@ -108,151 +108,138 @@ function siw_wc_checkout_address_fields($fields){
 remove_action( 'woocommerce_after_order_notes', 'on_checkout_page' );
 add_action( 'woocommerce_after_checkout_billing_form', 'on_checkout_page' );
 
-
-
-//informatie voor PO
-add_action( 'woocommerce_checkout_after_customer_details' ,'siw_wc_checkout_information_for_po' );
-
-function siw_wc_checkout_information_for_po(){ 
-
-    $checkout = WC()->checkout(); 
-	
-	//informatie voor PO
-	echo '<div id="infoForPartner"><h3>' . __('Informatie voor partnerorganisatie') . '</h3>';
-  	woocommerce_form_field( 'motivation', array(
-        'type'          => 'textarea',
-		'class'		=> array('form-row-first'),
-		'required'		=> true,
-		'label'         => __('Motivation'),
-		'placeholder'   => __('Vul hier (in het Engels) in waarom je graag aan je gekozen project wil deelnemen.'),
-        ), $checkout->get_value( 'motivation' )
-	);
-	
-	woocommerce_form_field( 'healthIssues', array(
-        'type'          => 'textarea',
-		'class'		=> array('form-row-last'),
-		'required'		=> false,
-		'label'         => __('Allergies/diet/health issues'),
-		'placeholder'   => __('Heb je een allergie, gebruik je medicijnen of volg je een diëet, vul dat dan hier in (in het Engels).'),
-        ), $checkout->get_value( 'healthIssues' )
-	);
-	
-	woocommerce_form_field( 'volunteerExperience', array(
-        'type'          => 'textarea',
-		'class'		=> array('form-row-first'),
-		'required'		=> false,
-		'label'         => __('Volunteer experience'),
-		'placeholder'   => __('Heb je eerder vrijwilligerswerk gedaan? Beschrijf dat dan hier (in het Engels).'),
-        ), $checkout->get_value( 'volunteerExperience' )
-	);
-	
-	woocommerce_form_field( 'togetherWith', array(
-        'type'          => 'text',
-		'class'		=> array('form-row-last'),
-		'required'		=> false,
-		'clear'     => true,  
-		'label'         => __('Together with'),
-		'placeholder'   => __('Wil je graag met iemand aan een project deelnemen. Vul zijn of haar naam dan hier in.'),
-        ), $checkout->get_value( 'togetherWith' )
-	);
-    echo '</div>';
-	
-}	
-
-add_action( 'woocommerce_before_order_notes', 'siw_wc_checkout_extra_information' );
- 
-function siw_wc_checkout_extra_information( $checkout ) {
- 
+//extra velden voor partner
+add_action( 'woocommerce_multistep_checkout_before_order_info', 'siw_wc_checkout_extra_information');
+function siw_wc_checkout_extra_information() {
+	$checkout = WC()->checkout(); 
 	//lijsten van talen en niveau
 	$languages = siw_get_array('languages');
 	$language_skill = siw_get_array('language_skill');
+	echo '<h1>Informatie voor partner</h1>';
+	echo '<div class="woocommerce-extra-fields">';
+	echo '<div id="infoForPartner"><h3>' . __('Informatie voor partnerorganisatie') . '</h3>';
+	woocommerce_form_field( 'motivation', array(
+		'type'			=> 'textarea',
+		'class'			=> array('form-row-first'),
+		'required'		=> true,
+		'label'			=> __('Motivation', 'siw'),
+		'placeholder'	=> __('Vul hier (in het Engels) in waarom je graag aan je gekozen project wil deelnemen.'),
+		), $checkout->get_value( 'motivation' )
+	);
 	
-    echo '<div id="languageSkills"><h3>' . __('Talenkennis') . '</h3>';
+	woocommerce_form_field( 'healthIssues', array(
+		'type'			=> 'textarea',
+		'class'			=> array('form-row-last'),
+		'required'		=> false,
+		'clear'			=> true,
+		'label'			=> __('Allergies/diet/health issues', 'siw'),
+		'placeholder'	=> __('Heb je een allergie, gebruik je medicijnen of volg je een diëet, vul dat dan hier in (in het Engels).', 'siw'),
+		), $checkout->get_value( 'healthIssues' )
+	);
+	
+	woocommerce_form_field( 'volunteerExperience', array(
+		'type'			=> 'textarea',
+		'class'			=> array('form-row-first'),
+		'required'		=> false,
+		'label'			=> __('Volunteer experience', 'siw'),
+		'placeholder'	=> __('Heb je eerder vrijwilligerswerk gedaan? Beschrijf dat dan hier (in het Engels).', 'siw'),
+		), $checkout->get_value( 'volunteerExperience' )
+	);
+	
+	woocommerce_form_field( 'togetherWith', array(
+		'type'			=> 'text',
+		'class'			=> array('form-row-last'),
+		'required'		=> false,
+		'clear'			=> true,
+		'label'			=> __('Together with', 'siw'),
+		'placeholder'	=> __('Wil je graag met iemand aan een project deelnemen. Vul zijn of haar naam dan hier in.', 'siw'),
+		), $checkout->get_value( 'togetherWith' )
+	);
+    echo '</div>';
+	// gegevens noodcontact
+	echo '<div id="emergencyContact"><h3>' . __('Noodcontact') . '</h3>';
+	woocommerce_form_field( 'emergencyContactName', array(
+		'type'			=> 'text',
+		'class'			=> array('form-row-first'),
+		'required'		=> true,
+		'label'			=> __('Naam', 'siw'),
+		), $checkout->get_value( 'emergencyContactName' )
+	);
+
+	woocommerce_form_field( 'emergencyContactPhone', array(
+		'type'			=> 'text',
+		'class'			=> array('form-row-last'),
+		'required'		=> true,
+		'label'			=> __('Telefoonnummer', 'siw'),
+		'clear'			=> true
+        ), $checkout->get_value( 'emergencyContactPhone' )
+	);
+	echo '</div>';		
+	echo '<div id="languageSkills"><h3>' . __('Talenkennis') . '</h3>';
  
 	woocommerce_form_field('language1', array(
-		    'type'  => 'select',
-			'class'     => array('form-row-first'),
-			'label'     => __('Taal 1', 'woocommerce'),
-			'required'  => true,
-			'clear'     => true,  
-			'options'   => $languages
+		'type'			=> 'select',
+		'class'			 => array('form-row-first'),
+		'label'			=> __('Taal 1', 'siw'),
+		'required'		=> true,
+		'clear'			=> true,
+		'options'		=> $languages
 		), $checkout->get_value( 'language1' )
 	);
  
 	woocommerce_form_field('language1Skill', array(
-		    'type'  => 'radio',
-			'class'     => array('form-row-wide'),
-			'label'     => __('Niveau taal 1', 'woocommerce'),
-			'required'  => true,
-			'clear'     => true,  
-			'options'   => $language_skill
+		'type'			=> 'radio',
+		'class'			=> array('form-row-wide'),
+		'label'			=> __('Niveau taal 1', 'siw'),
+		'required'		=> true,
+		'clear'			=> true,
+		'options'		=> $language_skill
 		), $checkout->get_value( 'language1Skill')
 	);
 
 	woocommerce_form_field('language2', array(
-		    'type'  => 'select',
-			'class'     => array('form-row-first'),
-			'label'     => __('Taal 2', 'woocommerce'),
-			'required'  => false,
-			'clear'     => true,  
-			'options'   => $languages
+		'type'			=> 'select',
+		'class'			=> array('form-row-first'),
+		'label'			=> __('Taal 2', 'siw'),
+		'required'		=> false,
+		'clear'			=> true,
+		'options'		=> $languages
 		), $checkout->get_value( 'language2' )
 	);
  
 	woocommerce_form_field('language2Skill', array(
-		    'type'  => 'radio',
-			'class'     => array('form-row-wide'),
-			'label'     => __('Niveau taal 2', 'woocommerce'),
-			'required'  => false,
-			'clear'     => true,  
-			'options'   => $language_skill
+		'type'			=> 'radio',
+		'class'			=> array('form-row-wide'),
+		'label'			=> __('Niveau taal 2', 'siw'),
+		'required'		=> false,
+		'clear'			=> true,
+		'options'		=> $language_skill
 		), $checkout->get_value( 'language2Skill' )
-	);		
+	);
 
 	woocommerce_form_field('language3', array(
-		    'type'  => 'select',
-			'class'     => array('form-row-first'),
-			'label'     => __('Taal 3', 'woocommerce'),
-			'required'  => false,
-			'clear'     => true,  
-			'blank' => __('Click here to select', 'dot'),
-			'options'   => $languages,
+		'type'			=> 'select',
+		'class'			=> array('form-row-first'),
+		'label'			=> __('Taal 3', 'siw'),
+		'required'		=> false,
+		'clear'			=> true,
+		'options'		=> $languages,
 		), $checkout->get_value( 'language3' )
 	);
  
 	woocommerce_form_field('language3Skill', array(
-		    'type'  => 'radio',
-			'class'     => array('form-row-wide'),
-			'label'     => __('Niveau taal 3', 'woocommerce'),
-			'required'  => false,
-			'clear'     => true,  
-			'options'   => $language_skill
+		'type'			=> 'radio',
+		'class'			=> array('form-row-wide'),
+		'label'			=> __('Niveau taal 3', 'siw'),
+		'required'		=> false,
+		'clear'			=> true,
+		'options'		=> $language_skill
 		), $checkout->get_value( 'language3Skill' )
 	);		
 		
 		
-    echo '</div>';
- 	
-	// gegevens noodcontact
-	echo '<div id="emergencyContact"><h3>' . __('Noodcontact') . '</h3>';
-	woocommerce_form_field( 'emergencyContactName', array(
-        'type'          => 'text',
-		'class'		=> array('form-row-first'),
-		'required'		=> true,
-		'label'         => __('Naam'),
-        ), $checkout->get_value( 'emergencyContactName' )
-	);
-   
-	woocommerce_form_field( 'emergencyContactPhone', array(
-        'type'          => 'text',
-		'class'		=> array('form-row-last'),
-		'required'		=> true,
-		'label'         => __('Telefoonnummer'),
-		'clear'         => true      
-        ), $checkout->get_value( 'emergencyContactPhone' )
-	);
-  
-    echo '</div>';	
+	echo '</div>';
+	echo '</div>';
 }
 
 //controleren extra velden
@@ -260,10 +247,10 @@ add_action('woocommerce_checkout_process', 'siw_wc_checkout_validate_checkout_fi
 
 function siw_wc_checkout_validate_checkout_fields() {
 	// controleer of geboortedatum het juiste formaat heeft en of de deelnemer minimaal 14 jaar is.
-    if ($_POST['billing_dob']) {
-        $date = explode("-", $_POST['billing_dob']);
+	if ($_POST['billing_dob']) {
+		$date = explode("-", $_POST['billing_dob']);
 		if(!checkdate($date[1], $date[0], $date[2]) or $date[2]<1900 )
-			wc_add_notice( __('<strong>Geboortedatum</strong> is ongeldig.'),'error');
+			wc_add_notice( __('<strong>Geboortedatum</strong> is ongeldig.', 'siw'),'error');
 		else {
 			$date14YearsAdded = strtotime(date("Y-m-d", strtotime($date[2].'-'.$date[1].'-'.$date[0])) . " +14 year");
 			if(date("Y-m-d", $date14YearsAdded)>date("Y-m-d"))
@@ -273,30 +260,30 @@ function siw_wc_checkout_validate_checkout_fields() {
 	
 	//controleer of de taal 1 en het niveau van taal 1 geselecteerd zijn.
 	if (!$_POST['language1']) {
-		wc_add_notice(__('<strong>Taal 1</strong> is niet geselecteerd.'), 'error');
+		wc_add_notice(__('<strong>Taal 1</strong> is niet geselecteerd.', 'siw'), 'error');
 	}
 	if (!$_POST['language1Skill']) {
-		wc_add_notice(__('<strong>Niveau taal 1</strong> is niet geselecteerd.'), 'error');
+		wc_add_notice(__('<strong>Niveau taal 1</strong> is niet geselecteerd.', 'siw'), 'error');
 	}
 	
 	//controleer of het niveau van taal 2 gekozen is als er een tweede taal geselecteerd is
 	if ($_POST['language2'] and !$_POST['language2Skill']) {
-		wc_add_notice(__('<strong>Niveau taal 2</strong> is niet geselecteerd.'), 'error');	
+		wc_add_notice(__('<strong>Niveau taal 2</strong> is niet geselecteerd.', 'siw'), 'error');	
 	}
 
 	//controleer of het niveau van taal 3 gekozen is als er een derde taal geselecteerd is
 	if ($_POST['language3'] and !$_POST['language3Skill']) {
-		wc_add_notice(__('<strong>Niveau taal 3</strong> is niet geselecteerd.'), 'error');	
+		wc_add_notice(__('<strong>Niveau taal 3</strong> is niet geselecteerd.', 'siw'), 'error');	
 	}	
 	
 	//controleer of gegevens noodcontact gevuld zijn
 	if (!$_POST['emergencyContactName'] or !$_POST['emergencyContactPhone']) {
-		wc_add_notice(__('<strong>Gegevens noodcontact</strong> zijn niet ingevuld.'), 'error');
+		wc_add_notice(__('<strong>Gegevens noodcontact</strong> zijn niet ingevuld.', 'siw'), 'error');
 	}
 	
 	//controleer of de motivatie gevuld is
 	if (!$_POST['motivation']) {
-		wc_add_notice(__('<strong>Motivation</strong> is niet ingevuld.'), 'error');
+		wc_add_notice(__('<strong>Motivation</strong> is niet ingevuld.', 'siw'), 'error');
 	}
 }
 
@@ -348,18 +335,7 @@ function siw_wc_checkout_save_checkout_fields( $order_id ) {
 /*
 Multi-step checkout
 */
-remove_filter('woocommerce_locate_template', 'wcmultichecout_woocommerce_locate_template', 1, 3);
-
-add_action('wp_enqueue_scripts', 'siw_woocommerce_multistep_checkout_scripts');
-function siw_woocommerce_multistep_checkout_scripts(){
-	global $wp_scripts;
-	if ( is_checkout() && $wp_scripts->registered['wmc-wizard']){
-		$wp_scripts->registered['wmc-wizard']->src = get_stylesheet_directory_uri() . '/assets/js/woocommerce-multistep-checkout/wizard.js';
-	}
-	if ($wp_scripts->registered['jquery-validate']){
-		$wp_scripts->registered['jquery-validate']->src = get_stylesheet_directory_uri() . '/assets/js/woocommerce-multistep-checkout/jquery.validate.js';
-	}
-}
+//remove_filter('woocommerce_locate_template', 'wcmultichecout_woocommerce_locate_template', 1, 3);
 
 /*Voorwaarden link vervangen door modal  */
 add_filter('woocommerce_checkout_show_terms', '__return_false');
@@ -368,7 +344,7 @@ add_action('woocommerce_review_order_after_submit', 'siw_woocommerce_show_terms_
 function siw_woocommerce_show_terms_link(){
 $terms_page = get_post( woocommerce_get_page_id('terms') );
 ?>
-<p class="form-row terms">
+<p class="form-row terms wc-terms-and-conditions">
 	<label for="terms" class="checkbox"><?php printf( __( 'Ik heb de <a id="open-terms-and-conditions" data-toggle="modal" data-target="#kt-modal-terms" >inschrijfvoorwaarden</a> gelezen en ga akkoord ', 'siw' ), esc_url( wc_get_page_permalink( 'terms' ) ) ); ?></label>
 	<input type="checkbox" class="input-checkbox" name="terms" <?php checked( apply_filters( 'woocommerce_terms_is_checked_default', isset( $_POST['terms'] ) ), true ); ?> id="terms" />
 </p>

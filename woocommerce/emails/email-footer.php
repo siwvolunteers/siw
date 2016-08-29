@@ -32,7 +32,7 @@ $site_url = site_url('', 'http' );
 										<td width="10%">&nbsp;</td>
 										<td width="auto" align="center">
 											<font style="font-family:'Open Sans', Verdana, normal; color:#666; font-size:11px; font-weight:bold;">
-												SIW Internationale Vrijwilligersprojecten | Tel: 030-2317721 | <a href= "mailto:info@siw.nl" style="color:#666; text-decoration:none; font-weight:bold">info@siw.nl</a>
+												SIW Internationale Vrijwilligersprojecten | 030-2317721 | <a href= "mailto:info@siw.nl" style="color:#666; text-decoration:none; font-weight:bold">info@siw.nl</a>
 											</font>
 										</td>
 										<td width="10%">&nbsp;</td>

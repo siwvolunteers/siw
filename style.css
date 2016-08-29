@@ -4,11 +4,71 @@ Theme URI: http://www.siw.nl
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 2.0
+Version: 2.1
 GitHub Theme URI: https://github.com/siwvolunteers/siw
 */
 
 
+div.siw_quote_widget{
+	background: rgba(255,255,255, 0.7);
+	padding:15px;
+	border-radius: 5px;
+}
+
+.siw_quote_widget .widget-title{
+	padding-bottom:0px;
+}
+
+.siw_quote_widget .quote{
+	font-size:15px;
+}
+
+.siw_quote_widget .quote .text{
+	margin-bottom:10px;
+	font-style:italic;
+}
+
+.siw_quote_widget .name{
+	font-weight:bold;
+}
+
+
+#topbar{
+	height:40px;
+	background: #59ab9c;
+}
+
+#eventbar{
+	height:40px;
+    line-height: normal;
+	color: #fff;
+	font-size:16px;
+	position: fixed;
+	z-index:1;
+	top: 0px;
+	left: 0px;
+	width: 100% !important;
+	padding:10px 0px;
+	text-align: center;
+}
+@media only screen and (max-width:767px) {
+.hide_on_mobile {
+display: none !important;}
+#eventbar{
+	font-size:2.5vw;
+}
+#topbar{
+	height:40px;
+}
+}
+@media only screen and (max-width:480px) {
+#eventbar{
+	font-size:3vw;
+}
+}
+
+
+#eventbar a {color: #ffffff; border-bottom: 1px dotted; font-weight:bold;}
 
 /*
 Algemene styling
@@ -336,14 +396,14 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a{
 }
 
 /*checkout*/
-.woocommerce-shipping-fields label.radio, .woocommerce-billing-fields label.radio{
+.woocommerce-extra-fields label.radio, .woocommerce-billing-fields label.radio{
 	display:inline-block !important;
 	padding-right: 20px !important;
 	padding-left: 0px !important;
 	font-weight: 400 !important;
 }
 
-.woocommerce-shipping-fields .checkradios-radio, .woocommerce-billing-fields .checkradios-radio{
+.woocommerce-extra-fields .checkradios-radio, .woocommerce-billing-fields .checkradios-radio{
 	margin-left: 5px !important;
 }
 
@@ -355,57 +415,7 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a{
 	text-align: left;
 }
 
-.form-row-day .select2-container, .form-row-month .select2-container , .form-row-year .select2-container{
-	min-width: 50px;
-}
 
-.woocommerce form .form-row-year, .woocommerce form .form-row-month, .woocommerce form .form-row-day, .woocommerce-page form .form-row-year, .woocommerce-page form .form-row-month, .woocommerce-page form .form-row-day {
-    min-height: 1px;
-    overflow: visible;
-    position: relative;
-}
-
-
-@media (min-width: 768px){
-.woocommerce form .form-row-day, .woocommerce-page form .form-row-day {
-    float: left;
-    padding-right: 5px;
-    width: 15%;
-}
-
-
-.woocommerce form .form-row-month, .woocommerce-page form .form-row-month {
-    float: left;
-    padding-right: 5px;
-    width: 20%;
-}
-.woocommerce form .form-row-year, .woocommerce-page form .form-row-year {
-    float: left;
-    width: 15%;
-	padding-right: 5px;
-}
-
-}
-
-@media (max-width: 767px){
-.woocommerce form .form-row-day, .woocommerce-page form .form-row-day {
-    float: left;
-    padding-right: 5px;
-    width: 20%;
-}
-
-.woocommerce form .form-row-month, .woocommerce-page form .form-row-month {
-    float: left;
-    padding-right: 5px;
-    width: 40%;
-}
-.woocommerce form .form-row-year, .woocommerce-page form .form-row-year {
-    float: left;
-    width: 40%;
-	padding-right: 5px;
-}
-
-}
 /*tekstblokken in informatie voor PO hoger maken*/
 #infoForPartner textarea{
 	height: auto !important;
@@ -415,14 +425,14 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a{
 Radio buttons zichtbaar maken i.v.m. validatie
 */
 
-.woocommerce-billing-fields input[type="radio"], .woocommerce-shipping-fields input[type="radio"]{
+.woocommerce-billing-fields input[type="radio"], .woocommerce-extra-fields input[type="radio"]{
 	display: inline-block !important;
 	margin-left: 10px !important;
 	left: -99999%;
 	opacity: 0;
 }
 
-.woocommerce-billing-fields .radiobutton, .woocommerce-shipping-fields .radiobutton{
+.woocommerce-billing-fields .radiobutton, .woocommerce-extra-fields .radiobutton{
 	position:relative !important;
 	margin-left: -15px !important;
 }
@@ -430,6 +440,12 @@ Radio buttons zichtbaar maken i.v.m. validatie
 .woocommerce input.input-text[readonly], form.checkout input.input-text[readonly]{
 	background-color: #eee;
     cursor: not-allowed;
+}
+
+.terms input[type="checkbox"]{
+	display: inline !important;
+	left: -99999%;
+	opacity: 0;
 }
 
 /*
@@ -694,10 +710,10 @@ ul.siw_events{
 	list-style-type:none;
 }
 
-li.siw_event h4 a::before{
+li.siw_event h5 a::before{
     color: #fff;
     display: inline-block;
-    height: 40px;
+    height: 30px;
     left: 15px;
     vertical-align: middle;
     width: 30px;
@@ -706,8 +722,9 @@ li.siw_event h4 a::before{
 	content:"\e115";
 }
 
-h4.siw_event_title{
+h5.siw_event_title{
 	margin-bottom:0px;
+	font-weight:bold;
 }
 
 .siw_event_duration, .siw_agenda_page_link{

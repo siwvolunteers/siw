@@ -4,7 +4,11 @@
 
 
 (function($) {
-
+	$.validator.setDefaults({
+		errorPlacement: function(error, element) {
+			error.appendTo( element.parents("p"));
+		}
+	});
 	$.validator.addMethod( "dateNL", function( value, element ) {
 		return this.optional( element ) || /^(0?[1-9]|[12]\d|3[01])[\-](0?[1-9]|1[012])[\-]([12]\d)?(\d\d)$/.test( value );
 	}, "Dit is geen geldige datum");
@@ -27,11 +31,16 @@
 		$( "#payment_method_bacs" ).click();
 	})
 	
-	//styling van checkboxes en radiobuttons
+	//styling van checkboxes en radiobuttons + validatie
 	$(document).ready(function() {
+		$("form.checkout .validate-required select").attr("required", "required");		
+		$("form.checkout .validate-required #billing_dob").addClass("dateNL");
+		$("form.checkout .validate-required #billing_postcode").addClass("postalcodeNL");
+		$("form.checkout .validate-required .input-radio").attr("required", "required");
+		
 		//woocommerce checkout page
 		$('.woocommerce-billing-fields :radio').addClass('mCheck');	
-		$('.woocommerce-shipping-fields :radio').addClass('mCheck');		 
+		$('.woocommerce-extra-fields :radio').addClass('mCheck');		 
 	
 		//woocommerce mailpoet opt-in
 		$('#mailpoet_checkout_subscribe').addClass('mCheck');
