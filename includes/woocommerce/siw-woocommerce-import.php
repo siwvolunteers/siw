@@ -482,38 +482,56 @@ function siw_wc_hide_projects() {
 
 	$days = siw_wc_get_nr_of_days_before_start_to_hide_project();
 	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$days." days"));
+
+	$meta_query_args = array(
+		'relation'	=>	'AND',
+		array(
+			'key'		=>	'_visibility',
+			'value'		=>	'visible',
+			'compare'	=>	'='
+		),
+		array(
+			'relation'	=>	'OR',
+			array(
+				'key'		=> 'freeplaces',
+				'value'		=> 'no',
+				'compare'	=> '='
+			),
+			array(
+				'key'		=> 'manual_visibility',
+				'value'		=> 'hidden',
+				'compare'	=> '='
+			),
+			array(
+				'key'		=> 'startdatum',
+				'value'		=> $limit,
+				'compare'	=> '<='
+			),
+		),
+	);
+	
 	$args = array(
 		'posts_per_page'	=> -1,
 		'post_type'			=> 'product',
-		'meta_key'			=> '_visibility',
-		'meta_value'		=> 'visible',
+		'meta_query'		=> $meta_query_args,
 		'fields' 			=> 'ids'
 	);
+	
 	$products = get_posts( $args ); 
 	foreach ( $products as $product_id ) {
-		$startdate = get_post_meta( $product_id, 'startdatum', true);
-		$startdate = date("Y-m-d",strtotime($startdate));
-		$freeplaces = get_post_meta( $product_id, 'freeplaces', true);
-		$allowed = get_post_meta( $product_id, 'allowed', true );
-		$manual_visibility = get_post_meta( $product_id, 'manual_visibility', true);
-		if (( $startdate <= $limit ) or ( 'no' == $freeplaces and '' != $freeplaces ) or ( 'hide' == $manual_visibility ) or ( 'no' == $allowed )){
-			update_post_meta( $product_id, '_visibility', 'hidden');
-			update_post_meta( $product_id, '_stock_status', 'outofstock');
-			update_post_meta( $product_id, '_featured', 'no');		
-			update_post_meta( $product_id, '_yoast_wpseo_meta-robots-noindex','1');
+		update_post_meta( $product_id, '_visibility', 'hidden');
+		update_post_meta( $product_id, '_stock_status', 'outofstock');
+		update_post_meta( $product_id, '_featured', 'no');
+		update_post_meta( $product_id, '_yoast_wpseo_meta-robots-noindex','1');
 			
-			$varationsargs = array(
-				'post_type' 	=> 'product_variation',
-				'post_parent'	=> $product_id,
-				'fields' 		=> 'ids'
-			);
-			$variations = get_posts( $varationsargs ); 
-			foreach ( $variations as $variation_id ) {
-				update_post_meta( $variation_id, '_stock_status', 'outofstock');
-			}
-			
-			//search&filter cache bijwerken
-			do_action('search_filter_update_post_cache', $product_id );
+		$varationsargs = array(
+			'post_type' 	=> 'product_variation',
+			'post_parent'	=> $product_id,
+			'fields' 		=> 'ids'
+		);
+		$variations = get_posts( $varationsargs ); 
+		foreach ( $variations as $variation_id ) {
+			update_post_meta( $variation_id, '_stock_status', 'outofstock');
 		}
 	}
 }
