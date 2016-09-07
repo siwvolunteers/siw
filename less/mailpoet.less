@@ -1,0 +1,32 @@
+/*SIW-mailpoet widget*/
+.widget_siw_mailpoet_subscription input{
+	color:#444;
+	.box-shadow(none);
+	
+	&:focus{
+	    .box-shadow(none);
+	}
+}
+
+#newsletter_message, #newsletter_email_message{
+    color: @secondary-color;
+	font-size:11px;
+	border: 1px solid @secondary-color;
+	.border-radius(4px);
+}
+
+/*loading-animatie*/
+#newsletter_loading {
+    border: 10px solid #f3f3f3; 
+    border-top: 10px solid @secondary-color; 
+    .border-radius(50%);
+    width: 75px;
+    height: 75px;
+    .animation(spin 2s linear infinite);
+	margin: 0 auto; 
+}
+
+.keyframes spin {
+    0% { .transform( rotate(0deg)); }
+    100% { .transform( rotate(360deg))}
+}
