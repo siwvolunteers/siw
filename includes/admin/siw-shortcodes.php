@@ -110,7 +110,7 @@ function siw_shortcodes( $pinnacle_shortcodes ){
 
 //volgende community day
 add_shortcode('siw_volgende_community_day', 'siw_shortcode_next_community_day');
-function siw_shortcode_next_community_day() {
+function siw_shortcode_next_community_day( $args ) {
 	
 	$attributes = shortcode_atts(
 		array(
@@ -150,7 +150,7 @@ function siw_shortcode_evs_next_deadline( $args ) {
 
 //Volgende EVS vertrekmoment
 add_shortcode('siw_evs_volgende_vertrekmoment', 'siw_shortcode_evs_next_start');
-function siw_shortcode_evs_next_start($args) {
+function siw_shortcode_evs_next_start( $args ) {
 	
 	$attributes = shortcode_atts(
 		array(
