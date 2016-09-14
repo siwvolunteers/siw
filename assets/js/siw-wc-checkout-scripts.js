@@ -43,7 +43,7 @@
 		$('.woocommerce-extra-fields :radio').addClass('mCheck');		 
 	
 		//woocommerce mailpoet opt-in
-		$('#mailpoet_checkout_subscribe').addClass('mCheck');
+		$('#newsletter_signup').addClass('mCheck');
 	
 		//uitvoeren
 		$('.mCheck').mCheckable({innerTags: "<div></div>"});	
