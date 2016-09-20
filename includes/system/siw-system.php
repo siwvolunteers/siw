@@ -72,22 +72,6 @@ function siw_disable_emojicons_tinymce( $plugins ) {
 	}
 }
 
-/*instellen starttijd Updraft Plus backup*/
-add_filter('updraftplus_schedule_firsttime_db', 'siw_backup_time_db');
-add_filter('updraftplus_schedule_firsttime_files', 'siw_backup_time_files');
-
-function siw_backup_time_db(){
-	$db_backup_time = siw_get_db_backup_time();
-	$time = strtotime( 'tomorrow '.$db_backup_time );
-	return $time;
-}
-
-function siw_backup_time_files(){
-	$files_backup_time = siw_get_files_backup_time();
-	$time = strtotime( 'tomorrow ' . $files_backup_time );
-	return $time;
-}
-
 /*dns-prefetch*/
 add_action('wp_head','siw_dns_prefetch', 0);
 
