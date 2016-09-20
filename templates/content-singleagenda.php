@@ -5,6 +5,7 @@
 	$id = $post->ID;
 
 	$start_ts					= get_post_meta( $id, 'siw_agenda_start', true );
+	$start_date					= date("Y-m-d", $start_ts );
 	$end_ts						= get_post_meta( $id, 'siw_agenda_eind', true );
 	$date_range					= siw_get_date_range_in_text( date("Y-m-d", $start_ts ),  date("Y-m-d", $end_ts ), false );
 	$start_time					= date("H:i", $start_ts );
@@ -22,7 +23,7 @@
 	$application_link_text		= get_post_meta( $id, 'siw_agenda_aanmelden_link_tekst', true );
 	$location_map				= '[gmap address="' . $address . ', ' . $postal_code . ' ' . $city . '" title="' . $location . '" zoom="15" maptype="ROADMAP"]';
 	$hide_form_days_before_cd = siw_get_hide_form_days_before_cd();
-	$hide_form_after = time() + ( $hide_form_days_before_cd * 24 * 60 * 60);
+	$limit_date = date("Y-m-d", strtotime( date("Y-m-d")."+" . $hide_form_days_before_cd . " days") );
 	$text_after_hide_cd_form = siw_get_text_after_hide_cd_form();
 	$agenda_page_url = get_permalink ( siw_get_parent_page('agenda') );
 ?>
@@ -72,9 +73,9 @@
 					</div>
 					<div class="col-md-6">
 						<h3>Aanmelden</h3>
-						<?php if($start_ts >= time()):?>
+						<?php if( $start_date > date("Y-m-d") ):?>
 						<?php if ('formulier' == $application ){
-							if ($start_ts >= $hide_form_after){
+							if ( $start_date >= $limit_date ){
 								echo do_shortcode( '[vfb id=' . $vfb_form_id . ']' );
 							}
 							else{
