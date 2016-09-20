@@ -67,11 +67,11 @@ function siw_get_ip_whitelist(){
 
 //pagina's
 function siw_get_parent_page( $type ){
-    switch ($type) {
-        case  "vacatures":
+	switch ($type) {
+		case "vacatures":
 			$parent_page = get_option('siw_jobs_parent_page');
 			return $parent_page;
-        case  "agenda":
+		case "agenda":
 			$parent_page = get_option('siw_agenda_parent_page');
 			return $parent_page;
 	}
@@ -88,28 +88,28 @@ function siw_get_vfb_field_id( $type ){
 
 
 function siw_get_vfb_form_id( $type ){
-    switch ($type) {
-        case  "community_day":
+	switch ($type) {
+		case "community_day":
 			$form_id = get_option('siw_forms_community_day');
 			return $form_id;
-        case  "evs":
+		case "evs":
 			$form_id = get_option('siw_forms_evs');
 			return $form_id;
-        case  "op_maat":
+		case "op_maat":
 			$form_id = get_option('siw_forms_op_maat');
 			return $form_id;
 	}
 }
 
 function siw_get_cf7_form_id( $type ){
-    switch ($type) {
-        case  "algemeen":
+	switch ($type) {
+		case "algemeen":
 			$form_id = get_option('siw_forms_algemeen');
 			return $form_id;
-        case  "project":
+		case "project":
 			$form_id = get_option('siw_forms_project');
 			return $form_id;
-        case  "begeleider":
+		case "begeleider":
 			$form_id = get_option('siw_forms_begeleider');
 			return $form_id;
 	}
@@ -216,56 +216,56 @@ function siw_get_outgoing_placements_email(){
 
 //ondertekening e-mails
 function siw_get_mail_signature_name( $type ){
-    switch ($type) {
-        case  "contact_algemeen":
+	switch ( $type ) {
+		case "contact_algemeen":
 			$signature_name = get_option('siw_signature_general');
 			return $signature_name;
 			
-        case  "contact_np":
+		case "contact_np":
 			$signature_name = get_option('siw_signature_camp_leader');
 			return $signature_name;
 			
-        case  "contact_project":
+		case "contact_project":
 			$signature_name = get_option('siw_signature_project');
 			return $signature_name;
 			
-        case  "aanmelding_groepsproject":
+		case "aanmelding_groepsproject":
 			$signature_name = get_option('siw_signature_workcamp');
 			return $signature_name;
 			
-        case  "aanmelding_evs":
+		case "aanmelding_evs":
 			$signature_name = get_option('siw_signature_evs');
 			return $signature_name;	
 			
-        case  "aanmelding_op_maat":
+		case "aanmelding_op_maat":
 			$signature_name = get_option('siw_signature_op_maat');
 			return $signature_name;
 			
-        case  "aanmelding_community_day":
+		case "aanmelding_community_day":
 			$signature_name = get_option('siw_signature_community_day');
 			return $signature_name;
 	}
 }
 //tarieven
 function siw_get_fee_op_maat( $tariff ){
-    switch ($tariff) {
-        case  "student":
+	switch ( $tariff ) {
+		case "student":
 			$fee = get_option('siw_tariffs_op_maat_student');
 			return $fee;
 			
-        case  "regulier":
+		case "regulier":
 			$fee = get_option('siw_tariffs_op_maat_regular');
 			return $fee;
 	}
 }
 
 function siw_get_fee_workcamp( $tariff ){
-    switch ($tariff) {
-        case  "student":
+	switch ( $tariff ) {
+		case "student":
 			$fee = get_option('siw_tariffs_workcamp_student');
 			return $fee;
 			
-        case  "regulier":
+		case "regulier":
 			$fee = get_option('siw_tariffs_workcamp_regular');
 			return $fee;
 	}
@@ -303,7 +303,7 @@ function siw_get_date_in_text( $date, $year = true ){
 
 }
 
-function siw_get_date_range_in_text ($date_start, $date_end, $year = true){
+function siw_get_date_range_in_text ( $date_start, $date_end, $year = true ){
 	//als beide datums gelijk zijn gebruik dan siw_get_date_in_text
 	if ( $date_start == $date_end){
 		$date_range_in_text = siw_get_date_in_text( $date_start, $year );
@@ -368,195 +368,195 @@ function siw_get_array( $array ){
 			
 		case "nationalities":
 			$nationalities = array(
-				'' => '',
-				'AFG' =>'Afghanistan',
-				'ALB' =>'Albanië',
-				'ALG' =>'Algerije',
-				'AGO' =>'Angola',
-				'ARG' =>'Argentinië',
-				'ARM' =>'Armenië',
-				'AUS' =>'Australië',
-				'AT' =>'Oostenrijk',
-				'AZB' =>'Azerbeidzjan',
-				'BHS' =>"Bahama's",
-				'BAH' =>'Bahrein',
-				'BGD' =>'Bangladesh',
-				'BBD' =>'Barbados',
-				'BYE' =>'Wit-Rusland',
-				'BEL' =>'België',
-				'BLZ' =>'Belize',
-				'BEN' =>'Benin',
-				'BRM' =>'Bermuda',
-				'BUT' =>'Bhutan',
-				'BOL' =>'Bolivia',
-				'BOS' =>'Bosnië en Herzegovina',
-				'BTW' =>'Botswana',
-				'BRZ' =>'Brazilië',
-				'BLG' =>'Bulgarije',
-				'BKF' =>'Burkina Faso',
-				'BM' =>'Myanmar',
-				'BDI' =>'Burundi',
-				'CMG' =>'Cambodja',
-				'CMR' =>'Kameroen',
-				'CAN' =>'Canada',
-				'CVD' =>'Kaapverdië',
-				'CYD' =>'Kaaimaneilanden',
-				'CAF' =>'Centraal-Afrikaanse Republiek',
-				'TCD' =>'Tsjaad',
-				'CHL' =>'Chili',
-				'CHI' =>'China',
-				'COL' =>'Colombia',
-				'COM' =>'Comoren',
-				'COG' =>'Congo-Brazzaville',
-				'COD' =>'Congo-Kinshasa',
-				'CRI' =>'Costa Rica',
-				'CRO' =>'Kroatië',
-				'CUB' =>'Cuba',
-				'CHY' =>'Cyprus',
-				'CZE' =>'Tsjechië',
-				'DNK' =>'Denemarken',
-				'DMA' =>'Dominica',
-				'DOM' =>'Dominicaanse Republiek',
-				'ECU' =>'Ecuador',
-				'EGY' =>'Egypte',
-				'SLV' =>'El Salvador',
-				'EST' =>'Estland',
-				'ETH' =>'Ethiopië',
-				'FIN' =>'Finland',
-				'FRA' =>'Frankrijk',
-				'GEO' =>'Georgië',
-				'GER' =>'Duitsland',
-				'GHA' =>'Ghana',
-				'GBR' =>'Groot-Brittannië',
-				'GRE' =>'Griekenland',
-				'GL' =>'Groenland',
-				'GAT' =>'Guatemala',
-				'HT' =>'Haïti',
-				'HON' =>'Honduras',
-				'HKG' =>'Hongkong',
-				'HUN' =>'Hongarije',
-				'ISL' =>'IJsland',
-				'IND' =>'India',
-				'IDN' =>'Indonesië',
-				'IRN' =>'Iran',
-				'EIR' =>'Ierland',
-				'ISR' =>'Israël',
-				'ITA' =>'Italië',
-				'CIV' =>'Ivoorkust',
-				'JM' =>'Jamaica',
-				'JPN' =>'Japan',
-				'JOR' =>'Jordanië',
-				'KZ' =>'Kazachstan',
-				'KEN' =>'Kenia',
-				'KOR' =>'Zuid-Korea',
-				'KGZ' =>'Kirgizië',
-				'LAO' =>'Laos',
-				'LTV' =>'Letland',
-				'LBN' =>'Libanon',
-				'LS' =>'Lesotho',
-				'LIT' =>'Litouwen',
-				'LUX' =>'Luxemburg',
-				'MK' =>'Macedonië',
-				'MG' =>'Madagaskar',
-				'MW' =>'Malawi',
-				'MLS' =>'Maleisië',
-				'MLI' =>'Mali',
-				'MU' =>'Mauritius',
-				'MEX' =>'Mexico',
-				'MOL' =>'Moldavië',
-				'MGL' =>'Mongolië',
-				'ME' =>'Montenegro',
-				'MAR' =>'Marokko',
-				'MOZ' =>'Mozambique',
-				'NEP' =>'Nepal',
-				'HOL' =>'Nederland',
-				'NZL' =>'Nieuw-Zeeland',
-				'NIC' =>'Nicaragua',
-				'NGR' =>'Niger',
-				'NIG' =>'Nigeria',
-				'NI' =>'Noord-Ierland',
-				'NOR' =>'Noorwegen',
-				'PK' =>'Pakistan',
-				'PS' =>'Palestina',
-				'PAR' =>'Paraguay',
-				'PER' =>'Peru',
-				'PHL' =>'Filipijnen',
-				'POL' =>'Polen',
-				'POR' =>'Portugal',
-				'ROM' =>'Roemenië',
-				'RUS' =>'Rusland',
-				'SEN' =>'Senegal',
-				'RS' =>'Servië',
-				'SL' =>'Sierra Leone',
-				'SGP' =>'Singapore',
-				'SLK' =>'Slowakije',
-				'SLO' =>'Slovenië',
-				'ZAF' =>'Zuid-Afrika',
-				'ESP' =>'Spanje',
-				'LK' =>'Sri Lanka',
-				'SVE' =>'Zweden',
-				'CH' =>'Zwitserland',
-				'TWN' =>'Taiwan',
-				'TAN' =>'Tanzania',
-				'THA' =>'Thailand',
-				'TOG' =>'Togo',
-				'TUN' =>'Tunesië',
-				'TUR' =>'Turkije',
-				'TKM' =>'Turkmenistan',
-				'UGA' =>'Oeganda',
-				'UKR' =>'Oekraïne',
-				'USA' =>'Verenigde Staten',
-				'URY' =>'Uruguay',
-				'UZB' =>'Oezbekistan',
-				'VEN' =>'Venezuela',
-				'VTN' =>'Vietnam',
-				'YEM' =>'Jemen',
-				'ZMB' =>'Zambia',
-				'ZIM' =>'Zimbabwe'
+				''		=> '',
+				'AFG'	=> 'Afghanistan',
+				'ALB'	=> 'Albanië',
+				'ALG'	=> 'Algerije',
+				'AGO'	=> 'Angola',
+				'ARG'	=> 'Argentinië',
+				'ARM'	=> 'Armenië',
+				'AUS'	=> 'Australië',
+				'AT'	=> 'Oostenrijk',
+				'AZB'	=> 'Azerbeidzjan',
+				'BHS'	=> "Bahama's",
+				'BAH'	=> 'Bahrein',
+				'BGD'	=> 'Bangladesh',
+				'BBD'	=> 'Barbados',
+				'BYE'	=> 'Wit-Rusland',
+				'BEL'	=> 'België',
+				'BLZ'	=> 'Belize',
+				'BEN'	=> 'Benin',
+				'BRM'	=> 'Bermuda',
+				'BUT'	=> 'Bhutan',
+				'BOL'	=> 'Bolivia',
+				'BOS'	=> 'Bosnië en Herzegovina',
+				'BTW'	=> 'Botswana',
+				'BRZ'	=> 'Brazilië',
+				'BLG'	=> 'Bulgarije',
+				'BKF'	=> 'Burkina Faso',
+				'BM'	=>'Myanmar',
+				'BDI'	=> 'Burundi',
+				'CMG'	=> 'Cambodja',
+				'CMR'	=> 'Kameroen',
+				'CAN'	=> 'Canada',
+				'CVD'	=> 'Kaapverdië',
+				'CYD'	=> 'Kaaimaneilanden',
+				'CAF'	=> 'Centraal-Afrikaanse Republiek',
+				'TCD'	=> 'Tsjaad',
+				'CHL'	=> 'Chili',
+				'CHI'	=> 'China',
+				'COL'	=> 'Colombia',
+				'COM'	=> 'Comoren',
+				'COG'	=> 'Congo-Brazzaville',
+				'COD'	=> 'Congo-Kinshasa',
+				'CRI'	=> 'Costa Rica',
+				'CRO'	=> 'Kroatië',
+				'CUB'	=> 'Cuba',
+				'CHY'	=> 'Cyprus',
+				'CZE'	=> 'Tsjechië',
+				'DNK'	=> 'Denemarken',
+				'DMA'	=> 'Dominica',
+				'DOM'	=> 'Dominicaanse Republiek',
+				'ECU'	=> 'Ecuador',
+				'EGY'	=> 'Egypte',
+				'SLV'	=> 'El Salvador',
+				'EST'	=> 'Estland',
+				'ETH'	=> 'Ethiopië',
+				'FIN'	=> 'Finland',
+				'FRA'	=> 'Frankrijk',
+				'GEO'	=> 'Georgië',
+				'GER'	=> 'Duitsland',
+				'GHA'	=> 'Ghana',
+				'GBR'	=> 'Groot-Brittannië',
+				'GRE'	=> 'Griekenland',
+				'GL'	=> 'Groenland',
+				'GAT'	=> 'Guatemala',
+				'HT'	=> 'Haïti',
+				'HON'	=> 'Honduras',
+				'HKG'	=> 'Hongkong',
+				'HUN'	=> 'Hongarije',
+				'ISL'	=> 'IJsland',
+				'IND'	=> 'India',
+				'IDN'	=> 'Indonesië',
+				'IRN'	=> 'Iran',
+				'EIR'	=> 'Ierland',
+				'ISR'	=> 'Israël',
+				'ITA'	=> 'Italië',
+				'CIV'	=> 'Ivoorkust',
+				'JM'	=> 'Jamaica',
+				'JPN'	=> 'Japan',
+				'JOR'	=> 'Jordanië',
+				'KZ'	=> 'Kazachstan',
+				'KEN'	=> 'Kenia',
+				'KOR'	=> 'Zuid-Korea',
+				'KGZ'	=> 'Kirgizië',
+				'LAO'	=> 'Laos',
+				'LTV'	=> 'Letland',
+				'LBN'	=> 'Libanon',
+				'LS'	=> 'Lesotho',
+				'LIT'	=> 'Litouwen',
+				'LUX'	=> 'Luxemburg',
+				'MK'	=> 'Macedonië',
+				'MG'	=> 'Madagaskar',
+				'MW'	=> 'Malawi',
+				'MLS'	=> 'Maleisië',
+				'MLI'	=> 'Mali',
+				'MU'	=> 'Mauritius',
+				'MEX'	=> 'Mexico',
+				'MOL'	=> 'Moldavië',
+				'MGL'	=> 'Mongolië',
+				'ME'	=> 'Montenegro',
+				'MAR'	=> 'Marokko',
+				'MOZ'	=> 'Mozambique',
+				'NEP'	=> 'Nepal',
+				'HOL'	=> 'Nederland',
+				'NZL'	=> 'Nieuw-Zeeland',
+				'NIC'	=> 'Nicaragua',
+				'NGR'	=> 'Niger',
+				'NIG'	=> 'Nigeria',
+				'NI'	=> 'Noord-Ierland',
+				'NOR'	=> 'Noorwegen',
+				'PK'	=> 'Pakistan',
+				'PS'	=> 'Palestina',
+				'PAR'	=> 'Paraguay',
+				'PER'	=> 'Peru',
+				'PHL'	=> 'Filipijnen',
+				'POL'	=> 'Polen',
+				'POR'	=> 'Portugal',
+				'ROM'	=> 'Roemenië',
+				'RUS'	=> 'Rusland',
+				'SEN'	=> 'Senegal',
+				'RS'	=> 'Servië',
+				'SL'	=> 'Sierra Leone',
+				'SGP'	=> 'Singapore',
+				'SLK'	=> 'Slowakije',
+				'SLO'	=> 'Slovenië',
+				'ZAF'	=> 'Zuid-Afrika',
+				'ESP'	=> 'Spanje',
+				'LK'	=> 'Sri Lanka',
+				'SVE'	=> 'Zweden',
+				'CH'	=> 'Zwitserland',
+				'TWN'	=> 'Taiwan',
+				'TAN'	=> 'Tanzania',
+				'THA'	=> 'Thailand',
+				'TOG'	=> 'Togo',
+				'TUN'	=> 'Tunesië',
+				'TUR'	=> 'Turkije',
+				'TKM'	=> 'Turkmenistan',
+				'UGA'	=> 'Oeganda',
+				'UKR'	=> 'Oekraïne',
+				'USA'	=> 'Verenigde Staten',
+				'URY'	=> 'Uruguay',
+				'UZB'	=> 'Oezbekistan',
+				'VEN'	=> 'Venezuela',
+				'VTN'	=> 'Vietnam',
+				'YEM'	=> 'Jemen',
+				'ZMB'	=> 'Zambia',
+				'ZIM'	=> 'Zimbabwe'
 			);
 			return $nationalities;
 			
         case  "languages":
 			$languages = array(
-				'' =>  'Selecteer een taal',
-				'ARA' => 'Arabisch',
-				'CAT' => 'Catalaans',
-				'CHN' => 'Chinees',
-				'DNK' => 'Deens',
-				'GER' => 'Duits',
-				'ENG' => 'Engels',
-				'EST' => 'Estisch ',
-				'FIN' => 'Fins',
-				'FRA' => 'Frans',
-				'GRE' => 'Grieks',
-				'HEB' => 'Hebreeuws',
-				'ITA' => 'Italiaans',
-				'JAP' => 'Japans',
-				'KOR' => 'Koreaans',
-				'HOL' => 'Nederlands',
-				'UKR' => 'Oekraïens',
-				'POL' => 'Pools',
-				'POR' => 'Portugees',
-				'RUS' => 'Russisch',
-				'SLK' => 'Slowaaks',
-				'ESP' => 'Spaans',
-				'CZE' => 'Tsjechisch',
-				'TUR' => 'Turks',
-				'SWE' => 'Zweeds',
+				''		=> 'Selecteer een taal',
+				'ARA'	=> 'Arabisch',
+				'CAT'	=> 'Catalaans',
+				'CHN'	=> 'Chinees',
+				'DNK'	=> 'Deens',
+				'GER'	=> 'Duits',
+				'ENG'	=> 'Engels',
+				'EST'	=> 'Estisch ',
+				'FIN'	=> 'Fins',
+				'FRA'	=> 'Frans',
+				'GRE'	=> 'Grieks',
+				'HEB'	=> 'Hebreeuws',
+				'ITA'	=> 'Italiaans',
+				'JAP'	=> 'Japans',
+				'KOR'	=> 'Koreaans',
+				'HOL'	=> 'Nederlands',
+				'UKR'	=> 'Oekraïens',
+				'POL'	=> 'Pools',
+				'POR'	=> 'Portugees',
+				'RUS'	=> 'Russisch',
+				'SLK'	=> 'Slowaaks',
+				'ESP'	=> 'Spaans',
+				'CZE'	=> 'Tsjechisch',
+				'TUR'	=> 'Turks',
+				'SWE'	=> 'Zweeds',
 			);
 			return $languages;	
 			
 		case  "language_skill":
 			$language_skill = array(
-				'1' => 'Matig',
-				'2' => 'Redelijk',
-				'3' => 'Goed',
-				'4' => 'Uitstekend',
+				'1'	=> 'Matig',
+				'2'	=> 'Redelijk',
+				'3'	=> 'Goed',
+				'4'	=> 'Uitstekend',
 			);
 			return $language_skill;
 
         case  "project_work":
-			$project_work=array(
+			$project_work = array(
 				"RENO"	=> "restauratie",
 				"ENVI"	=> "natuur",
 				"CONS"	=> "constructie",
@@ -585,60 +585,60 @@ function siw_get_array( $array ){
 			
 		case "month_to_text":
 			$month_to_text=array(
-				"1"	 => "januari",
-				"2"	 => "februari",
-				"3"	 => "maart",
-				"4"	 => "april",
-				"5"	 => "mei",
-				"6"	 => "juni",
-				"7"	 => "juli",
-				"8"	 => "augustus",
-				"9"	 => "september",
-				"10" => "oktober",
-				"11" => "november",
-				"12" => "december"
+				"1"		=> "januari",
+				"2"		=> "februari",
+				"3"		=> "maart",
+				"4"		=> "april",
+				"5"		=> "mei",
+				"6"		=> "juni",
+				"7"		=> "juli",
+				"8"		=> "augustus",
+				"9"		=> "september",
+				"10"	=> "oktober",
+				"11"	=> "november",
+				"12"	=> "december"
 			);	
 			return $month_to_text;
 			
-		case "project_languages":			
+		case "project_languages":
 			$project_languages=array(
-				'ARA' => 'arabisch',
-				'AZE' => 'azerbeidzjaans ',
-				'CAT' => 'catalaans',
-				'CHN' => 'chinees',
-				'HKG' => 'chinees',
-				'DNK' => 'deens',
-				'GER' => 'duits',
-				'ENG' => 'engels',
-				'EN'  => 'engels',
-				'USA' => 'engels',
-				'EST' => 'estisch',
-				'FIN' => 'fins',
-				'FRA' => 'frans',
-				'GRE' => 'grieks',
-				'HEB' => 'hebreeuws',
-				'ITA' => 'italiaans',
-				'JAP' => 'japans',
-				'JPN' => 'japans',
-				'KOR' => 'koreaans',
-				'HOL' => 'nederlands',
-				'UKR' => 'oekraiens',
-				'IRN' => 'perzisch',
-				'POL' => 'pools',
-				'POR' => 'portugees',
-				'RUS' => 'russisch',
-				'SLK' => 'slowaaks',
-				'ES'  => 'spaans',
-				'ESP' => 'spaans',
-				'CZE' => 'tsjechisch',
-				'TUR' => 'turks',
-				'BEL' => 'waals',
-				'BLR' => 'wit-russisch',
-				'SWE' => 'zweeds'
+				'ARA'	=> 'arabisch',
+				'AZE'	=> 'azerbeidzjaans ',
+				'CAT'	=> 'catalaans',
+				'CHN'	=> 'chinees',
+				'HKG'	=> 'chinees',
+				'DNK'	=> 'deens',
+				'GER'	=> 'duits',
+				'ENG'	=> 'engels',
+				'EN' 	=> 'engels',
+				'USA'	=> 'engels',
+				'EST'	=> 'estisch',
+				'FIN'	=> 'fins',
+				'FRA'	=> 'frans',
+				'GRE'	=> 'grieks',
+				'HEB'	=> 'hebreeuws',
+				'ITA'	=> 'italiaans',
+				'JAP'	=> 'japans',
+				'JPN'	=> 'japans',
+				'KOR'	=> 'koreaans',
+				'HOL'	=> 'nederlands',
+				'UKR'	=> 'oekraiens',
+				'IRN'	=> 'perzisch',
+				'POL'	=> 'pools',
+				'POR'	=> 'portugees',
+				'RUS'	=> 'russisch',
+				'SLK'	=> 'slowaaks',
+				'ES'	=> 'spaans',
+				'ESP'	=> 'spaans',
+				'CZE'	=> 'tsjechisch',
+				'TUR'	=> 'turks',
+				'BEL'	=> 'waals',
+				'BLR'	=> 'wit-russisch',
+				'SWE'	=> 'zweeds'
 			);			
-			return $project_languages;		
+			return $project_languages;
 
-			case "project_countries":	
+			case "project_countries":
 				$project_countries = array();
 				$project_countries['ALB'] = array(
 					'slug'		=> 'albanie',

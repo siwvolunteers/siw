@@ -260,7 +260,7 @@ function siw_wc_project_summary( $project_type, $country, $workcode, $startdate,
 	//verzamelen gegevens voor samenvatting
 	$numvol = (integer) $numvol;
 	$other_volunteer = $numvol - 1;
-	$age_range_int_text = siw_wc_age_range( $minimum_age, $maximum_age );	
+	$age_range_in_text = siw_wc_age_range( $minimum_age, $maximum_age );	
 	
 	$work = siw_wc_project_work_in_text( $workcode,2);
 	
@@ -272,7 +272,7 @@ function siw_wc_project_summary( $project_type, $country, $workcode, $startdate,
 	$project_summary = '';
 	
 	if ( 'tieners' == $teenage_project ){
-		$project_summary .= "Dit is een tienerproject (" . $age_range_int_text . '). ';
+		$project_summary .= "Dit is een tienerproject (" . $age_range_in_text . '). ';
 	}
 
 	else if ( 'familie' == $family_project ){
