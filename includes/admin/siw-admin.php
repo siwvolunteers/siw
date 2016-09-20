@@ -6,6 +6,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+// Logo vervangen door SIW logo
+add_action('admin_head', 'siw_admin_logo_styling');
+function siw_admin_logo_styling() {
+echo '
+<style type="text/css">
+.siw-logo div{
+    width: 195px !important;
+    background-image: url("'.get_stylesheet_directory_uri() . '/assets/images/admin/logo.png") !important;
+	background-size: contain !important;
+	background-repeat: no-repeat !important;
+}
+</style>
+';
+}
+
+add_action( 'admin_bar_menu', 'siw_admin_bar_logo', 1 );
+function siw_admin_bar_logo( $wp_admin_bar ) {
+    $args = array(
+        'id'    => 'siw-logo',
+        'meta'  => array( 'class' => 'siw-logo', 'title' => 'SIW' )
+    );
+    $wp_admin_bar->add_node( $args );
+}
+add_action( 'admin_bar_menu', 'siw_admin_bar_test', 1 );
+function siw_admin_bar_test( $wp_admin_bar ) {
+    $args = array(
+        'id'    => 'siw-url',
+		'title' => 'Je bent ingelogd op: ' . site_url('', '' ),
+    );
+    $wp_admin_bar->add_node( $args );
+}
 
 //admin-bar opschonen
 add_action( 'wp_before_admin_bar_render', 'siw_remove_admin_bar_items', 999 );
@@ -13,10 +44,13 @@ add_action( 'wp_before_admin_bar_render', 'siw_remove_admin_bar_items', 999 );
 function siw_remove_admin_bar_items( $wp_admin_bar ) {
 	global $wp_admin_bar;
 	$wp_admin_bar->remove_menu( 'wp-logo' );
+	$wp_admin_bar->remove_menu( 'site-name' );
+	$wp_admin_bar->remove_menu( 'ktoptions' );
 	$wp_admin_bar->remove_menu( 'comments' );
 	$wp_admin_bar->remove_menu( 'wpseo-menu' );
 	$wp_admin_bar->remove_menu( 'vfbp-admin-toolbar' );
-	$wp_admin_bar->remove_menu('new-content');
+	$wp_admin_bar->remove_menu( 'new-content');
+	$wp_admin_bar->remove_menu( 'updraft_admin_node' );
 
 }
 
@@ -34,7 +68,6 @@ function siw_remove_admin_menu_items(){
 
 //yoast box onderaan pagina
 add_filter( 'wpseo_metabox_prio', function() { return 'low';});
-
 
 
 //admin bar niet tonen voor ingelogde gebruikers
@@ -57,14 +90,6 @@ function siw_remove_plugin_metaboxes(){
 	remove_meta_box( 'woocommerce_dashboard_status', 'dashboard', 'normal');
 	remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'normal' ); 	
 	remove_meta_box( 'vfbp-dashboard', 'dashboard', 'normal');
-}
-
-add_action( 'admin_notices', 'siw_admin_notice_show_site_url' );
-function siw_admin_notice_show_site_url() {?>
-<div class="updated">
-	<h1>Je bent ingelogd op: <?php echo site_url('', '' );?></h1>
-</div>
-<?php
 }
 
 //woothemes update nag verwijderen
@@ -120,4 +145,23 @@ function siw_cmb_timepicker(){
 	}
 } 
 
-
+//WooCommerce in menu vervangen door Aanmeldingen
+add_action( 'admin_menu', 'siw_rename_woo_menu', 999 );
+function siw_rename_woo_menu() {
+	global $menu;
+	$woo = siw_menu_array_search( 'WooCommerce', $menu );
+	if( !$woo ){
+		return;
+	}
+	$menu[$woo][0] = 'Aanmeldingen';
+}
+ 
+function siw_menu_array_search( $find, $items ) {
+	foreach( $items as $key => $value ){
+		$current_key = $key;
+		if( $find === $value OR ( is_array( $value ) && siw_menu_array_search( $find, $value ) !== false ) ){
+			return $current_key;
+		}
+	}
+	return false;
+}
