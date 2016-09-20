@@ -15,6 +15,7 @@ require_once('includes/admin/siw-shortcodes.php');
 
 /*custom post types*/
 require_once('includes/post-types/siw-agenda.php');
+require_once('includes/post-types/siw-cpt.php');
 require_once('includes/post-types/siw-jobs.php');
 
 /*frontend functionaliteit*/
