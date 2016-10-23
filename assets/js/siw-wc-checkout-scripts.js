@@ -46,7 +46,7 @@
 		$('#newsletter_signup').addClass('mCheck');
 	
 		//uitvoeren
-		$('.mCheck').mCheckable({innerTags: "<div></div>"});	
+		//$('.mCheck').mCheckable({innerTags: "<div></div>"});	
 	})
 
 	$(document).ajaxComplete(function() {
