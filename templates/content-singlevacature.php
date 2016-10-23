@@ -60,17 +60,7 @@
 					</div>
 				</div>
 				<footer class="single-footer clearfix">
-				<?php $categories= get_the_terms( $post->ID,'soort_vacature');
-				if ( $categories && ! is_wp_error( $categories ) ){
-					$vacature_categories = array();
-					foreach ( $categories as $category ) {
-						$vacature_categories[] = $category->name;
-					}
-				$vacature_category = join( ", ", $vacature_categories );
-				}
-				if ( $vacature_category ) {
-					?> <span class="postedinbottom"><i class="kt-icon-tag4"></i> <?php echo $vacature_category; ?></span><?php
-				}?>
+					<?php do_action('siw_vacature_footer');?>
 				</footer>
 			</div>
 		</article>

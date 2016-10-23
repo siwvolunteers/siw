@@ -6,7 +6,7 @@
 					"compiler": "less",
 					"output": "../style.css",
 					"options": {
-						"compress": true,
+						"compress": false,
 						"ieCompat": false,
 						"strictMath": false,
 						"strictUnits": false,
@@ -24,6 +24,7 @@
 				"mailpoet.less",
 				"portfolio.less",
 				"snelzoeken.less",
+				"social-share.less",
 				"testimonials.less",
 				"topbar.less",
 				"vacatures.less",

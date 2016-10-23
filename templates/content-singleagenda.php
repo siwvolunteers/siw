@@ -96,17 +96,7 @@
 					</div>
 				</div>
 				<footer class="single-footer clearfix">
-				<?php $categories= get_the_terms($post->ID,'soort_evenement');
-				if ( $categories && ! is_wp_error( $categories ) ){
-					$agenda_categories = array();
-					foreach ( $categories as $category ) {
-						$agenda_categories[] = $category->name;
-					}
-				$agenda_category = join( ", ", $agenda_categories );
-				}
-				if ( $agenda_category ) {
-					?> <span class="postedinbottom"><i class="kt-icon-tag4"></i> <?php echo esc_html( $agenda_category ); ?></span><?php
-				}?>
+					<?php do_action('siw_agenda_footer');?>
 				</footer>
 			</div>
 		</article>
