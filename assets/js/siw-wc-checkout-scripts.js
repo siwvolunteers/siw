@@ -43,7 +43,7 @@
 		$('.woocommerce-extra-fields :radio').addClass('mCheck');		 
 	
 		//woocommerce mailpoet opt-in
-		$('#mailpoet_checkout_subscribe').addClass('mCheck');
+		$('#newsletter_signup').addClass('mCheck');
 	
 		//uitvoeren
 		$('.mCheck').mCheckable({innerTags: "<div></div>"});	
@@ -51,11 +51,11 @@
 
 	$(document).ajaxComplete(function() {
 		//woocommerce betaalmethodes
-		$('.woocommerce-checkout-payment :radio').addClass('mCheck');	
-		$('#terms').addClass('mCheck');	
+		$('.woocommerce-checkout-payment :radio').addClass('mCheckAjax');	
+		$('#terms').addClass('mCheckAjax');	
 		
 		//uitvoeren
-		$('.mCheck').mCheckable({innerTags: "<div></div>"});
+		$('.mCheckAjax').mCheckable({innerTags: "<div></div>"});
    
 	})
 

@@ -1,0 +1,117 @@
+/*pijltje op knoppen verbergen*/
+.wc-forward::after, .checkout-button::after, .return-to-shop a.wc-backward::after {
+    content: none !important;
+}
+
+
+/*checkout*/
+.woocommerce-extra-fields label.radio, .woocommerce-billing-fields label.radio{
+	display:inline-block !important;
+	padding-right: 20px !important;
+	padding-left: 0px !important;
+	font-weight: 400 !important;
+}
+
+.woocommerce-extra-fields .checkradios-radio, .woocommerce-billing-fields .checkradios-radio{
+	margin-left: 5px !important;
+}
+
+.wizard > .steps .done a, .wizard > .steps .done a:hover, .wizard > .steps .done a:active {
+    background: @primary-color-hover none repeat scroll 0 0;
+}
+
+.wizard > .steps a, .wizard > .steps a:hover, .wizard > .steps a:active {
+	text-align: left;
+}
+
+
+/*tekstblokken in informatie voor PO hoger maken*/
+#infoForPartner textarea{
+	height: auto !important;
+}
+
+
+/*
+Radio buttons zichtbaar maken i.v.m. validatie
+*/
+
+.woocommerce-billing-fields input[type="radio"], .woocommerce-extra-fields input[type="radio"]{
+	display: inline-block !important;
+	margin-left: 10px !important;
+	left: -99999%;
+	.opacity(0);
+}
+
+.woocommerce-billing-fields .radiobutton, .woocommerce-extra-fields .radiobutton{
+	position:relative !important;
+	margin-left: -15px !important;
+}
+
+.woocommerce input.input-text[readonly], form.checkout input.input-text[readonly]{
+	background-color: #eee;
+    cursor: not-allowed;
+}
+
+.terms input[type="checkbox"]{
+	display: inline !important;
+	left: -99999%;
+	.opacity(0);
+}
+
+
+/*modal*/
+.modal-body{
+	height:65vh;
+	overflow-y:auto;	
+}
+
+.modal-footer{
+	padding:10px;
+}
+
+.hide-button button.sm-kad-btn{
+	display:none;
+}
+
+#newsletter_signup_field .checkbox{
+	padding-left:0px;
+}
+#newsletter_signup_field .checkbox .input-checkbox{
+	display:inline-block;
+}
+
+
+/*verwijderen producten uit cart*/
+@media (max-width: 767px){
+    table.shop_table td.product-remove {
+      display: table-cell;
+      padding: 0;
+    }
+    table.shop_table th.product-remove{
+        .opacity(1);
+        display: table-cell;
+    }
+    #content table.cart a.remove {
+        font-size: 12px;
+        width: 20px;
+    }
+}
+
+#kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li a {
+    position: static;
+    margin-left:30px;
+}
+#kad-mobile-nav #kad-head-cart-popup ul.cart_list li a.remove {
+    display: block;
+    float:none;
+    position: absolute;
+    left: 0;
+    margin-left:0px;
+}
+#kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li {
+    position: relative;
+}
+
+.woocommerce .checkout .col-2 h3, .woocommerce-page .checkout .col-2 h3 {
+    float: none;
+}

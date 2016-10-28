@@ -5,6 +5,29 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
+
+//breadcrumbs voor custom post types
+add_action('kadence_breadcrumbs_after_home', 'siw_cpt_breadcrumbs');
+function siw_cpt_breadcrumbs(){
+	$delimiter = '/';
+	if (is_singular('vacatures')){
+		$vacature_parent = siw_get_parent_page('vacatures');
+		if( !empty($vacature_parent) ) { 
+			$parentpagelink = get_page_link($vacature_parent); $parenttitle = get_the_title($vacature_parent);
+			echo '<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="'.$parentpagelink. '"><span itemprop="title">' . $parenttitle . '</span></a></span> ' . $delimiter . ' ';
+		} 
+	}
+	if (is_singular('agenda')){
+		$agenda_parent = siw_get_parent_page('agenda');
+		if( !empty($agenda_parent) ) { 
+			$parentpagelink = get_page_link($agenda_parent); $parenttitle = get_the_title($agenda_parent);
+			echo '<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="'.$parentpagelink. '"><span itemprop="title">' . $parenttitle . '</span></a></span> ' . $delimiter . ' ';
+		} 
+	}
+}
+
+
 //shortcodes mogelijk maken in text widget
 add_filter( 'widget_text', 'do_shortcode' );
 

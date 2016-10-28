@@ -15,6 +15,7 @@ require_once('includes/admin/siw-shortcodes.php');
 
 /*custom post types*/
 require_once('includes/post-types/siw-agenda.php');
+require_once('includes/post-types/siw-cpt.php');
 require_once('includes/post-types/siw-jobs.php');
 
 /*frontend functionaliteit*/
@@ -24,6 +25,7 @@ require_once('includes/frontend/siw-frontend-widgets.php');
 require_once('includes/frontend/siw-js-css.php');
 require_once('includes/frontend/siw-newsletter.php');
 require_once('includes/frontend/siw-postcode.php');
+require_once('includes/frontend/siw-social-share.php');
 require_once('includes/frontend/siw-topbar.php');
 
 /*groepsprojecten (PLATO en WooCommerce)*/
@@ -32,6 +34,7 @@ require_once('includes/woocommerce/siw-woocommerce-email.php');
 require_once('includes/woocommerce/siw-woocommerce-checkout.php');
 require_once('includes/woocommerce/siw-woocommerce-import.php');
 require_once('includes/woocommerce/siw-woocommerce-export.php');
+require_once('includes/woocommerce/siw-woocommerce-newsletter.php');
 
 /*systeemfunctionaliteit*/
 require_once('includes/system/siw-cron.php');

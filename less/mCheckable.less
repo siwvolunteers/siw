@@ -1,0 +1,54 @@
+/* mCheckable - v1.0.2 - 2015-03-01
+* https://github.com/mIRUmd/mCheckable/
+* Copyright (c) 2015 Balan Miroslav; */
+
+.mCheckable{
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #b9b9b9;
+    height: 20px;
+    width: 20px;
+    font-size: 0;
+}
+
+.mCheckable div{
+    background-color: #eeeeee;
+    margin-top: 3px;
+    width: 12px;
+    height: 12px;
+}
+
+.mCheckable.radiobutton.checked div{ background-color: @primary-color; }
+
+
+.mCheckable.radiobutton{
+    .border-radius(50%);
+}
+
+.mCheckable.checkbox div{
+    display: inline;
+}
+
+.mCheckable.radiobutton div{
+    .border-radius(50%);
+	display: inline-block;
+}
+
+.mCheckable.checkbox{
+	padding-left:0px;
+	display: inline-block;
+	.box-sizing(content-box);
+}
+
+.mCheckable.checkbox.checked div::before{
+	font-family: kt-icon !important;
+	content:"\e370" !important;
+	color: @primary-color !important;
+	font-size:16px !important;
+
+
+}

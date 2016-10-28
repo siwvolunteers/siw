@@ -69,6 +69,18 @@
 		ga('send', 'event', 'Topbar', 'Klikken');
 	})	
 	
+	//GA-event bij social share
+	$(document).on('click', '.siw-social .facebook', function(){
+		ga('send', 'social', 'Facebook', 'Delen', window.location.href );
+	})		
+	$(document).on('click', '.siw-social .twitter', function(){
+		ga('send', 'social', 'Twitter', 'Delen', window.location.href );
+	})	
+	$(document).on('click', '.siw-social .linkedin', function(){
+		ga('send', 'social', 'LinkedIn', 'Delen', window.location.href );
+	})	
+
+	
 	$("#siw_newsletter_subscription").submit(function(event){
 		event.preventDefault();
 		

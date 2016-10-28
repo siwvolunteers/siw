@@ -104,10 +104,6 @@ function siw_wc_checkout_address_fields($fields){
 	return $address_fields;
 }
 
-//mailpoet opt-in verplaatsen
-remove_action( 'woocommerce_after_order_notes', 'on_checkout_page' );
-add_action( 'woocommerce_after_checkout_billing_form', 'on_checkout_page' );
-
 //extra velden voor partner
 add_action( 'woocommerce_multistep_checkout_before_order_info', 'siw_wc_checkout_extra_information');
 function siw_wc_checkout_extra_information() {

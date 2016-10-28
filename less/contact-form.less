@@ -1,0 +1,76 @@
+
+
+/*contact form styling*/
+div.wpcf7-validation-errors, div.wpcf7-mail-sent-ok{
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border: 2px solid;
+	.border-radius(4px);
+	border-color: @primary-color;
+	color: #444;
+	font-size: 15px;
+	line-height: 40px;
+	list-style: outside none none;
+	margin: 0 0 30px;
+	padding: 5px 5px 5px 55px;
+	position: relative;
+	width: auto;
+
+}
+
+div.wpcf7-validation-errors::after , div.wpcf7-mail-sent-ok::after{
+    clear: both;
+    content: "";
+    display: block;
+}
+
+div.wpcf7-validation-errors::before, div.wpcf7-mail-sent-ok::before{
+    color: @primary-color;
+    display: block;
+    height: 40px;
+    left: 15px;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+    top: 15px;
+    vertical-align: middle;
+    width: 30px;
+	background-color: transparent;
+    font-family: kt-icon;
+    font-style: normal;
+    font-variant: normal;
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: none;
+    top: 5px;
+}
+div.wpcf7-validation-errors::before{
+	content:"\e362";
+}
+div.wpcf7-mail-sent-ok::before{
+	content:"\e367";
+}
+
+.wpcf7-form textarea{
+    height: 5em !important;
+}
+span.wpcf7-not-valid-tip {
+    color: @primary-color;
+}
+
+
+
+
+
+
+
+/*
+Styling voor Ninja Kick contactform
+*/
+#ncf_sidebar, #ncf_sidebar .ncf_user_bio, #ncf_sidebar input, #ncf_sidebar textarea, #ncf_sidebar form.wpcf7-form p {
+	font-family: 'Open Sans',sans-serif !important;
+	color: #444 !important;
+}
+#ncf_sidebar .ncf_ph label{
+	position: static;
+	padding: 0px;
+}

@@ -6,6 +6,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/*instellen starttijd Updraft Plus backup*/
+add_filter('updraftplus_schedule_firsttime_db', 'siw_backup_time_db');
+add_filter('updraftplus_schedule_firsttime_files', 'siw_backup_time_files');
+
+function siw_backup_time_db(){
+	$db_backup_time = siw_get_db_backup_time();
+	$time = strtotime( 'tomorrow '.$db_backup_time );
+	return $time;
+}
+
+function siw_backup_time_files(){
+	$files_backup_time = siw_get_files_backup_time();
+	$time = strtotime( 'tomorrow ' . $files_backup_time );
+	return $time;
+}
+
+//cron jobs registreren
 add_action( 'wp', 'siw_schedule_custom_cron_jobs' );
 function siw_schedule_custom_cron_jobs() {
 	$cron_time = siw_get_cron_time();	

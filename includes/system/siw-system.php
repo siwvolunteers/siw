@@ -20,22 +20,10 @@ function siw_change_permalink_structure() {
 	add_permastruct( 'wpm-testimonial', "ervaring/%wpm-testimonial%", array( 'slug' => 'ervaring' ) );
 }
 
-
+//samenvatting toevoegen aan pagina's i.v.m. zoekfunctie
 add_action( 'init', 'siw_add_excerpts_to_pages' );
-
 function siw_add_excerpts_to_pages() {
 	add_post_type_support( 'page', 'excerpt' );
-}
-
-
-//portfolio permalinks aanpassen
-add_filter('kadence_portfolio_type_slug', 'siw_portfolio_type_slug');
-function siw_portfolio_type_slug(){
-	return 'projecten-op-maat-in';
-}
-add_filter('kadence_portfolio_tag_slug', 'siw_portfolio_tag_slug');
-function siw_portfolio_tag_slug(){
-	return 'projecten-op-maat-per-tag';
 }
 
 //pdf en doc(x) upload toestaan
@@ -47,7 +35,6 @@ function siw_custom_upload_mimes( $existing_mimes=array() ){
 	$existing_mimes['pdf'] = 'application/pdf';	
 	return $existing_mimes;
 }
-
 
 
 /*disable emojis*/
@@ -70,22 +57,6 @@ function siw_disable_emojicons_tinymce( $plugins ) {
 	else {
 		return array();
 	}
-}
-
-/*instellen starttijd Updraft Plus backup*/
-add_filter('updraftplus_schedule_firsttime_db', 'siw_backup_time_db');
-add_filter('updraftplus_schedule_firsttime_files', 'siw_backup_time_files');
-
-function siw_backup_time_db(){
-	$db_backup_time = siw_get_db_backup_time();
-	$time = strtotime( 'tomorrow '.$db_backup_time );
-	return $time;
-}
-
-function siw_backup_time_files(){
-	$files_backup_time = siw_get_files_backup_time();
-	$time = strtotime( 'tomorrow ' . $files_backup_time );
-	return $time;
 }
 
 /*dns-prefetch*/
