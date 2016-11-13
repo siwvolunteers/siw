@@ -74,12 +74,13 @@ add_filter( 'wpseo_metabox_prio', function() { return 'low';});
 add_filter('show_admin_bar', '__return_false');
 
 //standaard dashboard widgets verwijderen
-add_action('wp_dashboard_setup', 'siw_remove_dashboard_widgets' );
+add_action('admin_init', 'siw_remove_dashboard_widgets' );
 
 function siw_remove_dashboard_widgets(){
 	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
 	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
 	remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_primary', 'dashboard', 'normal' );
 }
 
 //overbodige metaboxes van plugins verwijderen
