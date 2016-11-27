@@ -32,6 +32,7 @@ require_once('includes/frontend/siw-topbar.php');
 require_once('includes/woocommerce/siw-woocommerce.php');
 require_once('includes/woocommerce/siw-woocommerce-email.php');
 require_once('includes/woocommerce/siw-woocommerce-checkout.php');
+require_once('includes/woocommerce/siw-woocommerce-cleanup.php');
 require_once('includes/woocommerce/siw-woocommerce-import.php');
 require_once('includes/woocommerce/siw-woocommerce-export.php');
 require_once('includes/woocommerce/siw-woocommerce-newsletter.php');
