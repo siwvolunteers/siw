@@ -507,6 +507,11 @@ function siw_wc_hide_projects() {
 				'value'		=> $limit,
 				'compare'	=> '<='
 			),
+			array(
+				'key'		=> 'allowed',
+				'value'		=> 'no',
+				'compare'	=> '='
+			),
 		),
 	);
 	
