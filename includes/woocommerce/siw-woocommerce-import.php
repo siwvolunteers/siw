@@ -499,7 +499,7 @@ function siw_wc_hide_projects() {
 			),
 			array(
 				'key'		=> 'manual_visibility',
-				'value'		=> 'hidden',
+				'value'		=> 'hide',
 				'compare'	=> '='
 			),
 			array(
