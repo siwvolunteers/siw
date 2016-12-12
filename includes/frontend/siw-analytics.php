@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
  
-///vervang Google Analytics functie door custom functie en voeg Pingdom Real Use Monitoring toe
+///vervang Google Analytics functie door custom functie
 add_action( 'after_setup_theme', 'siw_after_theme_setup' );
 function siw_after_theme_setup() {
 	$google_analytics_id = siw_get_google_analytics_id();
@@ -18,13 +18,6 @@ function siw_after_theme_setup() {
 		remove_action('wp_footer', 'kadence_google_analytics', 20);
 		add_action( 'wp_footer', 'siw_google_analytics', 20 );
 	}
-	
-	$pingdom_rum_id = siw_get_pingdom_rum_id();
-	define('PINGDOM_RUM_ID', $pingdom_rum_id );
-	if ( PINGDOM_RUM_ID ){
-		add_action('wp_head','siw_pingdom_rum');
-	}
-	
 }
 
 function siw_google_analytics() {?>
@@ -43,19 +36,5 @@ function siw_google_analytics() {?>
 	});
 	<?php }?>
 	ga('send','pageview');
-</script>
-<?php }
-
-function siw_pingdom_rum() {?>
-<script>
-var _prum = [['id', '<?php echo PINGDOM_RUM_ID; ?>'],
-             ['mark', 'firstbyte', (new Date()).getTime()]];
-(function() {
-    var s = document.getElementsByTagName('script')[0]
-      , p = document.createElement('script');
-    p.async = 'async';
-    p.src = '//rum-static.pingdom.net/prum.min.js';
-    s.parentNode.insertBefore(p, s);
-})();
 </script>
 <?php }
