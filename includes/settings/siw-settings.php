@@ -32,6 +32,7 @@ $args = array(
 	'footer_credit'			=> '&nbsp;',
 	'use_cdn'				=> false,
 	'hide_expand'			=> true,
+	'hide_reset'			=> true,
 );
 
 
