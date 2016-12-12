@@ -5,6 +5,22 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/*
+Redux laden
+*/
+require_once( 'assets/redux/framework.php' );
+
+/*systeemfunctionaliteit*/
+require_once('includes/system/siw-cron.php');
+require_once('includes/system/siw-email.php');
+require_once('includes/system/siw-get-information.php');
+require_once('includes/system/siw-search.php');
+require_once('includes/system/siw-system.php');
+
+require_once('includes/system/siw-vfb.php');
+
+/*instellingen*/
+require_once('includes/settings/siw-settings.php');
 
 /*backend*/
 require_once('includes/admin/siw-admin.php');
@@ -36,15 +52,4 @@ require_once('includes/woocommerce/siw-woocommerce-cleanup.php');
 require_once('includes/woocommerce/siw-woocommerce-import.php');
 require_once('includes/woocommerce/siw-woocommerce-export.php');
 require_once('includes/woocommerce/siw-woocommerce-newsletter.php');
-
-/*systeemfunctionaliteit*/
-require_once('includes/system/siw-cron.php');
-require_once('includes/system/siw-email.php');
-require_once('includes/system/siw-get-information.php');
-require_once('includes/system/siw-search.php');
-require_once('includes/system/siw-system.php');
-require_once('includes/system/siw-vfb.php');
-
-
-
 

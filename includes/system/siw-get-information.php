@@ -5,6 +5,17 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
+function siw_get_option ( $option ){
+	global $siw;
+	$value = '';
+	if ( isset( $siw[ $option ] ) ){
+		$value = $siw[$option];
+	}
+	return $value;	
+}
+
+
 //API keys
 function siw_get_postcode_api_key(){
 	$postcode_api_key = get_option('siw_api_postcode_api_key');
