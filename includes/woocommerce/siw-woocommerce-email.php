@@ -230,11 +230,10 @@ function siw_send_projects_for_approval_email(){
 	
 	//verstuur een e-mail naar de regiospecialist met links naar te beoordelen projecten
 	foreach ( $projects_for_approval as $email => $projectlist ){
-		$to = $email;
 		$subject = 'Nog te beoordelen projecten';
 		$message = 'Beste regiospecialist,<br/><br/>';
 		$message .= 'De volgende projecten wachten op jouw beoordeling:<br/><br/>' . $projectlist;
-		wp_mail( $to, $subject, $message, $headers );
+		wp_mail( $email, $subject, $message, $headers );
 	}
 	
 	//als er te beoordelen projecten zijn die niet aan een regiospecialist zijn toegewezen stuur dan een mail naar de coördinator
@@ -245,10 +244,10 @@ function siw_send_projects_for_approval_email(){
 	);	
 
 	if ( isset($unassigned_projects_for_approval) ){
-		$to = $supervisor_email;
 		$subject = 'Nog te beoordelen projecten';
 		$message = 'De volgende projecten wachten op beoordeling, maar zijn niet toegewezen aan een regiospecialist:<br/>' . $unassigned_projects_for_approval;
-		wp_mail( $to, $subject, $message, $headers );
+		wp_mail( $supervisor_email, $subject, $message, $headers );
 	}
 	
 }
+
