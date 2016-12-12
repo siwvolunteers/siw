@@ -238,11 +238,17 @@ function siw_send_projects_for_approval_email(){
 	}
 	
 	//als er te beoordelen projecten zijn die niet aan een regiospecialist zijn toegewezen stuur dan een mail naar de coördinator
+	//zet headers
+	$headers = array(
+		'Content-Type: text/html; charset=UTF-8',
+		'From: SIW website <webmaster@siw.nl>',
+	);	
+
 	if ( isset($unassigned_projects_for_approval) ){
 		$to = $supervisor_email;
 		$subject = 'Nog te beoordelen projecten';
 		$message = 'De volgende projecten wachten op beoordeling, maar zijn niet toegewezen aan een regiospecialist:<br/>' . $unassigned_projects_for_approval;
-		wp_mail( $to, $subject, $message );
+		wp_mail( $to, $subject, $message, $headers );
 	}
 	
 }
