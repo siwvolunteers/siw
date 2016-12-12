@@ -81,7 +81,10 @@ function siw_taxonomy_agenda_type() {
 		'show_ui'						=> true,
 		'show_admin_column'				=> true,
 		'show_in_nav_menus'				=> true,
-        'query_var'						=> true,
+		'query_var'						=> true,
+		'capabilities' => array(
+			'assign_terms' => 'edit_events'
+		),
 	);
 	register_taxonomy( 'soort_evenement', array( 'agenda' ), $args );
 
