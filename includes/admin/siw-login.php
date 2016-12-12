@@ -38,7 +38,7 @@ function siw_login_error() {
 
 
 //whitelisten ip's
-add_filter('limit_login_whitelist_ip', 'siw_login_ip_whitelist', 10, 2);
+add_filter('limit_login_whitelist_ip', 'siw_login_ip_whitelist', 99, 2);
 function siw_login_ip_whitelist( $allow, $ip ) {
 	$ip_whitelist = siw_get_ip_whitelist();
 	if ( in_array( $ip, $ip_whitelist ) ){
@@ -49,7 +49,7 @@ function siw_login_ip_whitelist( $allow, $ip ) {
 
 add_filter('woocommerce_prevent_admin_access', 'siw_allow_admin_access');
 function siw_allow_admin_access( $prevent_access ){
-	if ( current_user_can( 'edit_products' ) || current_user_can( 'edit_jobs' ) || current_user_can( 'edit_events' ) ){
+	if ( current_user_can( 'edit_products' ) || current_user_can( 'edit_jobs' ) || current_user_can( 'edit_events' ) || current_user_can( 'edit_quotes' ) || current_user_can( 'edit_volunteers' ) || current_user_can( 'edit_op_maat_projects' )){
 		$prevent_access = false;
 	}
 	return $prevent_access;
