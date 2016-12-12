@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -988,6 +988,12 @@ function siw_get_array( $array ){
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				);
+				$project_countries['TZA'] = array(
+					'slug'		=> 'tanzania',
+					'name'		=> 'Tanzania',
+					'continent'	=> 'afrika-midden-oosten',
+					'allowed'	=> 'yes',
+				);						
 				$project_countries['UGA'] = array(
 					'slug'		=> 'uganda',
 					'name'		=> 'Uganda',
