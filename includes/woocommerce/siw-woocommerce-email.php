@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -165,4 +165,84 @@ function siw_wc_email_show_application_details( $order ){
 <?php
 }
 
+//
+add_action ('siw_send_projects_for_approval_email', 'siw_send_projects_for_approval_email');
+function siw_send_projects_for_approval_email(){
+	
+	$projects_for_approval = array();
 
+	//zoek zichtbare en toegestane projecten met status 'draft'
+	$meta_query_args = array(
+		'relation'	=>	'AND',
+		array(
+			'key'		=>	'_visibility',
+			'value'		=>	'visible',
+			'compare'	=>	'='
+		),
+		array(
+			'key'		=>	'allowed',
+			'value'		=>	'yes',
+			'compare'	=>	'='
+		),
+	);
+	$args = array(
+		'posts_per_page'	=> -1,
+		'post_type'			=> 'product',
+		'post_status'		=> 'draft',
+		'meta_query'		=> $meta_query_args,
+		'fields' 			=> 'ids'
+	);	
+	$project_ids = get_posts( $args );
+	
+	//maak message per regiospecialist/e-mailadres aan 
+	foreach ( $project_ids as $project_id ){
+		$country = get_post_meta( $project_id, 'land', true );
+		$project = wc_get_product( $project_id );
+	  	$project_code = $project->get_sku();
+		$email = siw_get_option( $country . '_email');
+		
+		$project_name = get_the_title( $project_id );
+		$admin_link ='<a href="' . admin_url( 'post.php?post=' . $project_id . '&action=edit' ) . '">' . $project_code . '-' . $project_name . '<a/><br/>';
+		
+		if ( '' != $email){
+			if ( !isset( $projects_for_approval[ $email ] ) ){
+				$projects_for_approval[ $email ] = $admin_link;				
+			}
+			else{
+				$projects_for_approval[ $email ] .= $admin_link;
+			}
+		}
+		else{
+			$unassigned_projects_for_approval .= $admin_link;
+		}
+	}
+	
+	
+	//zoek e-mailadres coördinator op
+	$supervisor_email = siw_get_option('coordinator_op_maat_email');
+	
+	//zet headers
+	$headers = array(
+		'Content-Type: text/html; charset=UTF-8',
+		'From: SIW website <webmaster@siw.nl>',
+		'CC: ' . $supervisor_email,
+	);
+	
+	//verstuur een e-mail naar de regiospecialist met links naar te beoordelen projecten
+	foreach ( $projects_for_approval as $email => $projectlist ){
+		$to = $email;
+		$subject = 'Nog te beoordelen projecten';
+		$message = 'Beste regiospecialist,<br/><br/>';
+		$message .= 'De volgende projecten wachten op jouw beoordeling:<br/><br/>' . $projectlist;
+		wp_mail( $to, $subject, $message, $headers );
+	}
+	
+	//als er te beoordelen projecten zijn die niet aan een regiospecialist zijn toegewezen stuur dan een mail naar de coördinator
+	if ( isset($unassigned_projects_for_approval) ){
+		$to = $supervisor_email;
+		$subject = 'Nog te beoordelen projecten';
+		$message = 'De volgende projecten wachten op beoordeling, maar zijn niet toegewezen aan een regiospecialist:<br/>' . $unassigned_projects_for_approval;
+		wp_mail( $to, $subject, $message );
+	}
+	
+}

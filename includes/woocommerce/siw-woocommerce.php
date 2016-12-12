@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -114,13 +114,67 @@ function siw_wc_shortcode_add_orderby_random ( $args, $atts ) {
 
 //custom fields verbergen op orderscherm en projectscherm
 add_action( 'add_meta_boxes' , 'siw_wc_hide_custom_fields', 999 );
+add_action( 'admin_menu', 'siw_wc_hide_custom_fields', 999 );
 function siw_wc_hide_custom_fields() {
 	remove_meta_box( 'postcustom' , 'shop_order' , 'normal' ); 
 	remove_meta_box( 'woocommerce-order-downloads', 'shop_order', 'normal');
-	remove_meta_box( 'postcustom' , 'product' , 'normal' ); 
+	remove_meta_box( 'slugdiv', 'product', 'normal');
+	remove_meta_box( 'postcustom' , 'product' , 'normal' );
 	remove_meta_box( 'woocommerce-product-images' , 'product', 'side', 'low' );
 	remove_meta_box( 'commentsdiv' , 'product' , 'normal' ); 
+
+	//Diverse metaboxes verbergen voor niet-admins
+	if ( !current_user_can('manage_options') ){
+		remove_meta_box('woocommerce-product-data' , 'product', 'normal');
+		remove_meta_box('postimagediv', 'product', 'side');
+		remove_meta_box('tagsdiv-product_tag', 'product', 'normal');
+		remove_meta_box('product_catdiv', 'product', 'normal');		
+	}
+	
 }
+//editor verbergen bij projecten voor niet-admins
+add_action( 'admin_init', 'siw_hide_editor' );
+function siw_hide_editor() {
+
+	if (!isset($_GET['post'])){
+		return;
+	}
+	$post_id = $_GET['post'];
+
+	//Alleen uitvoeren bij groepsprojecten
+	if ('product' != get_post_type( $post_id) ) {
+		return;
+	}
+	
+	//Verberg editor voor niet-admins
+	if ( !current_user_can('manage_options') ){
+		remove_post_type_support('product', 'editor');
+	}
+}
+
+//Projectsamenvating
+add_action( 'add_meta_boxes' , 'siw_woo_show_meta_boxes', 999 );
+function siw_woo_show_meta_boxes() {
+
+	//metabox met projectbeschrijving tonen voor niet-admins
+	if ( !current_user_can('manage_options') ){
+		add_meta_box(
+			'siw_show_project_description',
+			esc_html__( 'Projectbeschrijving', 'siw' ),
+			'siw_show_project_description',
+			'product',
+			'normal', 
+			'high' 
+		);
+		
+	}
+}
+//Toon projectbeschrijving
+function siw_show_project_description( $object ){
+	echo do_shortcode( $object->post_content );
+}
+
+
 
 /*
 Functies voor tonen order op adminscherm
@@ -359,5 +413,56 @@ function siw_shop_order_admin_export_column_value( $column_name, $post_id ) {
 			$dashicon = 'minus';
 		}
 		echo sprintf('<span class="dashicons dashicons-%s"></span>', $dashicon );
+	}
+}
+
+
+/*
+Checkbox in projectscherm om project af te keuren
+*/
+add_action('post_submitbox_start', 'siw_show_reject_project_checkbox');
+function siw_show_reject_project_checkbox(){
+	$post_id = get_the_ID();
+
+	//Alleen tonen bij groepsprojecten
+	if ( get_post_type( $post_id) != 'product') {
+		return;
+	}
+	
+	//Alleen tonen als project ter review staat.
+	if ( get_post_status ( $post_id ) != 'draft'){
+		return;
+	}
+
+	wp_nonce_field('reject_project_nonce_'.$post_id, 'reject_project_nonce');
+	?>
+	<div class="hide-rejected-project">
+		<label><input type="checkbox" value="1" name="reject_project" /><?php _e('Project afkeuren en direct verbergen', 'siw'); ?></label>
+	</div>
+	<?php
+}
+
+/*
+Verbergen van afgekeurde projecten
+*/
+add_action( 'publish_product', 'siw_hide_rejected_project', 10, 2 );
+function siw_hide_rejected_project( $post_id, $post ){
+	
+	//TODO: is deze check nodig?
+	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+		return;
+	}
+	//Nonce check
+	if ( !isset($_POST['reject_project_nonce']) || !wp_verify_nonce($_POST['reject_project_nonce'], 'reject_project_nonce_'.$post_id)){
+		return;
+	}
+	//Check op capability
+	if (!current_user_can('edit_post', $post_id)) {
+		return;
+	}
+
+	//Afgekeurd project direct verbergen
+	if ( isset( $_POST['reject_project']) and 1 == $_POST['reject_project'] ) {
+		siw_hide_workcamp( $post_id );
 	}
 }

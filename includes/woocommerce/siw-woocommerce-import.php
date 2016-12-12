@@ -217,6 +217,17 @@ function siw_wc_is_vog_required( $work_codes ){
 	return $is_vog_required;
 }
 
+//functie om te bepalen of project direct gepubliceerd mag worden
+function siw_wc_determine_post_status( $work_codes, $country ){
+	$post_status = 'publish';
+	$work_array = explode(",", $work_codes);
+	$allowed = siw_wc_is_country_allowed($country);
+	if ( in_array('KIDS', $work_array ) && 'yes' == $allowed ){
+		$post_status = 'draft';
+	}
+	return $post_status;
+}
+
 
 //projectlocatie
 function siw_wc_is_project_location_available( $latitude ){	
@@ -473,12 +484,24 @@ function siw_wc_is_post_to_update( $product_id, $xml ) {
 }
 
 add_action('pmxi_after_xml_import', 'siw_wc_hide_projects_after_import', 10, 1);
-function siw_wc_hide_projects_after_import($import_id){
-	siw_wc_hide_projects();
+function siw_wc_hide_projects_after_import( $import_id ){
+	//Zet vervolgacties klaar
+	wp_schedule_single_event( time() + ( 15 * MINUTE_IN_SECONDS ), 'siw_hide_workcamps');
+	wp_schedule_single_event( time() + ( 45 * MINUTE_IN_SECONDS ), 'siw_send_projects_for_approval_email');
+	//TODO: email voor nieuwe projecten
+	//TODO: emails alleen voor volledige import niet voor FPL
 }
 
-/*functie om projecten waarvan de startdatum voor morgen ligt of waar geen plaatsen meer zijn te verbergen*/
-function siw_wc_hide_projects() {	
+/*
+Functie om groepsprojecten te verbergen die aan 1 of meer van onderstaande voorwaarden voldoen:
+- Het project begint binnen x dagen (configuratie)
+- Het project is in een niet-toegestaan land is
+- Het project is expliciet verborgen
+- Er zijn geen vrije plaatsen meer
+*/
+add_action('siw_hide_workcamps', 'siw_hide_workcamps');
+
+function siw_hide_workcamps() {	
 
 	$days = siw_wc_get_nr_of_days_before_start_to_hide_project();
 	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$days." days"));
@@ -524,19 +547,25 @@ function siw_wc_hide_projects() {
 	
 	$products = get_posts( $args ); 
 	foreach ( $products as $product_id ) {
-		update_post_meta( $product_id, '_visibility', 'hidden');
-		update_post_meta( $product_id, '_stock_status', 'outofstock');
-		update_post_meta( $product_id, '_featured', 'no');
-		update_post_meta( $product_id, '_yoast_wpseo_meta-robots-noindex','1');
-			
-		$varationsargs = array(
-			'post_type' 	=> 'product_variation',
-			'post_parent'	=> $product_id,
-			'fields' 		=> 'ids'
-		);
-		$variations = get_posts( $varationsargs ); 
-		foreach ( $variations as $variation_id ) {
-			update_post_meta( $variation_id, '_stock_status', 'outofstock');
-		}
+		siw_hide_workcamp( $product_id );
 	}
+}
+
+
+//losse functie om 1 groepsproject te verbergen
+function siw_hide_workcamp( $product_id ){
+	update_post_meta( $product_id, '_visibility', 'hidden');
+	update_post_meta( $product_id, '_stock_status', 'outofstock');
+	update_post_meta( $product_id, '_featured', 'no');
+	update_post_meta( $product_id, '_yoast_wpseo_meta-robots-noindex','1');
+		
+	$varationsargs = array(
+		'post_type' 	=> 'product_variation',
+		'post_parent'	=> $product_id,
+		'fields' 		=> 'ids'
+	);
+	$variations = get_posts( $varationsargs ); 
+	foreach ( $variations as $variation_id ) {
+		update_post_meta( $variation_id, '_stock_status', 'outofstock');
+	}	
 }
