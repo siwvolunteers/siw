@@ -171,7 +171,11 @@ function siw_woo_show_meta_boxes() {
 }
 //Toon projectbeschrijving
 function siw_show_project_description( $object ){
-	echo do_shortcode( $object->post_content );
+	$content = $object->post_content;
+	$content = preg_replace('/\[pane title="(.*?)"\]/', '<h4>$1</h4><p>', $content);
+	$content = preg_replace('/\[\/pane\]/', '</p><hr>', $content);
+	$content = preg_replace('/\[(.*?)\]/', '', $content);
+	echo wp_kses_post( $content );
 }
 
 
