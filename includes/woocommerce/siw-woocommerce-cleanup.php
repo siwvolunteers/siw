@@ -60,7 +60,8 @@ function siw_delete_orphaned_variations(){
 	$args = array(
 		'posts_per_page'		=> -1,
 		'post_type'				=> 'product',
-		'fields' 				=> 'ids',
+		'fields'				=> 'ids',
+		'post_status'			=> 'any',
 	);
 	$products = get_posts( $args );
 	
