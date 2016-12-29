@@ -27,6 +27,12 @@ function siw_schedule_woocommerce_cleanup_jobs() {
 	if ( ! wp_next_scheduled( 'siw_cleanup_terms' ) ) {
 		wp_schedule_event( $cron_timestamp + ( 45 * MINUTE_IN_SECONDS ) , 'daily', 'siw_cleanup_terms' );
 	}
+	
+	//maanden hernoemen en volgorde aanpassen
+	if ( ! wp_next_scheduled( 'siw_reorder_rename_product_attribute_month' ) ) {
+		wp_schedule_event( $cron_timestamp + ( 50 * MINUTE_IN_SECONDS ) , 'daily', 'siw_reorder_rename_product_attribute_month' );
+	}
+	
 }
 
 add_action('siw_cleanup_terms', 'siw_cleanup_terms');
@@ -53,6 +59,38 @@ function siw_cleanup_terms(){
 			}
 		}
 	}
+}
+
+
+/*
+	Volgorde en naam van attribute pa_month aanpassen
+*/
+add_action('siw_reorder_rename_product_attribute_month', 'siw_reorder_rename_product_attribute_month');
+function siw_reorder_rename_product_attribute_month(){
+	$terms = get_terms( 'pa_maand', array(
+		'hide_empty' => false,
+		)
+	);
+	$ordered_terms = array();
+	foreach ( $terms as $term ){
+		$ordered_terms[ $term->term_id ] = $term->slug;
+	}
+	//oplopend sorteren op slug
+	asort( $ordered_terms, SORT_STRING );
+	
+	$order = 0;
+	foreach( $ordered_terms as $term_id => $term_slug ){
+		$name = siw_wc_get_month_name_from_slug( $term_slug );
+		
+		//naam aanpassen
+		wp_update_term( $term_id, 'pa_maand', array(
+			'name' => $name,
+		));
+		$order++;
+		//Volgorde bijwerken
+		update_term_meta( $term_id, 'order_pa_maand', $order );
+	}
+
 }
 
 add_action('siw_delete_orphaned_variations', 'siw_delete_orphaned_variations');

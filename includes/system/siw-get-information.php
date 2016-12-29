@@ -361,6 +361,23 @@ function siw_wc_get_force_full_import(){
 	return $force_full_import;
 }
 
+function siw_wc_get_month_name_from_slug( $slug ){
+	$year = substr( $slug, 0, 4);
+	$month = substr( $slug, 4, 2);
+	$month = ltrim( $month, '0');
+	
+	$current_year = date('Y');
+	
+	$month_array = siw_get_array('month_to_text');	
+	
+	$month_name = ucfirst( $month_array[ $month ]);
+	if ($year != $current_year){
+		$month_name .= ' ' . $year;
+	}
+	return $month_name;
+}
+
+
 function siw_get_array( $array ){
 
     switch ($array) {
