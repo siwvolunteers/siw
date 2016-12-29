@@ -60,6 +60,7 @@ function siw_update_community_day_options(){
 	$hide_form_days_before_cd = siw_get_hide_form_days_before_cd();
 	$limit_date = date("Y-m-d", strtotime( date("Y-m-d")."+" . $hide_form_days_before_cd . " days") );
 	
+	
 	foreach($community_days as $community_day => $community_day_date) {
 		if( $community_day_date >= $limit_date ){
 			$future_community_days[]['label']= siw_get_date_in_text( $community_day_date, false);
@@ -82,7 +83,10 @@ function siw_update_community_day_options(){
 	$data = maybe_unserialize( $data );
 	
 	//update formuliervraag
-	$data['options'] = $future_community_days;
+	$data['options'] = array();
+	if ( isset( $future_community_days ) ){
+		$data['options'] = $future_community_days;
+	}
 	$query = "update $wpdb->vfbp_fields set $wpdb->vfbp_fields.data = %s where $wpdb->vfbp_fields.id = %d;";
 	$wpdb->query(
 		$wpdb->prepare( $query, maybe_serialize( $data ), $field_id )
