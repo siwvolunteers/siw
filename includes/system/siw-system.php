@@ -58,24 +58,32 @@ function siw_disable_emojicons_tinymce( $plugins ) {
 		return array();
 	}
 }
+add_filter( 'emoji_svg_url', '__return_false' );
 
-/*dns-prefetch*/
-add_action('wp_head','siw_dns_prefetch', 0);
 
-function siw_dns_prefetch(){
-	echo '
-	<meta http-equiv="x-dns-prefetch-control" content="on">
-	<link rel="dns-prefetch" href="//www.google-analytics.com"/>
-	<link rel="dns-prefetch" href="//fonts.googleapis.com"/>
-	<link rel="dns-prefetch" href="//fonts.gstatic.com"/>
-	<link rel="dns-prefetch" href="//maps.googleapis.com"/>
-	<link rel="dns-prefetch" href="//maps.google.com"/>
-	<link rel="dns-prefetch" href="//maps.gstatic.com"/>
-	<link rel="dns-prefetch" href="//csi.gstatic.com"/>
-	<link rel="dns-prefetch" href="//mts1.googleapis.com"/>
-	<link rel="dns-prefetch" href="//mts0.googleapis.com"/>
-	';
+/*
+	DNS-prefetch
+*/
+add_filter( 'wp_resource_hints', 'makewp_example_resource_hints', 10, 2 );
+function makewp_example_resource_hints( $hints, $relation_type ) {
+	if ( 'dns-prefetch' === $relation_type ) {
+		//Google Analytics
+		$hints[] = '//www.google-analytics.com';
+		
+		//Google Map
+		$hints[] = '//maps.googleapis.com';
+		$hints[] = '//maps.google.com';
+		$hints[] = '//maps.gstatic.com';
+		$hints[] = '//csi.gstatic.com';
+		
+		//Google Fonts
+		$hints[] = '//fonts.googleapis.com';
+		$hints[] = '//fonts.gstatic.com';	
+	}
+ 
+	return $hints;
 }
+ 
 
 //auteurinfo verwijderen uit oembed
 add_filter('oembed_response_data', 'siw_oembed_response_data', 10, 1);
