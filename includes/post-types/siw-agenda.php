@@ -366,7 +366,7 @@ public function __construct() {
 			'relation'	=>	'AND',
 			array(
 				'key'		=>	'siw_agenda_eind',
-				'value'		=>	time(),
+				'value'		=>	strtotime( date("Y-m-d") ),
 				'compare'	=>	'>='
 			)
 		);
