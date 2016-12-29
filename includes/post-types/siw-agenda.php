@@ -414,6 +414,8 @@ public function __construct() {
 [{
 "@context" : "http://schema.org",
 "name" : "<?php esc_attr( the_title() );?>",
+"description" : "<?php echo esc_attr( get_the_excerpt() );?>",
+"image" : "<?php esc_url( the_post_thumbnail_url() );?>",
 "@type" : "event",
 "startDate" : "<?php echo esc_attr( date('Y-m-d',$start_ts ) ); ?>",
 "endDate" : "<?php echo esc_attr( date('Y-m-d',$end_ts ) ); ?>",
