@@ -64,8 +64,8 @@ add_filter( 'emoji_svg_url', '__return_false' );
 /*
 	DNS-prefetch
 */
-add_filter( 'wp_resource_hints', 'makewp_example_resource_hints', 10, 2 );
-function makewp_example_resource_hints( $hints, $relation_type ) {
+add_filter( 'wp_resource_hints', 'siw_resource_hints', 10, 2 );
+function siw_resource_hints( $hints, $relation_type ) {
 	if ( 'dns-prefetch' === $relation_type ) {
 		//Google Analytics
 		$hints[] = '//www.google-analytics.com';
