@@ -27,22 +27,35 @@ function siw_staff_group_slug(){
 	return 'vrijwilligers-per-groep';
 }
 
-
-
 //capabilites voor op maat projecten
-add_filter( 'kadence_portfolio_capability_type',function(){
+add_filter( 'kadence_portfolio_capability_type', function(){
 	return 'op_maat_project';
 });
-add_filter( 'kadence_portfolio_map_meta_cap', function() { return true;});
+add_filter( 'kadence_portfolio_map_meta_cap', function() {
+	return true;
+});
 
 //capabilites voor quotes
-add_filter( 'kadence_testimonial_capability_type',function(){
+add_filter( 'kadence_testimonial_capability_type', function(){
 	return 'quote';
 });
-add_filter( 'kadence_testimonial_map_meta_cap', function() { return true;});
+add_filter( 'kadence_testimonial_map_meta_cap', function() {
+	return true;
+});
 
 //capabilites voor vrijwilligers
-add_filter( 'kadence_staff_capability_type',function(){
+add_filter( 'kadence_staff_capability_type', function(){
 	return 'volunteer';
 });
-add_filter( 'kadence_staff_map_meta_cap', function() { return true;});
+add_filter( 'kadence_staff_map_meta_cap', function() {
+	return true;});
+
+
+//capabilites voor Contact Form 7
+add_filter('wpcf7_map_meta_cap', function( $meta_caps ) {
+	$meta_caps['wpcf7_edit_contact_form'] = 'manage_options';
+	$meta_caps['wpcf7_edit_contact_forms'] = 'manage_options';
+	$meta_caps['wpcf7_read_contact_forms'] = 'manage_options';
+	$meta_caps['wpcf7_delete_contact_form'] = 'manage_options';	
+	return $meta_caps;
+});
