@@ -431,10 +431,10 @@ public function __construct() {
 			<?php endwhile;?>
 		</ul>
 		<p class="siw_agenda_page_link">
-			<a href="<?php echo esc_url( get_page_link( $agenda_page ) ); ?>"><?php _e('Bekijk de volledige agenda.', 'siw'); ?></a>
+			<a href="<?php echo esc_url( get_page_link( $agenda_page ) ); ?>"><?php esc_html_e('Bekijk de volledige agenda.', 'siw'); ?></a>
 		</p>
 		<?php else: ?>
-		<p><?php _e('Er zijn momenteel geen geplande activiteiten.', 'siw'); ?></p>
+		<p><?php esc_html_e('Er zijn momenteel geen geplande activiteiten.', 'siw'); ?></p>
 		<?php endif;
 		wp_reset_query();
 		echo $after_widget;

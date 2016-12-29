@@ -16,25 +16,25 @@ class siw_contact_information extends WP_Widget {
 
 	public function __construct() {
 		$widget_ops = array(
-			'class'         =>   'siw_contact_information',
-			'description'   =>   __( 'Contactinformatie', 'siw' )
+			'class'			=> 'siw_contact_information',
+			'description'	=> __( 'Contactinformatie', 'siw' )
 		);
  
 		parent::__construct(
-			'siw_contact_information',          //base id
-			__( 'SIW: Contactinformatie', 'siw' ), //title
+			'siw_contact_information',
+			__( 'SIW: Contactinformatie', 'siw' ),
 			$widget_ops
 		);
 	}
  
 	public function form( $instance ) {
 		$widget_defaults = array(
-			'title'			=>	'Contact',
+			'title'			=> 'Contact',
 		);
 		$instance  = wp_parse_args( (array) $instance, $widget_defaults );
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titel', 'siw' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Titel', 'siw' ); ?></label>
 			<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" class="widefat" value="<?php echo esc_attr( $instance['title'] ); ?>">
 		</p>	
 		<?php
@@ -89,8 +89,8 @@ class siw_testimonial_quote extends WP_Widget {
 
 	public function __construct() {
 		$widget_ops = array(
-			'class'         =>   'siw_testimonial_quote',
-			'description'   =>   __( 'Toont een willekeurige quote van deelnemer', 'siw' )
+			'class'			=> 'siw_testimonial_quote',
+			'description'	=> __( 'Toont een willekeurige quote van deelnemer', 'siw' )
 		);
  
 		parent::__construct(
@@ -103,7 +103,7 @@ class siw_testimonial_quote extends WP_Widget {
 	public function form( $instance ) {
 		$widget_defaults = array(
 			'title'			=> 'Ervaringen van deelnemers',
-			'cat'		=> '',
+			'cat'			=> '',
 		);
 		$instance  = wp_parse_args( (array) $instance, $widget_defaults );
 		
@@ -120,17 +120,17 @@ class siw_testimonial_quote extends WP_Widget {
 		foreach ($categories as $category) {
 			if ( $cat == $category->slug) { $selected=' selected="selected"';} else { $selected=""; }
 			$category_options[] = '<option value="' . $category->slug .'"' . $selected . '>' . $category->name . '</option>';
-    }
+		}
 				
 		
 
 		?>
 <p>
-	<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titel', 'siw' ); ?></label>
+	<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Titel', 'siw' ); ?></label>
 	<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" class="widefat" value="<?php echo esc_attr( $instance['title'] ); ?>">
 </p>
 <p>
-	<label for="<?php echo $this->get_field_id('cat'); ?>"><?php _e('Categorie', 'siw'); ?></label>
+	<label for="<?php echo $this->get_field_id('cat'); ?>"><?php esc_html_e('Categorie', 'siw'); ?></label>
 	<select id="<?php echo $this->get_field_id('cat'); ?>" name="<?php echo $this->get_field_name('cat'); ?>"><?php echo implode('', $category_options); ?></select>
 </p>
 		<?php
@@ -146,15 +146,15 @@ class siw_testimonial_quote extends WP_Widget {
 		extract( $args );
 		
 		$query = new WP_Query( array( 
-			'post_type' => 'testimonial', 
-			'testimonial-group' => $instance['cat'], 
-			'no_found_rows' => true, 
-			'posts_per_page' => 1,
-			'orderby' => 'rand', 
-			'post_status' => 'publish', 
-			'ignore_sticky_posts' => true )
+			'post_type'				=> 'testimonial', 
+			'testimonial-group'		=> $instance['cat'], 
+			'no_found_rows'			=> true, 
+			'posts_per_page'		=> 1,
+			'orderby'				=> 'rand', 
+			'post_status'			=> 'publish', 
+			'ignore_sticky_posts'	=> true )
 		);
-   
+
 		if ($query->have_posts()){
 			$title = apply_filters( 'widget_title', $instance['title'] );
 			echo $before_widget;

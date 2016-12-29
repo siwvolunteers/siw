@@ -23,7 +23,7 @@
 	$application_link_text		= get_post_meta( $id, 'siw_agenda_aanmelden_link_tekst', true );
 	$location_map				= '[gmap address="' . $address . ', ' . $postal_code . ' ' . $city . '" title="' . $location . '" zoom="15" maptype="ROADMAP"]';
 	$hide_form_days_before_cd = siw_get_hide_form_days_before_cd();
-	$limit_date = date("Y-m-d", strtotime( date("Y-m-d")."+" . $hide_form_days_before_cd . " days") );
+	$limit_date = date("Y-m-d", time() + ( $hide_form_days_before_cd * DAY_IN_SECONDS ));
 	$text_after_hide_cd_form = siw_get_text_after_hide_cd_form();
 	$agenda_page_url = get_permalink ( siw_get_parent_page('agenda') );
 ?>
@@ -46,7 +46,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<?php if( $program ){?>
-						<h3>Programma</h3>
+						<h3><?php esc_html_e('Programma', 'siw');?></h3>
 						<div class="row">
 						<?php
 						foreach ( (array) $program as $key => $item ) {
@@ -61,7 +61,7 @@
 						</div>
 						<?php }?>
 
-						<h3>Locatie</h3>
+						<h3><?php esc_html_e('Locatie', 'siw');?></h3>
 						<p>
 							<b>
 							<?php echo esc_html( $location ); ?><br/>
@@ -72,7 +72,7 @@
 						<?php echo do_shortcode( $location_map );?>
 					</div>
 					<div class="col-md-6">
-						<h3>Aanmelden</h3>
+						<h3><?php esc_html_e('Aanmelden', 'siw');?></h3>
 						<?php if( $start_date > date("Y-m-d") ):?>
 						<?php if ('formulier' == $application ){
 							if ( $start_date >= $limit_date ){
@@ -91,7 +91,9 @@
 							}
 						} ?>
 						<?php else: ?>
-						<p>Dit evenement is helaas al afgelopen. Bekijk de toekomstige evenementen in de <a href="<?php echo esc_url($agenda_page_url);?>">agenda</a>.</p>
+						<p>
+						<?php printf( wp_kses_post( __('Dit evenement is helaas al afgelopen. Bekijk de toekomstige evenementen in de <a href="%s">agenda</a>', 'siw' ) ), esc_url($agenda_page_url) );?>
+						</p>
 						<?php endif; ?>
 					</div>
 				</div>

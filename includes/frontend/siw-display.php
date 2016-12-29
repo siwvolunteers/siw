@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -57,7 +57,7 @@ function siw_set_page_title($title){
 
 function siw_show_quick_search_widget(){?>
 <div class="snelzoeken">
-<h4>Snel zoeken</h4>
+<h4><?php esc_html_e('Snel zoeken','siw');?></h4>
 <?php echo do_shortcode( '[searchandfilter id="57"]');?>
 </div>
 <?php
@@ -67,7 +67,7 @@ function siw_show_quick_search_widget(){?>
 add_action('kadence_single_portfolio_value_after','siw_show_op_maat_button');
 
 function siw_show_op_maat_button(){?>
-<a href="/zo-werkt-het/projecten-op-maat/" class="kad-btn kad-btn-primary">Alles over projecten op maat</a>
+<a href="/zo-werkt-het/projecten-op-maat/" class="kad-btn kad-btn-primary"><?php esc_html_e('Alles over projecten op maat','siw');?></a>
 <?php
 }	
 //functie om categorie header te tonen op productpagina TODO:herschrijven conform naamgevingsconventies
