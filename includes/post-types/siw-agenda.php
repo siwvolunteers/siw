@@ -372,7 +372,7 @@ public function __construct() {
 		);
 		$query_args = array(
 			'post_type'				=>	'agenda',
-			'posts_per_page'		=>	1,
+			'posts_per_page'		=>	2,
 			'post_status'			=>	'publish',
 			'ignore_sticky_posts'	=>	true,
 			'meta_key'				=>	'siw_agenda_start',
