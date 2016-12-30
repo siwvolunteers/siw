@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -137,9 +137,9 @@ function siw_delete_orphaned_variations(){
 add_action('siw_delete_projects', 'siw_delete_projects');
 function siw_delete_projects(){
 	
-	$months = siw_wc_get_nr_of_months_after_start_to_delete_project();
-	$limit = date("Y-m-d", strtotime( date("Y-m-d") . "-" . $months . " months"));
-	
+	$months = siw_wc_get_nr_of_months_after_start_to_delete_project(); //Moet dit echt een instelling zijn? Misschien gewoon 1 jaar van maken.
+	$limit = date("Y-m-d", time() - ( $months * MONTH_IN_SECONDS ));
+
 	$meta_query = array(
 		'relation'	=> 'AND',
 			array(

@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -29,7 +29,7 @@ function siw_delete_attachment_after_mail( $entry_id, $form_id ) {
 	$attachments_args = array(
 		'post_type'		=> 'attachment',
 		'post_parent'	=> $entry_id,
-		'fields'			=> 'ids'
+		'fields'		=> 'ids'
 	);
 	$attachments = get_posts( $attachments_args ); 
 	foreach ( $attachments as $attachment ) {
@@ -58,8 +58,8 @@ function siw_update_community_day_options(){
 	}
 	asort( $community_days );
 	$hide_form_days_before_cd = siw_get_hide_form_days_before_cd();
-	$limit_date = date("Y-m-d", strtotime( date("Y-m-d")."+" . $hide_form_days_before_cd . " days") );
-	
+	$limit_date = date("Y-m-d", time() + ( $hide_form_days_before_cd * DAY_IN_SECONDS ));
+
 	
 	foreach($community_days as $community_day => $community_day_date) {
 		if( $community_day_date >= $limit_date ){

@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -166,7 +166,7 @@ function siw_shortcode_evs_next_start( $args ) {
 		$month_array = siw_get_array('month_to_text');
 		$months = 3;
 		$weeks = 1;
-		$evs_next_start = date("Y-m-d",strtotime($evs_next_deadline."+".$months." months " . $weeks . " weeks"));	
+		$evs_next_start = date("Y-m-d", strtotime( $evs_next_deadline) + ( $months * MONTH_IN_SECONDS ) + ( $weeks * WEEK_IN_SECONDS ) );
 		$evs_next_start = date_parse($evs_next_start);
 		$month = $month_array[$evs_next_start['month']];
 		$year = $evs_next_start['year'];

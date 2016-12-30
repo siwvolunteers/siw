@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -21,7 +21,7 @@ function siw_wc_format_date( $date ) {
 function siw_wc_date_to_month( $date ){
 	$month = '';
 	if ( '1970-01-01' != $date ){
-		$month = date("Y", strtotime( $date )) . date("m", strtotime( $date ));
+		$month = date("Ym", strtotime( $date ) );
 	}	
 	return $month;
 }
@@ -30,11 +30,9 @@ function siw_wc_project_duration_in_days( $startdate, $enddate ){
 	$startdate = strtotime( $startdate );
 	$enddate = strtotime( $enddate );	
 	$duration_in_seconds = $enddate - $startdate;
-	$project_duration_in_days = round( $duration_in_seconds/(60*60*24) );
+	$project_duration_in_days = round( $duration_in_seconds / DAY_IN_SECONDS );
 	return $project_duration_in_days;
 }
-
-
 
 function siw_wc_project_work( $work_codes, $format='string' ){
 	$work_types = explode(",", $work_codes);
@@ -123,7 +121,7 @@ function siw_wc_number_of_volunteers( $volunteers_total, $volunteers_male, $volu
 	$number_of_volunteers = $volunteers_total;
 	
 	//alleen specificatie als totaal aantal vrijwilligers overeenkomt met som van aantal mannen en aantal vrouwen.
-	if ($volunteers_total == ($volunteers_male + $volunteers_female)){
+	if ( $volunteers_total == ( $volunteers_male + $volunteers_female )){
 		$number_of_volunteers .= " (" . $volunteers_male.$male_label . " en " . $volunteers_female . $female_label . ")";
 	}
 	return $number_of_volunteers;
@@ -191,7 +189,7 @@ function siw_wc_project_languages( $languages ){
 function siw_wc_project_work_in_text( $work_codes, $number ){
 	$work_array = siw_wc_project_work( $work_codes, 'array' );
 	$project_work_in_text = $work_array[0];
-	if (($number > 1)and ($work_array[1] != '')){
+	if (( $number > 1)and ( $work_array[1] != '')){
 		$project_work_in_text .= ' en ' . $work_array[1];
 	}
 	
@@ -209,9 +207,9 @@ function siw_wc_project_name( $country_code, $work_codes ){
 
 //functie om te bepalen of een Verklaring omtrent het gedrag vereist is
 function siw_wc_is_vog_required( $work_codes ){
-	$work = siw_wc_project_work( $work_codes );
+	$work_array = explode(",", $work_codes);
 	$is_vog_required = '';
-	if ((strpos( $work,'kinderen'))!==false) {
+	if ( in_array('KIDS', $work_array ) ){
 		$is_vog_required = 'Ja';
 	}
 	return $is_vog_required;
@@ -283,7 +281,7 @@ function siw_wc_project_summary( $project_type, $country, $workcode, $startdate,
 	$project_summary = '';
 	
 	if ( 'tieners' == $teenage_project ){
-		$project_summary .= "Dit is een tienerproject (" . $age_range_in_text . '). ';
+		$project_summary .= 'Dit is een tienerproject (' . $age_range_in_text . '). ';
 	}
 
 	else if ( 'familie' == $family_project ){
@@ -301,25 +299,25 @@ function siw_wc_project_summary( $project_type, $country, $workcode, $startdate,
 //function om projectbeschrijving te genereren
 function siw_wc_project_description( $work, $accommodation, $location, $organisation, $requirements, $notes, $description ){
 	$project_description = '\[accordion]';
-	if (strlen( $description ) > 3){
+	if ( strlen( $description ) > 3){
 		$project_description .= '\[pane title="Beschrijving"]' . htmlspecialchars_decode( $description ) . '\[/pane]';
 	}	
-	if (strlen( $work ) > 3){
+	if ( strlen( $work ) > 3){
 		$project_description .= '\[pane title="Werk"]' . $work . '\[/pane]';
 	}	
-	if (strlen( $accommodation ) > 3){
+	if ( strlen( $accommodation ) > 3){
 		$project_description .= '\[pane title="Accommodatie en maaltijden"]' . $accommodation . '\[/pane]';
 	}
-	if (strlen( $location ) > 3){
+	if ( strlen( $location ) > 3){
 		$project_description .= '\[pane title="Locatie en vrije tijd"]' . $location . '\[/pane]';
 	}
-	if (strlen( $organisation ) > 3){
+	if ( strlen( $organisation ) > 3){
 		$project_description .= '\[pane title="Organisatie"]' . $organisation . '\[/pane]';
 	}
-	if (strlen( $requirements ) > 3){
+	if ( strlen( $requirements ) > 3){
 		$project_description .= '\[pane title="Vereisten"]' . $requirements . '\[/pane]';
 	}
-	if (strlen( $notes ) > 3){
+	if ( strlen( $notes ) > 3){
 		$project_description .= '\[pane title="Opmerkingen"]' . $notes . '\[/pane]';
 	}
 	$project_description .= '\[/accordion]';
@@ -378,11 +376,11 @@ function siw_wc_select_project_image( $country_code, $work_codes ) {
 		foreach ( $work_array as $work ){
 			$relative_directory = $continent . '/' . $work . '/'.$country;
 			$dir = $base_directory . $relative_directory;
-			if (file_exists( $dir )){
+			if ( file_exists( $dir )){
 				$files = array_diff( scandir($dir), array(".", "..", "Thumbs.db") );	
 				$files = array_filter( $files, "siw_is_file");
 				
-				if (sizeof( $files ) > 0){
+				if ( sizeof( $files ) > 0){
 					$random_image = array_rand($files, 1);
 					$filename = $files[ $random_image ];
 					$url = $relative_directory . '/' . $filename;
@@ -395,11 +393,11 @@ function siw_wc_select_project_image( $country_code, $work_codes ) {
 			foreach ( $work_array as $work ){
 				$relative_directory = $continent.'/'.$work;
 				$dir = $base_directory . $relative_directory;
-				if (file_exists( $dir )){
+				if ( file_exists( $dir )){
 					$files = array_diff( scandir( $dir ), array(".", "..", "Thumbs.db") );
 					$files = array_filter( $files, "siw_is_file");
 				
-					if (sizeof( $files ) > 0){
+					if ( sizeof( $files ) > 0){
 						$random_image = array_rand( $files, 1);
 						$filename = $files[ $random_image ];
 						$url = $relative_directory . '/' . $filename;
@@ -411,11 +409,11 @@ function siw_wc_select_project_image( $country_code, $work_codes ) {
 		if ( '' == $url ){
 			$relative_directory = $continent;
 			$dir = $base_directory . $relative_directory;
-			if (file_exists( $dir )){
+			if ( file_exists( $dir )){
 				$files = array_diff( scandir( $dir ), array(".", "..", "Thumbs.db") );
 				$files = array_filter( $files, "siw_is_file");
 				
-				if (sizeof( $files ) > 0){
+				if ( sizeof( $files ) > 0){
 					$random_image = array_rand( $files, 1);
 					$filename = $files[ $random_image ];
 					$url = $relative_directory . '/' . $filename;
@@ -426,10 +424,10 @@ function siw_wc_select_project_image( $country_code, $work_codes ) {
 	return $url;
 }	
 
-//hulpfunctie voor selectProjectImage
+//hulpfunctie voor siw_wc_select_project_image
 function siw_is_file( $value ){
 	$is_file = false;
-	if ((strpos( $value,'.'))!==false) {
+	if (( strpos( $value, '.'))!==false) {
 		$is_file = true;
 	}
 	return $is_file;
@@ -480,6 +478,14 @@ function siw_wc_is_post_to_update( $product_id, $xml ) {
 		$update = true;
 	}
 
+	/* TODO:
+	Project opnieuw importeren als één van de volgende eigenschappen aangepast is.
+	- Startdatum
+	- Eindatum
+	- Local fee
+	*/
+	
+	
 	return $update;
 }
 
@@ -504,7 +510,7 @@ add_action('siw_hide_workcamps', 'siw_hide_workcamps');
 function siw_hide_workcamps() {	
 
 	$days = siw_wc_get_nr_of_days_before_start_to_hide_project();
-	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$days." days"));
+	$limit = date("Y-m-d", time() + ( $days * DAY_IN_SECONDS));
 
 	$meta_query_args = array(
 		'relation'	=>	'AND',
