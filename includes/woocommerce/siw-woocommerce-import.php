@@ -542,11 +542,16 @@ function siw_hide_workcamps() {
 		'posts_per_page'	=> -1,
 		'post_type'			=> 'product',
 		'meta_query'		=> $meta_query_args,
-		'fields' 			=> 'ids'
+		'fields' 			=> 'ids',
+		'post_status'		=> 'any',
 	);
 	
 	$products = get_posts( $args ); 
 	foreach ( $products as $product_id ) {
+		//project 'publiceren' als project eigenlijk ter review stond
+		if ('publish' != get_post_status( $product_id )){
+			wp_publish_post( $product_id );
+		}
 		siw_hide_workcamp( $product_id );
 	}
 }
