@@ -18,9 +18,11 @@ function kad_carousel_shortcode_function( $atts, $content) {
 		'speed' 				=> '9000',
 		'scroll'				=> '',
 		'cat'	 				=> '',
+		'single_link' 			=> 'true',
 		'fullwidth' 			=> 'standard',
+		'limit_content' 		=> 'true',
 		'readmore' 				=> false,
-		'ratio' 				=> 'defualt',
+		'ratio' 				=> 'default',
 		'items' 				=> '8'
 ), $atts));
 	if(empty($type)) {
@@ -196,11 +198,11 @@ ob_start(); ?>
 				<div id="carousel-<?php echo esc_attr($id); ?>" class="clearfix <?php echo esc_attr($product_shop_style);?> blog_carousel initcaroufedsel caroufedselclass products" data-carousel-container="#carouselcontainer-<?php echo esc_attr($id); ?>" data-carousel-transition="300" data-carousel-scroll="<?php echo esc_attr($scroll);?>" data-carousel-auto="<?php echo esc_attr($autoplay);?>" data-carousel-speed="<?php echo esc_attr($speed);?>" data-carousel-id="<?php echo esc_attr($id); ?>" data-carousel-sxl="<?php echo esc_attr($sxl);?>" data-carousel-xl="<?php echo esc_attr($xl);?>" data-carousel-md="<?php echo esc_attr($md);?>" data-carousel-sm="<?php echo esc_attr($sm);?>" data-carousel-xs="<?php echo esc_attr($xs);?>" data-carousel-ss="<?php echo esc_attr($ss);?>">
 				<?php if ($type == "portfolio") {
 			      		if(isset($pinnacle['portfolio_ratio_default'])) {
-	                   	$pimgratio = $pinnacle['portfolio_ratio_default'];
+	                   		$pimgratio = $pinnacle['portfolio_ratio_default'];
 	                	} else {
-	                   	 $pimgratio = "square";
+	                   	 	$pimgratio = "square";
 	                   	}
-					     if($pimgratio == 'portrait') {
+					     	if($pimgratio == 'portrait') {
 								$temppimgheight = $slidewidth * 1.35;
 								$slideheight = floor($temppimgheight);
 							} else if($pimgratio == 'landscape') {
@@ -263,6 +265,50 @@ ob_start(); ?>
 						if ( $wp_query ) :  while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
 								<div class="<?php echo $itemsize;?> b_item kad_blog_item">
 									<?php get_template_part('templates/content', 'post-grid-carousel');?>
+								</div>
+						<?php endwhile; else: ?>
+						<div class="error-not-found"><?php _e('Sorry, no post entries found.', 'pinnacle');?></div>
+						<?php endif; $wp_query = null; wp_reset_query(); 							
+
+           		} else if($type == "staff") {
+           			global $kt_staff_loop;
+           			if($ratio == 'portrait') {
+								$temppimgheight = $slidewidth * 1.35;
+								$slideheight = floor($temppimgheight);
+					} else if($ratio == 'landscape') {
+								$temppimgheight = $slidewidth / 1.35;
+								$slideheight = floor($temppimgheight);
+					} else if($ratio == 'widelandscape') {
+								$temppimgheight = $slidewidth / 2;
+								$slideheight = floor($temppimgheight);
+					} else {
+								$slideheight = $slidewidth;
+					}
+           			if($limit_content == 'true') {
+						$full_content = 'false';
+					} else {
+						$full_content = 'true';
+					}
+           			 	$kt_staff_loop = array(
+		                 	'full_content' 	=> $full_content,
+		                 	'single_link' 	=> $single_link,
+		                 	'slidewidth' 	=> $slidewidth,
+		                 	'slideheight' 	=> $slideheight,
+	                 	);
+						$wp_query = null; 
+						$wp_query = new WP_Query();
+						$wp_query->query(array(
+							'orderby' 			=> $orderby,
+							'order'	 			=> $order,
+							'offset' 			=> $offset,
+							'post_type' 		=> 'staff',
+							'staff-group'		=> $carousel_category,
+							'posts_per_page' 	=> $items
+							)
+						);
+						if ( $wp_query ) :  while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
+								<div class="<?php echo esc_attr($itemsize);?> s_item">
+									<?php get_template_part('templates/content', 'loop-staff');?>
 								</div>
 						<?php endwhile; else: ?>
 						<div class="error-not-found"><?php _e('Sorry, no post entries found.', 'pinnacle');?></div>
