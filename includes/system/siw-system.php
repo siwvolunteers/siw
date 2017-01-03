@@ -103,3 +103,11 @@ function siw_oembed_response_data( $data ){
 function siw_log( $content ){
 	error_log(print_r($content,true),0);
 }
+
+//query vars voor snel zoeken
+add_filter( 'query_vars', 'sf_add_query_vars_filter' );
+function sf_add_query_vars_filter( $vars ){
+	$vars[] = '_sft_product_cat';
+	$vars[] = '_sft_pa_maand';
+	return $vars;
+}
