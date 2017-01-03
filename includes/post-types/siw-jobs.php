@@ -81,7 +81,10 @@ function siw_taxonomy_job_type() {
 		'show_ui'			=> true,
 		'show_admin_column'	=> true,
 		'show_in_nav_menus'	=> true,
-        'query_var'			=> true,
+		'query_var'			=> true,
+		'capabilities' => array(
+			'assign_terms' => 'edit_jobs'
+		), 
 	);
 	register_taxonomy( 'soort_vacature', array( 'vacatures' ), $args );
 }

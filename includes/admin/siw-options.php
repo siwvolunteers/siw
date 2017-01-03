@@ -402,7 +402,6 @@ function siw_settings_api_init(){
 	register_setting( 'siw_api', 'siw_api_google_analytics_id', 'sanitize_text_field' );
 	register_setting( 'siw_api', 'siw_api_google_analytics_enable_linkid', 'siw_sanitize_checkbox' );
 	register_setting( 'siw_api', 'siw_api_postcode_api_key', 'sanitize_text_field' );
-	register_setting( 'siw_api', 'siw_api_pingdom_rum_id', 'sanitize_text_field' );
 	
 	//secties
 	add_settings_section(
@@ -434,14 +433,6 @@ function siw_settings_api_init(){
 		'siw_api',
 		'siw_api_keys', 
 		'siw_api_postcode_api_key' 
-	);
-	add_settings_field( 
-		'siw_api_pingdom_rum_id', 
-		__( 'Pingdom RUM ID', 'siw' ), 
-		'siw_settings_show_text_field', 
-		'siw_api',
-		'siw_api_keys', 
-		'siw_api_pingdom_rum_id' 
 	);
 
 }

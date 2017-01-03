@@ -1,10 +1,21 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
+function siw_get_option ( $option ){
+	global $siw;
+	$value = '';
+	if ( isset( $siw[ $option ] ) ){
+		$value = $siw[$option];
+	}
+	return $value;	
+}
+
+
 //API keys
 function siw_get_postcode_api_key(){
 	$postcode_api_key = get_option('siw_api_postcode_api_key');
@@ -31,27 +42,21 @@ function siw_get_google_analytics_enable_linkid(){
 	return $google_analytics_enable_linkid;
 }
 
-
-function siw_get_pingdom_rum_id(){
-	$pingdom_rum_id = get_option('siw_api_pingdom_rum_id');
-	return $pingdom_rum_id;
-}
-
 function siw_get_general_information ( $type ){
 	switch ( $type ){
-		case "iban":
+		case 'iban':
 			$iban = get_option('siw_general_iban');
 			return $iban;
-		case "kvk":
+		case 'kvk':
 			$kvk = get_option('siw_general_kvk');
 			return $kvk;
-		case "telefoon":
+		case 'telefoon':
 			$phone = get_option('siw_general_phone');
 			return $phone;
-		case "email":
+		case 'email':
 			$email = get_option('siw_general_email');
 			return $email;
-		case "naam":
+		case 'naam':
 			$naam = get_bloginfo('name');
 			return $naam;
 	}
@@ -68,10 +73,10 @@ function siw_get_ip_whitelist(){
 //pagina's
 function siw_get_parent_page( $type ){
 	switch ($type) {
-		case "vacatures":
+		case 'vacatures':
 			$parent_page = get_option('siw_jobs_parent_page');
 			return $parent_page;
-		case "agenda":
+		case 'agenda':
 			$parent_page = get_option('siw_agenda_parent_page');
 			return $parent_page;
 	}
@@ -80,7 +85,7 @@ function siw_get_parent_page( $type ){
 //formulieren
 function siw_get_vfb_field_id( $type ){
 	switch ($type) {
-		case "community_day_datums":
+		case 'community_day_datums':
 		$field_id = get_option('siw_community_day_vfb_dates_field');
 		return $field_id;
 	}
@@ -89,13 +94,13 @@ function siw_get_vfb_field_id( $type ){
 
 function siw_get_vfb_form_id( $type ){
 	switch ($type) {
-		case "community_day":
+		case 'community_day':
 			$form_id = get_option('siw_forms_community_day');
 			return $form_id;
-		case "evs":
+		case 'evs':
 			$form_id = get_option('siw_forms_evs');
 			return $form_id;
-		case "op_maat":
+		case 'op_maat':
 			$form_id = get_option('siw_forms_op_maat');
 			return $form_id;
 	}
@@ -103,13 +108,13 @@ function siw_get_vfb_form_id( $type ){
 
 function siw_get_cf7_form_id( $type ){
 	switch ($type) {
-		case "algemeen":
+		case 'algemeen':
 			$form_id = get_option('siw_forms_algemeen');
 			return $form_id;
-		case "project":
+		case 'project':
 			$form_id = get_option('siw_forms_project');
 			return $form_id;
-		case "begeleider":
+		case 'begeleider':
 			$form_id = get_option('siw_forms_begeleider');
 			return $form_id;
 	}
@@ -152,9 +157,8 @@ function siw_get_evs_next_deadline(){
 	}
 	asort($evs_deadlines);
 	$weeks = get_option( 'siw_evs_weeks_before_deadline' );
-	$limit = date("Y-m-d",strtotime(date("Y-m-d")."+".$weeks." weeks"));
+	$limit = date("Y-m-d", time() + ( $weeks * WEEK_IN_SECONDS ) );
 
-	
 	$evs_next_deadline = false;
 	foreach( $evs_deadlines as $evs_deadline => $evs_deadline_date ) {
 		if ( $evs_deadline_date > $limit ){
@@ -217,31 +221,31 @@ function siw_get_outgoing_placements_email(){
 //ondertekening e-mails
 function siw_get_mail_signature_name( $type ){
 	switch ( $type ) {
-		case "contact_algemeen":
+		case 'contact_algemeen':
 			$signature_name = get_option('siw_signature_general');
 			return $signature_name;
 			
-		case "contact_np":
+		case 'contact_np':
 			$signature_name = get_option('siw_signature_camp_leader');
 			return $signature_name;
 			
-		case "contact_project":
+		case 'contact_project':
 			$signature_name = get_option('siw_signature_project');
 			return $signature_name;
 			
-		case "aanmelding_groepsproject":
+		case 'aanmelding_groepsproject':
 			$signature_name = get_option('siw_signature_workcamp');
 			return $signature_name;
 			
-		case "aanmelding_evs":
+		case 'aanmelding_evs':
 			$signature_name = get_option('siw_signature_evs');
 			return $signature_name;	
 			
-		case "aanmelding_op_maat":
+		case 'aanmelding_op_maat':
 			$signature_name = get_option('siw_signature_op_maat');
 			return $signature_name;
 			
-		case "aanmelding_community_day":
+		case 'aanmelding_community_day':
 			$signature_name = get_option('siw_signature_community_day');
 			return $signature_name;
 	}
@@ -249,11 +253,11 @@ function siw_get_mail_signature_name( $type ){
 //tarieven
 function siw_get_fee_op_maat( $tariff ){
 	switch ( $tariff ) {
-		case "student":
+		case 'student':
 			$fee = get_option('siw_tariffs_op_maat_student');
 			return $fee;
 			
-		case "regulier":
+		case 'regulier':
 			$fee = get_option('siw_tariffs_op_maat_regular');
 			return $fee;
 	}
@@ -261,11 +265,11 @@ function siw_get_fee_op_maat( $tariff ){
 
 function siw_get_fee_workcamp( $tariff ){
 	switch ( $tariff ) {
-		case "student":
+		case 'student':
 			$fee = get_option('siw_tariffs_workcamp_student');
 			return $fee;
 			
-		case "regulier":
+		case 'regulier':
 			$fee = get_option('siw_tariffs_workcamp_regular');
 			return $fee;
 	}
@@ -273,10 +277,10 @@ function siw_get_fee_workcamp( $tariff ){
 
 function siw_get_discount_workcamp( $type ){
 	switch ( $type ){
-		case "second":
+		case 'second':
 			$discount = get_option('siw_tariffs_workcamp_discount_second_project');
 			return $discount;
-		case "third":
+		case 'third':
 			$discount = get_option('siw_tariffs_workcamp_discount_third_project');
 			return $discount;
 	}
@@ -335,8 +339,8 @@ function siw_get_date_range_in_text ( $date_start, $date_end, $year = true ){
 //PLATO import
 function siw_wc_get_tariff_array(){
 	$tariff_array = array(
-		"regulier" => number_format( get_option('siw_tariffs_workcamp_regular'),2),
-		"student" => number_format( get_option('siw_tariffs_workcamp_student'),2)
+		'regulier' => number_format( get_option('siw_tariffs_workcamp_regular'),2),
+		'student' => number_format( get_option('siw_tariffs_workcamp_student'),2)
 	);
 	return $tariff_array;
 }
@@ -356,17 +360,34 @@ function siw_wc_get_force_full_import(){
 	return $force_full_import;
 }
 
+function siw_wc_get_month_name_from_slug( $slug ){
+	$year = substr( $slug, 0, 4);
+	$month = substr( $slug, 4, 2);
+	$month = ltrim( $month, '0');
+	
+	$current_year = date('Y');
+	
+	$month_array = siw_get_array('month_to_text');	
+	
+	$month_name = ucfirst( $month_array[ $month ]);
+	if ($year != $current_year){
+		$month_name .= ' ' . $year;
+	}
+	return $month_name;
+}
+
+
 function siw_get_array( $array ){
 
     switch ($array) {
-        case  "gender":
+        case  'gender':
 			$gender = array(
 				'M' => 'Man',
 				'F' => 'Vrouw',
 			);
 			return $gender;
 			
-		case "nationalities":
+		case 'nationalities':
 			$nationalities = array(
 				''		=> '',
 				'AFG'	=> 'Afghanistan',
@@ -378,7 +399,7 @@ function siw_get_array( $array ){
 				'AUS'	=> 'Australië',
 				'AT'	=> 'Oostenrijk',
 				'AZB'	=> 'Azerbeidzjan',
-				'BHS'	=> "Bahama's",
+				'BHS'	=> 'Bahama\'s',
 				'BAH'	=> 'Bahrein',
 				'BGD'	=> 'Bangladesh',
 				'BBD'	=> 'Barbados',
@@ -394,7 +415,7 @@ function siw_get_array( $array ){
 				'BRZ'	=> 'Brazilië',
 				'BLG'	=> 'Bulgarije',
 				'BKF'	=> 'Burkina Faso',
-				'BM'	=>'Myanmar',
+				'BM'	=> 'Myanmar',
 				'BDI'	=> 'Burundi',
 				'CMG'	=> 'Cambodja',
 				'CMR'	=> 'Kameroen',
@@ -516,7 +537,7 @@ function siw_get_array( $array ){
 			);
 			return $nationalities;
 			
-        case  "languages":
+        case  'languages':
 			$languages = array(
 				''		=> 'Selecteer een taal',
 				'ARA'	=> 'Arabisch',
@@ -546,7 +567,7 @@ function siw_get_array( $array ){
 			);
 			return $languages;	
 			
-		case  "language_skill":
+		case  'language_skill':
 			$language_skill = array(
 				'1'	=> 'Matig',
 				'2'	=> 'Redelijk',
@@ -555,52 +576,52 @@ function siw_get_array( $array ){
 			);
 			return $language_skill;
 
-        case  "project_work":
+        case  'project_work':
 			$project_work = array(
-				"RENO"	=> "restauratie",
-				"ENVI"	=> "natuur",
-				"CONS"	=> "constructie",
-				"ARCH"	=> "archeologie",
-				"SOCI"	=> "sociaal",
-				"KIDS"	=> "kinderen",
-				"STUD"	=> "thema",
-				"DISA"	=> "gehandicapten",
-				"MANU"	=> "constructie",
-				"EDU"	=> "onderwijs",
-				"ELDE"	=> "ouderen",
-				"FEST"	=> "festival",
-				"CULT"	=> "cultuur",
-				"AGRI"	=> "landbouw",
-				"ART"	=> "kunst",
-				"SPOR"	=> "sport",
-				"YOGA"	=> "yoga",
-				"LANG"	=> "taalcursus",
-				"TRAS"	=> "taal",
-				"ZOO"	=> "dieren",
-				"ANIM"	=> "dieren",
-				"LEAD"	=> "projectbegeleider",
-				"HERI"	=> "erfgoed"
+				'RENO'	=> 'restauratie',
+				'ENVI'	=> 'natuur',
+				'CONS'	=> 'constructie',
+				'ARCH'	=> 'archeologie',
+				'SOCI'	=> 'sociaal',
+				'KIDS'	=> 'kinderen',
+				'STUD'	=> 'thema',
+				'DISA'	=> 'gehandicapten',
+				'MANU'	=> 'constructie',
+				'EDU'	=> 'onderwijs',
+				'ELDE'	=> 'ouderen',
+				'FEST'	=> 'festival',
+				'CULT'	=> 'cultuur',
+				'AGRI'	=> 'landbouw',
+				'ART'	=> 'kunst',
+				'SPOR'	=> 'sport',
+				'YOGA'	=> 'yoga',
+				'LANG'	=> 'taalcursus',
+				'TRAS'	=> 'taal',
+				'ZOO'	=> 'dieren',
+				'ANIM'	=> 'dieren',
+				'LEAD'	=> 'projectbegeleider',
+				'HERI'	=> 'erfgoed'
 			);
 			return $project_work;
 			
-		case "month_to_text":
+		case 'month_to_text':
 			$month_to_text=array(
-				"1"		=> "januari",
-				"2"		=> "februari",
-				"3"		=> "maart",
-				"4"		=> "april",
-				"5"		=> "mei",
-				"6"		=> "juni",
-				"7"		=> "juli",
-				"8"		=> "augustus",
-				"9"		=> "september",
-				"10"	=> "oktober",
-				"11"	=> "november",
-				"12"	=> "december"
+				'1'		=> 'januari',
+				'2'		=> 'februari',
+				'3'		=> 'maart',
+				'4'		=> 'april',
+				'5'		=> 'mei',
+				'6'		=> 'juni',
+				'7'		=> 'juli',
+				'8'		=> 'augustus',
+				'9'		=> 'september',
+				'10'	=> 'oktober',
+				'11'	=> 'november',
+				'12'	=> 'december'
 			);	
 			return $month_to_text;
 			
-		case "project_languages":
+		case 'project_languages':
 			$project_languages=array(
 				'ARA'	=> 'arabisch',
 				'AZE'	=> 'azerbeidzjaans ',
@@ -638,7 +659,7 @@ function siw_get_array( $array ){
 			);			
 			return $project_languages;
 
-			case "project_countries":
+			case 'project_countries':
 				$project_countries = array();
 				$project_countries['ALB'] = array(
 					'slug'		=> 'albanie',
@@ -988,6 +1009,12 @@ function siw_get_array( $array ){
 					'continent'	=> 'azie',
 					'allowed'	=> 'no',
 				);
+				$project_countries['TZA'] = array(
+					'slug'		=> 'tanzania',
+					'name'		=> 'Tanzania',
+					'continent'	=> 'afrika-midden-oosten',
+					'allowed'	=> 'yes',
+				);						
 				$project_countries['UGA'] = array(
 					'slug'		=> 'uganda',
 					'name'		=> 'Uganda',

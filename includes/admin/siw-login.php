@@ -25,7 +25,7 @@ function siw_login_headertitle() {
 add_filter( 'login_message', 'siw_login_message' );
 function siw_login_message( $message ) {
 	if ( empty( $message ) ){
-		return "<p class='message'>Welkom bij SIW. Log in om verder te gaan.</p>";
+		return '<p class="message">' . esc_html__('Welkom bij SIW. Log in om verder te gaan.', 'siw') . '</p>';
 	} else {
 		return $message;
 	}
@@ -38,7 +38,7 @@ function siw_login_error() {
 
 
 //whitelisten ip's
-add_filter('limit_login_whitelist_ip', 'siw_login_ip_whitelist', 10, 2);
+add_filter('limit_login_whitelist_ip', 'siw_login_ip_whitelist', 99, 2);
 function siw_login_ip_whitelist( $allow, $ip ) {
 	$ip_whitelist = siw_get_ip_whitelist();
 	if ( in_array( $ip, $ip_whitelist ) ){
@@ -49,7 +49,7 @@ function siw_login_ip_whitelist( $allow, $ip ) {
 
 add_filter('woocommerce_prevent_admin_access', 'siw_allow_admin_access');
 function siw_allow_admin_access( $prevent_access ){
-	if ( current_user_can( 'edit_products' ) || current_user_can( 'edit_jobs' ) || current_user_can( 'edit_events' ) ){
+	if ( current_user_can( 'edit_products' ) || current_user_can( 'edit_jobs' ) || current_user_can( 'edit_events' ) || current_user_can( 'edit_quotes' ) || current_user_can( 'edit_volunteers' ) || current_user_can( 'edit_op_maat_projects' )){
 		$prevent_access = false;
 	}
 	return $prevent_access;
@@ -89,10 +89,28 @@ function siw_user_last_login_column_value($value, $column_name, $user_id ) {
 //password protect
 add_action('password_protected_before_login_form', 'siw_password_protected_message');
 function siw_password_protected_message(){
-	echo"<p class='message'>Welkom op de testsite van SIW.<br/> Voer het wachtwoord in om toegang te krijgen. <br/> <br/> Klik <a href='//www.siw.nl'>hier</a> om naar de echte website van SIW te gaan.</p>";
+	$site_url = '//www.siw.nl';
+	?>
+	<p class='message'>
+	<b><?php esc_html_e('Welkom op de testsite van SIW.','siw')?></b><br />
+	<?php esc_html_e('Voer het wachtwoord in om toegang te krijgen.','siw')?><br /><br />
+	<?php printf( wp_kses_post( __('Klik <a href="%s">hier</a> om naar de echte website van SIW te gaan.', 'siw' ) ), esc_url($site_url) );?>
+	</p>
+<?php
 }
 
 add_action('password_protected_login_head', 'siw_password_protected_error');
 function siw_password_protected_error() {
 	remove_action('password_protected_login_head', 'wp_shake_js', 12);
+}
+
+add_filter('password_protected_is_active', 'siw_password_protected_is_active');
+function siw_password_protected_is_active( $is_active ){
+	$ip_whitelist = siw_get_ip_whitelist();
+
+	if ( in_array( $_SERVER['REMOTE_ADDR'], $ip_whitelist ) ) {
+		$is_active = false;
+	}
+
+	return $is_active;
 }

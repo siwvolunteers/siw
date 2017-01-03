@@ -14,15 +14,17 @@ function siw_next_event_topbar(){
 		'relation'	=>	'AND',
 		array(
 			'key'		=>	'siw_agenda_eind',
-			'value'		=>	time() + ($hide_topbar_days_before_event * 24 * 60 * 60),
+			'value'		=>	strtotime( date("Y-m-d") ) + ( $hide_topbar_days_before_event * DAY_IN_SECONDS ),
 			'compare'	=>	'>='
 		),
 		array(
 			'key'		=> 'siw_agenda_start',
-			'value'		=> time() + ($show_topbar_days_before_event * 24 * 60 * 60),
+			'value'		=> strtotime( date("Y-m-d") ) + ( $show_topbar_days_before_event * DAY_IN_SECONDS ),
 			'compare'	=>	'<='
 		),
 	);
+	
+	
 	$query_args = array(
 		'post_type'				=>	'agenda',
 		'posts_per_page'		=>	1,

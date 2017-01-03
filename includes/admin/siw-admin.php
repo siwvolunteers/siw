@@ -1,6 +1,6 @@
 <?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2016 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -12,8 +12,8 @@ function siw_admin_logo_styling() {
 echo '
 <style type="text/css">
 .siw-logo div{
-    width: 195px !important;
-    background-image: url("'.get_stylesheet_directory_uri() . '/assets/images/admin/logo.png") !important;
+	width: 195px !important;
+	background-image: url("'.get_stylesheet_directory_uri() . '/assets/images/admin/logo.png") !important;
 	background-size: contain !important;
 	background-repeat: no-repeat !important;
 }
@@ -23,19 +23,19 @@ echo '
 
 add_action( 'admin_bar_menu', 'siw_admin_bar_logo', 1 );
 function siw_admin_bar_logo( $wp_admin_bar ) {
-    $args = array(
-        'id'    => 'siw-logo',
-        'meta'  => array( 'class' => 'siw-logo', 'title' => 'SIW' )
-    );
-    $wp_admin_bar->add_node( $args );
+	$args = array(
+		'id'	=> 'siw-logo',
+		'meta'	=> array( 'class' => 'siw-logo', 'title' => 'SIW' )
+	);
+	$wp_admin_bar->add_node( $args );
 }
-add_action( 'admin_bar_menu', 'siw_admin_bar_test', 1 );
-function siw_admin_bar_test( $wp_admin_bar ) {
-    $args = array(
-        'id'    => 'siw-url',
-		'title' => 'Je bent ingelogd op: ' . site_url('', '' ),
-    );
-    $wp_admin_bar->add_node( $args );
+add_action( 'admin_bar_menu', 'siw_admin_bar_site_url', 1 );
+function siw_admin_bar_site_url( $wp_admin_bar ) {
+	$args = array(
+		'id'	=> 'siw-url',
+		'title'	=> 'Je bent ingelogd op: ' . site_url('', '' ),
+	);
+	$wp_admin_bar->add_node( $args );
 }
 
 //admin-bar opschonen
@@ -51,7 +51,6 @@ function siw_remove_admin_bar_items( $wp_admin_bar ) {
 	$wp_admin_bar->remove_menu( 'vfbp-admin-toolbar' );
 	$wp_admin_bar->remove_menu( 'new-content');
 	$wp_admin_bar->remove_menu( 'updraft_admin_node' );
-
 }
 
 //welcome panel verwijderen
@@ -65,31 +64,29 @@ function siw_remove_admin_menu_items(){
 	remove_menu_page( 'link-manager.php' );
 }
 
-
 //yoast box onderaan pagina
 add_filter( 'wpseo_metabox_prio', function() { return 'low';});
-
 
 //admin bar niet tonen voor ingelogde gebruikers
 add_filter('show_admin_bar', '__return_false');
 
 //standaard dashboard widgets verwijderen
-add_action('wp_dashboard_setup', 'siw_remove_dashboard_widgets' );
-
+add_action('admin_init', 'siw_remove_dashboard_widgets' );
 function siw_remove_dashboard_widgets(){
 	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
 	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
 	remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_primary', 'dashboard', 'normal' );
 }
 
 //overbodige metaboxes van plugins verwijderen
 add_action( 'do_meta_boxes', 'siw_remove_plugin_metaboxes' );
-
 function siw_remove_plugin_metaboxes(){
 	remove_meta_box( 'woocommerce_dashboard_recent_reviews', 'dashboard', 'normal' ); 
 	remove_meta_box( 'woocommerce_dashboard_status', 'dashboard', 'normal');
 	remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'normal' ); 	
 	remove_meta_box( 'vfbp-dashboard', 'dashboard', 'normal');
+	remove_meta_box( 'redux_dashboard_widget', 'dashboard', 'side');
 }
 
 //woothemes update nag verwijderen
@@ -132,7 +129,7 @@ function siw_remove_extra_profile_fields(){
 add_action( 'admin_enqueue_scripts', 'siw_admin_js' );
 function siw_admin_js() {
 	wp_register_script('siw_admin_js', get_stylesheet_directory_uri() . '/assets/js/siw-admin-scripts.js', array('jquery'), wp_get_theme()->version, TRUE);
-    wp_enqueue_script( 'siw_admin_js' );
+	wp_enqueue_script( 'siw_admin_js' );
 }
 
 /*

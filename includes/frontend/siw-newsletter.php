@@ -108,6 +108,7 @@ class siw_mailpoet_subscription extends WP_Widget {
 		extract( $args );
 		$title = apply_filters( 'widget_title', $instance['title'] );
 		$list = $instance['list'];
+		$subscriber_count = do_shortcode('[wysija_subscribers_count list_id="' . $list . '" ]');
 
 		echo $before_widget;
 		if ( $title ) {
@@ -118,19 +119,19 @@ class siw_mailpoet_subscription extends WP_Widget {
 			<div id="newsletter_loading" class="text-center hidden"></div>
 			<form id="siw_newsletter_subscription" method="post" autocomplete="on">
 				<p>
-					Meld je aan voor onze nieuwsbrief en voeg je bij de <?php echo do_shortcode('[wysija_subscribers_count list_id="' . $list . '" ]');?> abonnees.
+				<?php printf( esc_html__( 'Meld je aan voor onze nieuwsbrief en voeg je bij de %d abonnees.', 'siw' ), $subscriber_count );?>
 				</p>
 				<p>
-					<label>Voornaam *</label>
-					<input type="text" name="name" title="Voornaam" id="newsletter_name" required>
+					<label><?php esc_html_e('Voornaam *','siw');?></label>
+					<input type="text" name="name" title="<?php esc_attr_e('Voornaam', 'siw');?>" id="newsletter_name" required>
 				</p>
 				<p>
-					<label>E-mail *</label>
-					<input type="email" name="email" title="E-mail" id="newsletter_email" required>
+					<label><?php esc_html_e('E-mail *','siw');?></label>
+					<input type="email" name="email" title="<?php esc_attr_e('E-mail', 'siw');?>" id="newsletter_email" required>
 					
 				</p>
 				<p>
-					<input type="submit" value="Aanmelden">
+					<input type="submit" value="<?php esc_attr_e('Aanmelden', 'siw');?>">
 				</p>
 				<input type="hidden" value="<?php echo $list; ?>" name="list_id" id="newsletter_list_id">
 			</form>

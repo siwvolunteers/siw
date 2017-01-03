@@ -81,7 +81,10 @@ function siw_taxonomy_agenda_type() {
 		'show_ui'						=> true,
 		'show_admin_column'				=> true,
 		'show_in_nav_menus'				=> true,
-        'query_var'						=> true,
+		'query_var'						=> true,
+		'capabilities' => array(
+			'assign_terms' => 'edit_events'
+		),
 	);
 	register_taxonomy( 'soort_evenement', array( 'agenda' ), $args );
 
@@ -94,7 +97,7 @@ add_action( 'init', 'siw_taxonomy_agenda_type', 0 );
 //agendagegevens in metaboxes
 add_filter( 'cmb_meta_boxes', 'siw_agenda_metaboxes' );
 
-function siw_agenda_metaboxes( array $meta_boxes ){
+function siw_agenda_metaboxes( array $meta_boxes ) {
 	$prefix = 'siw_agenda_';
 	$meta_boxes[] = array(
 		'id'			=> 'agenda_meta',
@@ -261,7 +264,7 @@ function siw_agenda_metaboxes( array $meta_boxes ){
 }	
 
 
-function siw_event_show_custom_application_fields($field){
+function siw_event_show_custom_application_fields($field) {
 	$application = get_post_meta( $field->object_id, 'siw_agenda_aanmelden', 1 );
 	if ( 'aangepast' == $application ){
 		return true;
@@ -272,13 +275,13 @@ function siw_event_show_custom_application_fields($field){
 //kolom in admin menu
 add_filter('manage_agenda_posts_columns', 'siw_agenda_admin_start_column_header', 10);
 
-function siw_agenda_admin_start_column_header($columns) {
+function siw_agenda_admin_start_column_header( $columns ) {
 	$columns['start'] = 'Start';
 	return $columns;
 }
 
 add_action('manage_agenda_posts_custom_column', 'siw_agenda_admin_start_column_value', 10, 2);
-function siw_agenda_admin_start_column_value($column_name, $post_id) {
+function siw_agenda_admin_start_column_value( $column_name, $post_id ) {
 	if ( 'start' == $column_name ) {
 		$start = get_post_meta( $post_id, 'siw_agenda_start', true );
 		if ($start) {
@@ -363,13 +366,13 @@ public function __construct() {
 			'relation'	=>	'AND',
 			array(
 				'key'		=>	'siw_agenda_eind',
-				'value'		=>	time(),
+				'value'		=>	strtotime( date("Y-m-d") ),
 				'compare'	=>	'>='
 			)
 		);
 		$query_args = array(
 			'post_type'				=>	'agenda',
-			'posts_per_page'		=>	1,
+			'posts_per_page'		=>	2,
 			'post_status'			=>	'publish',
 			'ignore_sticky_posts'	=>	true,
 			'meta_key'				=>	'siw_agenda_start',
@@ -411,25 +414,27 @@ public function __construct() {
 [{
 "@context" : "http://schema.org",
 "name" : "<?php esc_attr( the_title() );?>",
+"description" : "<?php echo esc_attr( get_the_excerpt() );?>",
+"image" : "<?php esc_url( the_post_thumbnail_url() );?>",
 "@type" : "event",
-"startDate" : "<?php echo esc_attr( date('Y-m-d',$start_ts ) ); ?>",
-"endDate" : "<?php echo esc_attr( date('Y-m-d',$end_ts ) ); ?>",
+"startDate" : "<?php echo esc_attr( date('Y-m-d', $start_ts ) ); ?>",
+"endDate" : "<?php echo esc_attr( date('Y-m-d', $end_ts ) ); ?>",
 "location" : {
 	"@type" : "Place",
 	"name" : "<?php echo esc_attr( $location ); ?>",
 	"address" : "<?php echo esc_attr( $address . ', ' .$postal_code . ' ' . $city ); ?>"
 },
-"url": "<?php echo esc_url( the_permalink() ); ?>"
+"url": "<?php esc_url( the_permalink() ); ?>"
 }]
 					</script>
 					</li>
 			<?php endwhile;?>
 		</ul>
 		<p class="siw_agenda_page_link">
-			<a href="<?php echo esc_url( get_page_link( $agenda_page ) ); ?>"><?php _e('Bekijk de volledige agenda.', 'siw'); ?></a>
+			<a href="<?php echo esc_url( get_page_link( $agenda_page ) ); ?>"><?php esc_html_e('Bekijk de volledige agenda.', 'siw'); ?></a>
 		</p>
 		<?php else: ?>
-		<p><?php _e('Er zijn momenteel geen geplande activiteiten.', 'siw'); ?></p>
+		<p><?php esc_html_e('Er zijn momenteel geen geplande activiteiten.', 'siw'); ?></p>
 		<?php endif;
 		wp_reset_query();
 		echo $after_widget;
