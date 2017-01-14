@@ -7,6 +7,7 @@
 	$start_ts					= get_post_meta( $id, 'siw_agenda_start', true );
 	$start_date					= date("Y-m-d", $start_ts );
 	$end_ts						= get_post_meta( $id, 'siw_agenda_eind', true );
+	$end_date					= date("Y-m-d", $end_ts );
 	$date_range					= siw_get_date_range_in_text( date("Y-m-d", $start_ts ),  date("Y-m-d", $end_ts ), false );
 	$start_time					= date("H:i", $start_ts );
 	$end_time					= date("H:i", $end_ts );
@@ -73,7 +74,7 @@
 					</div>
 					<div class="col-md-6">
 						<h3><?php esc_html_e('Aanmelden', 'siw');?></h3>
-						<?php if( $start_date > date("Y-m-d") ):?>
+						<?php if( $end_date > date("Y-m-d") ):?>
 						<?php if ('formulier' == $application ){
 							if ( $start_date >= $limit_date ){
 								echo do_shortcode( '[vfb id=' . $vfb_form_id . ']' );
