@@ -554,6 +554,15 @@ article.vacatures {
 .siw-vacature-grid {
   margin: 20px;
 }
+.siw-vacature-grid .grid_item {
+  padding: 10px;
+  -webkit-border-radius: 4px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 4px;
+  -moz-background-clip: padding;
+  border-radius: 4px;
+  background-clip: padding-box;
+}
 h5.job-title {
   text-align: center;
 }
