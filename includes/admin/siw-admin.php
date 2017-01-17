@@ -150,9 +150,9 @@ function siw_rename_woo_menu() {
 	if( !$woo ){
 		return;
 	}
-	$menu[$woo][0] = 'Aanmeldingen';
+	$menu[$woo][0] = __( 'Aanmeldingen', 'siw' );
 }
- 
+
 function siw_menu_array_search( $find, $items ) {
 	foreach( $items as $key => $value ){
 		$current_key = $key;
@@ -162,3 +162,13 @@ function siw_menu_array_search( $find, $items ) {
 	}
 	return false;
 }
+
+
+//YITH premium nags verwijderen
+add_filter('yit_show_upgrade_to_premium_version', function() { return false;});
+add_filter('yit_panel_sidebar_load_remote_widgets', function() { return false;});
+add_filter('yit_panel_hide_sidebar', function() { return true;});
+add_filter('yith_wcan_settings_tabs', function( $admin_tabs ){
+	unset( $admin_tabs['premium'] );
+	return $admin_tabs;
+});
