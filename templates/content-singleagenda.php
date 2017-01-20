@@ -25,8 +25,9 @@
 	$location_map				= '[gmap address="' . $address . ', ' . $postal_code . ' ' . $city . '" title="' . $location . '" zoom="15" maptype="ROADMAP"]';
 	$hide_form_days_before_cd = siw_get_hide_form_days_before_cd();
 	$limit_date = date("Y-m-d", time() + ( $hide_form_days_before_cd * DAY_IN_SECONDS ));
-	$text_after_hide_cd_form = siw_get_text_after_hide_cd_form();
+	$text_after_hide_cd_form	= get_post_meta( $id, 'siw_agenda_tekst_na_verbergen_formulier', true );
 	$agenda_page_url = get_permalink ( siw_get_parent_page('agenda') );
+
 ?>
 	
 <div id="content" class="container">
@@ -80,7 +81,7 @@
 								echo do_shortcode( '[vfb id=' . $vfb_form_id . ']' );
 							}
 							else{
-								echo wp_kses_post( wpautop( $text_after_hide_cd_form ) );
+								echo wp_kses_post( wpautop( ($text_after_hide_cd_form ))? $text_after_hide_cd_form : __('Het is helaas niet meer mogelijk om je aan te melden.','siw'));
 							}
 						}else{?>
 							<?php echo wp_kses_post( wpautop( $application_explanation )); ?>

@@ -202,6 +202,17 @@ function siw_agenda_metaboxes( array $meta_boxes ) {
 				),
 			),
 			array(
+				'name'			=> 'Tekst als aanmeldformulier verborgen is *',
+				'id'			=> $prefix . 'tekst_na_verbergen_formulier',
+				'type'			=> 'wysiwyg',
+				'options'		=> array(
+					'wpautop'		=> true, 
+					'media_buttons'	=> false, 
+					'teeny'			=> true, 
+				),
+				'show_on_cb'	=> 'siw_event_show_form_application_fields', 
+			),
+			array(
 				'name'			=> 'Toelichting aanmelden *',
 				'id'			=> $prefix . 'aanmelden_toelichting',
 				'type'			=> 'wysiwyg',
@@ -271,6 +282,16 @@ function siw_event_show_custom_application_fields($field) {
 	}
 	return false;
 }
+
+function siw_event_show_form_application_fields($field) {
+	$application = get_post_meta( $field->object_id, 'siw_agenda_aanmelden', 1 );
+	if ( 'formulier' == $application ){
+		return true;
+	}
+	return false;
+}
+
+
 
 //kolom in admin menu
 add_filter('manage_agenda_posts_columns', 'siw_agenda_admin_start_column_header', 10);
