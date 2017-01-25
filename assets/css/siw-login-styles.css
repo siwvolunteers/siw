@@ -60,8 +60,14 @@ input[type="checkbox"]:checked::before{
 	color:#ff9900;
 }
 
-p#backtoblog, p#nav{
+p#backtoblog{
 	display: none;
+}
+.login #nav a{
+	color:#fff;
+}
+.login #nav a:hover{
+	color:#f90;
 }
 
 .login .message {
