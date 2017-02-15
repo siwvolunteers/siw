@@ -1,5 +1,5 @@
 /*
-(c)2015 SIW Internationale vrijwilligersprojecten
+(c)2015-2017 SIW Internationale vrijwilligersprojecten
 */
 
 (function($) {
@@ -87,6 +87,7 @@
 		var name = $("#newsletter_name").val();
 		var email = $("#newsletter_email").val();
 		var list = $("#newsletter_list_id").val();
+		var nonce = $("#newsletter_nonce").val();
 
 		if ((name != '') && (email != '') && (list != '')){
 			$( "#siw_newsletter_subscription" ).addClass( "hidden" );
@@ -99,7 +100,8 @@
 					action : 'newsletter_subscription',
 					name : name,
 					email : email,
-					list : list
+					list : list,
+					security: nonce
 				},
 				success: function(result) {
 					if(result.success == 1) {

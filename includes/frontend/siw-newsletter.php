@@ -14,6 +14,10 @@ add_filter( 'siw_ajax_allowed_actions', function($actions){
 
 add_action( 'siw_ajax_newsletter_subscription', 'siw_newsletter_subscription' );
 function siw_newsletter_subscription() {
+
+		//controleer nonce
+		check_ajax_referer( 'siw-newsletter-nonce', 'security');
+	
 		$name = $_POST['name'];
 		$email = $_POST['email'];
 		$list = (integer) $_POST['list'];
@@ -122,11 +126,11 @@ class siw_mailpoet_subscription extends WP_Widget {
 				<?php printf( esc_html__( 'Meld je aan voor onze nieuwsbrief en voeg je bij de %d abonnees.', 'siw' ), $subscriber_count );?>
 				</p>
 				<p>
-					<label><?php esc_html_e('Voornaam *','siw');?></label>
+					<label><?php esc_html_e('Voornaam','siw');?>&nbsp;*</label>
 					<input type="text" name="name" title="<?php esc_attr_e('Voornaam', 'siw');?>" id="newsletter_name" required>
 				</p>
 				<p>
-					<label><?php esc_html_e('E-mail *','siw');?></label>
+					<label><?php esc_html_e('E-mail','siw');?>&nbsp;*</label>
 					<input type="email" name="email" title="<?php esc_attr_e('E-mail', 'siw');?>" id="newsletter_email" required>
 					
 				</p>
@@ -134,6 +138,7 @@ class siw_mailpoet_subscription extends WP_Widget {
 					<input type="submit" value="<?php esc_attr_e('Aanmelden', 'siw');?>">
 				</p>
 				<input type="hidden" value="<?php echo $list; ?>" name="list_id" id="newsletter_list_id">
+				<?php wp_nonce_field('siw-newsletter-nonce', 'newsletter_nonce', false);?>
 			</form>
 		</div>
 	<?php
