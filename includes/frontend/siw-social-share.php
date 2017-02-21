@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /*
-social sharing links toevoegen aan 
+social sharing links toevoegen aan
 - Op maat projecten
 - Vacatures
 - Agenda-items
@@ -26,17 +26,17 @@ function siw_social_share_buttons(){
 	$hr = false;
 	$post_type_description = '';
 	if ('portfolio' == $post_type or 'product' == $post_type ){
-		$post_type_description = 'dit project';
+		$post_type_description = __('Deel dit project', 'siw');
 		$hr = true;
 	}
 	elseif('vacatures' == $post_type ){
-		$post_type_description = 'deze vacature';	
+		$post_type_description = __('Deel deze vacature', 'siw');
 	}
 	elseif('agenda' == $post_type ){
-		$post_type_description = 'dit evenement';	
+		$post_type_description = __('Deel dit evenement', 'siw');
 	}
 	elseif('wpm-testimonial' == $post_type ){
-		$post_type_description = 'dit ervaringsverhaal';	
+		$post_type_description = __('Deel dit ervaringsverhaal', 'siw');
 	}
 
 	/*
@@ -44,7 +44,7 @@ function siw_social_share_buttons(){
 	*/
 	$url = urlencode( get_permalink() );
  	$title = rawurlencode( html_entity_decode( get_the_title() ) );
-	
+
 	/*
 	url's voor diverse sociale netwerken genereren
 	*/
@@ -58,13 +58,13 @@ function siw_social_share_buttons(){
 	$share_buttons = '';
 	if ( $hr ){ $share_buttons .= '<hr>';}
 	$share_buttons .= '<div class="siw-social">';
-	$share_buttons .= '<div class="title">Deel ' . $post_type_description .  ':</div>';		
+	$share_buttons .= '<div class="title">' . $post_type_description .  ':</div>';
 	$share_buttons .= '<a class="facebook" data-toggle="tooltip" data-placement="bottom" data-original-title="Facebook" href="'. $facebook_url .'" target="_blank"><i class="kt-icon-facebook2"></i></a>';
 	$share_buttons .= '<a class="twitter" data-toggle="tooltip" data-placement="bottom" data-original-title="Twitter" href="'. $twitter_url .'" target="_blank"><i class="kt-icon-twitter2"></i></a>';
 	$share_buttons .= '<a class="linkedin" data-toggle="tooltip" data-placement="bottom" data-original-title="LinkedIn" href="'. $linkedin_url .'" target="_blank"><i class="kt-icon-linkedin2"></i></a>';
 	$share_buttons .= '</div>';
-	
-	
+
+
 	//Horizontale streep gevolgd door share buttons
 	echo $share_buttons;
 }
