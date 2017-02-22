@@ -5,10 +5,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-/*
-Redux laden
-*/
-require_once( 'assets/redux/framework.php' );
+
 
 /*systeemfunctionaliteit*/
 require_once('includes/system/siw-cron.php');
