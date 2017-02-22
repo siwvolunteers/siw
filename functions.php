@@ -19,8 +19,10 @@ require_once('includes/system/siw-system.php');
 
 require_once('includes/system/siw-vfb.php');
 
-/*instellingen*/
-require_once('includes/settings/siw-settings.php');
+/*instellingen. niet laden als functionality plugin deze al geladen heeft*/
+if (!function_exists('siw_settings_show_configuration_section')){
+	require_once('includes/settings/siw-settings.php');
+}
 
 /*backend*/
 require_once('includes/admin/siw-admin.php');
