@@ -6,13 +6,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-function siw_get_option ( $option ){
-	global $siw;
-	$value = '';
-	if ( isset( $siw[ $option ] ) ){
-		$value = $siw[$option];
+if (!function_exists('siw_get_setting')){
+	function siw_get_setting( $setting ){
+		global $siw;
+		$value = '';
+		if ( isset( $siw[ $setting ] ) ){
+			$value = $siw[ $setting ];
+		}
+		return $value;
 	}
-	return $value;	
 }
 
 
