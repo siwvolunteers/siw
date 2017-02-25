@@ -604,6 +604,12 @@ function siw_get_array( $array ){
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
+				$project_countries['AUS'] = array(
+					'slug'		=> 'australie',
+					'name'		=> 'Australië',
+					'continent'	=> 'oceanie',
+					'allowed'	=> 'no',
+				);
 				$project_countries['AUT'] = array(
 					'slug'		=> 'oostenrijk',
 					'name'		=> 'Oostenrijk',
