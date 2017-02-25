@@ -9,8 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 Functies voor export van aanmeldingen naar Plato
 */
 
-
-
 //betaalde aanmeldingen exporteren naar PLATO
 add_action( 'woocommerce_order_status_processing', 'siw_wc_export_application_to_plato' );
 
@@ -18,16 +16,16 @@ add_action( 'woocommerce_order_status_processing', 'siw_wc_export_application_to
 function siw_wc_export_application_to_plato( $order_id){
 	//ophalen aanmelding
 	$order = new WC_Order( $order_id );
-	
+
 	//PLATO webkey en url ophalen
 	$organization_webkey = siw_get_setting('plato_organization_webkey');
-	$url = siw_get_setting('plato_webservice_url');
+	$webservice_url = siw_get_setting('plato_webservice_url');
 
-	if ('' == $organization_webkey or '' == $url){
-		$order->add_order_note('Instellingen voor export naar PLATO ontbreken. Neem contact op met ICT-beheer.');		
+	if ('' == $organization_webkey || '' == $webservice_url ){
+		$order->add_order_note('Instellingen voor export naar PLATO ontbreken. Neem contact op met ICT-beheer.');
 		return;
 	}
-	
+
 	//standaard http POST argumenten
 	$args = array(
 			'timeout'		=> 60,
@@ -44,18 +42,18 @@ function siw_wc_export_application_to_plato( $order_id){
 		);
 	//velden voor aanmelding
 	$application_fields = siw_wc_get_application_fields_for_xml( $order );
-	
-	
+
+
 	//elk project per aanmelding apart exporteren.
 	$failed_count = 0;
 	$success_count = 0;
-	
+
 	foreach( $order->get_items() as $item_id => $item_data ) {
 		//bepaal projectcode
 		$product = $order->get_product_from_item( $item_data );
 		$projectcode = $product->get_sku();
 		$application_fields['choice1'] = $projectcode;
-		
+
 		//xml opbouwen
 		$xml = new SimpleXMLElement("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><vef></vef>");
 		foreach ($application_fields as $key => $value){
@@ -65,10 +63,11 @@ function siw_wc_export_application_to_plato( $order_id){
 
 		//bouw bericht voor webservice op
 		$args['body']='organizationWebserviceKey=' . $organization_webkey . '&xmlData=' . rawurlencode( $xml_data );
-		
+
 		//roep webservice aan
-		$response = wp_safe_remote_post($url,$args);
-		
+		$import_volunteer_webservice_url = $webservice_url . '/ImportVolunteer';
+		$response = wp_safe_remote_post( $import_volunteer_webservice_url, $args );
+
 		//in het geval van een fout: foutmelding wegschrijven naar log
 		if ( is_wp_error( $response ) ) {
 			$order->add_order_note('Er is een fout opgetreden bij de export naar PLATO. Neem contact op met ICT-beheer');
@@ -83,7 +82,7 @@ function siw_wc_export_application_to_plato( $order_id){
 			$failed_count++;
 			break;
 		}
-		
+
 		$body = simplexml_load_string($response['body']);
 		$success = (string) $body->Success;
 		if ( 'true' == $success ){
@@ -91,7 +90,7 @@ function siw_wc_export_application_to_plato( $order_id){
 			//$imported_id = (string) $body->ImportedIds->string;
 			$note = sprintf("Aanmelding voor %s succesvol geëxporteerd naar PLATO.", $projectcode );
 			$order->add_order_note( $note );
-			$success_count++;		
+			$success_count++;
 		}
 		else {
 			//foutmeldingen tonen bij order notes
@@ -101,18 +100,18 @@ function siw_wc_export_application_to_plato( $order_id){
 				$note .= '<br />-' . (string)$message;
 			}
 			$order->add_order_note( $note );
-			$failed_count++;			
+			$failed_count++;
 		}
 	}
-	
+
 	//resultaat opslaan bij aanmelding
 	if (0 != $failed_count){
-		update_post_meta( $order->id, '_exported_to_plato', 'failed');			
+		update_post_meta( $order->id, '_exported_to_plato', 'failed');
 	}
 	elseif (0 != $success_count){
-		update_post_meta( $order->id, '_exported_to_plato', 'success');		
+		update_post_meta( $order->id, '_exported_to_plato', 'success');
 	}
-	
+
 }
 
 
@@ -120,10 +119,10 @@ function siw_wc_export_application_to_plato( $order_id){
 
 function siw_wc_get_application_fields_for_xml( $order ) {
 
-	//ophalen gegevens  
+	//ophalen gegevens
 	$outgoing_placements_officer = siw_get_setting('plato_export_outgoing_placements_name');
 	$outgoing_placements_email = siw_get_setting('plato_export_outgoing_placements_email');
-	
+
 	$firstname			= $order->billing_first_name;
 	$lastname			= $order->billing_last_name;
 	$sex				= $order->billing_gender;
