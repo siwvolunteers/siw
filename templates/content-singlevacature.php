@@ -1,31 +1,32 @@
 <?php get_template_part('templates/post', 'header'); ?>
 
 <?php global $post;
-	$deadline_ts				= get_post_meta( $post->ID, 'siw_vacature_deadline', true );
+	$post_id 					= $post->ID;
+	$deadline_ts				= get_post_meta( $post_id, 'siw_vacature_deadline', true );
 	$deadline					= siw_get_date_in_text( date("Y-m-d", $deadline_ts ), false);
-	$missie						= siw_get_jobs_mission_statement();
-	$inleiding					= get_post_meta( $post->ID, 'siw_vacature_inleiding', true );
-	$wie_zijn_wij				= siw_get_jobs_company_profile();
-	$wie_ben_jij				= get_post_meta( $post->ID, 'siw_vacature_wie_ben_jij', true );
-	$wat_ga_je_doen				= get_post_meta( $post->ID, 'siw_vacature_wat_ga_je_doen', true );
-	$wat_bieden_wij_jou			= get_post_meta( $post->ID, 'siw_vacature_wat_bieden_wij_jou', true );
-	$contactpersoon_naam		= get_post_meta( $post->ID, 'siw_vacature_contactpersoon_naam', true );
-	$contactpersoon_functie		= get_post_meta( $post->ID, 'siw_vacature_contactpersoon_functie', true );
+	$missie						= siw_get_setting('mission_statement');
+	$inleiding					= get_post_meta( $post_id, 'siw_vacature_inleiding', true );
+	$wie_zijn_wij				= siw_get_setting('company_profile');
+	$wie_ben_jij				= get_post_meta( $post_id, 'siw_vacature_wie_ben_jij', true );
+	$wat_ga_je_doen				= get_post_meta( $post_id, 'siw_vacature_wat_ga_je_doen', true );
+	$wat_bieden_wij_jou			= get_post_meta( $post_id, 'siw_vacature_wat_bieden_wij_jou', true );
+	$contactpersoon_naam		= get_post_meta( $post_id, 'siw_vacature_contactpersoon_naam', true );
+	$contactpersoon_functie		= get_post_meta( $post_id, 'siw_vacature_contactpersoon_functie', true );
 	if ( $contactpersoon_functie ){
 		$contactpersoon_naam = $contactpersoon_naam . ' (' . $contactpersoon_functie . ')';
 	}
-	$contactpersoon_email		= get_post_meta( $post->ID, 'siw_vacature_contactpersoon_email', true );
+	$contactpersoon_email		= get_post_meta( $post_id, 'siw_vacature_contactpersoon_email', true );
 	$contactpersoon_email		= antispambot( $contactpersoon_email );
-	$contactpersoon_telefoon	= get_post_meta( $post->ID, 'siw_vacature_contactpersoon_telefoon', true );// Wordt nog niet gebruikt
-	$solliciteren_naam			= get_post_meta( $post->ID, 'siw_vacature_solliciteren_naam', true );	
-	$solliciteren_functie		= get_post_meta( $post->ID, 'siw_vacature_solliciteren_functie', true );
+	$contactpersoon_telefoon	= get_post_meta( $post_id, 'siw_vacature_contactpersoon_telefoon', true );// Wordt nog niet gebruikt
+	$solliciteren_naam			= get_post_meta( $post_id, 'siw_vacature_solliciteren_naam', true );	
+	$solliciteren_functie		= get_post_meta( $post_id, 'siw_vacature_solliciteren_functie', true );
 	if ( $solliciteren_functie ){
 		$solliciteren_naam = $solliciteren_naam . ' (' . $solliciteren_functie . ')';
 	}	
-	$solliciteren_email			= get_post_meta( $post->ID, 'siw_vacature_solliciteren_email', true );
+	$solliciteren_email			= get_post_meta( $post_id, 'siw_vacature_solliciteren_email', true );
 	$solliciteren_email			= antispambot( $solliciteren_email);
-	$gesprekken					= get_post_meta( $post->ID, 'siw_vacature_gesprekken', true );
-	$meervoud					= get_post_meta( $post->ID, 'siw_vacature_meervoud', true );
+	$gesprekken					= get_post_meta( $post_id, 'siw_vacature_gesprekken', true );
+	$meervoud					= get_post_meta( $post_id, 'siw_vacature_meervoud', true );
 	
 	$content = '[accordion]';
 	$content .= '[pane title="Wie zijn wij?"]' . wp_kses_post( wpautop( $missie ) . wpautop( $wie_zijn_wij ) ) . '[/pane]';
@@ -60,8 +61,7 @@
 						</p>
 						<h3><?php esc_html_e('Solliciteren?','siw');?></h3>
 						<p>
-						<?php printf( wp_kses_post( __('Je motivatie met cv kun je uiterlijk %s sturen naar %s
-					, <a class="email" href="mailto:%s">%s</a> onder vermelding van "Sollicitatie %s"', 'siw' ) ), $deadline, $solliciteren_naam, $solliciteren_email, $solliciteren_email, the_title_attribute( array( 'echo' => false ) ) );?>
+						<?php printf( wp_kses_post( __('Je motivatie met cv kun je uiterlijk %s sturen naar:<br />%s, <a class="email" href="mailto:%s">%s</a> onder vermelding van "Sollicitatie %s"', 'siw' ) ), $deadline, $solliciteren_naam, $solliciteren_email, $solliciteren_email, the_title_attribute( array( 'echo' => false ) ) );?>
 						</p>
 						<p><?php echo esc_html( $gesprekken );?></p>
 						<?php else: ?>

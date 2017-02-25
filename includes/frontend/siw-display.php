@@ -12,14 +12,14 @@ add_action('kadence_breadcrumbs_after_home', 'siw_cpt_breadcrumbs');
 function siw_cpt_breadcrumbs(){
 	$delimiter = '/';
 	if (is_singular('vacatures')){
-		$vacature_parent = siw_get_parent_page('vacatures');
+		$vacature_parent = siw_get_setting('vacatures_parent_page');
 		if( !empty($vacature_parent) ) { 
 			$parentpagelink = get_page_link($vacature_parent); $parenttitle = get_the_title($vacature_parent);
 			echo '<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="'.$parentpagelink. '"><span itemprop="title">' . $parenttitle . '</span></a></span> ' . $delimiter . ' ';
 		} 
 	}
 	if (is_singular('agenda')){
-		$agenda_parent = siw_get_parent_page('agenda');
+		$agenda_parent = siw_get_setting('agenda_parent_page');
 		if( !empty($agenda_parent) ) { 
 			$parentpagelink = get_page_link($agenda_parent); $parenttitle = get_the_title($agenda_parent);
 			echo '<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="'.$parentpagelink. '"><span itemprop="title">' . $parenttitle . '</span></a></span> ' . $delimiter . ' ';
@@ -58,7 +58,7 @@ function siw_set_page_title($title){
 function siw_show_quick_search_widget(){?>
 <div class="snelzoeken">
 <h4><?php esc_html_e('Snel zoeken','siw');?></h4>
-<?php echo do_shortcode( '[searchandfilter id="57"]');?>
+<?php echo do_shortcode( '[searchandfilter id="57"]');//TODO: vervangen door slug of optie?>
 </div>
 <?php
 }

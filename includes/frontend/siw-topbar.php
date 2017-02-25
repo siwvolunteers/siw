@@ -8,8 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action('kt_before_header_content','siw_next_event_topbar');
 function siw_next_event_topbar(){
-	$show_topbar_days_before_event = siw_get_show_topbar_days_before_event();
-	$hide_topbar_days_before_event = siw_get_hide_topbar_days_before_event();
+	$show_topbar_days_before_event = siw_get_setting('show_topbar_days_before_event');
+	$hide_topbar_days_before_event = siw_get_setting('hide_topbar_days_before_event');
 	$meta_query_args = array(
 		'relation'	=>	'AND',
 		array(

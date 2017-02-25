@@ -13,7 +13,7 @@
 	$end_time					= date("H:i", $end_ts );
 	$program					= get_post_meta( $id, 'siw_agenda_programma', true );
 	$description				= get_post_meta( $id, 'siw_agenda_beschrijving', true );
-	$location					= get_post_meta( $id, 'siw_agenda_locatie', true ); 
+	$location					= get_post_meta( $id, 'siw_agenda_locatie', true );
 	$address					= get_post_meta( $id, 'siw_agenda_adres', true );
 	$postal_code				= get_post_meta( $id, 'siw_agenda_postcode', true );
 	$city						= get_post_meta( $id, 'siw_agenda_plaats', true );
@@ -22,14 +22,14 @@
 	$application_explanation	= get_post_meta( $id, 'siw_agenda_aanmelden_toelichting', true );
 	$application_link_url		= get_post_meta( $id, 'siw_agenda_aanmelden_link_url', true );
 	$application_link_text		= get_post_meta( $id, 'siw_agenda_aanmelden_link_tekst', true );
-	$location_map				= '[gmap address="' . $address . ', ' . $postal_code . ' ' . $city . '" title="' . $location . '" zoom="15" maptype="ROADMAP"]';
-	$hide_form_days_before_cd = siw_get_hide_form_days_before_cd();
-	$limit_date = date("Y-m-d", time() + ( $hide_form_days_before_cd * DAY_IN_SECONDS ));
+	$location_map				= '[gmap address="' . esc_attr( $address ) . ', ' . esc_attr( $postal_code ) . ' ' . esc_attr( $city ) . '" title="' . esc_attr( $location ) . '" zoom="15" maptype="ROADMAP"]';
+	$hide_form_days_before_cd	= siw_get_setting('hide_application_form_days_before_info_day');
+	$limit_date					= date("Y-m-d", time() + ( $hide_form_days_before_cd * DAY_IN_SECONDS ));
 	$text_after_hide_cd_form	= get_post_meta( $id, 'siw_agenda_tekst_na_verbergen_formulier', true );
-	$agenda_page_url = get_permalink ( siw_get_parent_page('agenda') );
+	$agenda_page_url = get_permalink ( siw_get_setting('agenda_parent_page') );
 
 ?>
-	
+
 <div id="content" class="container">
     <div class="row single-article">
 		<div class="main col-md-12 kt-nosidebar" role="main">
@@ -58,7 +58,7 @@
 							</div>
 							<div class="col-md-9">
 								<?php echo wp_kses_post( wpautop( $item['omschrijving'] ) );?>
-							</div>		
+							</div>
 						<?php }?>
 						</div>
 						<?php }?>
@@ -87,8 +87,8 @@
 							<?php echo wp_kses_post( wpautop( $application_explanation )); ?>
 						<?php
 							if ( $application_link_url ){?>
-							<a href="<?php echo esc_url( $application_link_url );?>" target="_blank"><?php echo ( $application_link_text )? esc_html( $application_link_text ) : esc_html( $application_link_url )?> <i class="kt-icon-newtab"></i></a>
-						
+							<a href="<?php echo esc_url( $application_link_url );?>" target="_blank"><?php echo ( $application_link_text ) ? esc_html( $application_link_text ) : esc_html( $application_link_url )?> <i class="kt-icon-newtab"></i></a>
+
 						<?php
 							}
 						} ?>

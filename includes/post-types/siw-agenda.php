@@ -382,7 +382,7 @@ public function __construct() {
 		extract( $args );
 		$title = apply_filters( 'widget_title', $instance['title'] );
 
-		$agenda_page = siw_get_parent_page('agenda');
+		$agenda_page = siw_get_setting('agenda_parent_page');
 		$meta_quer_args = array(
 			'relation'	=>	'AND',
 			array(

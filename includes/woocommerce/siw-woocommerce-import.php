@@ -22,13 +22,13 @@ function siw_wc_date_to_month( $date ){
 	$month = '';
 	if ( '1970-01-01' != $date ){
 		$month = date("Ym", strtotime( $date ) );
-	}	
+	}
 	return $month;
 }
 
 function siw_wc_project_duration_in_days( $startdate, $enddate ){
 	$startdate = strtotime( $startdate );
-	$enddate = strtotime( $enddate );	
+	$enddate = strtotime( $enddate );
 	$duration_in_seconds = $enddate - $startdate;
 	$project_duration_in_days = round( $duration_in_seconds / DAY_IN_SECONDS );
 	return $project_duration_in_days;
@@ -43,10 +43,10 @@ function siw_wc_project_work( $work_codes, $format='string' ){
 		if (isset ( $project_work[ $work_type ])){
 			$work .= $project_work[ $work_type ]."|";
 		}
-	}	
+	}
 
 	if ( 'array' == $format ){
-		$work = explode("|", $work);	
+		$work = explode("|", $work);
 	}
 	return $work;
 }
@@ -54,7 +54,7 @@ function siw_wc_project_work( $work_codes, $format='string' ){
 
 function siw_wc_continent_from_country($country_code){
 	$continent = '';
-	$project_countries = siw_get_array('project_countries');	
+	$project_countries = siw_get_array('project_countries');
 	if (isset ( $project_countries[ $country_code ]['continent'])){
 		$continent = $project_countries[ $country_code ]['continent'];
 	}
@@ -63,10 +63,10 @@ function siw_wc_continent_from_country($country_code){
 
 function siw_wc_country($country_code){
 	$country = '';
-	$project_countries = siw_get_array('project_countries');	
+	$project_countries = siw_get_array('project_countries');
 	if (isset ( $project_countries[ $country_code ]['slug'])){
 		$country = $project_countries[ $country_code ]['slug'];
-	}	
+	}
 	return $country;
 }
 
@@ -74,7 +74,7 @@ function siw_wc_country($country_code){
 
 function siw_wc_country_name( $country_code ){
 	$country_name = '';
-	$project_countries = siw_get_array('project_countries');	
+	$project_countries = siw_get_array('project_countries');
 	if (isset ( $project_countries[ $country_code ]['name'])){
 		$country_name = $project_countries[ $country_code ]['name'];
 	}
@@ -84,11 +84,11 @@ function siw_wc_country_name( $country_code ){
 /*bepalen of land toegestaan is/aangeboden wordt*/
 function siw_wc_is_country_allowed( $country_code ){
 	$allowed = 'no';
-	$project_countries = siw_get_array('project_countries');	
+	$project_countries = siw_get_array('project_countries');
 	if (isset ( $project_countries[ $country_code ]['allowed'])){
 		$allowed = $project_countries[ $country_code ]['allowed'];
 	}
-	return $allowed;	
+	return $allowed;
 }
 
 
@@ -104,7 +104,7 @@ function siw_wc_local_fee( $local_fee_amount, $local_fee_currency ){
 
 function siw_wc_number_of_volunteers( $volunteers_total, $volunteers_male, $volunteers_female ){
 	$volunteers_male = (integer) $volunteers_male;
-	$volunteers_female = (integer) $volunteers_female;	
+	$volunteers_female = (integer) $volunteers_female;
 	$volunteers_total = (integer) $volunteers_total;
 	if ( 1 == $volunteers_male){
 		$male_label = " man";
@@ -117,9 +117,9 @@ function siw_wc_number_of_volunteers( $volunteers_total, $volunteers_male, $volu
 	}
 	else{
 		$female_label = " vrouwen";
-	}	
+	}
 	$number_of_volunteers = $volunteers_total;
-	
+
 	//alleen specificatie als totaal aantal vrijwilligers overeenkomt met som van aantal mannen en aantal vrouwen.
 	if ( $volunteers_total == ( $volunteers_male + $volunteers_female )){
 		$number_of_volunteers .= " (" . $volunteers_male.$male_label . " en " . $volunteers_female . $female_label . ")";
@@ -131,7 +131,7 @@ function siw_wc_number_of_volunteers( $volunteers_total, $volunteers_male, $volu
 function siw_wc_free_places_left( $free_places_male, $free_places_female ){
 	$free_places_left = 'yes';
 	$free_places_male = (integer) $free_places_male;
-	$free_places_female = (integer) $free_places_female;	
+	$free_places_female = (integer) $free_places_female;
 	$free_places_total = $free_places_male + $free_places_female;
 	if ( $free_places_total <= 0){
 		$free_places_left = 'no';
@@ -144,7 +144,7 @@ function siw_wc_age_range( $minimum_age, $maximum_age ){
 	$maximum_age = (integer) $maximum_age;
 	if ($minimum_age < 1){
 		$minimum_age = 18;
-	}	
+	}
 	if ($maximum_age < 1){
 		$maximum_age = 99;
 	}
@@ -192,7 +192,7 @@ function siw_wc_project_work_in_text( $work_codes, $number ){
 	if (( $number > 1)and ( $work_array[1] != '')){
 		$project_work_in_text .= ' en ' . $work_array[1];
 	}
-	
+
 	return $project_work_in_text;
 }
 
@@ -228,7 +228,7 @@ function siw_wc_determine_post_status( $work_codes, $country ){
 
 
 //projectlocatie
-function siw_wc_is_project_location_available( $latitude ){	
+function siw_wc_is_project_location_available( $latitude ){
 	$latitude = (float) $latitude;
 	$project_location_available = '';
 	if ( 0 != $latitude ){
@@ -253,33 +253,33 @@ function siw_wc_project_duration_in_text( $startdate, $enddate ){
 	$end_day = date("j", strtotime( $enddate ));
 	$end_month = date("n",strtotime( $enddate ));
 	$start_day = date("j", strtotime( $startdate ));
-	$start_month = date("n",strtotime( $startdate ));	
+	$start_month = date("n",strtotime( $startdate ));
 	$project_duration_in_text = $start_day;
 	if ($start_month != $end_month){
 		$project_duration_in_text .= ' ' . $month_array[ $start_month ];
 	}
-	$project_duration_in_text .= ' t/m ' . $end_day . ' ' . $month_array[ $end_month ];	
+	$project_duration_in_text .= ' t/m ' . $end_day . ' ' . $month_array[ $end_month ];
 	return $project_duration_in_text;
 }
 
 
 //functie om projectsamenvatting te genereren
 function siw_wc_project_summary( $project_type, $country, $workcode, $startdate, $enddate, $numvol, $minimum_age, $maximum_age, $family){
-	
+
 	//verzamelen gegevens voor samenvatting
 	$numvol = (integer) $numvol;
 	$other_volunteer = $numvol - 1;
-	$age_range_in_text = siw_wc_age_range( $minimum_age, $maximum_age );	
-	
+	$age_range_in_text = siw_wc_age_range( $minimum_age, $maximum_age );
+
 	$work = siw_wc_project_work_in_text( $workcode,2);
-	
+
 	$project_duration_in_days = siw_wc_project_duration_in_days( $startdate, $enddate );
 	$project_duration_in_text = siw_wc_project_duration_in_text( $startdate, $enddate );
 	$teenage_project = siw_wc_is_teenage_project( $minimum_age, $maximum_age, $project_type );
 	$family_project = siw_wc_is_family_project( $family, $project_type );
 
 	$project_summary = '';
-	
+
 	if ( 'tieners' == $teenage_project ){
 		$project_summary .= 'Dit is een tienerproject (' . $age_range_in_text . '). ';
 	}
@@ -287,11 +287,11 @@ function siw_wc_project_summary( $project_type, $country, $workcode, $startdate,
 	else if ( 'familie' == $family_project ){
 		$project_summary .= 'Dit is een familieproject. ';
 	}
-	
+
 	$project_summary .= 'Samen met ' . $other_volunteer . ' andere vrijwilligers ga je voor ' . $project_duration_in_days . ' dagen naar een ' . $work . 'project.<br/>';
-	
+
 	$project_summary .= 'Het project duurt van ' . $project_duration_in_text . '.';
-	
+
 	return $project_summary;
 }
 
@@ -301,10 +301,10 @@ function siw_wc_project_description( $work, $accommodation, $location, $organisa
 	$project_description = '\[accordion]';
 	if ( strlen( $description ) > 3){
 		$project_description .= '\[pane title="Beschrijving"]' . htmlspecialchars_decode( $description ) . '\[/pane]';
-	}	
+	}
 	if ( strlen( $work ) > 3){
 		$project_description .= '\[pane title="Werk"]' . $work . '\[/pane]';
-	}	
+	}
 	if ( strlen( $accommodation ) > 3){
 		$project_description .= '\[pane title="Accommodatie en maaltijden"]' . $accommodation . '\[/pane]';
 	}
@@ -332,7 +332,7 @@ function siw_wc_seo_title($country_code,$work_codes){
 	$work = siw_wc_project_work_in_text( $work_codes, 1) ;
 	$country = siw_wc_country_name( $country_code );
 	$seo_title = 'SIW Vrijwilligerswerk | ' . ucfirst( $work ) . 'project in ' . $country;
-	
+
 	return $seo_title;
 }
 
@@ -370,16 +370,16 @@ function siw_wc_select_project_image( $country_code, $work_codes ) {
 	$work_array = siw_wc_project_work( $work_codes, 'array' );
 	$work_array = array_filter( $work_array );
 	$url='';
-	
+
 	//alleen een afbeelding zoeken als er een continent gevonden is.
 	if ( $continent ){
 		foreach ( $work_array as $work ){
 			$relative_directory = $continent . '/' . $work . '/'.$country;
 			$dir = $base_directory . $relative_directory;
 			if ( file_exists( $dir )){
-				$files = array_diff( scandir($dir), array(".", "..", "Thumbs.db") );	
+				$files = array_diff( scandir($dir), array(".", "..", "Thumbs.db") );
 				$files = array_filter( $files, "siw_is_file");
-				
+
 				if ( sizeof( $files ) > 0){
 					$random_image = array_rand($files, 1);
 					$filename = $files[ $random_image ];
@@ -388,7 +388,7 @@ function siw_wc_select_project_image( $country_code, $work_codes ) {
 				}
 			}
 		}
-		
+
 		if ( '' == $url ){
 			foreach ( $work_array as $work ){
 				$relative_directory = $continent.'/'.$work;
@@ -396,7 +396,7 @@ function siw_wc_select_project_image( $country_code, $work_codes ) {
 				if ( file_exists( $dir )){
 					$files = array_diff( scandir( $dir ), array(".", "..", "Thumbs.db") );
 					$files = array_filter( $files, "siw_is_file");
-				
+
 					if ( sizeof( $files ) > 0){
 						$random_image = array_rand( $files, 1);
 						$filename = $files[ $random_image ];
@@ -412,7 +412,7 @@ function siw_wc_select_project_image( $country_code, $work_codes ) {
 			if ( file_exists( $dir )){
 				$files = array_diff( scandir( $dir ), array(".", "..", "Thumbs.db") );
 				$files = array_filter( $files, "siw_is_file");
-				
+
 				if ( sizeof( $files ) > 0){
 					$random_image = array_rand( $files, 1);
 					$filename = $files[ $random_image ];
@@ -422,7 +422,7 @@ function siw_wc_select_project_image( $country_code, $work_codes ) {
 		}
 	}
 	return $url;
-}	
+}
 
 //hulpfunctie voor siw_wc_select_project_image
 function siw_is_file( $value ){
@@ -446,7 +446,7 @@ function siw_wc_set_variations_prices( $product_id ){
 		'post_parent'	=> $product_id,
 		'fields' 		=> 'ids'
 	);
-	$variations = get_posts( $args ); 
+	$variations = get_posts( $args );
 	foreach ( $variations as $variation_id ) {
 		$tariff = get_post_meta( $variation_id, 'attribute_pa_tarief', true);
 		$price = $tariff_array[ $tariff ];
@@ -456,25 +456,25 @@ function siw_wc_set_variations_prices( $product_id ){
 	}
 }
 
-add_filter('wp_all_import_is_post_to_update', 'siw_wc_is_post_to_update', 10, 2);
-function siw_wc_is_post_to_update( $product_id, $xml ) {
+add_filter('wp_all_import_is_post_to_update', 'siw_wc_is_post_to_update', 10, 3);
+function siw_wc_is_post_to_update( $product_id, $xml, $current_import_id ) {
 	$update = false;
-	
+
 	//bepalen of het de fpl-import is
-	$is_fpl = array_key_exists( 'reserved', $xml );
-	if( $is_fpl ){
+	$fpl_import_id = siw_get_setting('plato_fpl_import_id');
+	if( $current_import_id == $fpl_import_id ){
 		$update = true;
 	}
-	
+
 	//bepalen of het project gemarkeerd is om opnieuw te importeren
 	$import_again = get_post_meta( $product_id, 'import_again', true);
 	if ( $import_again ){
 		$update = true;
 	}
-	
+
 	//controleer optie 'Forceer volledige import'
-	$force_full_import = siw_wc_get_force_full_import();
-	if ( $force_full_import ){
+	$force_full_update = siw_get_setting('plato_force_full_update');
+	if ( $force_full_update ){
 		$update = true;
 	}
 
@@ -484,32 +484,39 @@ function siw_wc_is_post_to_update( $product_id, $xml ) {
 	- Eindatum
 	- Local fee
 	*/
-	
-	
+
+
 	return $update;
 }
 
 add_action('pmxi_after_xml_import', 'siw_wc_hide_projects_after_import', 10, 1);
 function siw_wc_hide_projects_after_import( $import_id ){
-	//Zet vervolgacties klaar
-	wp_schedule_single_event( time() + ( 15 * MINUTE_IN_SECONDS ), 'siw_hide_workcamps');
-	wp_schedule_single_event( time() + ( 45 * MINUTE_IN_SECONDS ), 'siw_send_projects_for_approval_email');
-	//TODO: email voor nieuwe projecten
-	//TODO: emails alleen voor volledige import niet voor FPL
+	$full_import_id = siw_get_setting('plato_full_import_id');
+
+	if ( $import_id == $full_import_id ){
+		//Zet vervolgacties klaar
+		wp_schedule_single_event( time() + ( 15 * MINUTE_IN_SECONDS ), 'siw_hide_workcamps');
+		wp_schedule_single_event( time() + ( 45 * MINUTE_IN_SECONDS ), 'siw_send_projects_for_approval_email');
+		//TODO: email voor nieuwe projecten
+		if ( siw_get_setting('plato_force_full_update') ){
+			siw_set_setting('plato_force_full_update', 0);
+		}
+	}
+
 }
 
 /*
 Functie om groepsprojecten te verbergen die aan 1 of meer van onderstaande voorwaarden voldoen:
 - Het project begint binnen x dagen (configuratie)
-- Het project is in een niet-toegestaan land is
+- Het project is in een niet-toegestaan land
 - Het project is expliciet verborgen
 - Er zijn geen vrije plaatsen meer
 */
 add_action('siw_hide_workcamps', 'siw_hide_workcamps');
 
-function siw_hide_workcamps() {	
+function siw_hide_workcamps() {
 
-	$days = siw_wc_get_nr_of_days_before_start_to_hide_project();
+	$days = siw_get_setting('plato_hide_project_days_before_start');
 	$limit = date("Y-m-d", time() + ( $days * DAY_IN_SECONDS));
 
 	$meta_query_args = array(
@@ -543,7 +550,7 @@ function siw_hide_workcamps() {
 			),
 		),
 	);
-	
+
 	$args = array(
 		'posts_per_page'	=> -1,
 		'post_type'			=> 'product',
@@ -551,8 +558,8 @@ function siw_hide_workcamps() {
 		'fields' 			=> 'ids',
 		'post_status'		=> 'any',
 	);
-	
-	$products = get_posts( $args ); 
+
+	$products = get_posts( $args );
 	foreach ( $products as $product_id ) {
 		//project 'publiceren' als project eigenlijk ter review stond
 		if ('publish' != get_post_status( $product_id )){
@@ -569,14 +576,14 @@ function siw_hide_workcamp( $product_id ){
 	update_post_meta( $product_id, '_stock_status', 'outofstock');
 	update_post_meta( $product_id, '_featured', 'no');
 	update_post_meta( $product_id, '_yoast_wpseo_meta-robots-noindex','1');
-		
+
 	$varationsargs = array(
 		'post_type' 	=> 'product_variation',
 		'post_parent'	=> $product_id,
 		'fields' 		=> 'ids'
 	);
-	$variations = get_posts( $varationsargs ); 
+	$variations = get_posts( $varationsargs );
 	foreach ( $variations as $variation_id ) {
 		update_post_meta( $variation_id, '_stock_status', 'outofstock');
-	}	
+	}
 }

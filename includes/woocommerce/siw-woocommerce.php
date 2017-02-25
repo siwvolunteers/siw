@@ -39,7 +39,7 @@ remove_action( 'woocommerce_product_tabs', 'woocommerce_product_reviews_tab', 30
 add_filter('woocommerce_product_tabs','siw_wc_enquiry_tab',10,1);
 function siw_wc_enquiry_tab( $tabs ){	
 	$tabs['enquiry'] = array(
-		'title'    => __( 'Stel een vraag', 'woocommerce' ),
+		'title'    => __( 'Stel een vraag', 'siw' ),
 		'priority' => 100,
 		'callback' => 'siw_wc_product_enquiry_form'
 	);	
@@ -76,7 +76,7 @@ function siw_wc_catalog_ordering( $args ) {
 			$sort_args['orderby'] = 'meta_value';
 			$sort_args['order'] = 'asc';
 			$sort_args['meta_key'] = 'land';
-			break;		
+			break;
 	}
 	return $sort_args;
 }
@@ -85,16 +85,16 @@ add_filter( 'woocommerce_default_catalog_orderby_options', 'siw_wc_catalog_order
 add_filter( 'woocommerce_catalog_orderby', 'siw_wc_catalog_orderby' );
 
 function siw_wc_catalog_orderby( $sortby ) {
-	$sortby['startdate'] = 'Startdatum';
-	$sortby['country'] = 'Land';
-	$sortby['random'] = 'Willekeurig';
+	$sortby['startdate'] =  __('Startdatum', 'siw');
+	$sortby['country'] = __('Land', 'siw');
+	$sortby['random'] = __('Willekeurig', 'siw');
 	//unset($sortby["price"]);
 	//unset($sortby["date"]);
 	//unset($sortby["popularity"]);
 	//unset($sortby["price-desc"]);
-	
+
 	return $sortby;
-}	
+}
 
 
 //random volgorde toevoegen aan woocommerce shortcodes
@@ -116,21 +116,21 @@ function siw_wc_shortcode_add_orderby_random ( $args, $atts ) {
 add_action( 'add_meta_boxes' , 'siw_wc_hide_custom_fields', 999 );
 add_action( 'admin_menu', 'siw_wc_hide_custom_fields', 999 );
 function siw_wc_hide_custom_fields() {
-	remove_meta_box( 'postcustom' , 'shop_order' , 'normal' ); 
+	remove_meta_box( 'postcustom' , 'shop_order' , 'normal' );
 	remove_meta_box( 'woocommerce-order-downloads', 'shop_order', 'normal');
 	remove_meta_box( 'slugdiv', 'product', 'normal');
 	remove_meta_box( 'postcustom' , 'product' , 'normal' );
 	remove_meta_box( 'woocommerce-product-images' , 'product', 'side', 'low' );
-	remove_meta_box( 'commentsdiv' , 'product' , 'normal' ); 
+	remove_meta_box( 'commentsdiv' , 'product' , 'normal' );
 
 	//Diverse metaboxes verbergen voor niet-admins
 	if ( !current_user_can('manage_options') ){
 		remove_meta_box('woocommerce-product-data' , 'product', 'normal');
 		remove_meta_box('postimagediv', 'product', 'side');
 		remove_meta_box('tagsdiv-product_tag', 'product', 'normal');
-		remove_meta_box('product_catdiv', 'product', 'normal');		
+		remove_meta_box('product_catdiv', 'product', 'normal');
 	}
-	
+
 }
 //editor verbergen bij projecten voor niet-admins
 add_action( 'admin_init', 'siw_hide_editor' );
@@ -145,7 +145,7 @@ function siw_hide_editor() {
 	if ('product' != get_post_type( $post_id) ) {
 		return;
 	}
-	
+
 	//Verberg editor voor niet-admins
 	if ( !current_user_can('manage_options') ){
 		remove_post_type_support('product', 'editor');
@@ -163,10 +163,10 @@ function siw_woo_show_meta_boxes() {
 			esc_html__( 'Projectbeschrijving', 'siw' ),
 			'siw_show_project_description',
 			'product',
-			'normal', 
-			'high' 
+			'normal',
+			'high'
 		);
-		
+
 	}
 }
 //Toon projectbeschrijving
@@ -178,8 +178,6 @@ function siw_show_project_description( $object ){
 	echo wp_kses_post( $content );
 }
 
-
-
 /*
 Functies voor tonen order op adminscherm
 */
@@ -188,16 +186,16 @@ Functies voor tonen order op adminscherm
 add_filter('woocommerce_admin_billing_fields', 'siw_wc_admin_address_fields');
 
 function siw_wc_admin_address_fields( $fields ){
- 
-	$email = $fields['email']; 
-	$phone = $fields['phone']; 
-	
+
+	$email = $fields['email'];
+	$phone = $fields['phone'];
+
 	//zelfe volgorde + extra velden als bij checkout gebruiken
 	$fields = siw_wc_checkout_address_fields($fields);
 
 	//geslacht tonen als select i.p.v. drowdown.
 	$fields['gender']['type'] = 'select';
-	
+
 	//reassign email and phone fields
 	$fields['email'] = $email;
 	$fields['phone'] = $phone;
@@ -214,99 +212,98 @@ function siw_wc_order_meta_boxes( array $meta_boxes ){
 	$language_skill = siw_get_array('language_skill');
 	$gender = siw_get_array('gender');
 	$nationalities = siw_get_array('nationalities');
-	
 
 	$meta_boxes[] = array(
 		'id'         => 'woocommerce_order_meta',
-		'title'      => 'Aanmelding',
-		'pages'      => array( 'shop_order' ), 
+		'title'      => __('Aanmelding', 'siw'),
+		'pages'      => array( 'shop_order' ),
 		'context'    => 'normal',
 		'priority'   => 'default',
-		'show_names' => true, 
+		'show_names' => true,
 		'fields' => array(
-			
+
 			array(
-				'name'	=> 'Talenkennis',
-				'type' 	=> 'title',
-				'id'	=> 'language_skill'
-			),			
+				'name'		=> __('Talenkennis', 'siw'),
+				'type' 		=> 'title',
+				'id'		=> 'language_skill'
+			),
 			array(
-				'name'		=> 'Taal 1',
+				'name'		=> __('Taal 1', 'siw'),
 				'id'		=> 'language1',
 				'type'		=> 'select',
 				'options'	=> $languages,
-			),		
+			),
 			array(
-				'name'		=> 'Niveau taal 1',
+				'name'		=> __('Niveau taal 1', 'siw'),
 				'id'		=> 'language1Skill',
 				'type'		=> 'radio_inline',
 				'options'	=> $language_skill,
 			),
 			array(
-				'name'		=> 'Taal 2',
+				'name'		=> __('Taal 2', 'siw'),
 				'id'		=> 'language2',
 				'type'		=> 'select',
 				'options'	=> $languages,
-			),		
+			),
 			array(
-				'name'		=> 'Niveau taal 2',
+				'name'		=> __('Niveau taal 2', 'siw'),
 				'id'		=> 'language2Skill',
 				'type'		=> 'radio_inline',
 				'options'	=> $language_skill,
 			),
 			array(
-				'name'		=> 'Taal 3',
+				'name'		=> __('Taal 3', 'siw'),
 				'id'		=> 'language3',
 				'type'		=> 'select',
 				'options'	=> $languages,
-			),		
+			),
 			array(
-				'name'		=> 'Niveau taal 3',
+				'name'		=> __('Niveau taal 3', 'siw'),
 				'id'		=> 'language3Skill',
 				'type'		=> 'radio_inline',
 				'options'	=> $language_skill,
-			),				
-			array(
-				'name'	=> 'Gegevens voor PO',
-				'desc'	=> 's.v.p. in het engels invullen',
-				'type' 	=> 'title',
-				'id'	=> 'informationForPartner'
-			),		
-			array(
-				'name'	=> 'Motivation',
-				'id' 	=> 'motivation',
-				'type'	=> 'textarea'
 			),
 			array(
-				'name'	=> 'Health issues',
-				'id' 	=> 'healthIssues',
-				'type'	=> 'textarea'
+				'name'		=> __('Gegevens voor PO', 'siw'),
+				'desc'		=> __('s.v.p. in het engels invullen', 'siw'),
+				'type' 		=> 'title',
+				'id'		=> 'informationForPartner'
 			),
 			array(
-				'name'	=> 'Volunteer experience',
-				'id' 	=> 'volunteerExperience',
-				'type'	=> 'textarea'
-			),			
-			array(
-				'name'	=> 'Together with',
-				'id' 	=> 'togetherWith',
-				'type'	=> 'text_medium'
-			),	
-			array(
-				'name'	=> 'Gegevens noodcontact',
-				'type' 	=> 'title',
-				'id'	=> 'emergencyContact'
-			),		
-			array(
-				'name'	=> 'Naam',
-				'id' 	=> 'emergencyContactName',
-				'type'	=> 'text_medium'
+				'name'		=> __('Motivation', 'siw'),
+				'id' 		=> 'motivation',
+				'type'		=> 'textarea'
 			),
 			array(
-				'name'	=> 'Telefoonnummer',
-				'id' 	=> 'emergencyContactPhone',
-				'type'	=> 'text_medium'
-			),		
+				'name'		=> __('Health issues', 'siw'),
+				'id' 		=> 'healthIssues',
+				'type'		=> 'textarea'
+			),
+			array(
+				'name'		=> __('Volunteer experience', 'siw'),
+				'id' 		=> 'volunteerExperience',
+				'type'		=> 'textarea'
+			),
+			array(
+				'name'		=> __('Together with', 'siw'),
+				'id' 		=> 'togetherWith',
+				'type'		=> 'text_medium'
+			),
+			array(
+				'name'		=> __('Gegevens noodcontact', 'siw'),
+				'type' 		=> 'title',
+				'id'		=> 'emergencyContact'
+			),
+			array(
+				'name'		=> __('Naam', 'siw'),
+				'id' 		=> 'emergencyContactName',
+				'type'		=> 'text_medium'
+			),
+			array(
+				'name'		=> __('Telefoonnummer', 'siw'),
+				'id' 		=> 'emergencyContactPhone',
+				'type'		=> 'text_medium'
+			),
 		),
 	);
 
@@ -320,56 +317,56 @@ add_filter( 'cmb_meta_boxes', 'siw_wc_project_metaboxes' ,999 );
 function siw_wc_project_metaboxes( array $meta_boxes ){
 
 	$visibility_options = array(
-		''		=> 'Automatisch',
-		'hide'	=> 'Verbergen',
+		''		=> __('Automatisch', 'siw'),
+		'hide'	=> __('Verbergen', 'siw'),
 		//'show'	=> 'Tonen',
 	);
 
 	$meta_boxes[] = array(
 		'id'			=> 'woocommerce_project_meta',
-		'title'			=> 'Extra opties',
-		'pages'			=> array( 'product' ), 
+		'title'			=> __('Extra opties', 'siw'),
+		'pages'			=> array( 'product' ),
 		'context'		=> 'normal',
 		'priority'		=> 'default',
 		'show_names'	=> true,
 		'fields'		=> array(
-			
+
 			array(
-				'name'		=> 'Zichtbaarheid',
+				'name'		=> __('Zichtbaarheid', 'siw'),
 				'id'		=> 'manual_visibility',
 				'type'		=> 'select',
 				'options'	=> $visibility_options,
 			),
 			array(
-				'name'		=> 'Opnieuw importeren',
+				'name'		=> __('Opnieuw importeren', 'siw'),
 				'id'		=> 'import_again',
 				'type'		=> 'checkbox',
-			),	
+			),
 		),
 	);
 	//verbergen
 	$sidebar = array_search('product_post_side_metabox', array_column( $meta_boxes, 'id'));
 	$meta_boxes[ $sidebar ]['pages'] = array();
-	
+
 	$video = array_search('product_post_metabox', array_column( $meta_boxes, 'id'));
-	$meta_boxes[ $video ]['pages'] = array();	
+	$meta_boxes[ $video ]['pages'] = array();
 
 	$tab_1 = array_search('kad_custom_tab_01', array_column( $meta_boxes, 'id'));
-	$meta_boxes[ $tab_1 ]['pages'] = array();	
+	$meta_boxes[ $tab_1 ]['pages'] = array();
 
 	$tab_2 = array_search('kad_custom_tab_02', array_column( $meta_boxes, 'id'));
-	$meta_boxes[ $tab_2 ]['pages'] = array();	
+	$meta_boxes[ $tab_2 ]['pages'] = array();
 
 	$tab_3 = array_search('kad_custom_tab_03', array_column( $meta_boxes, 'id'));
-	$meta_boxes[ $tab_3 ]['pages'] = array();	
-	
+	$meta_boxes[ $tab_3 ]['pages'] = array();
+
 	$subtitle_keys = array_keys( array_column($meta_boxes, 'id'), 'subtitle_metabox');
 	foreach( $subtitle_keys as $subtitle ){
 		$meta_boxes[ $subtitle ]['pages'] = array_diff( $meta_boxes[$subtitle]['pages'], array('product'));
 	}
-	
+
 	return $meta_boxes;
-}	
+}
 
 //actie 'Exporteer naar PLATO' toevoegen aan order-scherm
 add_action( 'woocommerce_order_actions', 'siw_add_order_action_export_to_plato' );
@@ -384,18 +381,39 @@ function siw_export_application_to_plato( $order ) {
 }
 
 
+//admin columns verbergen
+add_filter('manage_edit-product_columns', 'siw_product_remove_admin_columns', 10);
+function siw_product_remove_admin_columns( $columns ){
+	unset( $columns['product_type']);
+	//Yoast
+	unset( $columns['wpseo-title']);
+	unset( $columns['wpseo-metadesc']);
+	unset( $columns['wpseo-focuskw']);
+	return $columns;
+}
+
+
+//admin columns verbergen
+add_filter('manage_edit-shop_order_columns', 'siw_shop_order_remove_admin_columns', 10);
+function siw_shop_order_remove_admin_columns( $columns ){
+	unset( $columns['shipping_address']);
+	unset( $columns['customers_message']);
+	unset( $columns['order_note']);
+	return $columns;
+}
 
 //admin column voor export naar PLATO
 add_filter('manage_edit-shop_order_columns', 'siw_shop_order_admin_export_column_header', 10);
 
 function siw_shop_order_admin_export_column_header( $columns ) {
-	
+
 	$new_columns = array();
 	foreach ( $columns as $column_name => $column_info ) {
 		$new_columns[ $column_name ] = $column_info;
-		if ( 'order_status' == $column_name )
+		if ( 'order_status' == $column_name ){
 			$new_columns['exported'] = __( 'Export naar PLATO', 'siw' );
 		}
+	}
 	return $new_columns;
 }
 
@@ -403,10 +421,10 @@ add_action('manage_shop_order_posts_custom_column', 'siw_shop_order_admin_export
 function siw_shop_order_admin_export_column_value( $column_name, $post_id ) {
 	if ( 'exported' == $column_name ) {
 		$exported = get_post_meta( $post_id, '_exported_to_plato', true );
-		
+
 		//export via xml export suite
 		$exported_via_xml_suite = get_post_meta( $post_id, '_wc_customer_order_xml_export_suite_is_exported', true );
-		
+
 		if ('success' == $exported or 1 == $exported_via_xml_suite ) {
 			$dashicon = 'yes';
 		}
@@ -429,12 +447,12 @@ function siw_show_reject_project_checkbox(){
 	$post_id = get_the_ID();
 
 	//Alleen tonen bij groepsprojecten
-	if ( get_post_type( $post_id) != 'product') {
+	if ( 'product' != get_post_type( $post_id) ) {
 		return;
 	}
-	
+
 	//Alleen tonen als project ter review staat.
-	if ( get_post_status ( $post_id ) != 'draft'){
+	if ( 'draft' != get_post_status ( $post_id ) ){
 		return;
 	}
 
@@ -451,7 +469,7 @@ Verbergen van afgekeurde projecten
 */
 add_action( 'publish_product', 'siw_hide_rejected_project', 10, 2 );
 function siw_hide_rejected_project( $post_id, $post ){
-	
+
 	//TODO: is deze check nodig?
 	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
 		return;
@@ -465,7 +483,7 @@ function siw_hide_rejected_project( $post_id, $post ){
 		return;
 	}
 
-	//Afgekeurd project direct verbergen
+	//Afgekeurd project direct verbergen //TODO: meta zetten
 	if ( isset( $_POST['reject_project']) and 1 == $_POST['reject_project'] ) {
 		siw_hide_workcamp( $post_id );
 	}

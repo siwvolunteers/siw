@@ -14,11 +14,11 @@ add_filter( 'siw_ajax_allowed_actions', function($actions){
 add_action( 'siw_ajax_postcode_lookup', 'siw_postcode_lookup' );
 function siw_postcode_lookup() {
 
-	$api_key = siw_get_postcode_api_key();
-	$postcode = strtoupper(siw_strip_url($_GET['postcode']));
-	$houseNumber = siw_strip_url($_GET['housenumber']);
+	$api_key = siw_get_setting('postcode_api_key');
+	$postcode = strtoupper( siw_strip_url( $_GET['postcode'] ) );
+	$houseNumber = siw_strip_url( $_GET['housenumber'] );
 
-	$url = 'https://postcode-api.apiwise.nl/v2/addresses/?postcode=' . str_replace(' ', '', $postcode) . '&number=' . $houseNumber;
+	$url = 'https://postcode-api.apiwise.nl/v2/addresses/?postcode=' . str_replace(' ', '', $postcode ) . '&number=' . $houseNumber;
 	$args = array(
 		'timeout'		=> 10,
 		'redirection'	=> 0,
@@ -44,7 +44,7 @@ function siw_postcode_lookup() {
 function siw_strip_url( $title , $seperator = '-' ){
     $title = preg_replace( '/[^a-z0-9\s]/i' , '' , $title );
 
-    if (!empty($title) && strlen($title) <= 6)    
+    if (!empty( $title ) && strlen( $title ) <= 6)    
         return $title;
     else
         return false;

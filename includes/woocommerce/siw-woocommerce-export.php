@@ -20,8 +20,8 @@ function siw_wc_export_application_to_plato( $order_id){
 	$order = new WC_Order( $order_id );
 	
 	//PLATO webkey en url ophalen
-	$organization_webkey = siw_get_plato_organization_webkey();
-	$url = siw_get_plato_webservice_url();
+	$organization_webkey = siw_get_setting('plato_organization_webkey');
+	$url = siw_get_setting('plato_webservice_url');
 
 	if ('' == $organization_webkey or '' == $url){
 		$order->add_order_note('Instellingen voor export naar PLATO ontbreken. Neem contact op met ICT-beheer.');		
@@ -120,9 +120,9 @@ function siw_wc_export_application_to_plato( $order_id){
 
 function siw_wc_get_application_fields_for_xml( $order ) {
 
-	//ophalen gegevens
-	$outgoing_placements_officer = siw_get_outgoing_placements_officer();
-	$outgoing_placements_email = siw_get_outgoing_placements_email();
+	//ophalen gegevens  
+	$outgoing_placements_officer = siw_get_setting('plato_export_outgoing_placements_name');
+	$outgoing_placements_email = siw_get_setting('plato_export_outgoing_placements_email');
 	
 	$firstname			= $order->billing_first_name;
 	$lastname			= $order->billing_last_name;

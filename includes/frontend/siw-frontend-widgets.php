@@ -19,14 +19,14 @@ class siw_contact_information extends WP_Widget {
 			'class'			=> 'siw_contact_information',
 			'description'	=> __( 'Contactinformatie', 'siw' )
 		);
- 
+
 		parent::__construct(
 			'siw_contact_information',
 			__( 'SIW: Contactinformatie', 'siw' ),
 			$widget_ops
 		);
 	}
- 
+
 	public function form( $instance ) {
 		$widget_defaults = array(
 			'title'			=> 'Contact',
@@ -36,30 +36,30 @@ class siw_contact_information extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Titel', 'siw' ); ?></label>
 			<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" class="widefat" value="<?php echo esc_attr( $instance['title'] ); ?>">
-		</p>	
+		</p>
 		<?php
 	}
-	
+
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = $new_instance['title'];
 		return $instance;
 	}
- 
- 
+
+
     public function widget( $args, $instance ) {
 		extract( $args );
 		$title = apply_filters( 'widget_title', $instance['title'] );
 
 		//ophalen gegevens
-		$name = siw_get_general_information('naam');;
-		$address = 'Willemstraat 7';
-		$postal_code = '3511 RJ';
-		$city = 'Utrecht';
-		$email = sanitize_email( siw_get_general_information('email') );
-		$phone = siw_get_general_information('telefoon');
-		
-		
+		$name = SIW_NAME;
+		$address = SIW_ADDRESS;
+		$postal_code = SIW_POSTAL_CODE;
+		$city = SIW_CITY;
+		$email = SIW_EMAIL;
+		$phone = SIW_PHONE;
+
+
 		echo $before_widget;
 		if ( $title ) {
 			echo $before_title . $title . $after_title;
@@ -72,11 +72,11 @@ class siw_contact_information extends WP_Widget {
 			</p>
 			<p class="tel fixedtel"><i class="kt-icon-phone3"></i>&nbsp;<?php echo esc_html( $phone );?></p>
 			<p><a href="mailto:<?php echo antispambot( $email );?>" class="email"><i class="kt-icon-envelop"></i>&nbsp;<?php echo antispambot( $email );?></a></p>
-		</div>	
+		</div>
 		<?php
 		echo $after_widget;
     }
-     
+
 }
 
 
@@ -92,37 +92,37 @@ class siw_testimonial_quote extends WP_Widget {
 			'class'			=> 'siw_testimonial_quote',
 			'description'	=> __( 'Toont een willekeurige quote van deelnemer', 'siw' )
 		);
- 
+
 		parent::__construct(
-			'siw_testimonial_quote',  
+			'siw_testimonial_quote',
 			__( 'SIW: Quote van deelnemer', 'siw' ),
 			$widget_ops
 		);
 	}
- 
+
 	public function form( $instance ) {
 		$widget_defaults = array(
-			'title'			=> 'Ervaringen van deelnemers',
+			'title'			=> __('Ervaringen van deelnemers', 'siw'),
 			'cat'			=> '',
 		);
 		$instance  = wp_parse_args( (array) $instance, $widget_defaults );
-		
+
 		if (isset($instance['cat'])){
 			$cat = esc_attr($instance['cat']);
 		}
 		else{
 			$cat = '';
 		}
-		
+
 		$categories= get_terms('testimonial-group');
 		$category_options = array();
-		$category_options[] = '<option value="">Alle</option>';
+		$category_options[] = '<option value="">' . __('Alle', 'siw') . '</option>';
 		foreach ($categories as $category) {
 			if ( $cat == $category->slug) { $selected=' selected="selected"';} else { $selected=""; }
 			$category_options[] = '<option value="' . $category->slug .'"' . $selected . '>' . $category->name . '</option>';
 		}
-				
-		
+
+
 
 		?>
 <p>
@@ -144,14 +144,14 @@ class siw_testimonial_quote extends WP_Widget {
 
     public function widget( $args, $instance ) {
 		extract( $args );
-		
-		$query = new WP_Query( array( 
-			'post_type'				=> 'testimonial', 
-			'testimonial-group'		=> $instance['cat'], 
-			'no_found_rows'			=> true, 
+
+		$query = new WP_Query( array(
+			'post_type'				=> 'testimonial',
+			'testimonial-group'		=> $instance['cat'],
+			'no_found_rows'			=> true,
 			'posts_per_page'		=> 1,
-			'orderby'				=> 'rand', 
-			'post_status'			=> 'publish', 
+			'orderby'				=> 'rand',
+			'post_status'			=> 'publish',
 			'ignore_sticky_posts'	=> true )
 		);
 
@@ -161,7 +161,7 @@ class siw_testimonial_quote extends WP_Widget {
 			echo '<div class="siw_quote_widget">';
 			if ( $title ) {
 				echo $before_title . $title . $after_title;
-			}	
+			}
 			while ($query->have_posts()) : $query->the_post();
 			global $post;
 			$quote = get_the_content();
@@ -182,9 +182,9 @@ class siw_testimonial_quote extends WP_Widget {
 		<?php
 		echo '</div>';
 		echo $after_widget;
-		
+
 		wp_reset_postdata();
 		}
 	}
-	
+
 }

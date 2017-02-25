@@ -40,7 +40,6 @@ function siw_cleanup_terms(){
 	//ongebruikte terms verwijderen
 	$taxonomies[] = 'pa_maand';
 	$taxonomies[] = 'pa_aantal-vrijwilligers';
-	$taxonomies[] = 'pa_beschikbare-plaatsen';
 	$taxonomies[] = 'pa_leeftijd';
 	$taxonomies[] = 'pa_lokale-bijdrage';
 	$taxonomies[] = 'pa_projectcode';
