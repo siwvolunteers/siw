@@ -41,7 +41,7 @@ function siw_get_general_information ( $type ){
 //ip whitelist
 function siw_get_ip_whitelist(){
 	for ($x = 1 ; $x <= SIW_IP_WHITELIST_SIZE; $x++) {
-		$ip_whitelist[]= siw_get_setting("whitelist_ip_{$x}");
+		$ip_whitelist[] = siw_get_setting("whitelist_ip_{$x}");
 	}
 	return $ip_whitelist;
 }
@@ -538,6 +538,51 @@ function siw_get_array( $array ){
 				'SWE'	=> 'zweeds'
 			);
 			return $project_languages;
+
+			case 'project_currencies':
+				$project_currencies = array();
+				$project_currencies['EUR'] = array(
+					'symbol'	=> '&euro;',
+					'name'		=> 'Euro',
+				);
+				$project_currencies['GBP'] = array(
+					'symbol'	=> '&pound;',
+					'name'		=> 'Britse Pond',
+				);
+				$project_currencies['IDR'] = array(
+					'symbol'	=> 'Rp',
+					'name'		=> 'Indonesische roepia',
+				);
+				$project_currencies['INR'] = array(
+					'symbol'	=> '&#x20B9;',
+					'name'		=> 'Indiase roepie',
+				);
+				$project_currencies['KES'] = array(
+					'symbol'	=> 'Ksh',
+					'name'		=> 'Keniaanse shilling',
+				);
+				$project_currencies['THB'] = array(
+					'symbol'	=> '&#x0E3F;',
+					'name'		=> 'Thaise baht',
+				);
+				$project_currencies['USD'] = array(
+					'symbol'	=> '$',
+					'name'		=> 'Amerikaanse dollar',
+				);
+				$project_currencies['VND'] = array(
+					'symbol'	=> '&#x20ab;',
+					'name'		=> 'Vietnamese dong',
+				);
+				$project_currencies['JPY'] = array(
+					'symbol'	=> '&yen;',
+					'name'		=> 'Japanse yen',
+				);
+				$project_currencies['MXN'] = array(
+					'symbol'	=> '$',
+					'name'		=> 'Mexicaanse peso',
+				);
+
+			return $project_currencies;
 
 			case 'project_countries':
 				$project_countries = array();

@@ -94,11 +94,18 @@ function siw_wc_is_country_allowed( $country_code ){
 
 
 function siw_wc_local_fee( $local_fee_amount, $local_fee_currency ){
+	$project_currencies = siw_get_array('project_currencies');
 	$local_fee_amount = (float) $local_fee_amount;
 	$local_fee = '';
+	$local_fee_currency_symbol = $local_fee_currency;
+	$local_fee_currency_name = '';
+	if ( isset( $project_currencies[ $local_fee_currency ] ) ){
+		$local_fee_currency_symbol = $project_currencies[ $local_fee_currency ]['symbol'];
+		$local_fee_currency_name = ' (' . $project_currencies[ $local_fee_currency ]['name'] . ')';
+	}
 	if ($local_fee_amount > 0){
-		$local_fee = $local_fee_currency . " " . $local_fee_amount;
-	}	
+		$local_fee = $local_fee_currency_symbol . ' ' . $local_fee_amount . $local_fee_currency_name;
+	}
 	return $local_fee;
 }
 
