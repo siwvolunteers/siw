@@ -1,11 +1,10 @@
 /*!
 Theme Name: SIW
-Theme URI: http://www.siw.nl
+Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
 Version: 2.4
-GitHub Theme URI: https://github.com/siwvolunteers/siw
 */
 /*
 Styling voor agenda
@@ -873,18 +872,16 @@ div.product .woocommerce-tabs .panel-default {
 div.product .woocommerce-tabs .panel-default {
   padding: 0px;
 }
-/*prijsrange verbergen*/
-div.product_details_case .price {
-  display: none !important;
+.woocommerce-variation-description {
+  font-size: 12px;
+  color: #555;
 }
 span.price span.amount {
   color: #555;
   font-size: 20px;
 }
-/*resetlink voor tarieven verbergen*/
-a.reset_variations,
-p.price {
-  display: none !important;
+.local-fee {
+  color: #555;
 }
 /* tarief-knoppen wit i.p.v. themakleur*/
 .variations .kad_radio_variations label.selectedValue {

@@ -1,12 +1,12 @@
 <?php
 /*
-(c)2015-2016 SIW Internationale Vrijwilligersprojecten
+(c)2015-2017 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if (!function_exists('siw_get_setting')){
+if ( ! function_exists('siw_get_setting') ) {
 	function siw_get_setting( $setting ){
 		global $siw;
 		$value = '';
@@ -18,37 +18,8 @@ if (!function_exists('siw_get_setting')){
 }
 
 
-function siw_get_general_information ( $type ){
-	switch ( $type ){
-		case 'iban':
-			$iban = SIW_IBAN;
-			return $iban;
-		case 'kvk':
-			$kvk = SIW_KVK;
-			return $kvk;
-		case 'telefoon':
-			$phone = SIW_PHONE;
-			return $phone;
-		case 'email':
-			$email = SIW_EMAIL;
-			return $email;
-		case 'naam':
-			$naam = SIW_NAME;
-			return $naam;
-	}
-}
-
-//ip whitelist
-function siw_get_ip_whitelist(){
-	for ($x = 1 ; $x <= SIW_IP_WHITELIST_SIZE; $x++) {
-		$ip_whitelist[] = siw_get_setting("whitelist_ip_{$x}");
-	}
-	return $ip_whitelist;
-}
-
-
 //formulieren
-function siw_get_vfb_field_id( $type ){
+function siw_get_vfb_field_id( $type ) {
 	switch ($type) {
 		case 'community_day_datums':
 		$field_id = get_option('siw_community_day_vfb_dates_field');
@@ -57,7 +28,7 @@ function siw_get_vfb_field_id( $type ){
 }
 
 
-function siw_get_vfb_form_id( $type ){
+function siw_get_vfb_form_id( $type ) {
 	switch ($type) {
 		case 'community_day':
 			$form_id = get_option('siw_forms_community_day');
@@ -71,7 +42,7 @@ function siw_get_vfb_form_id( $type ){
 	}
 }
 
-function siw_get_cf7_form_id( $type ){
+function siw_get_cf7_form_id( $type ) {
 	switch ($type) {
 		case 'algemeen':
 			$form_id = get_option('siw_forms_algemeen');
@@ -85,182 +56,90 @@ function siw_get_cf7_form_id( $type ){
 	}
 }
 
-function siw_get_cron_time(){
-	$cron_time = '02:00';
-	return $cron_time;
-}
 
-function siw_get_cache_rebuild_time(){
-	$cache_rebuild_time = '04:00';
-	return $cache_rebuild_time;
-}
-
-function siw_get_db_backup_time(){
-	$db_backup_time = '03:00';
-	return $db_backup_time;
-}
-
-function siw_get_files_backup_time(){
-	$files_backup_time = '05:00';
-	return $files_backup_time;
-}
-
-//EVS
-function siw_get_evs_next_deadline(){
-	for ($x = 1 ; $x <= SIW_NUMBER_OF_EVS_DEADLINES; $x++) {
-		$evs_deadlines[]= siw_get_setting("evs_deadline_{$x}");
-	}
-	asort($evs_deadlines);
-	$weeks = siw_get_setting('evs_min_weeks_before_deadline');
-	$limit = date("Y-m-d", time() + ( $weeks * WEEK_IN_SECONDS ) );
-
-	$evs_next_deadline = false;
-	foreach( $evs_deadlines as $evs_deadline => $evs_deadline_date ) {
-		if ( $evs_deadline_date > $limit ){
-			$evs_next_deadline = $evs_deadline_date;
-			break;
-		}
-	}
-	return $evs_next_deadline;
-}
-
-function siw_get_next_community_day(){
-	for ($x = 1 ; $x <= SIW_NUMBER_OF_INFO_DAYS; $x++) {
-		$community_days[]= siw_get_setting("info_day_{$x}");
-	}
-
-	asort( $community_days );
-	$today = date("Y-m-d");
-
-	$next_community_day = false;
-	foreach( $community_days as $community_day => $community_day_date ) {
-		if ( $community_day_date > $today ){
-			$next_community_day = $community_day_date;
-			break;
-		}
-	}
-	return $next_community_day;
-}
-
-
-
-//tarieven
-function siw_get_fee_op_maat( $tariff ){
-	switch ( $tariff ) {
-		case 'student':
-			$fee = SIW_OP_MAAT_FEE_STUDENT;
-			return $fee;
-
-		case 'regulier':
-			$fee = SIW_OP_MAAT_FEE_REGULAR;
-			return $fee;
+//Dummy functies
+if ( ! function_exists('siw_get_job_data') ) {
+	function siw_get_job_data () {
+		return;
 	}
 }
-
-function siw_get_fee_workcamp( $tariff ){
-	switch ( $tariff ) {
-		case 'student':
-			$fee = SIW_WORKCAMP_FEE_STUDENT;
-			return $fee;
-
-		case 'regulier':
-			$fee = SIW_WORKCAMP_FEE_REGULAR;
-			return $fee;
+if ( ! function_exists('siw_get_event_data') ) {
+	function siw_get_event_data () {
+		return;
 	}
 }
-
-function siw_get_discount_workcamp( $type ){
-	switch ( $type ){
-		case 'second':
-			$discount = SIW_DISCOUNT_SECOND_PROJECT;
-			return $discount;
-		case 'third':
-			$discount = SIW_DISCOUNT_THIRD_PROJECT;
-			return $discount;
-	}
-}
-
-function siw_get_evs_deposit(){
-	$evs_deposit = SIW_EVS_DEPOSIT;
-	return $evs_deposit;
-}
-
 
 //datum
-function siw_get_date_in_text( $date, $year = true ){
-	$date_array = date_parse( $date );
-	$month_array = siw_get_array('month_to_text');
-	$day = $date_array['day'];
-	$month = $month_array[ $date_array['month'] ];
-	$date_in_text = $day . ' ' . $month;
-	if ($year){
-		$year = $date_array['year'];
-		$date_in_text .=  ' ' . $year;
-	}
-	return $date_in_text;
+if ( ! function_exists('siw_get_date_in_text')) {
+	function siw_get_date_in_text( $date, $year = true ) {
+		$date_array = date_parse( $date );
+		$month_array = siw_get_array('month_to_text');
+		$day = $date_array['day'];
+		$month = $month_array[ $date_array['month'] ];
+		$date_in_text = $day . ' ' . $month;
+		if ( $year ) {
+			$year = $date_array['year'];
+			$date_in_text .=  ' ' . $year;
+		}
+		return $date_in_text;
 
+	}
 }
 
-function siw_get_date_range_in_text ( $date_start, $date_end, $year = true ){
-	//als beide datums gelijk zijn gebruik dan siw_get_date_in_text
-	if ( $date_start == $date_end){
-		$date_range_in_text = siw_get_date_in_text( $date_start, $year );
+if ( ! function_exists('siw_get_date_range_in_text')) {
+	function siw_get_date_range_in_text ( $date_start, $date_end, $year = true ) {
+		//als beide datums gelijk zijn gebruik dan siw_get_date_in_text
+		if ( $date_start == $date_end){
+			$date_range_in_text = siw_get_date_in_text( $date_start, $year );
+		}
+		else{
+			$date_start_array = date_parse( $date_start );
+			$date_end_array = date_parse( $date_end );
+			$month_array = siw_get_array('month_to_text');
+
+			$date_range_in_text = $date_start_array['day'];
+			if ( $date_start_array['month'] != $date_end_array['month']){
+				$date_range_in_text .= ' ' . $month_array[ $date_start_array['month'] ];
+			}
+			if ( ($date_start_array['year'] != $date_end_array['year'] ) and $year ){
+				$date_range_in_text .= ' ' . $date_start_array['year'];
+			}
+			$date_range_in_text .= ' t/m ';
+			$date_range_in_text .= $date_end_array['day'];
+			$date_range_in_text .= ' ' . $month_array[ $date_end_array['month'] ];
+			if ( $year ){
+				$date_range_in_text .= ' ' . $date_end_array['year'];
+			}
+
+		}
+		return $date_range_in_text;
+
 	}
-	else{
-		$date_start_array = date_parse( $date_start );
-		$date_end_array = date_parse( $date_end );
+}
+
+
+if ( ! function_exists('siw_wc_get_month_name_from_slug') ) {
+	function siw_wc_get_month_name_from_slug( $slug ) {
+		$year = substr( $slug, 0, 4);
+		$month = substr( $slug, 4, 2);
+		$month = ltrim( $month, '0');
+
+		$current_year = date('Y');
+
 		$month_array = siw_get_array('month_to_text');
 
-		$date_range_in_text = $date_start_array['day'];
-		if ( $date_start_array['month'] != $date_end_array['month']){
-			$date_range_in_text .= ' ' . $month_array[ $date_start_array['month'] ];
+		$month_name = ucfirst( $month_array[ $month ] );
+		if ( $year != $current_year ) {
+			$month_name .= ' ' . $year;
 		}
-		if ( ($date_start_array['year'] != $date_end_array['year'] ) and $year ){
-			$date_range_in_text .= ' ' . $date_start_array['year'];
-		}
-		$date_range_in_text .= ' t/m ';
-		$date_range_in_text .= $date_end_array['day'];
-		$date_range_in_text .= ' ' . $month_array[ $date_end_array['month'] ];
-		if ( $year ){
-			$date_range_in_text .= ' ' . $date_end_array['year'];
-		}
-
+		return $month_name;
 	}
-	return $date_range_in_text;
-
 }
 
-//PLATO import
-function siw_wc_get_tariff_array(){
-	$tariff_array = array(
-		'regulier' => number_format( SIW_WORKCAMP_FEE_REGULAR, 2),
-		'student' => number_format( SIW_WORKCAMP_FEE_STUDENT, 2)
-	);
-	return $tariff_array;
-}
+function siw_get_array( $array ) {
 
-
-function siw_wc_get_month_name_from_slug( $slug ){
-	$year = substr( $slug, 0, 4);
-	$month = substr( $slug, 4, 2);
-	$month = ltrim( $month, '0');
-
-	$current_year = date('Y');
-
-	$month_array = siw_get_array('month_to_text');
-
-	$month_name = ucfirst( $month_array[ $month ]);
-	if ($year != $current_year){
-		$month_name .= ' ' . $year;
-	}
-	return $month_name;
-}
-
-
-function siw_get_array( $array ){
-
-    switch ($array) {
-        case  'gender':
+	switch ( $array ) {
+		case  'gender':
 			$gender = array(
 				'M' => 'Man',
 				'F' => 'Vrouw',
@@ -628,6 +507,12 @@ function siw_get_array( $array ){
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
+				$project_countries['BGR'] = array(
+					'slug'		=> 'bulgarije',
+					'name'		=> 'Bulgarije',
+					'continent'	=> 'europa',
+					'allowed'	=> 'yes',
+				);
 				$project_countries['BLR'] = array(
 					'slug'		=> 'wit-rusland',
 					'name'		=> 'Wit-Rusland',
@@ -723,6 +608,12 @@ function siw_get_array( $array ){
 					'name'		=> 'Griekenland',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
+				);
+				$project_countries['GRL'] = array(
+					'slug'		=> 'groenland',
+					'name'		=> 'Groenland',
+					'continent'	=> 'noord-amerika',
+					'allowed'	=> 'no',
 				);
 				$project_countries['HKG'] = array(
 					'slug'		=> 'hong-kong',
@@ -892,6 +783,12 @@ function siw_get_array( $array ){
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
+				$project_countries['SEN'] = array(
+					'slug'		=> 'senegal',
+					'name'		=> 'Senegal',
+					'continent'	=> 'afrika-midden-oosten',
+					'allowed'	=> 'no',
+				);
 				$project_countries['SRB'] = array(
 					'slug'		=> 'servie',
 					'name'		=> 'Servië',
@@ -907,6 +804,12 @@ function siw_get_array( $array ){
 				$project_countries['SVN'] = array(
 					'slug'		=> 'slovenie',
 					'name'		=> 'Slovenië',
+					'continent'	=> 'europa',
+					'allowed'	=> 'yes',
+				);
+				$project_countries['SWE'] = array(
+					'slug'		=> 'zweden',
+					'name'		=> 'Zweden',
 					'continent'	=> 'europa',
 					'allowed'	=> 'yes',
 				);
@@ -970,6 +873,13 @@ function siw_get_array( $array ){
 					'continent'	=> 'azie',
 					'allowed'	=> 'yes',
 				);
+				$project_countries['ZAF'] = array(
+					'slug'		=> 'zuid-afrika',
+					'name'		=> 'Zuid-Afrika',
+					'continent'	=> 'afrika-midden-oosten',
+					'allowed'	=> 'yes',
+				);
+
 				return $project_countries;
 	}
 }

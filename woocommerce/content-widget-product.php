@@ -19,13 +19,15 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-global $product; ?>
+global $product;
+$start_date = $product->get_attribute('startdatum');
+$end_date = $product->get_attribute('einddatum');
+$duration = siw_get_date_range_in_text($start_date, $end_date, false);
+ ?>
 <li>
 	<a href="<?php echo esc_url( get_permalink( $product->id ) ); ?>" title="<?php echo esc_attr( $product->get_title() ); ?>">
 		<?php echo $product->get_image(); ?>
 		<span class="product-title"><?php echo $product->get_title(); ?></span>
 	</a>
-	<?php 	$duration=get_post_meta($product->id, 'projectduur', true);
-	echo '<p>'.$duration.'</p>';?>
+	<p><?php esc_html( $duration );?></p>
 </li>

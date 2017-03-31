@@ -6,10 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-//update alle mailtemplates na theme-update
-add_action('wppusher_theme_was_updated', 'siw_update_all_mail_templates', 10, 1);
-
-function siw_update_all_mail_templates(){
+/*
+ * Update alle mailtemplates na theme-update
+ */
+add_action('wppusher_theme_was_updated', function () {
 	//vfb templates
 	siw_update_vfb_mail_template('evs');
 	siw_update_vfb_mail_template('op_maat');
@@ -22,10 +22,15 @@ function siw_update_all_mail_templates(){
 
 	//mailpoet bevestiging
 	siw_update_mailpoet_mail_template();
-}
+}, 10, 1);
 
-//update vfb mailtemplates
-
+/**
+ * Update VFB Pro e-mailtemplate
+ *
+ * @param string $form formulierslug
+ *
+ * @return void
+ */
 function siw_update_vfb_mail_template( $form ){
 
 	$vfb_form_id = siw_get_vfb_form_id( $form );
@@ -67,9 +72,12 @@ function siw_update_vfb_mail_template( $form ){
 }
 
 
-//update mailpoet template
-
-function siw_update_mailpoet_mail_template(){
+/**
+ * Update Mailpoet e-mailtemplate bevestingsmail
+ *
+ * @return void
+ */
+function siw_update_mailpoet_mail_template() {
 	//haal template op
 	global $wp_filesystem;
 	$directory = $wp_filesystem->wp_themes_dir('siw');
@@ -93,9 +101,14 @@ function siw_update_mailpoet_mail_template(){
 }
 
 
-//update cf7 emails
-
-function siw_update_cf7_mail_template( $form ){
+/**
+ * Update Contact Form 7 e-mailtemplate
+ *
+ * @param string $form formulierslug
+ *
+ * @return void
+ */
+function siw_update_cf7_mail_template( $form ) {
 
 	//haal mail-templates op
 	global $wp_filesystem;
@@ -126,12 +139,10 @@ function siw_update_cf7_mail_template( $form ){
 }
 
 
-
-
-/*Bepaal ondertekening voor contact-mails*/
-add_filter( 'wpcf7_special_mail_tags', 'siw_cf7_set_mail_signature', 10, 3 );
-
-function siw_cf7_set_mail_signature( $output, $name, $html ) {
+/*
+ * Bepaal ondertekening voor CF7 e-mails
+ */
+add_filter( 'wpcf7_special_mail_tags', function ( $output, $name, $html ) {
 	$name = preg_replace( '/^wpcf7\./', '_', $name );
 
 	$submission = WPCF7_Submission::get_instance();
@@ -164,12 +175,13 @@ function siw_cf7_set_mail_signature( $output, $name, $html ) {
 		return $signature;
 	}
 	return $output;
-}
+}, 10, 3 );
 
-//siteurl voor gebruik in mailtemplates
-add_filter( 'wpcf7_special_mail_tags', 'siw_cf7_set_site_url', 10, 3 );
 
-function siw_cf7_set_site_url( $output, $name, $html ) {
+/*
+ * Vervang site-url in CF7 e-mails
+ */
+add_filter( 'wpcf7_special_mail_tags', function ( $output, $name, $html ) {
 	$name = preg_replace( '/^wpcf7\./', '_', $name );
 	$submission = WPCF7_Submission::get_instance();
 
@@ -181,4 +193,4 @@ function siw_cf7_set_site_url( $output, $name, $html ) {
 		return $site_url;
 	}
 	return $output;
-}
+}, 10, 3 );
