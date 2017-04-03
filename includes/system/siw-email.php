@@ -163,7 +163,7 @@ add_filter( 'wpcf7_special_mail_tags', function ( $output, $name, $html ) {
 		return $signature;
 	}
 	if ('_signature_np_functie' == $name) {
-		$signature = siw_get_setting('enquiry_camp_leader_signature_function');
+		$signature = siw_get_setting('enquiry_camp_leader_signature_title');
 		return $signature;
 	}
 	if ('_signature_project' == $name) {
@@ -171,7 +171,7 @@ add_filter( 'wpcf7_special_mail_tags', function ( $output, $name, $html ) {
 		return $signature;
 	}
 	if ('_signature_project_functie' == $name) {
-		$signature = siw_get_setting('enquiry_workcamp_signature_function');
+		$signature = siw_get_setting('enquiry_workcamp_signature_title');
 		return $signature;
 	}
 	return $output;
