@@ -5,23 +5,16 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-function siw_settings_show_configuration_section( $opt_name ){
-	/*
-	Velden
-	*/
-	//E-mailadressen
+function siw_settings_show_configuration_section( $opt_name ) {
+	/* Velden*/
 	$email_fields[] = array(
 		'id'			=> 'coordinator_op_maat_email',
 		'type'			=> 'text',
 		'title'			=> __( 'Coördinator op maat', 'siw' ),
 		'validate'		=> 'email',
 	);
-		
 
-	
-	/*
-	Secties
-	*/	
+	/* Secties */
 	Redux::setSection( $opt_name, array(
 		'title'			=> __( 'Configuratie', 'siw' ),
 		'id'			=> 'configuration',
@@ -34,6 +27,4 @@ function siw_settings_show_configuration_section( $opt_name ){
 		'subsection'	=> true,
 		'fields'		=> $email_fields,
 	));
-
-
 }

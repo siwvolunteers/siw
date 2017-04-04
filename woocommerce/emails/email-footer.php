@@ -30,10 +30,8 @@ $site_url = site_url('', 'http' );
 									</tr>
 									<tr>
 										<td width="10%">&nbsp;</td>
-										<td width="auto" align="center">
-											<font style="font-family:'Open Sans', Verdana, normal; color:#666; font-size:11px; font-weight:bold;">
-												SIW Internationale Vrijwilligersprojecten | 030-2317721 | <a href= "mailto:info@siw.nl" style="color:#666; text-decoration:none; font-weight:bold">info@siw.nl</a>
-											</font>
+										<td width="auto" align="center" style="font-family:'Open Sans', Verdana, normal; color:#666; font-size:0.75em; font-weight:bold;">
+											SIW Internationale Vrijwilligersprojecten | 030-2317721 | <a href= "mailto:info@siw.nl" style="color:#666; text-decoration:none; font-weight:bold">info@siw.nl</a>
 										</td>
 										<td width="10%">&nbsp;</td>
 									</tr>
@@ -41,7 +39,7 @@ $site_url = site_url('', 'http' );
 							</td>
 						</tr>
 						<tr>
-							<td height="30">								
+							<td height="30">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td width="40%">&nbsp;</td>

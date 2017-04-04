@@ -1,31 +1,36 @@
-<?php 
+<?php
 /*
-(c)2015 SIW Internationale Vrijwilligersprojecten
+(c)2015-2017 SIW Internationale Vrijwilligersprojecten
 */
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
-//update alle mailtemplates na theme-update
-add_action('wppusher_theme_was_updated', 'siw_update_all_mail_templates', 10, 1);
-
-function siw_update_all_mail_templates(){
+/*
+ * Update alle mailtemplates na theme-update
+ */
+add_action('wppusher_theme_was_updated', function () {
 	//vfb templates
 	siw_update_vfb_mail_template('evs');
 	siw_update_vfb_mail_template('op_maat');
 	siw_update_vfb_mail_template('community_day');
-	
+
 	//cf7 templates
 	siw_update_cf7_mail_template('algemeen');
 	siw_update_cf7_mail_template('project');
 	siw_update_cf7_mail_template('begeleider');
-	
+
 	//mailpoet bevestiging
 	siw_update_mailpoet_mail_template();
-}
+}, 10, 1);
 
-//update vfb mailtemplates
-
+/**
+ * Update VFB Pro e-mailtemplate
+ *
+ * @param string $form formulierslug
+ *
+ * @return void
+ */
 function siw_update_vfb_mail_template( $form ){
 
 	$vfb_form_id = siw_get_vfb_form_id( $form );
@@ -35,10 +40,19 @@ function siw_update_vfb_mail_template( $form ){
 	$directory = $wp_filesystem->wp_themes_dir('siw');
 	$filename =  $directory . "/siw/assets/html/mail/vfb_{$form}.html";
 	$template = $wp_filesystem->get_contents( $filename );
-		
+
 	//ondertekening naam
-	$signature = siw_get_mail_signature_name("aanmelding_{$form}");
-	$template = str_replace("[_signature_{$form}]", $signature, $template );
+	$signature_prefixes = array(
+		'evs' 			=> 'evs',
+		'op_maat' 		=> 'op_maat',
+		'community_day'	=> 'info_day',
+	);
+	$signature_prefix = $signature_prefixes[ $form ];
+
+	$signature_name = siw_get_setting("{$signature_prefix}_application_signature_name");
+	$signature_title = siw_get_setting("{$signature_prefix}_application_signature_title");
+	$template = str_replace("[_signature_{$form}_name]", $signature_name, $template );
+	$template = str_replace("[_signature_{$form}_title]", $signature_title, $template );
 
 	//update template
 	global $wpdb;
@@ -58,16 +72,19 @@ function siw_update_vfb_mail_template( $form ){
 }
 
 
-//update mailpoet template
-
-function siw_update_mailpoet_mail_template(){
+/**
+ * Update Mailpoet e-mailtemplate bevestingsmail
+ *
+ * @return void
+ */
+function siw_update_mailpoet_mail_template() {
 	//haal template op
 	global $wp_filesystem;
 	$directory = $wp_filesystem->wp_themes_dir('siw');
 	$filename =  $directory . '/siw/assets/html/mail/mailpoet.html';
 	$template = $wp_filesystem->get_contents( $filename );
 	$template = str_replace(array("\n\r", "\r", "\n"), '', $template );
-	
+
 	//update template
 	global $wpdb;
 	if (!isset( $wpdb->wysija_email )) {
@@ -84,33 +101,30 @@ function siw_update_mailpoet_mail_template(){
 }
 
 
-//update cf7 emails
-
-function siw_update_cf7_mail_template( $form ){
-
-	$cf7_form_titles = array(
-		'algemeen' 		=> 'Contactformulier algemeen',
-		'project' 		=> 'Contactformulier product',
-		'begeleider'	=> 'Projectbegeleider',
-	);
+/**
+ * Update Contact Form 7 e-mailtemplate
+ *
+ * @param string $form formulierslug
+ *
+ * @return void
+ */
+function siw_update_cf7_mail_template( $form ) {
 
 	//haal mail-templates op
 	global $wp_filesystem;
 	$directory = $wp_filesystem->wp_themes_dir('siw');
-	
+
 	//notificatie
 	$filename_confirmation =  $directory."/siw/assets/html/mail/cf7_{$form}_bevestiging.html";
 	$template_confirmation = $wp_filesystem->get_contents( $filename_confirmation );
-	
+
 	//bevestiging
 	$filename_notification =  $directory."/siw/assets/html/mail/cf7_{$form}_notificatie.html";
 	$template_notification = $wp_filesystem->get_contents( $filename_notification );
 
 	//zoek formulier
-	global $wpdb;
-	$post_id_query = "SELECT ID from $wpdb->posts WHERE $wpdb->posts.post_title = %s AND $wpdb->posts.post_type = 'wpcf7_contact_form'";
-	$post_id = $wpdb->get_var($wpdb->prepare( $post_id_query, $cf7_form_titles[$form]));
-	
+	$post_id = siw_get_cf7_form_id( $form );
+
 	//update templates
 	global $post;
 	//notificatie
@@ -125,12 +139,10 @@ function siw_update_cf7_mail_template( $form ){
 }
 
 
-
-
-/*Bepaal ondertekening voor contact-mails*/
-add_filter( 'wpcf7_special_mail_tags', 'siw_cf7_set_mail_signature', 10, 3 );
-
-function siw_cf7_set_mail_signature( $output, $name, $html ) {
+/*
+ * Bepaal ondertekening voor CF7 e-mails
+ */
+add_filter( 'wpcf7_special_mail_tags', function ( $output, $name, $html ) {
 	$name = preg_replace( '/^wpcf7\./', '_', $name );
 
 	$submission = WPCF7_Submission::get_instance();
@@ -139,25 +151,37 @@ function siw_cf7_set_mail_signature( $output, $name, $html ) {
 		return $output;
 	}
 	if ('_signature_algemeen' == $name) {
-		$signature = siw_get_mail_signature_name('contact_algemeen');
+		$signature = siw_get_setting('enquiry_general_signature_name');
+		return $signature;
+	}
+	if ('_signature_algemeen_functie' == $name) {
+		$signature = siw_get_setting('enquiry_general_signature_title');
 		return $signature;
 	}
 	if ('_signature_np' == $name) {
-		$signature = siw_get_mail_signature_name('contact_np');
+		$signature = siw_get_setting('enquiry_camp_leader_signature_name');
+		return $signature;
+	}
+	if ('_signature_np_functie' == $name) {
+		$signature = siw_get_setting('enquiry_camp_leader_signature_title');
 		return $signature;
 	}
 	if ('_signature_project' == $name) {
-		$signature = siw_get_mail_signature_name('contact_project');
+		$signature = siw_get_setting('enquiry_workcamp_signature_name');
 		return $signature;
 	}
-	
+	if ('_signature_project_functie' == $name) {
+		$signature = siw_get_setting('enquiry_workcamp_signature_title');
+		return $signature;
+	}
 	return $output;
-}
+}, 10, 3 );
 
-//siteurl voor gebruik in mailtemplates
-add_filter( 'wpcf7_special_mail_tags', 'siw_cf7_set_site_url', 10, 3 );
 
-function siw_cf7_set_site_url( $output, $name, $html ) {
+/*
+ * Vervang site-url in CF7 e-mails
+ */
+add_filter( 'wpcf7_special_mail_tags', function ( $output, $name, $html ) {
 	$name = preg_replace( '/^wpcf7\./', '_', $name );
 	$submission = WPCF7_Submission::get_instance();
 
@@ -169,4 +193,4 @@ function siw_cf7_set_site_url( $output, $name, $html ) {
 		return $site_url;
 	}
 	return $output;
-}
+}, 10, 3 );

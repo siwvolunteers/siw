@@ -36,28 +36,17 @@ $args = array(
 );
 
 
-/*
-includes voor secties
-*/
+/* Includes voor secties */
 
 require_once('siw-settings-configuration.php');
 require_once('siw-settings-countries.php');
 
+Redux::setArgs( $opt_name, $args );
 
 
+/* Bepaal volgorde van secties */
 
-
-	Redux::setArgs( $opt_name, $args );
-    
-
-
-
-/*
-Bepaal volgorde van secties
-*/	
-
-	/*Configuratie*/
-	siw_settings_show_configuration_section( $opt_name );
-	/*Landen*/
-	siw_settings_show_countries_section( $opt_name );
-
+/*Configuratie*/
+siw_settings_show_configuration_section( $opt_name );
+/*Landen*/
+siw_settings_show_countries_section( $opt_name );

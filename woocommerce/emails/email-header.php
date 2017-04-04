@@ -36,10 +36,8 @@ $site_url = site_url('', 'http' );
 									<tr>
 										<td width="10%">&nbsp;</td>
 										<td width="20%"><a href="<?php echo $site_url; ?>/" target="_blank"><img src="<?php echo $site_url; ?>/wp-content/themes/siw/assets/images/mail/logo_transparant.png" width="144" height="76" border="0" alt="logo" title="Bezoek onze website"/></a></td>
-										<td width="60%" style="vertical-align:bottom;border-bottom: solid #ff9900;" align="center">
-											<font style="font-family:'Open Sans', Verdana, normal; color:#666666; font-size:14px; font-weight:bold;">
-												<?php echo $email_heading; ?>
-											</font>
+										<td width="60%" style="vertical-align:bottom;border-bottom: solid #ff9900;font-family:'Open Sans', Verdana, normal; color:#666666; font-size:1em; font-weight:bold;" align="center">
+											<?php echo $email_heading; ?>
 										</td>
 										<td width="10%">&nbsp;</td>
 									</tr>
@@ -48,7 +46,7 @@ $site_url = site_url('', 'http' );
 						</tr>
 						<tr>
 							<td align="center">&nbsp;</td>
-						</tr>						
+						</tr>
                        	<tr>
                            	<td>
                                    <!-- Body -->
