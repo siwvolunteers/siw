@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 2.4
+Version: 2.5
 */
 /*
 Styling voor agenda
@@ -191,6 +191,13 @@ a::after,
 }
 .kad-icon-box .kad-btn {
   font-size: 14px;
+}
+/*Styling voor kaart NP*/
+#nl-dr path,
+#nl-fr path,
+#nl-ut path,
+#nl-ge path {
+  fill: #ffcc33;
 }
 /*contact form styling*/
 div.wpcf7-validation-errors,
@@ -664,7 +671,7 @@ h5.job-title {
   font-weight: bold;
 }
 /*SIW contact widget*/
-.widget_siw_contact_information .vcard p {
+.vcard p {
   margin-bottom: 5px;
 }
 /*sorteerdropdown verbergen*/
