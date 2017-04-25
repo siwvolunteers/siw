@@ -49,8 +49,8 @@ function siw_update_vfb_mail_template( $form ) {
 	);
 	$signature_prefix = $signature_prefixes[ $form ];
 
-	$signature_name = siw_get_setting( "{$signature_prefix}_application_signature_name" );
-	$signature_title = siw_get_setting( "{$signature_prefix}_application_signature_title" );
+	$signature_name = SIW_PLUGIN::siw_get_setting( "{$signature_prefix}_application_signature_name" );
+	$signature_title = SIW_PLUGIN::siw_get_setting( "{$signature_prefix}_application_signature_title" );
 	$template = str_replace( "[_signature_{$form}_name]", $signature_name, $template );
 	$template = str_replace( "[_signature_{$form}_title]", $signature_title, $template );
 
@@ -149,27 +149,27 @@ add_filter( 'wpcf7_special_mail_tags', function ( $output, $name, $html ) {
 		return $output;
 	}
 	if ( '_signature_algemeen' == $name ) {
-		$signature = siw_get_setting( 'enquiry_general_signature_name' );
+		$signature = SIW_PLUGIN::siw_get_setting( 'enquiry_general_signature_name' );
 		return $signature;
 	}
 	if ( '_signature_algemeen_functie' == $name ) {
-		$signature = siw_get_setting( 'enquiry_general_signature_title' );
+		$signature = SIW_PLUGIN::siw_get_setting( 'enquiry_general_signature_title' );
 		return $signature;
 	}
 	if ( '_signature_np' == $name ) {
-		$signature = siw_get_setting( 'enquiry_camp_leader_signature_name' );
+		$signature = SIW_PLUGIN::siw_get_setting( 'enquiry_camp_leader_signature_name' );
 		return $signature;
 	}
 	if ( '_signature_np_functie' == $name ) {
-		$signature = siw_get_setting( 'enquiry_camp_leader_signature_title' );
+		$signature = SIW_PLUGIN::siw_get_setting( 'enquiry_camp_leader_signature_title' );
 		return $signature;
 	}
 	if ( '_signature_project' == $name ) {
-		$signature = siw_get_setting( 'enquiry_workcamp_signature_name' );
+		$signature = SIW_PLUGIN::siw_get_setting( 'enquiry_workcamp_signature_name' );
 		return $signature;
 	}
 	if ( '_signature_project_functie' == $name ) {
-		$signature = siw_get_setting( 'enquiry_workcamp_signature_title' );
+		$signature = SIW_PLUGIN::siw_get_setting( 'enquiry_workcamp_signature_title' );
 		return $signature;
 	}
 	return $output;

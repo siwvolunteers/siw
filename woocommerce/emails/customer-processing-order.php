@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 //gegevens aanmelding
 $application_number = $order->get_order_number();
 //ondertekening
-$signature_name = siw_get_setting('workcamp_application_signature_name');
-$signature_title = siw_get_setting('workcamp_application_signature_title');
+$signature_name = SIW_PLUGIN::siw_get_setting('workcamp_application_signature_name');
+$signature_title = SIW_PLUGIN::siw_get_setting('workcamp_application_signature_title');
 $iban = SIW_IBAN;
 
 //bepaal onderwerp
@@ -72,9 +72,9 @@ Met vriendelijke groet,<br/><br/>
 </p>
 </div>
 
-<?php siw_wc_email_show_project_details( $order, $application_number );?>
+<?php SIW_PLUGIN::siw_wc_email_show_project_details( $order, $application_number );?>
 
-<?php siw_wc_email_show_application_details( $order );?>
+<?php SIW_PLUGIN::siw_wc_email_show_application_details( $order );?>
 
 
 <?php /**

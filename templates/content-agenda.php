@@ -5,8 +5,7 @@
     // Get summary setting
 	$postsummery = 'img_portrait';
 
-	$post_id		= $post->ID;
-	$event_data 	= siw_get_event_data( $post_id );
+	$event_data 	= SIW_PLUGIN::siw_get_event_data( $post->ID );
 
 ?>
 <article id="agenda-<?php the_ID(); ?>" <?php post_class('kad_blog_item postclass kad-animation'); ?> data-animation="fade-in" data-delay="0" itemscope="" itemtype="http://schema.org/BlogPosting">

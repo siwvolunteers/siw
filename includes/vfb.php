@@ -54,16 +54,16 @@ add_action('siw_update_community_day_options', 'siw_update_community_day_options
 function siw_update_community_day_options() {
 	//haal cd-datums op
 	for ($x = 1 ; $x <= SIW_NUMBER_OF_INFO_DAYS; $x++) {
-		$community_days[]= siw_get_setting("info_day_{$x}");
+		$community_days[]= SIW_PLUGIN::siw_get_setting("info_day_{$x}");
 	}
 	asort( $community_days );
-	$hide_form_days_before_cd = siw_get_setting('hide_application_form_days_before_info_day');
+	$hide_form_days_before_cd = SIW_PLUGIN::siw_get_setting('hide_application_form_days_before_info_day');
 	$limit_date = date("Y-m-d", time() + ( $hide_form_days_before_cd * DAY_IN_SECONDS ));
 
 
 	foreach ( $community_days as $community_day => $community_day_date ) {
 		if ( $community_day_date >= $limit_date ) {
-			$future_community_days[]['label']= siw_get_date_in_text( $community_day_date, false);
+			$future_community_days[]['label']= SIW_PLUGIN::siw_get_date_in_text( $community_day_date, false);
 		}
 	}
 

@@ -1,10 +1,9 @@
 <?php get_template_part('templates/post', 'header'); ?>
 
 <?php global $post;
-	$post_id 		= $post->ID;
-	$job_data 		= siw_get_job_data( $post_id );
-	$missie			= siw_get_setting('mission_statement');
-	$wie_zijn_wij	= siw_get_setting('company_profile');
+	$job_data 		= SIW_PLUGIN::siw_get_job_data( $post->ID );
+	$missie			= SIW_PLUGIN::siw_get_setting('mission_statement');
+	$wie_zijn_wij	= SIW_PLUGIN::siw_get_setting('company_profile');
 
 	$content = '[accordion]';
 	$content .= '[pane title="Wie zijn wij?"]' . wp_kses_post( wpautop( $missie ) . wpautop( $wie_zijn_wij ) ) . '[/pane]';
