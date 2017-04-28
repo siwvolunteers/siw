@@ -38,9 +38,7 @@ h5.siw_event_title {
 .agenda-location {
   font-style: italic;
 }
-/*
-Header
-*/
+/* Header */
 .page-header {
   padding-bottom: 75px;
   padding-top: 75px;
@@ -62,9 +60,7 @@ Header
     display: none;
   }
 }
-/*
-Heading
-*/
+/* Heading */
 h3 {
   text-align: center;
 }
@@ -157,7 +153,7 @@ input[type="text"]:disabled {
 blockquote {
   font-size: 14px;
 }
-blockquote footer {
+blockquote .footer {
   font-size: 100%;
 }
 /*pijltje achter links weg*/
@@ -198,6 +194,97 @@ a::after,
 #nl-ut path,
 #nl-ge path {
   fill: #ffcc33;
+}
+.caldera-grid .checkbox {
+  margin-top: 0px !important;
+  padding-left: 0px;
+}
+.caldera-grid .checkbox label {
+  padding-left: 30px !important;
+}
+.caldera-grid .radio-inline {
+  padding-left: 30px !important;
+}
+.caldera-grid .radio {
+  margin-top: 0px !important;
+  padding-left: 0px;
+}
+.caldera-grid .radio label {
+  padding-left: 30px !important;
+}
+.checkbox label,
+.radio label,
+.radio-inline label {
+  position: relative;
+  display: block;
+  margin-bottom: 15px;
+  padding-left: 0px;
+  cursor: pointer;
+}
+.checkbox input,
+.radio input,
+.radio-inline input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.control-indicator {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 1px solid #b9b9b9;
+}
+.control-indicator:after {
+  position: absolute;
+  display: none;
+  content: '';
+}
+.radio .control-indicator,
+.radio-inline .control-indicator {
+  -webkit-border-radius: 50%;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 50%;
+  -moz-background-clip: padding;
+  border-radius: 50%;
+  background-clip: padding-box;
+}
+/* Show check mark */
+.checkbox input:checked ~ .control-indicator:after,
+.radio input:checked ~ .control-indicator:after,
+.radio-inline input:checked ~ .control-indicator:after {
+  display: block;
+}
+/* Checkbox tick */
+.checkbox .control-indicator:after {
+  top: 0px;
+  left: 5px;
+  width: 9px;
+  height: 14px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border: solid #ff9900;
+  border-width: 0 3px 3px 0;
+}
+/* Radio button inner circle */
+.radio-inline .control-indicator:after,
+.radio .control-indicator:after {
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  -webkit-border-radius: 50%;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 50%;
+  -moz-background-clip: padding;
+  border-radius: 50%;
+  background-clip: padding-box;
+  background: #ff9900;
 }
 /*contact form styling*/
 div.wpcf7-validation-errors,
@@ -275,13 +362,13 @@ Styling voor Ninja Kick contactform
   padding: 0px;
 }
 /*SIW-mailpoet widget*/
-.widget_siw_mailpoet_subscription input {
+.siw-aanmelden-nieuwsbrief input {
   color: #444;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
-.widget_siw_mailpoet_subscription input:focus {
+.siw-aanmelden-nieuwsbrief input:focus {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
