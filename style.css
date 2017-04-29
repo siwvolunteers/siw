@@ -201,6 +201,9 @@ a::after,
 #nl-ge path {
   fill: #ffcc33;
 }
+li.mapplic-list-location > a {
+  padding: 5px;
+}
 .caldera-grid .checkbox {
   margin-top: 0px !important;
   padding-left: 0px;
