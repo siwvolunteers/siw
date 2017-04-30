@@ -1,11 +1,9 @@
 <?php get_template_part('templates/post', 'header'); ?>
 
 <?php global $post;
-
-	$post_id 					= $post->ID;
-	$event_data 				= siw_get_event_data( $post_id );
+	$event_data 				= SIW_PLUGIN::siw_get_event_data( $post->ID );
 	$location_map				= sprintf('[gmap address="%s, %s %s" title="%s" zoom="15" maptype="ROADMAP"]', esc_attr( $event_data['address'] ), esc_attr( $event_data['postal_code'] ), esc_attr( $event_data['city'] ), esc_attr( $event_data['location'] ) );
-	$hide_form_days_before_cd	= siw_get_setting('hide_application_form_days_before_info_day');
+	$hide_form_days_before_cd	= SIW_PLUGIN::siw_get_setting('hide_application_form_days_before_info_day');
 	$limit_date					= date("Y-m-d", time() + ( $hide_form_days_before_cd * DAY_IN_SECONDS ) );
 	$vfb_form_id				= siw_get_vfb_form_id('community_day');
 	$agenda_page_url 			= get_permalink ( siw_get_setting('agenda_parent_page') );

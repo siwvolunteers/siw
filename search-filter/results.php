@@ -18,44 +18,43 @@ if ( $query->have_posts() ) {
 
 	<?php
 	global $wp_query;
-	$product_cat_slug		= get_query_var('_sft_product_cat');
-	$cat_obj				= get_term_by('slug', $product_cat_slug, 'product_cat', 'ARRAY_A');
+	$product_cat_slug		= get_query_var( '_sft_product_cat' );
+	$cat_obj				= get_term_by( 'slug', $product_cat_slug, 'product_cat', 'ARRAY_A' );
 	$product_cat_name		= $cat_obj['name'];
 	$product_cat_taxonomy	= $cat_obj['taxonomy'];
 	if ( $cat_obj ) {
 		$product_cat_permalink = get_term_link( $cat_obj['term_id'] );
 	}
 
-	$month_slug				= get_query_var('_sft_pa_maand');
-	$month_obj				= get_term_by('slug', $month_slug, 'pa_maand', 'ARRAY_A');
-	$month_name				= strtolower( $month_obj['name']);
+	$month_slug				= get_query_var( '_sft_pa_maand' );
+	$month_obj				= get_term_by( 'slug', $month_slug, 'pa_maand', 'ARRAY_A' );
+	$month_name				= strtolower( $month_obj['name'] );
 
 	if ( '' == $product_cat_slug && '' == $month_slug ) {
 		$url = $shop_url;
-		$text = __('Bekijk alle projecten', 'siw');
+		$text = __( 'Bekijk alle projecten', 'siw' );
 	}
 	else if ( '' == $product_cat_slug && '' != $month_slug ) {
 		$url = $shop_url . '?filter_maand=' . $month_slug;
-		$text = sprintf( __('Bekijk alle projecten in %s', 'siw'), $month_name );
+		$text = sprintf( __( 'Bekijk alle projecten in %s', 'siw' ), $month_name );
 	}
 	else if ( '' != $product_cat_slug && '' == $month_slug ) {
 		$url = 	$product_cat_permalink;
-		$text = sprintf( __('Bekijk alle projecten in %s', 'siw'), $product_cat_name );
+		$text = sprintf( __( 'Bekijk alle projecten in %s', 'siw' ), $product_cat_name );
 	}
 	else {
 		$url = $product_cat_permalink . '?filter_maand=' . $month_slug;
-		$text = sprintf( __('Bekijk alle projecten in %s in %s', 'siw'), $month_name, $product_cat_name );
+		$text = sprintf( __( 'Bekijk alle projecten in %s in %s', 'siw' ), $month_name, $product_cat_name );
 	}?>
 
 <?php
 } else {
 	woocommerce_get_template( 'loop/no-products-found.php' );
 	$url = $shop_url;
-	$text = __('Bekijk alle projecten', 'siw');
+	$text = __( 'Bekijk alle projecten', 'siw' );
 }?>
 <div style="text-align:center">
-	<?php printf( __( '<a href="%s" class="kad-btn kad-btn-primary">', 'siw'), esc_url( $url ) )?><?php esc_html_e( $text );?></a>
+	<?php printf( __( '<a href="%s" class="kad-btn kad-btn-primary">', 'siw' ), esc_url( $url ) )?><?php esc_html_e( $text );?></a>
 </div>
-
 
 <?php

@@ -33,15 +33,15 @@ $email_heading = 'Nieuwe aanmelding ' . $application_status;
  /**
   * @hooked WC_Emails::email_header() Output the email header
   */
- do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
+do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 <div style="font-family:'Open Sans', Verdana, normal; color:#444; font-size:14px; ">
 <p>
 Er is een nieuwe aanmelding <?php echo $application_status; ?> binnengekomen:<br/>
 <a href="<?php echo admin_url( 'post.php?post=' . $order->id . '&action=edit' ); ?>">Aanmelding <?php echo $application_number;?><a/>
 </p>
 </div>
-<?php siw_wc_email_show_project_details( $order, $application_number);?>
-<?php siw_wc_email_show_application_details( $order );?>
+<?php SIW_PLUGIN::siw_wc_email_show_project_details( $order, $application_number);?>
+<?php SIW_PLUGIN::siw_wc_email_show_application_details( $order );?>
 
 <?php  /**
   * @hooked WC_Emails::email_footer() Output the email footer
