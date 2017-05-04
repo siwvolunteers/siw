@@ -7,13 +7,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-
 add_action( 'admin_menu', function () {
-	add_menu_page( __( 'Instellingen SIW', 'siw' ), __( 'Instellingen SIW', 'siw' ), 'manage_options', 'siw_settings', 'siw_settings_page', 'dashicons-admin-settings', 110 );
-	add_submenu_page( 'siw_settings', __( 'Instellingen SIW', 'siw' ), __( 'Formulieren', 'siw' ), 'manage_options', 'siw_settings' );
+	add_menu_page(
+		__( 'Instellingen SIW', 'siw' ),
+		__( 'Instellingen SIW', 'siw' ),
+		'manage_options',
+		'siw_settings',
+		'siw_settings_page',
+		'dashicons-admin-settings',
+		110
+	);
 });
-
-
 
 
 add_action( 'admin_init', function () {
@@ -25,10 +29,6 @@ add_action( 'admin_init', function () {
 	register_setting( 'siw_forms', 'siw_forms_begeleider', 'absint' );
 	register_setting( 'siw_forms', 'siw_community_day_vfb_dates_field', 'absint' );
 
-
-
-
-	//secties
 	add_settings_section(
 		'siw_forms',
 		__( 'Formulieren', 'siw' ),
@@ -99,31 +99,9 @@ add_action( 'admin_init', function () {
 		'siw_community_day_vfb_dates_field'
 	);
 });
-/*
-add_action( 'admin_init', function () {
-	register_setting( 'siw_community_day', 'siw_community_day_vfb_dates_field', 'absint' );
-
-
-	add_settings_section(
-		'siw_community_day_vfb_fields',
-		__( 'Formuliervragen', 'siw' ),
-		'__return_false',
-		'siw_community_day'
-	);
-	add_settings_field(
-		'siw_community_day_vfb_dates_field',
-		__( 'Datums', 'siw' ),
-		'siw_settings_show_vfb_field',
-		'siw_community_day',
-		'siw_community_day_vfb_fields',
-		'siw_community_day_vfb_dates_field'
-	);
-});
-*/
 
 
 function siw_settings_show_vfb_form_select( $option ) {
-
 	global $wpdb;
 	if ( ! isset( $wpdb->vfbp_forms ) ) {
 		$wpdb->vfbp_forms = $wpdb->prefix . 'vfbp_forms';
@@ -131,7 +109,7 @@ function siw_settings_show_vfb_form_select( $option ) {
 
 	$query = "SELECT $wpdb->vfbp_forms.id, $wpdb->vfbp_forms.title FROM $wpdb->vfbp_forms ORDER BY $wpdb->vfbp_forms.title ASC";
 
-	$forms = $wpdb->get_results($query, ARRAY_A);
+	$forms = $wpdb->get_results( $query, ARRAY_A );
 
 	if ( ! empty( $forms ) ) {
 		echo '<select name="', esc_attr( $option ), '">';
@@ -164,7 +142,7 @@ function siw_settings_show_cf7_form_select ( $option ) {
 
 
 function siw_settings_show_vfb_field( $option ) {
-	$form_id = siw_get_vfb_form_id('community_day');
+	$form_id = siw_get_vfb_form_id( 'community_day' );
 
 	global $wpdb;
 	if ( ! isset( $wpdb->vfbp_fields ) ) {
@@ -172,11 +150,11 @@ function siw_settings_show_vfb_field( $option ) {
 	}
 
 	$query = "SELECT $wpdb->vfbp_fields.id, $wpdb->vfbp_fields.data FROM $wpdb->vfbp_fields WHERE $wpdb->vfbp_fields.form_id = %d ORDER BY $wpdb->vfbp_fields.field_order ASC";
-	$fields = $wpdb->get_results( $wpdb->prepare( $query, $form_id), ARRAY_A);
+	$fields = $wpdb->get_results( $wpdb->prepare( $query, $form_id ), ARRAY_A );
 
 	if( ! empty( $fields ) ) {
 		echo '<select name="', esc_attr( $option ), '">';
-		foreach ( $fields as $field){
+		foreach ( $fields as $field ) {
 			$id = $field['id'];
 			$label = maybe_unserialize( $field['data'] )['label'];
 			echo '<option value="', $id, '"', get_option( $option ) == $id ? ' selected="selected"' : '', '>', esc_html( $label ), '</option>';
@@ -189,22 +167,15 @@ function siw_settings_show_vfb_field( $option ) {
 
 
 function siw_settings_page() {?>
-    <div class="wrap">
-        <h2><?php esc_html_e( 'Instellingen SIW', 'siw' );?></h2>
-        <?php settings_errors();
-		$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'forms';
-		?>
-		<h2 class="nav-tab-wrapper">
-			<a href="?page=siw_settings&tab=forms" class="nav-tab <?php echo 'forms' == $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Formulieren', 'siw' );?></a>
-		</h2>
-        <form method="post" action="options.php">
+	<div class="wrap">
+		<h2><?php esc_html_e( 'Instellingen SIW', 'siw' );?></h2>
+		<?php settings_errors();?>
+		<form method="post" action="options.php">
 			<?php
-			if ( 'forms' == $active_tab ) {
-				settings_fields( 'siw_forms' );
-				do_settings_sections( 'siw_forms' );
-			}
+			settings_fields( 'siw_forms' );
+			do_settings_sections( 'siw_forms' );
 			submit_button();
 			?>
 		</form>
-    </div><?php
+	</div><?php
 }
