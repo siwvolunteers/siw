@@ -668,9 +668,6 @@ Styling voor testimonialpagina
 article.vacatures {
   background-color: #fff;
 }
-.siw-vacature-grid {
-  margin: 20px;
-}
 .siw-vacature-grid .grid_item {
   padding: 10px;
   -webkit-border-radius: 4px;
