@@ -6,10 +6,10 @@
 	$wie_zijn_wij	= SIW_PLUGIN::siw_get_setting('company_profile');
 
 	$content = '[accordion]';
-	$content .= '[pane title="Wie zijn wij?"]' . wp_kses_post( wpautop( $missie ) . wpautop( $wie_zijn_wij ) ) . '[/pane]';
-	$content .= '[pane title="Wie ben jij?"]' . wp_kses_post( wpautop( $job_data['wie_ben_jij'] ) ). '[/pane]';
 	$content .= '[pane title="Wat ga je doen?"]' . wp_kses_post( wpautop( $job_data['wat_ga_je_doen'] ) ) . '[/pane]';
+	$content .= '[pane title="Wie ben jij?"]' . wp_kses_post( wpautop( $job_data['wie_ben_jij'] ) ). '[/pane]';
 	$content .= '[pane title="Wat bieden wij jou?"]' . wp_kses_post( wpautop( $job_data['wat_bieden_wij_jou'] ) ) . '[/pane]';
+	$content .= '[pane title="Wie zijn wij?"]' . wp_kses_post( wpautop( $missie ) . wpautop( $wie_zijn_wij ) ) . '[/pane]';
 	$content .= '[/accordion]';
 ?>
 
@@ -19,15 +19,26 @@
 		<?php while (have_posts()) : the_post(); ?>
 		<article <?php post_class() ?> id="vacatures-<?php the_ID(); ?>">
 			<div class="postclass">
-				<header>
+				<header class="agenda-header">
+					<h1><?php the_title();?></h1>
+					<h5><?php esc_html_e( 'Vrijwillige functie', 'siw'); echo( ! empty( $job_data['uur_per_week'] ) ? sprintf( esc_html__( ' (%s uur/week)', 'siw'), $job_data['uur_per_week'] ) : ''); ?></h5>
+					<hr>
 				</header>
 				<div class="row">
 					<div class="col-md-7">
-						<h3 class="job-heading"><?php esc_html_e('Vacature', 'siw');?></h3>
-						<?php the_excerpt(); ?>
-						<p><?php printf( esc_html__( 'Wij zijn op zoek naar%s:', 'siw' ), $job_data['meervoud'] ?'':__(' een', 'siw') );?></p>
-						<h5 class="job-title"><?php the_title();?></h5>
-						<?php echo ( $job_data['inleiding'] ? wp_kses_post( wpautop( $job_data['inleiding'] ) ) : ''  ); ?>
+						<?php echo ( ! empty( $job_data['inleiding'] ) ? wp_kses_post( wpautop( $job_data['inleiding'] ) ) : ''  ); ?>
+					</div>
+					<div class="col-md-5">
+						<?php if ( ! empty( $job_data['highlight_quote'] ) ): ?>
+						<div class="pullquote-center vacature-quote">
+							<?php echo esc_html( $job_data['highlight_quote'] );?>
+						</div>
+						<?php endif ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-7">
+						<h3><?php esc_html_e('Wat houdt deze vacature in?', 'siw');?></h3>
 						<?php echo do_shortcode( $content );?>
 					</div>
 					<div class="col-md-5">
