@@ -32,10 +32,10 @@
 						<?php
 						foreach ( (array) $event_data['program'] as $key => $item ) {
 						?>
-							<div class="col-md-3">
+							<div class="col-xs-3">
 								<p><b><?php echo esc_html( date("H:i", strtotime( $item['starttijd'])) .  '&nbsp;-&nbsp;' . date("H:i", strtotime( $item['eindtijd'] ) ) );?></b></p>
 							</div>
-							<div class="col-md-9">
+							<div class="col-xs-9">
 								<?php echo wp_kses_post( wpautop( $item['omschrijving'] ) );?>
 							</div>
 						<?php }?>
