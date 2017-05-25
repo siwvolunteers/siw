@@ -8,7 +8,10 @@ Template Name: Vacatures Grid
 <div id="content" class="container">
 	<div class="row">
 			<?php global $post ;
-			$open_application_email = antispambot( SIW_PLUGIN::siw_get_setting('open_application_email') );
+			$introduction = get_post_meta( $post->ID, 'siw_vacatures_introduction', true );
+			$open_application = get_post_meta( $post->ID, 'siw_vacatures_open_application', true );
+			$open_application_email = antispambot( get_post_meta( $post->ID, 'siw_vacatures_open_application_email', true ) );
+			$no_jobs = get_post_meta( $post->ID, 'siw_vacatures_no_jobs', true );
 			?>
 		<div class="main <?php echo kadence_main_class();?>" role="main">
 			<div class="pageclass entry-content" itemprop="mainContentOfPage">
@@ -16,7 +19,7 @@ Template Name: Vacatures Grid
 					<div class="col-md-9">
 						<h3><?php esc_html_e('Vacatures', 'siw');?></h3>
 						<p>
-						<?php esc_html_e('SIW ontvangt al ruim zestig jaar buitenlandse vrijwilligers op diverse projecten in Nederland en zendt Nederlandse vrijwilligers uit naar projecten over de hele wereld. Ruim 70 vrijwilligere medewerkers zetten zich hier vol overgave voor in. Regelmatig zijn we op zoek naar nieuwe collega\'s. Ben jij op zoek naar een functie bij een organisatie met een internationaal speelveld en kom jij graag in aanraking met andere culturen? Wellicht heeft SIW Internationale Vrijwilligersprojecten dan een vacature voor jou.', 'siw');?>
+						<?php echo esc_html( $introduction );?>
 						</p>
 						<div id="kad-blog-grid" class="rowtight init-isotope siw-vacature-grid" data-fade-in="1"  data-iso-selector=".b_item" data-iso-style="masonry" data-iso-filter="false">
 						<?php
@@ -50,11 +53,9 @@ Template Name: Vacatures Grid
 						</div><?php
 						else:?>
 						</div>
-						<div>
+						<div class="well">
 							<p>
-							<em>
-							<?php echo esc_html_e( 'Helaas zijn er op dit moment geen vacatures beschikbaar. Houd onze website in de gaten, meld je aan voor onze nieuwsbrief of stuur ons een open sollicitatie.', 'siw'); ?>
-							</em>
+								<em><?php echo esc_html( $no_jobs ); ?></em>
 							</p>
 						</div>
 						<?php endif ?>
@@ -62,9 +63,9 @@ Template Name: Vacatures Grid
 						<?php wp_reset_query(); ?>
 					</div>
 					<div class="col-md-3">
-						<h3><?php esc_html_e( 'Open sollicitatie', 'siw');?></h3>
+						<h3><?php esc_html_e('Open sollicitatie', 'siw');?></h3>
 						<p>
-						<?php printf( wp_kses_post( __('Is er op dit moment geen geschikte vacature voor jou bij SIW? Je kunt ons ook een open sollicitatie sturen. Wij zijn altijd op zoek naar vrijwillige medewerkers die ons kunnen helpen met diverse kantoorwerkzaamheden. Stuur jouw motivatie en curriculum vitae onder vermelding van \'Open sollicitatie\' naar  <a class="email" href="mailto:%s">%s</a>', 'siw' ) ), $open_application_email, $open_application_email);?>
+						<?php printf( wp_kses_post( $open_application . ' ' . __('Stuur jouw motivatie en curriculum vitae onder vermelding van \'Open sollicitatie\' naar  <a class="email" href="mailto:%s">%s</a>', 'siw' ) ), $open_application_email, $open_application_email);?>
 						</p>
 					</div>
 				</div>
