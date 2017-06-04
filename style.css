@@ -989,9 +989,11 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
 .woocommerce-checkout .control-checkbox .control-indicator {
   left: 0;
 }
-.woocommerce-checkout .terms {
+.woocommerce-checkout #payment .terms {
   padding-bottom: 10px;
-  margin-left: 20px;
+}
+.woocommerce-checkout #payment .terms .checkbox {
+  margin-left: 15px;
 }
 .woocommerce-checkout .terms.control-checkbox .control-indicator {
   left: 1em;
