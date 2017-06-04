@@ -60,17 +60,10 @@ h5.siw_event_title {
     display: none;
   }
 }
-/* class om content te verbergen op mobiel*/
-@media only screen and (max-width: 767px) {
-  .hide_on_mobile {
-    display: none !important;
-  }
-}
 /* Heading */
 h3 {
   text-align: center;
 }
-/*alle headers onderstepen*/
 h3::after {
   background-color: #444;
   content: "";
@@ -105,9 +98,6 @@ h3:hover:after {
 .home-padding {
   padding: 0px 0;
 }
-.home-product {
-  padding-bottom: 30px !important ;
-}
 /*Footer */
 #containerfooter a:hover {
   color: #59ab9c;
@@ -124,8 +114,7 @@ h3:hover:after {
 Styling voor invoervelden
 */
 /*default styling voor alle submit-inputs*/
-input[type="submit"],
-input[type="file"] {
+input[type="submit"] {
   padding: 12px 18px;
   border: none;
   margin: 10px 0;
@@ -140,7 +129,6 @@ input[type="file"] {
   font-size: 14px !important;
 }
 input[type="submit"]:hover,
-input[type="file"]:hover,
 .btn-primary:focus {
   background: #ffcc33 !important;
   color: #ffffff !important;
@@ -168,33 +156,9 @@ a::after,
 .kad-post-navigation .kad-next-link a span::after {
   content: none !important;
 }
-/*styling voor home-carousel*/
-.kad-slider-btn {
-  background: rgba(51, 51, 51, 0.5) !important;
-  border: none !important;
-  -webkit-transition: background 0.6s ease-out 0s !important;
-  -moz-transition: background 0.6s ease-out 0s !important;
-  -o-transition: background 0.6s ease-out 0s !important;
-  transition: background 0.6s ease-out 0s !important;
-}
-.kad-slider-btn:hover {
-  background-color: #444 !important;
-}
-@media only screen and (max-width: 767px) {
-  .caption-case.kad-placement-rc .kad-slide-caption .caption-case-inner {
-    max-width: 100%;
-    float: none;
-  }
-  .kad-slider .kad-slider-btn {
-    font-size: 14px;
-    padding: 6px 24px;
-  }
-}
 /*iconbox hover-kleur*/
 .kad-icon-box:hover h4::after,
-.kad-icon-box:hover h3::after {
-  background-color: #ff9900;
-}
+.kad-icon-box:hover h3::after,
 .kad-icon-box:hover i {
   background-color: #ff9900;
 }
@@ -544,10 +508,6 @@ Styling voor portfolio
 }
 /*styling voor snelzoeken*/
 .snelzoeken {
-  left: 5%;
-  position: absolute;
-  top: 25%;
-  z-index: 10;
   display: inline-block;
   background: rgba(51, 51, 51, 0.5);
   -webkit-border-radius: 5px;
@@ -558,31 +518,18 @@ Styling voor portfolio
   background-clip: padding-box;
   padding: 10px 20px;
   text-align: center;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-left: 20%;
 }
 .snelzoeken ul li {
   padding: 4px;
   display: block;
 }
-.snelzoeken h4 {
+.snelzoeken h3 {
   color: #ffffff;
-  text-align: center;
+  padding-bottom: 5px;
 }
-.snelzoeken h4::after {
+.snelzoeken h3::after {
   background-color: #ffffff;
-  content: "";
-  display: block;
-  height: 1px;
-  margin: 0 auto;
-  -webkit-transition: background 0.3s ease-out 0s;
-  -moz-transition: background 0.3s ease-out 0s;
-  -o-transition: background 0.3s ease-out 0s;
-  transition: background 0.3s ease-out 0s;
-  width: 60px;
-}
-.snelzoeken h4:hover:after {
-  background-color: #ff9900;
 }
 /*
 Styling voor testimonials
@@ -762,6 +709,28 @@ h5.job-title {
   background: #ff9900 none repeat scroll 0 0 !important;
   color: #fff !important;
 }
+.vfbp-form input[type="file"] {
+  padding: 12px 18px;
+  border: none;
+  margin: 10px 0;
+  display: inline-block;
+  background: #ff9900;
+  color: #ffffff !important;
+  -webkit-border-radius: 4px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 4px;
+  -moz-background-clip: padding;
+  border-radius: 4px;
+  background-clip: padding-box;
+  -webkit-transition: background 0.6s ease-out;
+  -moz-transition: background 0.6s ease-out;
+  -o-transition: background 0.6s ease-out;
+  transition: background 0.6s ease-out;
+  font-size: 14px !important;
+}
+.vfbp-form input[type="file"]:hover {
+  background: #ffcc33 !important;
+}
 /*Quote widget*/
 .siw_quote_widget {
   background: rgba(255, 255, 255, 0.7);
@@ -789,6 +758,63 @@ h5.job-title {
 /*SIW contact widget*/
 .vcard p {
   margin-bottom: 5px;
+}
+/* SIW CTA widget*/
+.siw-cta-title h2 {
+  color: #fff;
+  font-size: 76px;
+  line-height: 76px;
+}
+@media only screen and (max-width: 992px) {
+  .siw-cta-title h2 {
+    font-size: 50px;
+    line-height: 50px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .siw-cta-title h2 {
+    font-size: 30px;
+    line-height: 30px;
+  }
+}
+.siw-cta-title h4 {
+  color: #fff;
+  font-size: 45px;
+  line-height: 45px;
+}
+@media only screen and (max-width: 992px) {
+  .siw-cta-title h4 {
+    font-size: 30px;
+    line-height: 30px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .siw-cta-title h4 {
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+.siw-cta-button {
+  text-align: center;
+}
+.siw-cta-button .kad-btn {
+  background: rgba(51, 51, 51, 0.5) !important;
+  color: #fff;
+  border: none !important;
+  -webkit-transition: background 0.6s ease-out 0s !important;
+  -moz-transition: background 0.6s ease-out 0s !important;
+  -o-transition: background 0.6s ease-out 0s !important;
+  transition: background 0.6s ease-out 0s !important;
+}
+.siw-cta-button .kad-btn:hover {
+  background-color: #444 !important;
+  color: #fff;
+}
+@media only screen and (max-width: 767px) {
+  .siw-cta-title {
+    font-size: 26px;
+    line-height: 26px;
+  }
 }
 /*sorteerdropdown verbergen*/
 .woocommerce-ordering {
