@@ -4,8 +4,33 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 2.5.1
+Version: 2.5.2
 */
+.siw-404 {
+  height: 100vh;
+  background-image: url('/wp-content/themes/siw/assets/images/404/groep.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+.siw-404 .row {
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.siw-404 .row .main {
+  text-align: center;
+  padding-top: 50px;
+}
+.siw-404 .row .main .sectiontitle {
+  color: #fff;
+}
+.siw-404 .row .main .sectiontitle:hover:after {
+  background-color: #ff9900;
+}
+.siw-404 .row .main .sectiontitle:after {
+  background-color: #fff;
+}
 /*
 Styling voor agenda
 */
