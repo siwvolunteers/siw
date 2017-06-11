@@ -17,10 +17,12 @@ Version: 2.5.2
 .siw-404 .row {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 .siw-404 .row .main {
-  text-align: center;
   padding-top: 50px;
+  max-width: 767px;
+  display: inline-block;
 }
 .siw-404 .row .main .sectiontitle {
   color: #fff;
