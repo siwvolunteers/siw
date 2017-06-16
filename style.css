@@ -688,6 +688,9 @@ h5.job-title {
   margin-top: 0px;
   margin-bottom: 0px;
 }
+.vacature-quote:before {
+  color: #ccc;
+}
 /*styling voor visual form builder*/
 .vfb-wizard ul > li.current div,
 .vfb-wizard ul > li.current div:hover,
