@@ -637,7 +637,7 @@ Styling voor testimonialpagina
   height: 40px;
   background: #59ab9c;
 }
-#eventbar {
+#topbar-content {
   height: 40px;
   line-height: normal;
   color: #fff;
@@ -650,21 +650,18 @@ Styling voor testimonialpagina
   padding: 10px 0px;
   text-align: center;
 }
-#eventbar a {
+#topbar-content a {
   color: #ffffff;
   border-bottom: 1px dotted;
   font-weight: bold;
 }
 @media only screen and (max-width: 767px) {
-  #eventbar {
+  #topbar-content {
     font-size: 2.5vw;
-  }
-  #eventbar .hide_on_mobile {
-    display: none !important;
   }
 }
 @media only screen and (max-width: 480px) {
-  #eventbar {
+  #topbar-content {
     font-size: 3vw;
   }
 }
