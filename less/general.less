@@ -150,11 +150,17 @@ li.mapplic-list-location > a {
 
 
 .geschiedenis-quote .pullquote-center {
-    font-size: inherit;
-    font-style: italic;
-    margin: 10px;
-    color: #777;
-    &:before{
-    	color:#ccc;	
-    }
+	font-size: inherit;
+	font-style: italic;
+	margin: 10px;
+	color: #777;
+	@media only screen and (max-width:767px) {
+		padding:inherit;
+	}
+	&:before{
+		color:#ccc;
+		@media only screen and (max-width:767px) {
+			display:none;
+		}	
+	}
 }

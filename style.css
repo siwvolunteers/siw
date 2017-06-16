@@ -211,8 +211,18 @@ li.mapplic-list-location > a {
   margin: 10px;
   color: #777;
 }
+@media only screen and (max-width: 767px) {
+  .geschiedenis-quote .pullquote-center {
+    padding: inherit;
+  }
+}
 .geschiedenis-quote .pullquote-center:before {
   color: #ccc;
+}
+@media only screen and (max-width: 767px) {
+  .geschiedenis-quote .pullquote-center:before {
+    display: none;
+  }
 }
 .caldera-grid .checkbox {
   margin-top: 0px !important;
