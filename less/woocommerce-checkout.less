@@ -1,63 +1,15 @@
 /*pijltje op knoppen verbergen*/
 .wc-forward::after, .checkout-button::after, .return-to-shop a.wc-backward::after {
-    content: none !important;
-}
-
-
-/*checkout*/
-.woocommerce-extra-fields label.radio, .woocommerce-billing-fields label.radio{
-	display:inline-block !important;
-	padding-right: 20px !important;
-	padding-left: 0px !important;
-	font-weight: 400 !important;
-}
-
-.woocommerce-extra-fields .checkradios-radio, .woocommerce-billing-fields .checkradios-radio{
-	margin-left: 5px !important;
+	content: none !important;
 }
 
 .wizard > .steps .done a, .wizard > .steps .done a:hover, .wizard > .steps .done a:active {
-    background: @primary-color-hover none repeat scroll 0 0;
+	background: @primary-color-hover none repeat scroll 0 0;
 }
 
 .wizard > .steps a, .wizard > .steps a:hover, .wizard > .steps a:active {
 	text-align: left;
 }
-
-
-/*tekstblokken in informatie voor PO hoger maken*/
-#infoForPartner textarea{
-	height: auto !important;
-}
-
-
-/*
-Radio buttons zichtbaar maken i.v.m. validatie
-*/
-
-.woocommerce-billing-fields input[type="radio"], .woocommerce-extra-fields input[type="radio"]{
-	display: inline-block !important;
-	margin-left: 10px !important;
-	left: -99999%;
-	.opacity(0);
-}
-
-.woocommerce-billing-fields .radiobutton, .woocommerce-extra-fields .radiobutton{
-	position:relative !important;
-	margin-left: -15px !important;
-}
-
-.woocommerce input.input-text[readonly], form.checkout input.input-text[readonly]{
-	background-color: #eee;
-    cursor: not-allowed;
-}
-
-.terms input[type="checkbox"]{
-	display: inline !important;
-	left: -99999%;
-	.opacity(0);
-}
-
 
 /*modal*/
 .modal-body{
@@ -73,45 +25,169 @@ Radio buttons zichtbaar maken i.v.m. validatie
 	display:none;
 }
 
-#newsletter_signup_field .checkbox{
-	padding-left:0px;
-}
-#newsletter_signup_field .checkbox .input-checkbox{
-	display:inline-block;
-}
-
 
 /*verwijderen producten uit cart*/
 @media (max-width: 767px){
-    table.shop_table td.product-remove {
-      display: table-cell;
-      padding: 0;
-    }
-    table.shop_table th.product-remove{
-        .opacity(1);
-        display: table-cell;
-    }
-    #content table.cart a.remove {
-        font-size: 12px;
-        width: 20px;
-    }
+	table.shop_table td.product-remove {
+		display: table-cell;
+		padding: 0;
+	}
+	table.shop_table th.product-remove{
+		.opacity(1);
+		display: table-cell;
+	}
+	#content table.cart a.remove {
+		font-size: 12px;
+		width: 20px;
+	}
 }
 
-#kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li a {
-    position: static;
-    margin-left:30px;
-}
-#kad-mobile-nav #kad-head-cart-popup ul.cart_list li a.remove {
-    display: block;
-    float:none;
-    position: absolute;
-    left: 0;
-    margin-left:0px;
-}
-#kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li {
-    position: relative;
+#kad-mobile-nav #kad-head-cart-popup{
+	ul.product_list_widget li {
+		position: relative;
+		a{
+			position: static;
+			margin-left:30px;
+		}	
+	}
+
+	ul.cart_list li a.remove {
+		display: block;
+		float:none;
+		position: absolute;
+		left: 0;
+		margin-left:0px;
+	}
+
 }
 
-.woocommerce .checkout .col-2 h3, .woocommerce-page .checkout .col-2 h3 {
-    float: none;
+.woocommerce-checkout{
+
+	/*tekstblokken in informatie voor PO hoger maken*/
+	#infoForPartner textarea{
+		height: auto !important;
+	}
+
+	#payment .methods label {
+		padding-left: 35px;
+	}
+	
+	/*readonly velden*/
+	input.input-text[readonly]{
+		background-color: #eee;
+		cursor: not-allowed;
+	}
+	
+	/*Styling land*/
+	.country{
+		label.country-label{
+			display:block;	
+		}
+		.description{
+			display:block;
+			font-style:italic;
+		}
+	}
+
+	/*Styling radiobuttons en checkboxes*/	
+	.control-checkbox{
+		margin-top:0px !important;
+		padding-left:0px;
+		label{
+			padding-left:30px !important;
+		}
+	}
+
+	.control-radio{
+		label.radio-label{
+			display:block;	
+		}
+		label.radio{
+			padding-left:25px !important;
+			display:inline-block;
+			font-weight:normal;
+			margin-right:10px;
+		}
+	}
+	
+	.control-checkbox, .control-radio,{
+		label {
+		    position: relative;
+			display: block;
+			margin-bottom: 15px;
+			padding-left: 0px;
+			cursor: pointer;
+		}
+		input {
+			position: absolute;
+			z-index: -1;
+			opacity: 0;
+		}
+	}
+
+	.control-indicator {
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		background: #fff;
+	border: 1px solid #b9b9b9;
+		&:after{
+			position: absolute;
+			display: none;
+			content: '';       
+		}
+	}
+
+	.control-radio .control-indicator{
+		.border-radius(50%);
+
+		margin-top:10px;
+	}
+	.control-checkbox .control-indicator{
+		left: 0;
+	}
+
+	#payment .terms{
+		padding-bottom:10px;
+		.checkbox{
+			margin-left:15px;
+		}
+	}
+
+	.terms.control-checkbox .control-indicator{
+		left: 1em;	
+	}
+
+	
+	/* Show check mark */
+	.control-checkbox, .control-radio{
+		input:checked + .control-indicator:after {
+			display: block;
+		}
+	}
+
+	/* Checkbox tick */
+	.control-checkbox{
+		.control-indicator:after {
+			top: 0px;
+			left: 5px;
+			width: 9px;
+			height: 14px;
+			.transform( rotate(45deg) );
+			border: solid #ff9900;
+			border-width: 0 3px 3px 0;
+		}
+	}
+
+	/* Radio button inner circle */
+	.control-radio{
+		.control-indicator:after {
+			top: 3px;
+			left: 3px;
+			width: 12px;
+			height: 12px;
+			.border-radius(50%);
+			background: #ff9900;
+		}
+	}
 }

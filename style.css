@@ -4,8 +4,35 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 2.5.1
+Version: 2.6
 */
+.siw-404 {
+  height: 100vh;
+  background-image: url('/wp-content/themes/siw/assets/images/404/groep.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+.siw-404 .row {
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+.siw-404 .row .main {
+  padding-top: 50px;
+  max-width: 767px;
+  display: inline-block;
+}
+.siw-404 .row .main .sectiontitle {
+  color: #fff;
+}
+.siw-404 .row .main .sectiontitle:hover:after {
+  background-color: #ff9900;
+}
+.siw-404 .row .main .sectiontitle:after {
+  background-color: #fff;
+}
 /*
 Styling voor agenda
 */
@@ -38,6 +65,13 @@ h5.siw_event_title {
 .agenda-location {
   font-style: italic;
 }
+.agenda-quote {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.agenda-quote:before {
+  color: #ccc;
+}
 /* Header */
 .page-header {
   padding-bottom: 75px;
@@ -60,17 +94,10 @@ h5.siw_event_title {
     display: none;
   }
 }
-/* class om content te verbergen op mobiel*/
-@media only screen and (max-width: 767px) {
-  .hide_on_mobile {
-    display: none !important;
-  }
-}
 /* Heading */
 h3 {
   text-align: center;
 }
-/*alle headers onderstepen*/
 h3::after {
   background-color: #444;
   content: "";
@@ -105,9 +132,6 @@ h3:hover:after {
 .home-padding {
   padding: 0px 0;
 }
-.home-product {
-  padding-bottom: 30px !important ;
-}
 /*Footer */
 #containerfooter a:hover {
   color: #59ab9c;
@@ -124,8 +148,7 @@ h3:hover:after {
 Styling voor invoervelden
 */
 /*default styling voor alle submit-inputs*/
-input[type="submit"],
-input[type="file"] {
+input[type="submit"] {
   padding: 12px 18px;
   border: none;
   margin: 10px 0;
@@ -140,7 +163,6 @@ input[type="file"] {
   font-size: 14px !important;
 }
 input[type="submit"]:hover,
-input[type="file"]:hover,
 .btn-primary:focus {
   background: #ffcc33 !important;
   color: #ffffff !important;
@@ -168,33 +190,9 @@ a::after,
 .kad-post-navigation .kad-next-link a span::after {
   content: none !important;
 }
-/*styling voor home-carousel*/
-.kad-slider-btn {
-  background: rgba(51, 51, 51, 0.5) !important;
-  border: none !important;
-  -webkit-transition: background 0.6s ease-out 0s !important;
-  -moz-transition: background 0.6s ease-out 0s !important;
-  -o-transition: background 0.6s ease-out 0s !important;
-  transition: background 0.6s ease-out 0s !important;
-}
-.kad-slider-btn:hover {
-  background-color: #444 !important;
-}
-@media only screen and (max-width: 767px) {
-  .caption-case.kad-placement-rc .kad-slide-caption .caption-case-inner {
-    max-width: 100%;
-    float: none;
-  }
-  .kad-slider .kad-slider-btn {
-    font-size: 14px;
-    padding: 6px 24px;
-  }
-}
 /*iconbox hover-kleur*/
 .kad-icon-box:hover h4::after,
-.kad-icon-box:hover h3::after {
-  background-color: #ff9900;
-}
+.kad-icon-box:hover h3::after,
 .kad-icon-box:hover i {
   background-color: #ff9900;
 }
@@ -214,11 +212,33 @@ a::after,
 li.mapplic-list-location > a {
   padding: 5px;
 }
+.geschiedenis-quote .pullquote-center {
+  font-size: inherit;
+  font-style: italic;
+  margin: 10px;
+  color: #777;
+}
+@media only screen and (max-width: 767px) {
+  .geschiedenis-quote .pullquote-center {
+    padding: inherit;
+  }
+}
+.geschiedenis-quote .pullquote-center:before {
+  color: #ccc;
+}
+@media only screen and (max-width: 767px) {
+  .geschiedenis-quote .pullquote-center:before {
+    display: none;
+  }
+}
 .caldera-grid .checkbox {
   margin-top: 0px !important;
   padding-left: 0px;
 }
 .caldera-grid .checkbox label {
+  padding-left: 30px !important;
+}
+.caldera-grid .checkbox-inline {
   padding-left: 30px !important;
 }
 .caldera-grid .radio-inline {
@@ -231,23 +251,25 @@ li.mapplic-list-location > a {
 .caldera-grid .radio label {
   padding-left: 30px !important;
 }
-.checkbox label,
-.radio label,
-.radio-inline label {
+.caldera-grid .checkbox label,
+.caldera-grid .checkbox-inline label,
+.caldera-grid .radio label,
+.caldera-grid .radio-inline label {
   position: relative;
   display: block;
   margin-bottom: 15px;
   padding-left: 0px;
   cursor: pointer;
 }
-.checkbox input,
-.radio input,
-.radio-inline input {
+.caldera-grid .checkbox input,
+.caldera-grid .checkbox-inline input,
+.caldera-grid .radio input,
+.caldera-grid .radio-inline input {
   position: absolute;
   z-index: -1;
   opacity: 0;
 }
-.control-indicator {
+.caldera-grid .control-indicator {
   position: absolute;
   top: 2px;
   left: 0;
@@ -256,13 +278,13 @@ li.mapplic-list-location > a {
   background: #fff;
   border: 1px solid #b9b9b9;
 }
-.control-indicator:after {
+.caldera-grid .control-indicator:after {
   position: absolute;
   display: none;
   content: '';
 }
-.radio .control-indicator,
-.radio-inline .control-indicator {
+.caldera-grid .radio .control-indicator,
+.caldera-grid .radio-inline .control-indicator {
   -webkit-border-radius: 50%;
   -webkit-background-clip: padding-box;
   -moz-border-radius: 50%;
@@ -270,14 +292,14 @@ li.mapplic-list-location > a {
   border-radius: 50%;
   background-clip: padding-box;
 }
-/* Show check mark */
-.checkbox input:checked ~ .control-indicator:after,
-.radio input:checked ~ .control-indicator:after,
-.radio-inline input:checked ~ .control-indicator:after {
+.caldera-grid .checkbox input:checked ~ .control-indicator:after,
+.caldera-grid .checkbox-inline input:checked ~ .control-indicator:after,
+.caldera-grid .radio input:checked ~ .control-indicator:after,
+.caldera-grid .radio-inline input:checked ~ .control-indicator:after {
   display: block;
 }
-/* Checkbox tick */
-.checkbox .control-indicator:after {
+.caldera-grid .checkbox .control-indicator:after,
+.caldera-grid .checkbox-inline .control-indicator:after {
   top: 0px;
   left: 5px;
   width: 9px;
@@ -290,9 +312,8 @@ li.mapplic-list-location > a {
   border: solid #ff9900;
   border-width: 0 3px 3px 0;
 }
-/* Radio button inner circle */
-.radio-inline .control-indicator:after,
-.radio .control-indicator:after {
+.caldera-grid .radio-inline .control-indicator:after,
+.caldera-grid .radio .control-indicator:after {
   top: 3px;
   left: 3px;
   width: 12px;
@@ -540,10 +561,6 @@ Styling voor portfolio
 }
 /*styling voor snelzoeken*/
 .snelzoeken {
-  left: 5%;
-  position: absolute;
-  top: 25%;
-  z-index: 10;
   display: inline-block;
   background: rgba(51, 51, 51, 0.5);
   -webkit-border-radius: 5px;
@@ -554,31 +571,18 @@ Styling voor portfolio
   background-clip: padding-box;
   padding: 10px 20px;
   text-align: center;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-left: 20%;
 }
 .snelzoeken ul li {
   padding: 4px;
   display: block;
 }
-.snelzoeken h4 {
+.snelzoeken h3 {
   color: #ffffff;
-  text-align: center;
+  padding-bottom: 5px;
 }
-.snelzoeken h4::after {
+.snelzoeken h3::after {
   background-color: #ffffff;
-  content: "";
-  display: block;
-  height: 1px;
-  margin: 0 auto;
-  -webkit-transition: background 0.3s ease-out 0s;
-  -moz-transition: background 0.3s ease-out 0s;
-  -o-transition: background 0.3s ease-out 0s;
-  transition: background 0.3s ease-out 0s;
-  width: 60px;
-}
-.snelzoeken h4:hover:after {
-  background-color: #ff9900;
 }
 /*
 Styling voor testimonials
@@ -633,7 +637,7 @@ Styling voor testimonialpagina
   height: 40px;
   background: #59ab9c;
 }
-#eventbar {
+#topbar-content {
   height: 40px;
   line-height: normal;
   color: #fff;
@@ -646,30 +650,24 @@ Styling voor testimonialpagina
   padding: 10px 0px;
   text-align: center;
 }
-#eventbar a {
+#topbar-content a {
   color: #ffffff;
   border-bottom: 1px dotted;
   font-weight: bold;
 }
 @media only screen and (max-width: 767px) {
-  #eventbar {
+  #topbar-content {
     font-size: 2.5vw;
-  }
-  #eventbar .hide_on_mobile {
-    display: none !important;
   }
 }
 @media only screen and (max-width: 480px) {
-  #eventbar {
+  #topbar-content {
     font-size: 3vw;
   }
 }
 /*vacatures*/
 article.vacatures {
   background-color: #fff;
-}
-.siw-vacature-grid {
-  margin: 20px;
 }
 .siw-vacature-grid .grid_item {
   padding: 10px;
@@ -682,6 +680,13 @@ article.vacatures {
 }
 h5.job-title {
   text-align: center;
+}
+.vacature-quote {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.vacature-quote:before {
+  color: #ccc;
 }
 /*styling voor visual form builder*/
 .vfb-wizard ul > li.current div,
@@ -757,6 +762,28 @@ h5.job-title {
   background: #ff9900 none repeat scroll 0 0 !important;
   color: #fff !important;
 }
+.vfbp-form input[type="file"] {
+  padding: 12px 18px;
+  border: none;
+  margin: 10px 0;
+  display: inline-block;
+  background: #ff9900;
+  color: #ffffff !important;
+  -webkit-border-radius: 4px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 4px;
+  -moz-background-clip: padding;
+  border-radius: 4px;
+  background-clip: padding-box;
+  -webkit-transition: background 0.6s ease-out;
+  -moz-transition: background 0.6s ease-out;
+  -o-transition: background 0.6s ease-out;
+  transition: background 0.6s ease-out;
+  font-size: 14px !important;
+}
+.vfbp-form input[type="file"]:hover {
+  background: #ffcc33 !important;
+}
 /*Quote widget*/
 .siw_quote_widget {
   background: rgba(255, 255, 255, 0.7);
@@ -784,6 +811,63 @@ h5.job-title {
 /*SIW contact widget*/
 .vcard p {
   margin-bottom: 5px;
+}
+/* SIW CTA widget*/
+.siw-cta-title h2 {
+  color: #fff;
+  font-size: 76px;
+  line-height: 76px;
+}
+@media only screen and (max-width: 992px) {
+  .siw-cta-title h2 {
+    font-size: 50px;
+    line-height: 50px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .siw-cta-title h2 {
+    font-size: 30px;
+    line-height: 30px;
+  }
+}
+.siw-cta-title h4 {
+  color: #fff;
+  font-size: 45px;
+  line-height: 45px;
+}
+@media only screen and (max-width: 992px) {
+  .siw-cta-title h4 {
+    font-size: 30px;
+    line-height: 30px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .siw-cta-title h4 {
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+.siw-cta-button {
+  text-align: center;
+}
+.siw-cta-button .kad-btn {
+  background: rgba(51, 51, 51, 0.5) !important;
+  color: #fff;
+  border: none !important;
+  -webkit-transition: background 0.6s ease-out 0s !important;
+  -moz-transition: background 0.6s ease-out 0s !important;
+  -o-transition: background 0.6s ease-out 0s !important;
+  transition: background 0.6s ease-out 0s !important;
+}
+.siw-cta-button .kad-btn:hover {
+  background-color: #444 !important;
+  color: #fff;
+}
+@media only screen and (max-width: 767px) {
+  .siw-cta-title {
+    font-size: 26px;
+    line-height: 26px;
+  }
 }
 /*sorteerdropdown verbergen*/
 .woocommerce-ordering {
@@ -850,18 +934,6 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
 .return-to-shop a.wc-backward::after {
   content: none !important;
 }
-/*checkout*/
-.woocommerce-extra-fields label.radio,
-.woocommerce-billing-fields label.radio {
-  display: inline-block !important;
-  padding-right: 20px !important;
-  padding-left: 0px !important;
-  font-weight: 400 !important;
-}
-.woocommerce-extra-fields .checkradios-radio,
-.woocommerce-billing-fields .checkradios-radio {
-  margin-left: 5px !important;
-}
 .wizard > .steps .done a,
 .wizard > .steps .done a:hover,
 .wizard > .steps .done a:active {
@@ -871,43 +943,6 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
 .wizard > .steps a:hover,
 .wizard > .steps a:active {
   text-align: left;
-}
-/*tekstblokken in informatie voor PO hoger maken*/
-#infoForPartner textarea {
-  height: auto !important;
-}
-/*
-Radio buttons zichtbaar maken i.v.m. validatie
-*/
-.woocommerce-billing-fields input[type="radio"],
-.woocommerce-extra-fields input[type="radio"] {
-  display: inline-block !important;
-  margin-left: 10px !important;
-  left: -99999%;
-  zoom: 1;
-  filter: alpha(opacity=0);
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  opacity: 0;
-}
-.woocommerce-billing-fields .radiobutton,
-.woocommerce-extra-fields .radiobutton {
-  position: relative !important;
-  margin-left: -15px !important;
-}
-.woocommerce input.input-text[readonly],
-form.checkout input.input-text[readonly] {
-  background-color: #eee;
-  cursor: not-allowed;
-}
-.terms input[type="checkbox"] {
-  display: inline !important;
-  left: -99999%;
-  zoom: 1;
-  filter: alpha(opacity=0);
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  opacity: 0;
 }
 /*modal*/
 .modal-body {
@@ -919,12 +954,6 @@ form.checkout input.input-text[readonly] {
 }
 .hide-button button.sm-kad-btn {
   display: none;
-}
-#newsletter_signup_field .checkbox {
-  padding-left: 0px;
-}
-#newsletter_signup_field .checkbox .input-checkbox {
-  display: inline-block;
 }
 /*verwijderen producten uit cart*/
 @media (max-width: 767px) {
@@ -945,6 +974,9 @@ form.checkout input.input-text[readonly] {
     width: 20px;
   }
 }
+#kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li {
+  position: relative;
+}
 #kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li a {
   position: static;
   margin-left: 30px;
@@ -956,12 +988,124 @@ form.checkout input.input-text[readonly] {
   left: 0;
   margin-left: 0px;
 }
-#kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li {
-  position: relative;
+.woocommerce-checkout {
+  /*tekstblokken in informatie voor PO hoger maken*/
+  /*readonly velden*/
+  /*Styling land*/
+  /*Styling radiobuttons en checkboxes*/
+  /* Show check mark */
+  /* Checkbox tick */
+  /* Radio button inner circle */
 }
-.woocommerce .checkout .col-2 h3,
-.woocommerce-page .checkout .col-2 h3 {
-  float: none;
+.woocommerce-checkout #infoForPartner textarea {
+  height: auto !important;
+}
+.woocommerce-checkout #payment .methods label {
+  padding-left: 35px;
+}
+.woocommerce-checkout input.input-text[readonly] {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+.woocommerce-checkout .country label.country-label {
+  display: block;
+}
+.woocommerce-checkout .country .description {
+  display: block;
+  font-style: italic;
+}
+.woocommerce-checkout .control-checkbox {
+  margin-top: 0px !important;
+  padding-left: 0px;
+}
+.woocommerce-checkout .control-checkbox label {
+  padding-left: 30px !important;
+}
+.woocommerce-checkout .control-radio label.radio-label {
+  display: block;
+}
+.woocommerce-checkout .control-radio label.radio {
+  padding-left: 25px !important;
+  display: inline-block;
+  font-weight: normal;
+  margin-right: 10px;
+}
+.woocommerce-checkout .control-checkbox label,
+.woocommerce-checkout .control-radio label {
+  position: relative;
+  display: block;
+  margin-bottom: 15px;
+  padding-left: 0px;
+  cursor: pointer;
+}
+.woocommerce-checkout .control-checkbox input,
+.woocommerce-checkout .control-radio input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.woocommerce-checkout .control-indicator {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 1px solid #b9b9b9;
+}
+.woocommerce-checkout .control-indicator:after {
+  position: absolute;
+  display: none;
+  content: '';
+}
+.woocommerce-checkout .control-radio .control-indicator {
+  -webkit-border-radius: 50%;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 50%;
+  -moz-background-clip: padding;
+  border-radius: 50%;
+  background-clip: padding-box;
+  margin-top: 10px;
+}
+.woocommerce-checkout .control-checkbox .control-indicator {
+  left: 0;
+}
+.woocommerce-checkout #payment .terms {
+  padding-bottom: 10px;
+}
+.woocommerce-checkout #payment .terms .checkbox {
+  margin-left: 15px;
+}
+.woocommerce-checkout .terms.control-checkbox .control-indicator {
+  left: 1em;
+}
+.woocommerce-checkout .control-checkbox input:checked + .control-indicator:after,
+.woocommerce-checkout .control-radio input:checked + .control-indicator:after {
+  display: block;
+}
+.woocommerce-checkout .control-checkbox .control-indicator:after {
+  top: 0px;
+  left: 5px;
+  width: 9px;
+  height: 14px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border: solid #ff9900;
+  border-width: 0 3px 3px 0;
+}
+.woocommerce-checkout .control-radio .control-indicator:after {
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  -webkit-border-radius: 50%;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 50%;
+  -moz-background-clip: padding;
+  border-radius: 50%;
+  background-clip: padding-box;
+  background: #ff9900;
 }
 /*
 Styling voor de woocommerce productpagina

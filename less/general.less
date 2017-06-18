@@ -1,13 +1,13 @@
 /* Header */
 .page-header {
-    padding-bottom: 75px;
-    padding-top: 75px;
+	padding-bottom: 75px;
+	padding-top: 75px;
 }
 
 /*breadcrubs*/
 #kadbreadcrumbs{
-    float:left;
-    padding-top:15px;
+	float:left;
+	padding-top:15px;
 }
 
 /*sidebar links i.p.v. rechts*/
@@ -21,28 +21,21 @@
 	}
 }
 
-/* class om content te verbergen op mobiel*/
-@media only screen and (max-width:767px) {
-    .hide_on_mobile {
-        display: none !important;
-    }
-}
-
 
 /* Heading */
 h3{
 	text-align:center;
+	&::after{
+		background-color: #444;
+		content: "";
+		display: block;
+		height: 1px;
+		margin: 0 auto;
+		.transition (background 0.3s ease-out 0s);
+		width: 60px;
+	}
 }
-/*alle headers onderstepen*/
-h3::after{
-    background-color: #444;
-    content: "";
-    display: block;
-    height: 1px;
-    margin: 0 auto;
-    .transition (background 0.3s ease-out 0s);
-    width: 60px;
-}
+
 
 h4.info_box_title{
 	font-size: 18px;
@@ -51,23 +44,18 @@ h4.info_box_title{
 
 /*hover effect voor headers*/
 .hometitle:hover:after, .sectiontitle:hover:after, .widget-title:hover:after, .related.products > h3:hover:after, h3:hover:after{
-    background-color: @primary-color;
+	background-color: @primary-color;
 }
 
 /*juiste kleur in footer*/
 .footerclass .hometitle:hover:after, .footerclass .sectiontitle:hover:after, .footerclass .widget-title:hover:after {
-    background-color: @secondary-color !important;
+	background-color: @secondary-color !important;
 }
 
 /*home*/
 .home-padding {
-    padding: 0px 0;
+	padding: 0px 0;
 }
-
-.home-product {
-	padding-bottom: 30px !important ;
-}
-
 
 
 /*Footer */
@@ -81,9 +69,8 @@ h4.info_box_title{
 }
 /*h5 footer wit maken (bug in pinnacle)*/
 .footerclass h5{
-    color: #f2f2f2;
+	color: #f2f2f2;
 }
-
 
 
 /*
@@ -91,25 +78,25 @@ Styling voor invoervelden
 */
 
 /*default styling voor alle submit-inputs*/
-input[type="submit"], input[type="file"] {
-    padding: 12px 18px;
-    border: none; 
+input[type="submit"]{
+	padding: 12px 18px;
+	border: none; 
 	margin: 10px 0;
-    display: inline-block; 
-    background: @primary-color; 
-    color: #ffffff !important;
+	display: inline-block; 
+	background: @primary-color; 
+	color: #ffffff !important;
 	border-radius:4px;
-    .transition(background .6s ease-out); 
+	.transition(background .6s ease-out); 
 	font-size: 14px !important;
 }
-input[type="submit"]:hover, input[type="file"]:hover, .btn-primary:focus{
+input[type="submit"]:hover, .btn-primary:focus{
 	background: @primary-color-hover !important; 
 	color: #ffffff !important;
 }
 
 
 input[type="text"]:disabled {
-    background: #eee !important;
+	background: #eee !important;
 }
 
 /*aparte kleur voor submits in de footer*/
@@ -117,69 +104,63 @@ input[type="text"]:disabled {
 #containerfooter input[type="submit"]{
 	background-color: @secondary-color !important;
 	&:hover{
-	    background-color: @secondary-color-hover !important;	    
-    }
+		background-color: @secondary-color-hover !important;	    
+	}
 }
-
 
 /*blockquote*/
 blockquote{
 	font-size:14px;
 	.footer{
-	    font-size:100%;	 
+		font-size:100%;	 
 	}
 }
 
 /*pijltje achter links weg*/
 a::after, .kad-post-navigation .kad-previous-link a span::before, .kad-post-navigation .kad-next-link a span::after {
-    content: none !important;
+	content: none !important;
 }	
 
-
-/*styling voor home-carousel*/
-.kad-slider-btn{
-	background: rgba(51,51,51, 0.5) !important;
-	border:none !important;
-	.transition ( background 0.6s ease-out 0s) !important;
-	&:hover{
-	    background-color: #444 !important;
-	}
-}
-@media only screen and (max-width:767px) {
-    .caption-case.kad-placement-rc .kad-slide-caption .caption-case-inner{
-        max-width:100%;
-        float:none;
-    }
-    .kad-slider .kad-slider-btn {
-        font-size: 14px;
-        padding: 6px 24px;
-    }
-}
-
-
 /*iconbox hover-kleur*/
-.kad-icon-box:hover h4::after, .kad-icon-box:hover h3::after {
-    background-color: @primary-color;
-}
-.kad-icon-box:hover i {
-    background-color: @primary-color;
-}
-
-.kad-icon-box:hover .kad-btn-primary {
-    background: none repeat scroll 0 0 @primary-color;
-}
-
-.kad-icon-box .kad-btn{
-	font-size:14px;
+.kad-icon-box{
+	&:hover{
+		h4::after, h3::after, i{
+			background-color: @primary-color;
+		}
+		.kad-btn-primary {
+			background: none repeat scroll 0 0 @primary-color;
+		}
+	}
+	.kad-btn{
+		font-size:14px;
+	}
 }
 
 /*Styling voor kaart NP*/
 #nl-dr, #nl-fr, #nl-ut, #nl-ge{
-    path{
-        fill:@primary-color-hover;
-    }
+	path{
+		fill:@primary-color-hover;
+	}
 }
 
 li.mapplic-list-location > a {
-    padding:5px;
+	padding:5px;
+}
+
+
+
+.geschiedenis-quote .pullquote-center {
+	font-size: inherit;
+	font-style: italic;
+	margin: 10px;
+	color: #777;
+	@media only screen and (max-width:767px) {
+		padding:inherit;
+	}
+	&:before{
+		color:#ccc;
+		@media only screen and (max-width:767px) {
+			display:none;
+		}	
+	}
 }

@@ -42,7 +42,7 @@ if($order->has_status( 'on-hold' )){
  **/
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<div style="font-family:'Open Sans', Verdana, normal; color:#444; font-size:0.9em; ">
+<div style="font-family:Verdana, normal; color:#444; font-size:0.9em; ">
 <p>Beste <?php echo $order->billing_first_name ?>,<br/><br/>
 <?php if($order->has_status( 'on-hold' )){?>
 Heel erg bedankt voor je aanmelding voor een vrijwilligersproject via SIW! We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!<br/><br/>Je inschrijving wordt pas in behandeling genomen als we je betaling ontvangen hebben.<br/><br/>

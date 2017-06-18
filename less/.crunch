@@ -16,6 +16,7 @@
 				}
 			],
 			"sources": [
+				"404.less",
 				"agenda.less",
 				"caldera.less",
 				"contact-form.less",
