@@ -5,10 +5,10 @@
 	$wie_zijn_wij	= SIW_PLUGIN::siw_get_setting('company_profile');
 
 	$content = '[accordion]';
-	$content .= '[pane title="Wat ga je doen?"]' . wp_kses_post( wpautop( $job_data['wat_ga_je_doen'] ) ) . '[/pane]';
-	$content .= '[pane title="Wie ben jij?"]' . wp_kses_post( wpautop( $job_data['wie_ben_jij'] ) ). '[/pane]';
-	$content .= '[pane title="Wat bieden wij jou?"]' . wp_kses_post( wpautop( $job_data['wat_bieden_wij_jou'] ) ) . '[/pane]';
-	$content .= '[pane title="Wie zijn wij?"]' . wp_kses_post( wpautop( $wie_zijn_wij ) ) . '[/pane]';
+	$content .= '[pane title="'. esc_html__('Wat ga je doen?', 'siw' ) . '"]' . wp_kses_post( wpautop( $job_data['wat_ga_je_doen'] ) ) . '[/pane]';
+	$content .= '[pane title="'. esc_html__('Wie ben jij?', 'siw' ) . '"]' . wp_kses_post( wpautop( $job_data['wie_ben_jij'] ) ). '[/pane]';
+	$content .= '[pane title="'. esc_html__('Wat bieden wij jou?', 'siw' ) . '"]' . wp_kses_post( wpautop( $job_data['wat_bieden_wij_jou'] ) ) . '[/pane]';
+	$content .= '[pane title="'. esc_html__('Wie zijn wij?', 'siw' ) . '"]' . wp_kses_post( wpautop( $wie_zijn_wij ) ) . '[/pane]';
 	$content .= '[/accordion]';
 ?>
 
@@ -20,7 +20,7 @@
 			<div class="postclass">
 				<header class="agenda-header">
 					<h1><?php the_title();?></h1>
-					<h5><?php esc_html_e( 'Vrijwillige functie', 'siw'); echo( ! empty( $job_data['uur_per_week'] ) ? sprintf( esc_html__(' ' . '(%s uur/week)', 'siw'), $job_data['uur_per_week'] ) : ''); ?></h5>
+					<h5><?php esc_html_e( 'Vrijwillige functie', 'siw'); echo( ! empty( $job_data['uur_per_week'] ) ? SPACE . sprintf( esc_html__( '(%s uur/week)', 'siw'), $job_data['uur_per_week'] ) : ''); ?></h5>
 					<hr>
 				</header>
 				<div class="row">
