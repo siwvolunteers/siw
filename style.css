@@ -66,11 +66,23 @@ h5.siw_event_title {
   font-style: italic;
 }
 .agenda-quote {
-  margin-top: 0px;
-  margin-bottom: 0px;
+  font-size: inherit;
+  font-style: italic;
+  margin: 10px;
+  color: #777;
+}
+@media only screen and (max-width: 767px) {
+  .agenda-quote {
+    padding: inherit;
+  }
 }
 .agenda-quote:before {
   color: #ccc;
+}
+@media only screen and (max-width: 767px) {
+  .agenda-quote:before {
+    display: none;
+  }
 }
 /* Header */
 .page-header {
@@ -682,11 +694,23 @@ h5.job-title {
   text-align: center;
 }
 .vacature-quote {
-  margin-top: 0px;
-  margin-bottom: 0px;
+  font-size: inherit;
+  font-style: italic;
+  margin: 10px;
+  color: #777;
+}
+@media only screen and (max-width: 767px) {
+  .vacature-quote {
+    padding: inherit;
+  }
 }
 .vacature-quote:before {
   color: #ccc;
+}
+@media only screen and (max-width: 767px) {
+  .vacature-quote:before {
+    display: none;
+  }
 }
 /*styling voor visual form builder*/
 .vfb-wizard ul > li.current div,
