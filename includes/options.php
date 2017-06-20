@@ -24,9 +24,6 @@ add_action( 'admin_init', function () {
 	register_setting( 'siw_forms', 'siw_forms_community_day', 'absint' );
 	register_setting( 'siw_forms', 'siw_forms_evs', 'absint' );
 	register_setting( 'siw_forms', 'siw_forms_op_maat', 'absint' );
-	register_setting( 'siw_forms', 'siw_forms_algemeen', 'absint' );
-	register_setting( 'siw_forms', 'siw_forms_project', 'absint' );
-	register_setting( 'siw_forms', 'siw_forms_begeleider', 'absint' );
 	register_setting( 'siw_forms', 'siw_community_day_vfb_dates_field', 'absint' );
 
 	add_settings_section(
@@ -67,30 +64,6 @@ add_action( 'admin_init', function () {
 		'siw_forms_op_maat'
 	);
 	add_settings_field(
-		'siw_forms_algemeen',
-		__( 'Contactformulier algemeen', 'siw' ),
-		'siw_settings_show_cf7_form_select',
-		'siw_forms',
-		'siw_forms',
-		'siw_forms_algemeen'
-	);
-	add_settings_field(
-		'siw_forms_project',
-		__( 'Contactformulier project', 'siw' ),
-		'siw_settings_show_cf7_form_select',
-		'siw_forms',
-		'siw_forms',
-		'siw_forms_project'
-	);
-	add_settings_field(
-		'siw_forms_begeleider',
-		__( 'Projectbegeleider', 'siw' ),
-		'siw_settings_show_cf7_form_select',
-		'siw_forms',
-		'siw_forms',
-		'siw_forms_begeleider'
-	);
-	add_settings_field(
 		'siw_community_day_vfb_dates_field',
 		__( 'Datums', 'siw' ),
 		'siw_settings_show_vfb_field',
@@ -121,24 +94,6 @@ function siw_settings_show_vfb_form_select( $option ) {
 }
 
 
-function siw_settings_show_cf7_form_select ( $option ) {
-	$args = array(
-		'posts_per_page'	=> -1,
-		'orderby'			=> 'title',
-		'order'				=> 'ASC',
-		'post_type'			=> 'wpcf7_contact_form',
-		'fields' 			=> 'ids'
-	);
-	$forms = get_posts( $args );
-
-	if ( ! empty( $forms ) ) {
-		echo '<select name="', esc_attr( $option ), '">';
-		foreach ( $forms as $form ) {
-			echo '<option value="', $form, '"', get_option( $option ) == $form ? ' selected="selected"' : '', '>', esc_html( get_the_title( $form ) ), '</option>';
-		}
-		echo '</select>';
-	}
-}
 
 
 function siw_settings_show_vfb_field( $option ) {
