@@ -15,8 +15,6 @@ add_action( 'wppusher_theme_was_updated', function () {
 	siw_update_vfb_mail_template( 'op_maat' );
 	siw_update_vfb_mail_template( 'community_day' );
 
-	//mailpoet bevestiging
-	siw_update_mailpoet_mail_template();
 }, 10, 1);
 
 /**
@@ -73,26 +71,7 @@ function siw_update_vfb_mail_template( $form ) {
  * @return void
  */
 function siw_update_mailpoet_mail_template() {
-	//haal template op
-	global $wp_filesystem;
-	$directory = $wp_filesystem->wp_themes_dir( 'siw' );
-	$filename =  $directory . '/siw/assets/html/mail/mailpoet.html';
-	$template = $wp_filesystem->get_contents( $filename );
-	$template = str_replace( array( "\n\r", "\r", "\n" ), '', $template );
-
-	//update template
-	global $wpdb;
-	if ( ! isset( $wpdb->wysija_email ) ) {
-		$wpdb->wysija_email = $wpdb->prefix . 'wysija_email';
-	}
-	$wpdb->query(
-		$wpdb->prepare(
-			"UPDATE $wpdb->wysija_email
-			SET body = %s
-				WHERE $wpdb->wysija_email.type  = 0",
-			$template
-        )
-	);
+	return;
 }
 
 

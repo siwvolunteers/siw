@@ -19,14 +19,13 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
+//TODO: waarom niet customer-processing-order.php includen?
 
 //gegevens aanmelding
 $application_number = $order->get_order_number();
 //ondertekening
 $signature_name = SIW_PLUGIN::siw_get_setting('workcamp_application_signature_name');
 $signature_title = SIW_PLUGIN::siw_get_setting('workcamp_application_signature_title');
-$iban = SIW_IBAN;
 
 /**
  * @hooked WC_Emails::email_header() Output the email header
@@ -34,12 +33,15 @@ $iban = SIW_IBAN;
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <div style="font-family:Verdana, normal; color:#444; font-size:0.9em; ">
-<p>Beste <?php echo $order->billing_first_name ?>,<br/><br/>
-Heel erg bedankt voor je aanmelding voor een vrijwilligersproject via SIW! We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!<br/><br/>Je inschrijving wordt pas in behandeling genomen als we je betaling ontvangen hebben.<br/><br/>
-Je kunt je betaling overmaken naar <?php echo esc_html( $iban );?> o.v.v. je aanmeldnummer (<?php echo esc_html( $application_number );?>).<br/><br/>
-Als je nog vragen hebt, aarzel dan niet om contact met ons op te nemen.<br/><br/>
-Met vriendelijke groet,<br/><br/>
-<?php echo esc_html( $signature_name )?><br/>
+<p><?php
+printf( esc_html__( 'Beste %s,', 'siw'), $order->billing_first_name ); echo BR2;
+esc_html_e( 'Heel erg bedankt voor je aanmelding voor een vrijwilligersproject via SIW!', 'siw' ); echo SPACE;
+esc_html_e( 'We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!', 'siw' ); echo BR2;
+esc_html_e( 'Je inschrijving wordt pas in behandeling genomen als we je betaling ontvangen hebben.', 'siw' ); echo BR2;
+printf( esc_html__( 'Je kunt je betaling overmaken naar %s o.v.v. je aanmeldnummer (%s).', 'siw' ), SIW_IBAN, $application_number ); echo BR;
+esc_html_e( 'Als je nog vragen hebt, aarzel dan niet om contact met ons op te nemen.', 'siw' ); echo BR2;
+esc_html_e( 'Met vriendelijke groet,', 'siw' ); echo BR2;
+echo esc_html( $signature_name )?><br/>
 <span style="color:#808080"><?php echo esc_html( $signature_title )?> </span>
 </p>
 </div>

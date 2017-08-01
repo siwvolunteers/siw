@@ -20,22 +20,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-//gegevens aanmelding
+/* gegevens aanmelding */
 $application_number = $order->get_order_number();
 //ondertekening
 $signature_name = SIW_PLUGIN::siw_get_setting('workcamp_application_signature_name');
 $signature_title = SIW_PLUGIN::siw_get_setting('workcamp_application_signature_title');
-$iban = SIW_IBAN;
+
+
+$tariff = 'regulier';
+foreach ( $order->get_items() as $item_id => $item ) {
+	if ( 'student' == $item['pa_tarief'] ) {
+		$tariff = 'student';
+	}
+}
+
+/*Bepaal leeftijd */
+$age = SIW_PLUGIN::siw_get_age_from_date($order->billing_dob);
 
 //bepaal onderwerp
-if ($order->has_status( 'processing' ) && ('bacs' != $order->payment_method)){
-	$subject = 'Bevestiging aanmelding #' . $application_number;
+if ( $order->has_status( 'processing' ) && ( 'bacs' != $order->payment_method ) ) {
+	$email_heading = sprintf( __( 'Bevestiging aanmelding #%s', 'siw' ), $application_number );
 }
-if ($order->has_status( 'processing' ) && ('bacs' === $order->payment_method)){
-	$subject = 'Bevestiging betaling aanmelding #' . $application_number;
+if ( $order->has_status( 'processing' ) && ( 'bacs' === $order->payment_method ) ) {
+	$email_heading = sprintf( __( 'Bevestiging betaling aanmelding #%s', 'siw'), $application_number );
 }
-if($order->has_status( 'on-hold' )){
-	$subject = 'Bevestiging aanmelding #' . $application_number;
+if ( $order->has_status( 'on-hold' ) ) {
+	$email_heading = sprintf( __( 'Bevestiging aanmelding #%s', 'siw'), $application_number );
 }
 /**
  * @hooked WC_Emails::email_header() Output the email header
@@ -43,31 +53,42 @@ if($order->has_status( 'on-hold' )){
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <div style="font-family:Verdana, normal; color:#444; font-size:0.9em; ">
-<p>Beste <?php echo $order->billing_first_name ?>,<br/><br/>
-<?php if($order->has_status( 'on-hold' )){?>
-Heel erg bedankt voor je aanmelding voor een vrijwilligersproject via SIW! We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!<br/><br/>Je inschrijving wordt pas in behandeling genomen als we je betaling ontvangen hebben.<br/><br/>
-Je kunt je betaling overmaken naar <?php echo esc_html( $iban );?> o.v.v. je aanmeldnummer (<?php echo $application_number;?>).<br/>
+<p><?php
+printf( esc_html__( 'Beste %s,', 'siw'), $order->billing_first_name ); echo BR2;
 
-<?php
+if ( $order->has_status( 'on-hold' ) ) {
+	esc_html_e( 'Heel erg bedankt voor je aanmelding voor een vrijwilligersproject via SIW!', 'siw' ); echo SPACE;
+	esc_html_e( 'We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!', 'siw' ); echo BR2;
+	esc_html_e( 'Je inschrijving wordt pas in behandeling genomen als we je betaling ontvangen hebben.', 'siw' ); echo BR2;
+	printf( esc_html__( 'Je kunt je betaling overmaken naar %s o.v.v. je aanmeldnummer (%s).', 'siw' ), SIW_IBAN, $application_number ); echo BR;
 }
-if ( $order->has_status( 'processing' ) && ('bacs' != $order->payment_method )){?>
-Heel erg bedankt voor je aanmelding en betaling voor een vrijwilligersproject via SIW! We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!<br/><br/>
-<?php
+if ( $order->has_status( 'processing' ) && ('bacs' != $order->payment_method ) ) {
+	esc_html_e( 'Heel erg bedankt voor je aanmelding en betaling voor een vrijwilligersproject via SIW!', 'siw' ); echo SPACE;
+	esc_html_e( 'We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!', 'siw' ); echo BR2;
 }
-if ( $order->has_status( 'processing' ) && ('bacs' === $order->payment_method )){?>
-Heel erg bedankt voor je betaling.<br/><br/>
-<?php
+if ( $order->has_status( 'processing' ) && ( 'bacs' === $order->payment_method ) ) {
+	esc_html_e( 'Heel erg bedankt voor je betaling.', 'siw' ); echo BR2;
 }
-if ($order->has_status( 'processing' ) ){?>
-We gaan je aanmelding doorzetten naar onze partnerorganisatie en nemen contact met je op zodra we bericht hebben ontvangen over je plaatsing.<br/>
-Gemiddeld duurt het 5 werkdagen om een aanmelding voor een project binnen Europa te verwerken. Voor een projectaanmelding buiten Europa duurt het ongeveer 2 weken voor je van ons hoort of je definitief geplaatst bent.<br/><br/>
-We willen je er nadrukkelijk op wijzen dat deze email nog geen bevestiging is van deelname, maar een bevestiging van ontvangst van je betaling. Boek nog geen tickets, totdat je van ons ook een bevestiging hebt ontvangen van je plaatsing. Het kan zijn dat in de tussentijd het maximale deelnemersaantal op het project is bereikt.<br/><br/>
-<?php
+if ( $order->has_status( 'processing' ) ) {
+	esc_html_e( 'We gaan je aanmelding doorzetten naar onze partnerorganisatie en nemen contact met je op zodra we bericht hebben ontvangen over je plaatsing.', 'siw' ); echo BR;
+	esc_html_e( 'Gemiddeld duurt het 5 werkdagen om een aanmelding voor een project binnen Europa te verwerken.', 'siw' ); echo SPACE;
+	esc_html_e( 'Voor een projectaanmelding buiten Europa duurt het ongeveer 2 weken voor je van ons hoort of je definitief geplaatst bent', 'siw' ); echo BR2;
+	esc_html_e( 'We willen je er nadrukkelijk op wijzen dat deze email nog geen bevestiging is van deelname, maar een bevestiging van ontvangst van je betaling.', 'siw' ); echo SPACE;
+	esc_html_e( 'Boek nog geen tickets, totdat je van ons ook een bevestiging hebt ontvangen van je plaatsing.', 'siw' ); echo SPACE;
+	esc_html_e( 'Het kan zijn dat in de tussentijd het maximale deelnemersaantal op het project is bereikt.', 'siw' ); echo BR2;
 }
-?>
-Als je nog vragen hebt, aarzel dan niet om contact met ons op te nemen.<br/><br/>
-Met vriendelijke groet,<br/><br/>
-<?php echo esc_html( $signature_name )?><br/>
+//TODO: waar komen deze teksten?
+/*
+if ( 'student' == $tariff && 18 <= $age ) {
+	esc_html_e('Tekst over studentenbewijs.', 'siw'); echo BR2;
+}
+if ( 18 > $age ) {
+	esc_html_e('Tekst over toestemming ouders. Inclusief link.', 'siw'); echo BR2;
+}
+*/
+esc_html_e( 'Als je nog vragen hebt, aarzel dan niet om contact met ons op te nemen.', 'siw'); echo BR2;
+esc_html_e( 'Met vriendelijke groet,', 'siw' ); echo BR2;
+echo esc_html( $signature_name ); echo BR;?>
 <span style="color:#808080"><?php echo esc_html( $signature_title )?> </span>
 </p>
 </div>

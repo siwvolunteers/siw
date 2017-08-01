@@ -15,6 +15,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 										</td>
 										<td width="10%">&nbsp;</td>
 									</tr>
+									<tr>
+										<td width="10%">&nbsp;</td>
+										<td width="80%" height="20" style="border-bottom:thin solid #ff9900"></td>
+										<td width="10%">&nbsp;</td>
+									</tr>
 								</table>
 							<!-- End Body -->
 							</td>
@@ -24,13 +29,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td width="10%">&nbsp;</td>
-										<td height="20" style="margin-left:10%; margin-right:10%; border-bottom:thin solid #ff9900"></td>
+										<td width="auto" align="center" style="font-family:Verdana, normal; color:#666; font-size:0.7em; font-weight:bold"><?php echo SIW_NAME;?>
+										</td>
 										<td width="10%">&nbsp;</td>
 									</tr>
 									<tr>
 										<td width="10%">&nbsp;</td>
-										<td width="auto" align="center" style="font-family:Verdana, normal; color:#666; font-size:0.7em; font-weight:bold;">
-											<?php echo SIW_NAME; ?> | <?php echo SIW_PHONE; ?> | <a href= "mailto:<?php echo SIW_EMAIL;?>" style="color:#666; text-decoration:none"><?php echo SIW_EMAIL;?></a>
+										<td width="auto" align="center" style="font-family:Verdana, normal; color:#666; font-size:0.7em; font-weight:bold"><a href= "<?php echo SIW_SITE_URL;?>" target="_blank" style="color:#666; text-decoration:none" title="<?php esc_attr_e( 'Bezoek onze website', 'siw' );?>"><?php echo SIW_SITE_NAME;?></a> | <a href="tel:<?php echo SIW_PHONE_FULL;?>" style="color:#666; text-decoration:none"><?php echo SIW_PHONE; ?></a> | <a href="mailto:<?php echo SIW_EMAIL;?>" style="color:#666; text-decoration:none"><?php echo SIW_EMAIL;?></a>
 										</td>
 										<td width="10%">&nbsp;</td>
 									</tr>
@@ -42,11 +47,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td width="40%">&nbsp;</td>
-										<td width="auto" align="center"><a href="https://www.facebook.com/siwvolunteers" target="_blank"><img src="<?php echo SIW_ASSETS_URL; ?>images/mail/facebook.png" alt="facebook" title="Volg ons op Facebook" width="20" height="20" border="0" /></a></td>
-										<td width="auto" align="center"><a href="https://twitter.com/siwvolunteers" target="_blank"><img src="<?php echo SIW_ASSETS_URL; ?>images/mail/twitter.png" alt="twitter" title="Volg ons op Twitter" width="20" height="20" border="0" /></a></td>
-										<td width="auto" align="center"><a href="https://www.instagram.com/siwvolunteers/" target="_blank"><img src="<?php echo SIW_ASSETS_URL; ?>images/mail/instagram.png" alt="instagram" title="Volg ons op Instagram" width="20" height="20" border="0" /></a></td>
-										<td width="auto" align="center"><a href="https://www.youtube.com/user/SIWvolunteerprojects" target="_blank"><img src="<?php echo SIW_ASSETS_URL; ?>images/mail/youtube.png" alt="youtube" title="Volg ons op YouTube" width="20" height="20" border="0" /></a></td>
-										<td width="auto" align="center"><a href="http://www.linkedin.com/company/siw" target="_blank"><img src="<?php echo SIW_ASSETS_URL; ?>images/mail/linkedin.png" alt="linkedin" title="Volg ons op LinkedIn" width="20" height="20" border="0" /></a></td>
+										<td width="auto" align="center"><a href="https://www.facebook.com/siwvolunteers" target="_blank"><img src="<?php echo SIW_ASSETS_URL; ?>images/mail/facebook.png" alt="facebook" title="<?php esc_attr_e( 'Volg ons op Facebook', 'siw' );?>" width="20" height="20" border="0" /></a></td>
+										<td width="auto" align="center"><a href="https://twitter.com/siwvolunteers" target="_blank"><img src="<?php echo SIW_ASSETS_URL; ?>images/mail/twitter.png" alt="twitter" title="<?php esc_attr_e( 'Volg ons op Twitter', 'siw' );?>" width="20" height="20" border="0" /></a></td>
+										<td width="auto" align="center"><a href="https://www.instagram.com/siwvolunteers/" target="_blank"><img src="<?php echo SIW_ASSETS_URL; ?>images/mail/instagram.png" alt="instagram" title="<?php esc_attr_e( 'Volg ons op Instagram', 'siw' );?>" width="20" height="20" border="0" /></a></td>
+										<td width="auto" align="center"><a href="https://www.youtube.com/user/SIWvolunteerprojects" target="_blank"><img src="<?php echo SIW_ASSETS_URL; ?>images/mail/youtube.png" alt="youtube" title="<?php esc_attr_e( 'Volg ons op YouTube', 'siw' );?>" width="20" height="20" border="0" /></a></td>
+										<td width="auto" align="center"><a href="http://www.linkedin.com/company/siw" target="_blank"><img src="<?php echo SIW_ASSETS_URL; ?>images/mail/linkedin.png" alt="linkedin" title="<?php esc_attr_e( 'Volg ons op LinkedIn', 'siw' );?>" width="20" height="20" border="0" /></a></td>
 										<td width="40%">&nbsp;</td>
 									</tr>
 								</table>

@@ -92,6 +92,12 @@ class SIW_Plugin {
 		return \siw_wc_email_show_application_details( $order );
 	}
 
+	public static function siw_get_age_from_date( $date ) {
+		if ( ! function_exists( '\siw_get_age_from_date' ) ) {
+			return;
+		}
+		return \siw_get_age_from_date( $date );
+	}
 
 
 
