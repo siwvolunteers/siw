@@ -1052,6 +1052,7 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
   padding-left: 25px !important;
   display: inline-block;
   font-weight: normal;
+  margin-top: 10px;
   margin-right: 10px;
 }
 .woocommerce-checkout .control-checkbox label,
