@@ -243,6 +243,11 @@ li.mapplic-list-location > a {
     display: none;
   }
 }
+/*infobox in sidebar*/
+.kadence_infobox_widget {
+  margin-top: 0px;
+  margin-bottom: 0px !important;
+}
 .caldera-grid .checkbox {
   margin-top: 0px !important;
   padding-left: 0px;
@@ -1180,8 +1185,4 @@ span.price span.amount {
 .woocommerce table.shop_attributes th,
 .woocommerce-page table.shop_attributes th {
   width: 20%;
-}
-/*infobox in sidebar*/
-.kadence_infobox_widget {
-  margin-top: 0px;
 }
