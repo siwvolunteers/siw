@@ -30,17 +30,3 @@ function siw_get_vfb_form_id( $type ) {
 			return $form_id;
 	}
 }
-
-function siw_get_cf7_form_id( $type ) {
-	switch ($type) {
-		case 'algemeen':
-			$form_id = get_option( 'siw_forms_algemeen' );
-			return $form_id;
-		case 'project':
-			$form_id = get_option( 'siw_forms_project' );
-			return $form_id;
-		case 'begeleider':
-			$form_id = get_option( 'siw_forms_begeleider' );
-			return $form_id;
-	}
-}

@@ -36,9 +36,17 @@ h5.siw_event_title{
 }
 
 .agenda-quote{
-	margin-top:0px;
-	margin-bottom:0px;
-    &:before{
-    	color:#ccc;	
-    }
+	font-size: inherit;
+	font-style: italic;
+	margin: 10px;
+	color: #777;
+	@media only screen and (max-width:767px) {
+		padding:inherit;
+	}
+	&:before{
+		color:#ccc;
+		@media only screen and (max-width:767px) {
+			display:none;
+		}	
+	}
 }

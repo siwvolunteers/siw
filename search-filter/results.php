@@ -54,7 +54,7 @@ if ( $query->have_posts() ) {
 	$text = __( 'Bekijk alle projecten', 'siw' );
 }?>
 <div style="text-align:center">
-	<?php printf( __( '<a href="%s" class="kad-btn kad-btn-primary">', 'siw' ), esc_url( $url ) )?><?php esc_html_e( $text );?></a>
+	<?php printf( '<a href="%s" class="kad-btn kad-btn-primary">', esc_url( $url ) )?><?php esc_html_e( $text );?></a>
 </div>
 
 <?php
