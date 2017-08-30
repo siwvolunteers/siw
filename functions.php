@@ -22,6 +22,5 @@ add_action('wp_head', function() { ?>
 	<link rel="mask-icon" href="/wp-content/themes/siw/assets/icons/safari-pinned-tab.svg" color="#ff9900">
 	<link rel="shortcut icon" href="/wp-content/themes/siw/assets/icons/favicon.ico">
 	<meta name="msapplication-config" content="/wp-content/themes/siw/assets/icons/browserconfig.xml">
-	<meta name="theme-color" content="#ff9900">
 <?php
 });
