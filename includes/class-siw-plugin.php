@@ -16,7 +16,7 @@ class SIW_Plugin {
 	/**
 	* Creates or returns an instance of this class.
 	*
-	* @return  Foo A single instance of this class.
+	* @return  SIW_Plugin A single instance of this class.
 	*/
 	public static function get_instance() {
 
@@ -35,13 +35,6 @@ class SIW_Plugin {
 	/*--------------------------------------------*
 	* Functions
 	*--------------------------------------------*/
-	public static function siw_show_quick_search_widget() {
-		if ( ! function_exists( '\siw_show_quick_search_widget' ) ) {
-			return;
-		}
-		\siw_show_quick_search_widget();
-	}
-
 	public static function siw_get_setting( $setting ) {
 		if ( ! function_exists( '\siw_get_setting' ) ) {
 			return;
