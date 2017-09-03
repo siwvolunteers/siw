@@ -248,6 +248,9 @@ li.mapplic-list-location > a {
   margin-top: 0px;
   margin-bottom: 0px !important;
 }
+.kad-infobox {
+  padding: 5px;
+}
 .caldera-grid .checkbox {
   margin-top: 0px !important;
   padding-left: 0px;
@@ -1020,11 +1023,18 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
 .woocommerce-checkout {
   /*tekstblokken in informatie voor PO hoger maken*/
   /*readonly velden*/
+  /*Styling nationaliteit + talen*/
   /*Styling land*/
   /*Styling radiobuttons en checkboxes*/
   /* Show check mark */
   /* Checkbox tick */
   /* Radio button inner circle */
+}
+.woocommerce-checkout #wizard div.content {
+  clear: right;
+}
+.woocommerce-checkout p.form-row-first {
+  clear: left;
 }
 .woocommerce-checkout #infoForPartner textarea {
   height: auto !important;
@@ -1036,7 +1046,7 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
   background-color: #eee;
   cursor: not-allowed;
 }
-.woocommerce-checkout .country label.country-label {
+.woocommerce-checkout .select label.select-label {
   display: block;
 }
 .woocommerce-checkout .country .description {

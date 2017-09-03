@@ -62,6 +62,14 @@
 }
 
 .woocommerce-checkout{
+	
+	#wizard div.content{
+		clear:right;	
+	}
+	
+	p.form-row-first{
+		clear:left;	
+	}
 
 	/*tekstblokken in informatie voor PO hoger maken*/
 	#infoForPartner textarea{
@@ -78,11 +86,15 @@
 		cursor: not-allowed;
 	}
 	
-	/*Styling land*/
-	.country{
-		label.country-label{
+	/*Styling nationaliteit + talen*/
+	.select{
+		label.select-label{
 			display:block;	
 		}
+	}
+	
+	/*Styling land*/
+	.country{
 		.description{
 			display:block;
 			font-style:italic;
