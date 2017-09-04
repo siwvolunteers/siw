@@ -841,6 +841,10 @@ h5.job-title {
   font-weight: bold;
 }
 /*SIW contact widget*/
+.vcard {
+  margin: 0 auto;
+  display: table;
+}
 .vcard p {
   margin-bottom: 5px;
 }
