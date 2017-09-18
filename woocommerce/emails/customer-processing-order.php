@@ -35,13 +35,13 @@ foreach ( $order->get_items() as $item_id => $item ) {
 }
 
 /*Bepaal leeftijd */
-$age = SIW_PLUGIN::siw_get_age_from_date($order->billing_dob);
+$age = SIW_PLUGIN::siw_get_age_from_date( $order->get_meta('_billing_dob') );
 
 //bepaal onderwerp
-if ( $order->has_status( 'processing' ) && ( 'bacs' != $order->payment_method ) ) {
+if ( $order->has_status( 'processing' ) && ( 'bacs' != $order->get_payment_method() ) ) {
 	$email_heading = sprintf( __( 'Bevestiging aanmelding #%s', 'siw' ), $application_number );
 }
-if ( $order->has_status( 'processing' ) && ( 'bacs' === $order->payment_method ) ) {
+if ( $order->has_status( 'processing' ) && ( 'bacs' === $order->get_payment_method() ) ) {
 	$email_heading = sprintf( __( 'Bevestiging betaling aanmelding #%s', 'siw'), $application_number );
 }
 if ( $order->has_status( 'on-hold' ) ) {
@@ -54,7 +54,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <div style="font-family:Verdana, normal; color:#444; font-size:0.9em; ">
 <p><?php
-printf( esc_html__( 'Beste %s,', 'siw'), $order->billing_first_name ); echo BR2;
+printf( esc_html__( 'Beste %s,', 'siw'), $order->get_billing_first_name() ); echo BR2;
 
 if ( $order->has_status( 'on-hold' ) ) {
 	esc_html_e( 'Heel erg bedankt voor je aanmelding voor een vrijwilligersproject via SIW!', 'siw' ); echo SPACE;
@@ -62,11 +62,11 @@ if ( $order->has_status( 'on-hold' ) ) {
 	esc_html_e( 'Je inschrijving wordt pas in behandeling genomen als we je betaling ontvangen hebben.', 'siw' ); echo BR2;
 	printf( esc_html__( 'Je kunt je betaling overmaken naar %s o.v.v. je aanmeldnummer (%s).', 'siw' ), SIW_IBAN, $application_number ); echo BR;
 }
-if ( $order->has_status( 'processing' ) && ('bacs' != $order->payment_method ) ) {
+if ( $order->has_status( 'processing' ) && ('bacs' != $order->get_payment_method() ) ) {
 	esc_html_e( 'Heel erg bedankt voor je aanmelding en betaling voor een vrijwilligersproject via SIW!', 'siw' ); echo SPACE;
 	esc_html_e( 'We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!', 'siw' ); echo BR2;
 }
-if ( $order->has_status( 'processing' ) && ( 'bacs' === $order->payment_method ) ) {
+if ( $order->has_status( 'processing' ) && ( 'bacs' === $order->get_payment_method() ) ) {
 	esc_html_e( 'Heel erg bedankt voor je betaling.', 'siw' ); echo BR2;
 }
 if ( $order->has_status( 'processing' ) ) {
