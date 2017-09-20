@@ -34,7 +34,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <div style="font-family:Verdana, normal; color:#444; font-size:0.9em; ">
 <p><?php
-printf( esc_html__( 'Beste %s,', 'siw'), $order->billing_first_name ); echo BR2;
+printf( esc_html__( 'Beste %s,', 'siw'), $order->get_billing_first_name() ); echo BR2;
 esc_html_e( 'Heel erg bedankt voor je aanmelding voor een vrijwilligersproject via SIW!', 'siw' ); echo SPACE;
 esc_html_e( 'We doen ons best om ervoor te zorgen dat dit voor jou een onvergetelijke ervaring wordt!', 'siw' ); echo BR2;
 esc_html_e( 'Je inschrijving wordt pas in behandeling genomen als we je betaling ontvangen hebben.', 'siw' ); echo BR2;

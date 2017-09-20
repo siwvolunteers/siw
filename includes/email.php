@@ -6,16 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/*
- * Update alle mailtemplates na theme-update
- */
-add_action( 'wppusher_theme_was_updated', function () {
-	//vfb templates
-	siw_update_vfb_mail_template( 'evs' );
-	siw_update_vfb_mail_template( 'op_maat' );
-	siw_update_vfb_mail_template( 'community_day' );
-
-}, 10, 1);
 
 /**
  * Update VFB Pro e-mailtemplate

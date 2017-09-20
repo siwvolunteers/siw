@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 2.7
+Version: 2.8
 */
 .siw-404 {
   height: 100vh;
@@ -247,6 +247,9 @@ li.mapplic-list-location > a {
 .kadence_infobox_widget {
   margin-top: 0px;
   margin-bottom: 0px !important;
+}
+.kad-infobox {
+  padding: 5px;
 }
 .caldera-grid .checkbox {
   margin-top: 0px !important;
@@ -838,6 +841,10 @@ h5.job-title {
   font-weight: bold;
 }
 /*SIW contact widget*/
+.vcard {
+  margin: 0 auto;
+  display: table;
+}
 .vcard p {
   margin-bottom: 5px;
 }
@@ -1020,11 +1027,18 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
 .woocommerce-checkout {
   /*tekstblokken in informatie voor PO hoger maken*/
   /*readonly velden*/
+  /*Styling nationaliteit + talen*/
   /*Styling land*/
   /*Styling radiobuttons en checkboxes*/
   /* Show check mark */
   /* Checkbox tick */
   /* Radio button inner circle */
+}
+.woocommerce-checkout #wizard div.content {
+  clear: right;
+}
+.woocommerce-checkout p.form-row-first {
+  clear: left;
 }
 .woocommerce-checkout #infoForPartner textarea {
   height: auto !important;
@@ -1036,7 +1050,7 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
   background-color: #eee;
   cursor: not-allowed;
 }
-.woocommerce-checkout .country label.country-label {
+.woocommerce-checkout .select label.select-label {
   display: block;
 }
 .woocommerce-checkout .country .description {
