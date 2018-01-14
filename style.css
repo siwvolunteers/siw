@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 2.8
+Version: 2.8.1
 */
 .siw-404 {
   height: 100vh;
@@ -155,6 +155,10 @@ h3:hover:after {
 /*h5 footer wit maken (bug in pinnacle)*/
 .footerclass h5 {
   color: #f2f2f2;
+}
+/* Aparte footer layout voor Engels */
+html[lang=en] .footerclass .footercol4 {
+  width: 100%;
 }
 /*
 Styling voor invoervelden
@@ -578,6 +582,54 @@ Styling voor portfolio
 }
 .siw-social .linkedin:hover {
   color: #007bb6;
+}
+#containerfooter .siw-social-links {
+  text-align: center;
+  margin-top: 10px;
+}
+#containerfooter .siw-social-links a {
+  display: inline-block;
+  float: none;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  margin-left: 3px;
+  margin-bottom: 3px;
+  color: #f2f2f2;
+  -webkit-border-radius: 50%;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 50%;
+  -moz-background-clip: padding;
+  border-radius: 50%;
+  background-clip: padding-box;
+  box-sizing: content-box;
+}
+#containerfooter .siw-social-links a i {
+  font-size: 18px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+#containerfooter .siw-social-links .facebook:hover {
+  color: #fff;
+  background-color: #3b5998;
+}
+#containerfooter .siw-social-links .twitter:hover {
+  color: #fff;
+  background-color: #00aced;
+}
+#containerfooter .siw-social-links .instagram:hover {
+  color: #fff;
+  background-color: #517fa4;
+}
+#containerfooter .siw-social-links .youtube:hover {
+  color: #fff;
+  background-color: #ff3333;
+}
+#containerfooter .siw-social-links .linkedin:hover {
+  color: #fff;
+  background-color: #007bb6;
 }
 /*styling voor snelzoeken*/
 .snelzoeken {
