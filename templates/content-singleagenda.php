@@ -32,7 +32,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-7">
+					<div class="col-md-6">
 						<?php if ( $event_data['program'] ):?>
 						<h3><?php esc_html_e( 'Programma', 'siw' );?></h3>
 						<div class="row">
@@ -59,7 +59,7 @@
 						</p>
 						<?php echo do_shortcode( $location_map );?>
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-6">
 						<h3><?php esc_html_e( 'Aanmelden', 'siw' );?></h3>
 						<?php if ( $event_data['end_date'] > date( 'Y-m-d') ):?>
 						<?php if ( 'formulier' == $event_data['application'] ) {

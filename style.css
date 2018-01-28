@@ -93,6 +93,10 @@ h5.siw_event_title {
 #kadbreadcrumbs {
   float: left;
   padding-top: 15px;
+  text-align: left;
+}
+#kadbreadcrumbs .kt-breadcrumb-container {
+  padding-left: 0px;
 }
 /*sidebar links i.p.v. rechts*/
 @media (min-width: 992px) {
