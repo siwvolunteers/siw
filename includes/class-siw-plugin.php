@@ -92,6 +92,11 @@ class SIW_Plugin {
 		return \siw_get_age_from_date( $date );
 	}
 
-
+	public static function siw_generate_accordion( $panes ) {
+		if ( ! function_exists( '\siw_generate_accordion' ) ) {
+			return;
+		}
+		return \siw_generate_accordion( $panes );
+	}
 
 }
