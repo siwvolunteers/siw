@@ -8,6 +8,10 @@
 #kadbreadcrumbs{
 	float:left;
 	padding-top:15px;
+	text-align:left;
+	.kt-breadcrumb-container{
+		padding-left: 0px;	
+	}
 }
 
 /*sidebar links i.p.v. rechts*/
@@ -72,6 +76,10 @@ h4.info_box_title{
 	color: #f2f2f2;
 }
 
+/* Aparte footer layout voor Engels */
+html[lang=en] .footerclass .footercol4 {
+    width: 100%;
+}
 
 /*
 Styling voor invoervelden
@@ -136,12 +144,6 @@ a::after, .kad-post-navigation .kad-previous-link a span::before, .kad-post-navi
 	}
 }
 
-/*Styling voor kaart NP*/
-#nl-dr, #nl-fr, #nl-ut, #nl-ge{
-	path{
-		fill:@primary-color-hover;
-	}
-}
 
 li.mapplic-list-location > a {
 	padding:5px;

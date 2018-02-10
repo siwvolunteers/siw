@@ -6,13 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 require_once( get_stylesheet_directory() . '/includes/class-siw-plugin.php' );
-require_once( get_stylesheet_directory() . '/includes/email.php' );
-require_once( get_stylesheet_directory() . '/includes/get-information.php' );
-require_once( get_stylesheet_directory() . '/includes/vfb.php' );
-require_once( get_stylesheet_directory() . '/includes/options.php' );
 
 
-/* Icons toevoegen aan head*/
+
+/* Icons toevoegen aan head TODO: verplaatsen naar plugin*/ 
 add_action('wp_head', function() { ?>
 	<link rel="apple-touch-icon" sizes="180x180" href="/wp-content/themes/siw/assets/icons/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/wp-content/themes/siw/assets/icons/favicon-32x32.png">

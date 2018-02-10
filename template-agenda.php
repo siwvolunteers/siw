@@ -5,7 +5,7 @@ Template Name: Agenda
 ?>
 		<?php get_header(); ?>
 			<?php get_template_part('templates/page', 'header'); ?>
-	
+
 	<div id="content" class="container">
 		<div class="row">
 			<?php $fullclass = 'fullwidth'; global $post; $postclass = 'postlist'; ?>
@@ -13,7 +13,7 @@ Template Name: Agenda
 		<div class="entry-content" itemprop="mainContentOfPage">
 					<?php get_template_part('templates/content', 'page'); ?>
 		</div>
-			<?php  global $post, $pinnacle; $blog_category = get_post_meta( $post->ID, '_kad_blog_cat', true ); 
+			<?php  global $post, $pinnacle; $blog_category = get_post_meta( $post->ID, '_kad_blog_cat', true );
  				$meta_query = array(
 					'relation'	=> 'AND',
 					array(
@@ -22,8 +22,8 @@ Template Name: Agenda
 						'compare'	=> '>=',
 					)
 				);
-					$temp = $wp_query; 
-					$wp_query = null; 
+					$temp = $wp_query;
+					$wp_query = null;
 					$wp_query = new WP_Query();
 					$wp_query->query(array(
 						'paged'				=> $paged,
@@ -36,26 +36,18 @@ Template Name: Agenda
 						)
 					);
 					$count =0;
-					if ( $wp_query->have_posts() ) : while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
-					<?php 
-							if( $display_sidebar ){
-								global $kt_post_with_sidebar; 
-								$kt_post_with_sidebar = true;
-							} else {
-								global $kt_feat_width; 
-								$kt_post_with_sidebar = false;
-							}
-						 	get_template_part('templates/content', 'agenda'); 
-
+					if ( $wp_query->have_posts() ) : while ( $wp_query->have_posts() ) : $wp_query->the_post();
+						$count++;
+						include( locate_template( 'templates/content-agenda.php' ) );
 					endwhile; else: ?>
 					<div>
-						<h5 class="error-not-found"><?php _e('Er zijn momenteel geen geplande evenementen.', 'siw'); ?></h5>
+						<h5 class="error-not-found"><?php _e( 'Er zijn momenteel geen geplande evenementen.', 'siw' ); ?></h5>
 					</div>
 					<?php endif; ?>
 
-				<?php 
+				<?php
 				$wp_query = null; $wp_query = $temp;
-				wp_reset_query(); 
+				wp_reset_query();
 ?>
 <?php do_action('kt_after_pagecontent'); ?>
 </div><!-- /.main -->

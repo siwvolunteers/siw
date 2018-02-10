@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 2.8
+Version: 2.9
 */
 .siw-404 {
   height: 100vh;
@@ -93,6 +93,10 @@ h5.siw_event_title {
 #kadbreadcrumbs {
   float: left;
   padding-top: 15px;
+  text-align: left;
+}
+#kadbreadcrumbs .kt-breadcrumb-container {
+  padding-left: 0px;
 }
 /*sidebar links i.p.v. rechts*/
 @media (min-width: 992px) {
@@ -156,6 +160,10 @@ h3:hover:after {
 .footerclass h5 {
   color: #f2f2f2;
 }
+/* Aparte footer layout voor Engels */
+html[lang=en] .footerclass .footercol4 {
+  width: 100%;
+}
 /*
 Styling voor invoervelden
 */
@@ -213,13 +221,6 @@ a::after,
 }
 .kad-icon-box .kad-btn {
   font-size: 14px;
-}
-/*Styling voor kaart NP*/
-#nl-dr path,
-#nl-fr path,
-#nl-ut path,
-#nl-ge path {
-  fill: #ffcc33;
 }
 li.mapplic-list-location > a {
   padding: 5px;
@@ -482,63 +483,6 @@ Styling voor Ninja Kick contactform
   -o-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-/* mCheckable - v1.0.2 - 2015-03-01
-* https://github.com/mIRUmd/mCheckable/
-* Copyright (c) 2015 Balan Miroslav; */
-.mCheckable {
-  display: inline-block;
-  cursor: pointer;
-  margin-right: 10px;
-  text-align: center;
-  vertical-align: middle;
-  background-color: #fff;
-  border: 1px solid #b9b9b9;
-  height: 20px;
-  width: 20px;
-  font-size: 0;
-}
-.mCheckable div {
-  background-color: #eeeeee;
-  margin-top: 3px;
-  width: 12px;
-  height: 12px;
-}
-.mCheckable.radiobutton.checked div {
-  background-color: #ff9900;
-}
-.mCheckable.radiobutton {
-  -webkit-border-radius: 50%;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 50%;
-  -moz-background-clip: padding;
-  border-radius: 50%;
-  background-clip: padding-box;
-}
-.mCheckable.checkbox div {
-  display: inline;
-}
-.mCheckable.radiobutton div {
-  -webkit-border-radius: 50%;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 50%;
-  -moz-background-clip: padding;
-  border-radius: 50%;
-  background-clip: padding-box;
-  display: inline-block;
-}
-.mCheckable.checkbox {
-  padding-left: 0px;
-  display: inline-block;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-}
-.mCheckable.checkbox.checked div::before {
-  font-family: kt-icon !important;
-  content: "\e370" !important;
-  color: #ff9900 !important;
-  font-size: 16px !important;
-}
 /*
 Styling voor portfolio
 */
@@ -578,6 +522,54 @@ Styling voor portfolio
 }
 .siw-social .linkedin:hover {
   color: #007bb6;
+}
+#containerfooter .siw-social-links {
+  text-align: center;
+  margin-top: 10px;
+}
+#containerfooter .siw-social-links a {
+  display: inline-block;
+  float: none;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  margin-left: 3px;
+  margin-bottom: 3px;
+  color: #f2f2f2;
+  -webkit-border-radius: 50%;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 50%;
+  -moz-background-clip: padding;
+  border-radius: 50%;
+  background-clip: padding-box;
+  box-sizing: content-box;
+}
+#containerfooter .siw-social-links a i {
+  font-size: 18px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+#containerfooter .siw-social-links .facebook:hover {
+  color: #fff;
+  background-color: #3b5998;
+}
+#containerfooter .siw-social-links .twitter:hover {
+  color: #fff;
+  background-color: #00aced;
+}
+#containerfooter .siw-social-links .instagram:hover {
+  color: #fff;
+  background-color: #517fa4;
+}
+#containerfooter .siw-social-links .youtube:hover {
+  color: #fff;
+  background-color: #ff3333;
+}
+#containerfooter .siw-social-links .linkedin:hover {
+  color: #fff;
+  background-color: #007bb6;
 }
 /*styling voor snelzoeken*/
 .snelzoeken {
@@ -719,102 +711,7 @@ h5.job-title {
   .vacature-quote:before {
     display: none;
   }
-}
-/*styling voor visual form builder*/
-.vfb-wizard ul > li.current div,
-.vfb-wizard ul > li.current div:hover,
-.vfb-wizard ul > li.current div:active {
-  background: none repeat scroll 0 0 #ff9900;
-}
-.vfbp-form .btn-primary {
-  background-color: #ff9900;
-  border-color: #ff9900;
-  color: #fff;
-}
-.vfbp-form .btn-primary:hover {
-  background-color: #ffcc33;
-  border-color: #ffcc33;
-  color: #fff;
-}
-.vfb-wizard ul > li {
-  display: inline-table;
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-/* styling voor select */
-.vfbp-form .select2-container {
-  border: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  padding: 0;
-}
-.vfbp-form .btn-file {
-  overflow: visible;
-}
-/* styling voor likert-radiobuttons*/
-.vfb-likert-row .mCheckable {
-  width: 20px;
-  border: 1px solid #b9b9b9;
-}
-.vfb-likert-row .mCheckable div {
-  vertical-align: top;
-}
-/*weer zichtbaar maken ivm validatie*/
-.vfb-radio input[type="radio"] {
-  display: block !important;
-  left: -99999%;
-  zoom: 1;
-  filter: alpha(opacity=0);
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  opacity: 0;
-}
-.vfb-checkbox input[type="checkbox"] {
-  display: block !important;
-  left: -99999%;
-  zoom: 1;
-  filter: alpha(opacity=0);
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  opacity: 0;
-}
-.vfb-radio .mCheckable {
-  position: relative !important;
-}
-.vfb-radio label,
-.vfb-checkbox label {
-  padding-left: 0px !important;
-}
-/*styling voor datepicker*/
-.datepicker table tr td span:hover,
-.datepicker table tr td.day:hover,
-.datepicker table tr th:hover,
-.datepicker table tr td span.active {
-  background: #ff9900 none repeat scroll 0 0 !important;
-  color: #fff !important;
-}
-.vfbp-form input[type="file"] {
-  padding: 12px 18px;
-  border: none;
-  margin: 10px 0;
-  display: inline-block;
-  background: #ff9900;
-  color: #ffffff !important;
-  -webkit-border-radius: 4px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 4px;
-  -moz-background-clip: padding;
-  border-radius: 4px;
-  background-clip: padding-box;
-  -webkit-transition: background 0.6s ease-out;
-  -moz-transition: background 0.6s ease-out;
-  -o-transition: background 0.6s ease-out;
-  transition: background 0.6s ease-out;
-  font-size: 14px !important;
-}
-.vfbp-form input[type="file"]:hover {
-  background: #ffcc33 !important;
+
 }
 /*Quote widget*/
 .siw_quote_widget {
@@ -963,6 +860,12 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
   font-style: normal;
   font-weight: 400;
   margin-left: -12px;
+}
+.woo-archive-intro {
+  background-color: #444;
+  color: #fff;
+  padding: 15px;
+  margin: 15px;
 }
 /*pijltje op knoppen verbergen*/
 .wc-forward::after,
