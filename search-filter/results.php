@@ -3,7 +3,7 @@
 (c)2015 SIW Internationale Vrijwilligersprojecten
 */
 
-$shop_url = get_permalink( woocommerce_get_page_id( 'shop' ) );
+$shop_url = get_permalink( wc_get_page_id( 'shop' ) );
 
 if ( $query->have_posts() ) {
 
@@ -11,7 +11,7 @@ if ( $query->have_posts() ) {
 	$woocommerce_loop['columns']=3;?>
 	<?php woocommerce_product_loop_start(); ?>
 	<?php while ( $query->have_posts() ) : $query->the_post(); ?>
-		<?php woocommerce_get_template_part( 'content', 'product' ); ?>
+		<?php wc_get_template_part( 'content', 'product' ); ?>
 	<?php endwhile; // end of the loop. ?>
 
 	<?php woocommerce_product_loop_end(); ?>
