@@ -17,7 +17,7 @@
 			'content' => '[caldera_form id="contact_evs"]',
 		),
 	);
-	$content = SIW_Plugin::siw_generate_accordion( $panes );
+	$content = apply_filters( 'siw_accordion', false, $panes );
 ?>
 
 <div id="content" class="container">

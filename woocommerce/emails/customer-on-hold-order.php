@@ -24,8 +24,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 //gegevens aanmelding
 $application_number = $order->get_order_number();
 //ondertekening
-$signature_name = SIW_PLUGIN::siw_get_setting('workcamp_application_signature_name');
-$signature_title = SIW_PLUGIN::siw_get_setting('workcamp_application_signature_title');
+$signature_name = apply_filters( 'siw_setting', false, 'workcamp_application_signature_name' );
+$signature_title = apply_filters( 'siw_setting', false, 'workcamp_application_signature_title' );
+
 
 /**
  * @hooked WC_Emails::email_header() Output the email header
@@ -46,9 +47,8 @@ echo esc_html( $signature_name )?><br/>
 </p>
 </div>
 
-<?php SIW_PLUGIN::siw_wc_email_show_project_details( $order, $application_number );?>
-
-<?php SIW_PLUGIN::siw_wc_email_show_application_details( $order );?>
+<?php do_action( 'siw_wc_email_show_project_details', $order, $application_number );?>
+<?php do_action( 'siw_wc_email_show_application_details', $order );?>
 
 <?php
 /**

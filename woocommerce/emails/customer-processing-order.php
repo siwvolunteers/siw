@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /* gegevens aanmelding */
 $application_number = $order->get_order_number();
 //ondertekening
-$signature_name = SIW_PLUGIN::siw_get_setting('workcamp_application_signature_name');
-$signature_title = SIW_PLUGIN::siw_get_setting('workcamp_application_signature_title');
+$signature_name = apply_filters( 'siw_setting', false, 'workcamp_application_signature_name' );
+$signature_title = apply_filters( 'siw_setting', false, 'workcamp_application_signature_title' );
 
 
 $tariff = 'regulier';
@@ -34,8 +34,7 @@ foreach ( $order->get_items() as $item_id => $item ) {
 	}
 }
 
-/*Bepaal leeftijd */
-$age = SIW_PLUGIN::siw_get_age_from_date( $order->get_meta('_billing_dob') );
+
 
 //bepaal onderwerp
 if ( $order->has_status( 'processing' ) && ( 'bacs' != $order->get_payment_method() ) ) {
@@ -78,6 +77,8 @@ if ( $order->has_status( 'processing' ) ) {
 	esc_html_e( 'Het kan zijn dat in de tussentijd het maximale deelnemersaantal op het project is bereikt.', 'siw' ); echo BR2;
 }
 //TODO: waar komen deze teksten?
+
+/*TODO::Bepaal leeftijd */
 /*
 if ( 'student' == $tariff && 18 <= $age ) {
 	esc_html_e('Tekst over studentenbewijs.', 'siw'); echo BR2;
@@ -93,9 +94,8 @@ echo esc_html( $signature_name ); echo BR;?>
 </p>
 </div>
 
-<?php SIW_PLUGIN::siw_wc_email_show_project_details( $order, $application_number );?>
-
-<?php SIW_PLUGIN::siw_wc_email_show_application_details( $order );?>
+<?php do_action( 'siw_wc_email_show_project_details', $order, $application_number );?>
+<?php do_action( 'siw_wc_email_show_application_details', $order );?>
 
 
 <?php /**
