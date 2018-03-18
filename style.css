@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 2.9
+Version: 2.9.1
 */
 .siw-404 {
   height: 100vh;
@@ -252,6 +252,29 @@ li.mapplic-list-location > a {
 .kad-infobox {
   padding: 5px;
 }
+/* EVS */
+article.evs_project {
+  background-color: #fff;
+}
+.evs-project-quote {
+  font-size: inherit;
+  font-style: italic;
+  margin: 10px;
+  color: #777;
+}
+@media only screen and (max-width: 767px) {
+  .evs-project-quote {
+    padding: inherit;
+  }
+}
+.evs-project-quote:before {
+  color: #ccc;
+}
+@media only screen and (max-width: 767px) {
+  .evs-project-quote:before {
+    display: none;
+  }
+}
 .caldera-grid .checkbox {
   margin-top: 0px !important;
   padding-left: 0px;
@@ -346,86 +369,6 @@ li.mapplic-list-location > a {
   border-radius: 50%;
   background-clip: padding-box;
   background: #ff9900;
-}
-/*contact form styling*/
-div.wpcf7-validation-errors,
-div.wpcf7-mail-sent-ok {
-  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
-  border: 2px solid;
-  -webkit-border-radius: 4px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 4px;
-  -moz-background-clip: padding;
-  border-radius: 4px;
-  background-clip: padding-box;
-  border-color: #ff9900;
-  color: #444;
-  font-size: 15px;
-  line-height: 40px;
-  list-style: outside none none;
-  margin: 0 0 30px;
-  padding: 5px 5px 5px 55px;
-  position: relative;
-  width: auto;
-}
-div.wpcf7-validation-errors::after,
-div.wpcf7-mail-sent-ok::after {
-  clear: both;
-  content: "";
-  display: block;
-}
-div.wpcf7-validation-errors::before,
-div.wpcf7-mail-sent-ok::before {
-  color: #ff9900;
-  display: block;
-  height: 40px;
-  left: 15px;
-  line-height: 40px;
-  position: absolute;
-  text-align: center;
-  top: 15px;
-  vertical-align: middle;
-  width: 30px;
-  background-color: transparent;
-  font-family: kt-icon;
-  font-style: normal;
-  font-variant: normal;
-  font-size: 18px;
-  font-weight: 400;
-  text-transform: none;
-  top: 5px;
-}
-div.wpcf7-validation-errors::before {
-  content: "\e362";
-}
-div.wpcf7-mail-sent-ok::before {
-  content: "\e367";
-}
-.wpcf7-form textarea {
-  height: 5em !important;
-}
-span.wpcf7-not-valid-tip {
-  color: #ff9900;
-}
-/*
-Styling voor Ninja Kick contactform
-*/
-#ncf_sidebar,
-#ncf_sidebar .ncf_user_bio,
-#ncf_sidebar input,
-#ncf_sidebar textarea,
-#ncf_sidebar form.wpcf7-form p {
-  font-family: 'Open Sans', sans-serif !important;
-  color: #444 !important;
-}
-#ncf_sidebar .ncf_ph label {
-  position: static;
-  padding: 0px;
-}
-@media only screen and (max-width: 767px) {
-  .nks_cc_trigger_tabs {
-    display: none !important;
-  }
 }
 /*SIW-mailpoet widget*/
 .siw-aanmelden-nieuwsbrief input {
@@ -711,7 +654,6 @@ h5.job-title {
   .vacature-quote:before {
     display: none;
   }
-
 }
 /*Quote widget*/
 .siw_quote_widget {
