@@ -382,8 +382,7 @@ article.evs_project {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-#newsletter_message,
-#newsletter_email_message {
+#newsletter_message {
   color: #59ab9c;
   font-size: 11px;
   border: 1px solid #59ab9c;
@@ -394,37 +393,66 @@ article.evs_project {
   border-radius: 4px;
   background-clip: padding-box;
 }
-/*loading-animatie*/
-#newsletter_loading {
-  border: 10px solid #f3f3f3;
-  border-top: 10px solid #59ab9c;
+#newsletter_loading,
+#newsletter_loading:before,
+#newsletter_loading:after {
   -webkit-border-radius: 50%;
   -webkit-background-clip: padding-box;
   -moz-border-radius: 50%;
   -moz-background-clip: padding;
   border-radius: 50%;
   background-clip: padding-box;
-  width: 75px;
-  height: 75px;
-  -webkit-animation: spin 2s linear infinite;
-  -moz-animation: spin 2s linear infinite;
-  -o-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-  margin: 0 auto;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: dots 1.8s infinite ease-in-out;
+  -moz-animation: dots 1.8s infinite ease-in-out;
+  -o-animation: dots 1.8s infinite ease-in-out;
+  animation: dots 1.8s infinite ease-in-out;
 }
-.keyframes spin 0% {
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
+#newsletter_loading {
+  color: #59ab9c;
+  font-size: 10px;
+  margin: 10px auto;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  transform: translateZ(0px);
+  -webkit-animation-delay: -0.16s;
+  -moz-animation-delay: -0.16s;
+  -o-animation-delay: -0.16s;
+  animation-delay: -0.16s;
 }
-.keyframes spin 100% {
-  -webkit-transform: rotate(360deg);
-  -moz-transform: rotate(360deg);
-  -ms-transform: rotate(360deg);
-  -o-transform: rotate(360deg);
-  transform: rotate(360deg);
+#newsletter_loading:before,
+#newsletter_loading:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+#newsletter_loading:before {
+  left: -3.5em;
+  -webkit-animation-delay: -0.32s;
+  -moz-animation-delay: -0.32s;
+  -o-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+#newsletter_loading:after {
+  left: 3.5em;
+}
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes dots{ 0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+@-moz-keyframes dots{ 0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+@-o-keyframes dots{ 0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+@keyframes dots{ 0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+[not-existing] {
+  zoom: 1;
 }
 /*
 Styling voor portfolio
