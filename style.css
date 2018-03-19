@@ -382,17 +382,6 @@ article.evs_project {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-#newsletter_message {
-  color: #59ab9c;
-  font-size: 11px;
-  border: 1px solid #59ab9c;
-  -webkit-border-radius: 4px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 4px;
-  -moz-background-clip: padding;
-  border-radius: 4px;
-  background-clip: padding-box;
-}
 #newsletter_loading,
 #newsletter_loading:before,
 #newsletter_loading:after {
@@ -447,10 +436,10 @@ article.evs_project {
 }
 lesshat-selector {
   -lh-property: 0; } 
-@-webkit-keyframes dots{ 0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
-@-moz-keyframes dots{ 0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
-@-o-keyframes dots{ 0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
-@keyframes dots{ 0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+@-webkit-keyframes dots{0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+@-moz-keyframes dots{0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+@-o-keyframes dots{0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+@keyframes dots{0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
 [not-existing] {
   zoom: 1;
 }
