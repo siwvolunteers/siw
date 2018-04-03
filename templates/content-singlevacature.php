@@ -7,7 +7,7 @@
 	$panes = array(
 		array(
 			'title' => __( 'Wat ga je doen?', 'siw' ),
-			'content' => $job_data['wat_ga_je_doen'],
+			'content' => $job_data['wat_ga_je_doen'] . apply_filters( 'siw_list', '', $job_data['wat_ga_je_doen_lijst'] ),
 		),
 		array(
 			'title' => __( 'Wie ben jij?', 'siw' ),
@@ -15,7 +15,7 @@
 		),
 		array(
 			'title' => __( 'Wat bieden wij jou?', 'siw' ),
- 			'content' => $job_data['wat_bieden_wij_jou'],
+ 			'content' => $job_data['wat_bieden_wij_jou'] . apply_filters( 'siw_list', '', $job_data['wat_bieden_wij_jou_lijst'] ),
 		),
 		array(
 			'title' => __( 'Wie zijn wij?', 'siw' ),
