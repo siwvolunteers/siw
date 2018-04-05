@@ -1,6 +1,6 @@
 <?php global $post, $pinnacle;
 
-	$event_data = SIW_PLUGIN::siw_get_event_data( $post->ID );
+	$event_data = apply_filters( 'siw_event_data', array(), $post->ID );
 	$loadscripts = ( 1 == $count ) ? true : false;
 	$location_map = sprintf('[gmap address="%s, %s %s" title="%s" zoom="13" maptype="ROADMAP" loadscripts="%s"]', esc_attr( $event_data['address'] ), esc_attr( $event_data['postal_code'] ), esc_attr( $event_data['city'] ), esc_attr( $event_data['location'] ), esc_attr( $loadscripts) );
 

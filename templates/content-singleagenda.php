@@ -1,11 +1,12 @@
 <?php get_template_part('templates/post', 'header'); ?>
 
 <?php global $post;
-	$event_data 				= SIW_PLUGIN::siw_get_event_data( $post->ID );
+	$event_data					= apply_filters( 'siw_event_data', array(),  $post->ID );
 	$location_map				= sprintf('[gmap address="%s, %s %s" title="%s" zoom="15" maptype="ROADMAP"]', esc_attr( $event_data['address'] ), esc_attr( $event_data['postal_code'] ), esc_attr( $event_data['city'] ), esc_attr( $event_data['location'] ) );
-	$hide_application_form_days_before_info_day	= SIW_PLUGIN::siw_get_setting( 'hide_application_form_days_before_info_day' );
+	$hide_application_form_days_before_info_day	= apply_filters( 'siw_setting', false, 'hide_application_form_days_before_info_day' );
 	$limit_date					= date( 'Y-m-d', time() + ( $hide_application_form_days_before_info_day * DAY_IN_SECONDS ) );
-	$agenda_page_url 			= get_permalink ( siw_get_setting('agenda_parent_page') );
+	$agenda_page_id				= apply_filters( 'siw_setting', false, 'agenda_parent_page' );
+	$agenda_page_url 			= get_permalink ( $agenda_page_id );
 ?>
 
 <div id="content" class="container">

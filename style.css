@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 2.9
+Version: 3.0
 */
 .siw-404 {
   height: 100vh;
@@ -252,6 +252,29 @@ li.mapplic-list-location > a {
 .kad-infobox {
   padding: 5px;
 }
+/* EVS */
+article.evs_project {
+  background-color: #fff;
+}
+.evs-project-quote {
+  font-size: inherit;
+  font-style: italic;
+  margin: 10px;
+  color: #777;
+}
+@media only screen and (max-width: 767px) {
+  .evs-project-quote {
+    padding: inherit;
+  }
+}
+.evs-project-quote:before {
+  color: #ccc;
+}
+@media only screen and (max-width: 767px) {
+  .evs-project-quote:before {
+    display: none;
+  }
+}
 .caldera-grid .checkbox {
   margin-top: 0px !important;
   padding-left: 0px;
@@ -347,86 +370,6 @@ li.mapplic-list-location > a {
   background-clip: padding-box;
   background: #ff9900;
 }
-/*contact form styling*/
-div.wpcf7-validation-errors,
-div.wpcf7-mail-sent-ok {
-  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
-  border: 2px solid;
-  -webkit-border-radius: 4px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 4px;
-  -moz-background-clip: padding;
-  border-radius: 4px;
-  background-clip: padding-box;
-  border-color: #ff9900;
-  color: #444;
-  font-size: 15px;
-  line-height: 40px;
-  list-style: outside none none;
-  margin: 0 0 30px;
-  padding: 5px 5px 5px 55px;
-  position: relative;
-  width: auto;
-}
-div.wpcf7-validation-errors::after,
-div.wpcf7-mail-sent-ok::after {
-  clear: both;
-  content: "";
-  display: block;
-}
-div.wpcf7-validation-errors::before,
-div.wpcf7-mail-sent-ok::before {
-  color: #ff9900;
-  display: block;
-  height: 40px;
-  left: 15px;
-  line-height: 40px;
-  position: absolute;
-  text-align: center;
-  top: 15px;
-  vertical-align: middle;
-  width: 30px;
-  background-color: transparent;
-  font-family: kt-icon;
-  font-style: normal;
-  font-variant: normal;
-  font-size: 18px;
-  font-weight: 400;
-  text-transform: none;
-  top: 5px;
-}
-div.wpcf7-validation-errors::before {
-  content: "\e362";
-}
-div.wpcf7-mail-sent-ok::before {
-  content: "\e367";
-}
-.wpcf7-form textarea {
-  height: 5em !important;
-}
-span.wpcf7-not-valid-tip {
-  color: #ff9900;
-}
-/*
-Styling voor Ninja Kick contactform
-*/
-#ncf_sidebar,
-#ncf_sidebar .ncf_user_bio,
-#ncf_sidebar input,
-#ncf_sidebar textarea,
-#ncf_sidebar form.wpcf7-form p {
-  font-family: 'Open Sans', sans-serif !important;
-  color: #444 !important;
-}
-#ncf_sidebar .ncf_ph label {
-  position: static;
-  padding: 0px;
-}
-@media only screen and (max-width: 767px) {
-  .nks_cc_trigger_tabs {
-    display: none !important;
-  }
-}
 /*SIW-mailpoet widget*/
 .siw-aanmelden-nieuwsbrief input {
   color: #444;
@@ -439,49 +382,66 @@ Styling voor Ninja Kick contactform
   -moz-box-shadow: none;
   box-shadow: none;
 }
-#newsletter_message,
-#newsletter_email_message {
-  color: #59ab9c;
-  font-size: 11px;
-  border: 1px solid #59ab9c;
-  -webkit-border-radius: 4px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 4px;
-  -moz-background-clip: padding;
-  border-radius: 4px;
-  background-clip: padding-box;
-}
-/*loading-animatie*/
-#newsletter_loading {
-  border: 10px solid #f3f3f3;
-  border-top: 10px solid #59ab9c;
+#newsletter_loading,
+#newsletter_loading:before,
+#newsletter_loading:after {
   -webkit-border-radius: 50%;
   -webkit-background-clip: padding-box;
   -moz-border-radius: 50%;
   -moz-background-clip: padding;
   border-radius: 50%;
   background-clip: padding-box;
-  width: 75px;
-  height: 75px;
-  -webkit-animation: spin 2s linear infinite;
-  -moz-animation: spin 2s linear infinite;
-  -o-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-  margin: 0 auto;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: dots 1.8s infinite ease-in-out;
+  -moz-animation: dots 1.8s infinite ease-in-out;
+  -o-animation: dots 1.8s infinite ease-in-out;
+  animation: dots 1.8s infinite ease-in-out;
 }
-.keyframes spin 0% {
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
+#newsletter_loading {
+  color: #59ab9c;
+  font-size: 10px;
+  margin: 10px auto;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  transform: translateZ(0px);
+  -webkit-animation-delay: -0.16s;
+  -moz-animation-delay: -0.16s;
+  -o-animation-delay: -0.16s;
+  animation-delay: -0.16s;
 }
-.keyframes spin 100% {
-  -webkit-transform: rotate(360deg);
-  -moz-transform: rotate(360deg);
-  -ms-transform: rotate(360deg);
-  -o-transform: rotate(360deg);
-  transform: rotate(360deg);
+#newsletter_loading:before,
+#newsletter_loading:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+#newsletter_loading:before {
+  left: -3.5em;
+  -webkit-animation-delay: -0.32s;
+  -moz-animation-delay: -0.32s;
+  -o-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+#newsletter_loading:after {
+  left: 3.5em;
+}
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes dots{0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+@-moz-keyframes dots{0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+@-o-keyframes dots{0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+@keyframes dots{0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em; } 40% { box-shadow: 0 2.5em 0 0;}}
+[not-existing] {
+  zoom: 1;
 }
 /*
 Styling voor portfolio
@@ -711,7 +671,6 @@ h5.job-title {
   .vacature-quote:before {
     display: none;
   }
-
 }
 /*Quote widget*/
 .siw_quote_widget {
@@ -940,7 +899,8 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
 .woocommerce-checkout #wizard div.content {
   clear: right;
 }
-.woocommerce-checkout p.form-row-first {
+.woocommerce-checkout p.form-row-first,
+.woocommerce-checkout h3 {
   clear: left;
 }
 .woocommerce-checkout #infoForPartner textarea {
