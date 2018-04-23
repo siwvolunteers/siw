@@ -1,0 +1,30 @@
+#siw-cookie-notification {
+	display: none;
+	position: fixed;
+	right: 2%;
+	bottom: 2%;
+	width: 25%;
+	z-index: 99999;
+	color:#fff;
+	background-color: @secondary-color;
+	.wrap{
+		padding: 10px;
+		.cookie-text{
+			padding: 5px;
+		}
+		.cookie-button{
+			padding: 5px;
+		}
+	}
+}
+
+@media only screen and (max-width: 1023px) {
+	#siw-cookie-notification {
+		width: 50%;
+	}
+}
+@media only screen and (max-width: 800px) {
+	#siw-cookie-notification {
+		width: 96%;
+	}
+}
