@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 3.0.2
+Version: 3.0.3
 */
 .siw-404 {
   height: 100vh;
@@ -87,34 +87,23 @@ h5.siw_event_title {
 #siw-cookie-notification {
   display: none;
   position: fixed;
-  right: 2%;
-  bottom: 2%;
-  width: 25%;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
   z-index: 99999;
   color: #fff;
-  background-color: #59ab9c;
-}
-#siw-cookie-notification .wrap {
   padding: 10px;
-  font-size: 11px;
+  background-color: #59ab9c;
+  text-align: left;
+  font-size: 12px;
 }
-#siw-cookie-notification .wrap .cookie-text {
+#siw-cookie-notification #siw-cookie-consent {
   padding: 5px;
+  margin: 5px;
 }
-#siw-cookie-notification .wrap .cookie-button {
-  padding: 5px;
-}
-#siw-cookie-notification .wrap .cookie-button .button {
-  padding: 5px;
-}
-@media only screen and (max-width: 1023px) {
-  #siw-cookie-notification {
-    width: 50%;
-  }
-}
-@media only screen and (max-width: 800px) {
-  #siw-cookie-notification {
-    width: 96%;
+@media only screen and (max-width: 767px) {
+  #siw-cookie-notification .cookie-button {
+    text-align: center;
   }
 }
 /* Header */
