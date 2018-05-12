@@ -198,3 +198,41 @@ article.evs_project {
 		}	
 	}
 }
+
+/* Fade in voor lazyload */
+img[data-lazy-src] {
+	opacity: 0;
+}
+
+img.lazyloaded {
+	.transition (opacity 0.5s linear 0.2s);
+   	opacity: 1;
+}
+
+/* Taalwisselaar */
+
+.kad-primary-nav ul.sf-menu{
+	.menu-en, .menu-nl{
+		a:hover{
+			background-color: rgba(0, 0, 0, 0);
+			color: #444 !important;
+		}
+		span{
+			display: inline;
+			border: solid 2px #ccc;
+			padding: 10px;
+			.transition(border-color 0.3s ease-out);
+			&:hover{
+				border-color:@primary-color;
+			}
+		}
+	}
+}
+
+.is-sticky .kad-primary-nav ul.sf-menu{
+	.menu-en, .menu-nl{
+		span{
+			padding:4px;	
+		}
+	}
+}

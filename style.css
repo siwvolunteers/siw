@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 3.0
+Version: 3.1
 */
 .siw-404 {
   height: 100vh;
@@ -82,6 +82,28 @@ h5.siw_event_title {
 @media only screen and (max-width: 767px) {
   .agenda-quote:before {
     display: none;
+  }
+}
+#siw-cookie-notification {
+  display: none;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  z-index: 99999;
+  color: #fff;
+  padding: 10px;
+  background-color: #59ab9c;
+  text-align: left;
+  font-size: 12px;
+}
+#siw-cookie-notification #siw-cookie-consent {
+  padding: 5px;
+  margin: 5px;
+}
+@media only screen and (max-width: 767px) {
+  #siw-cookie-notification .cookie-button {
+    text-align: center;
   }
 }
 /* Header */
@@ -274,6 +296,41 @@ article.evs_project {
   .evs-project-quote:before {
     display: none;
   }
+}
+/* Fade in voor lazyload */
+img[data-lazy-src] {
+  opacity: 0;
+}
+img.lazyloaded {
+  -webkit-transition: opacity 0.5s linear 0.2s;
+  -moz-transition: opacity 0.5s linear 0.2s;
+  -o-transition: opacity 0.5s linear 0.2s;
+  transition: opacity 0.5s linear 0.2s;
+  opacity: 1;
+}
+/* Taalwisselaar */
+.kad-primary-nav ul.sf-menu .menu-en a:hover,
+.kad-primary-nav ul.sf-menu .menu-nl a:hover {
+  background-color: rgba(0, 0, 0, 0);
+  color: #444 !important;
+}
+.kad-primary-nav ul.sf-menu .menu-en span,
+.kad-primary-nav ul.sf-menu .menu-nl span {
+  display: inline;
+  border: solid 2px #ccc;
+  padding: 10px;
+  -webkit-transition: border-color 0.3s ease-out;
+  -moz-transition: border-color 0.3s ease-out;
+  -o-transition: border-color 0.3s ease-out;
+  transition: border-color 0.3s ease-out;
+}
+.kad-primary-nav ul.sf-menu .menu-en span:hover,
+.kad-primary-nav ul.sf-menu .menu-nl span:hover {
+  border-color: #ff9900;
+}
+.is-sticky .kad-primary-nav ul.sf-menu .menu-en span,
+.is-sticky .kad-primary-nav ul.sf-menu .menu-nl span {
+  padding: 4px;
 }
 .caldera-grid .checkbox {
   margin-top: 0px !important;
