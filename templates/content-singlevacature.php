@@ -73,5 +73,6 @@
 					<?php do_action( 'siw_vacature_footer' );?>
 				</footer>
 			</div>
+			<?php echo $job_data['json_ld']?>
 		</article>
 <?php endwhile; ?>
