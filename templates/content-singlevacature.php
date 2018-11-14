@@ -33,7 +33,11 @@
 			<div class="postclass">
 				<header class="agenda-header">
 					<h1><?php the_title();?></h1>
-					<h5><?php esc_html_e( 'Vrijwillige functie', 'siw'); echo( ! empty( $job_data['uur_per_week'] ) ? SPACE . '(' . sprintf( esc_html__( '%s uur/week', 'siw') . ')', $job_data['uur_per_week'] ) : ''); ?></h5>
+					<h5>
+						<?php
+						( isset( $job_data['betaald'] ) && true == $job_data['betaald'] ) ? esc_html_e( 'Betaalde functie', 'siw') : esc_html_e( 'Vrijwillige functie', 'siw');
+						echo( ! empty( $job_data['uur_per_week'] ) ? SPACE . '(' . sprintf( esc_html__( '%s uur/week', 'siw') . ')', $job_data['uur_per_week'] ) : ''); ?>
+					</h5>
 					<hr>
 				</header>
 				<div class="row">
