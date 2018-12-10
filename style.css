@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 3.3
+Version: 3.3.1
 */
 .siw-404 {
   height: 100vh;
@@ -501,30 +501,6 @@ Styling voor portfolio
     width: 50%;
   }
 }
-.siw-social {
-  text-align: center;
-}
-.siw-social .title {
-  padding-bottom: 15px;
-  font-weight: bold;
-}
-.siw-social a {
-  padding: 5px;
-  margin: 5px;
-  font-size: 18px;
-  border-top: 3px solid;
-  color: #cfcfcf;
-}
-.siw-social .twitter:hover {
-  color: #00aced;
-  border-color: #00aced;
-}
-.siw-social .facebook:hover {
-  color: #3b5998;
-}
-.siw-social .linkedin:hover {
-  color: #007bb6;
-}
 #containerfooter .siw-social-links {
   text-align: center;
   margin-top: 10px;
@@ -645,38 +621,6 @@ Styling voor testimonialpagina
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-  }
-}
-#topbar {
-  height: 40px;
-  background: #59ab9c;
-}
-#topbar-content {
-  height: 40px;
-  line-height: normal;
-  color: #fff;
-  font-size: 16px;
-  position: fixed;
-  z-index: 1;
-  top: 0px;
-  left: 0px;
-  width: 100% !important;
-  padding: 10px 0px;
-  text-align: center;
-}
-#topbar-content a {
-  color: #ffffff;
-  border-bottom: 1px dotted;
-  font-weight: bold;
-}
-@media only screen and (max-width: 767px) {
-  #topbar-content {
-    font-size: 2.5vw;
-  }
-}
-@media only screen and (max-width: 480px) {
-  #topbar-content {
-    font-size: 3vw;
   }
 }
 /*vacatures*/
