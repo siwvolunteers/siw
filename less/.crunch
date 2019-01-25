@@ -16,18 +16,13 @@
 				}
 			],
 			"sources": [
-				"404.less",
 				"agenda.less",
 				"caldera.less",
 				"general.less",
 				"lesshat.less",
-				"mailpoet.less",
 				"portfolio.less",
-				"snelzoeken.less",
-				"social-share.less",
 				"testimonials.less",
 				"vacatures.less",
-				"widgets.less",
 				"woocommerce-archive.less",
 				"woocommerce-checkout.less",
 				"woocommerce-product.less"
