@@ -16,13 +16,8 @@
 				}
 			],
 			"sources": [
-				"agenda.less",
-				"caldera.less",
 				"general.less",
 				"lesshat.less",
-				"portfolio.less",
-				"testimonials.less",
-				"vacatures.less",
 				"woocommerce-archive.less",
 				"woocommerce-checkout.less",
 				"woocommerce-product.less"
