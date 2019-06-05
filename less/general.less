@@ -178,35 +178,3 @@ li.mapplic-list-location > a {
 .kad-infobox{
 	padding:5px;	
 }
-
-
-/* EVS */
-article.evs_project {
-	background-color:#fff;
-}
-
-.evs-project-quote{
-	font-size: inherit;
-	font-style: italic;
-	margin: 10px;
-	color: #777;
-	@media only screen and (max-width:767px) {
-		padding:inherit;
-	}
-	&:before{
-		color:#ccc;
-		@media only screen and (max-width:767px) {
-			display:none;
-		}	
-	}
-}
-
-/* Fade in voor lazyload */
-img[data-lazy-src] {
-	opacity: 0;
-}
-
-img.lazyloaded {
-	.transition (opacity 0.5s linear 0.2s);
-   	opacity: 1;
-}
