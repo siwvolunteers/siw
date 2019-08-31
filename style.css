@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 3.4.1
+Version: 3.4.2
 */
 /* Header */
 .page-header {
@@ -287,20 +287,6 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
     font-size: 12px;
     width: 20px;
   }
-}
-#kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li {
-  position: relative;
-}
-#kad-mobile-nav #kad-head-cart-popup ul.product_list_widget li a {
-  position: static;
-  margin-left: 30px;
-}
-#kad-mobile-nav #kad-head-cart-popup ul.cart_list li a.remove {
-  display: block;
-  float: none;
-  position: absolute;
-  left: 0;
-  margin-left: 0px;
 }
 .woocommerce-checkout {
   /*tekstblokken in informatie voor PO hoger maken*/
