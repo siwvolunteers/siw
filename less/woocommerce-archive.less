@@ -4,35 +4,17 @@
 }
 
 /*Styling op archiefpagina */
-.product_item:hover, .product_list_widget li:hover{
+.product_item:hover{
 	color:#ffffff !important;
 	background-color:@primary-color !important;
 }
 
-.product_item, .product_item h5, .product_list_widget li, .product_list_widget li a{
+.product_item, .product_item h5{
 	.transition(all 0.3s linear 0s) !important;
 }
 
-.product_list_widget li{
-	.border-radius(4px);
-}
-
-.product_list_widget li img{
-	padding: 4px;
-}
-
-.product_item:hover h5, .product_list_widget li:hover a{
+.product_item:hover h5{
 	color:#ffffff !important;
-}
-
-/*gekozen filter niet inspringen */
-html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a{
-	padding: 5px 15px;
-}
-
-/*styling van filter*/
-.woocommerce .widget_layered_nav ul.yith-wcan-label li.chosen a, .woocommerce .widget_layered_nav ul.yith-wcan-label li a, .woocommerce .widget_layered_nav ul.yith-wcan-label li a:hover {
-	.border-radius(4px);
 }
 
 /*filter verwijderen*/
@@ -43,11 +25,4 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a{
 	font-style: normal;
 	font-weight: 400;
 	margin-left: -12px;
-}
-
-.woo-archive-intro{
-	background-color: #444;
-	color: #fff;
-	padding: 15px;
-	margin:15px;
 }

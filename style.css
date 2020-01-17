@@ -4,7 +4,7 @@ Theme URI: https://github.com/siwvolunteers/siw
 Description: Thema voor www.siw.nl
 Author: Maarten Bruna
 Template: pinnacle_premium
-Version: 3.4.2
+Version: 3.4.3
 */
 /* Header */
 .page-header {
@@ -65,10 +65,6 @@ h3:hover:after {
 .footerclass .sectiontitle:hover:after,
 .footerclass .widget-title:hover:after {
   background-color: #59ab9c !important;
-}
-/*home*/
-.home-padding {
-  padding: 0px 0;
 }
 /*Footer */
 #containerfooter a:hover {
@@ -182,49 +178,19 @@ li.mapplic-list-location > a {
   display: none;
 }
 /*Styling op archiefpagina */
-.product_item:hover,
-.product_list_widget li:hover {
+.product_item:hover {
   color: #ffffff !important;
   background-color: #ff9900 !important;
 }
 .product_item,
-.product_item h5,
-.product_list_widget li,
-.product_list_widget li a {
+.product_item h5 {
   -webkit-transition: all 0.3s linear 0s !important;
   -moz-transition: all 0.3s linear 0s !important;
   -o-transition: all 0.3s linear 0s !important;
   transition: all 0.3s linear 0s !important;
 }
-.product_list_widget li {
-  -webkit-border-radius: 4px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 4px;
-  -moz-background-clip: padding;
-  border-radius: 4px;
-  background-clip: padding-box;
-}
-.product_list_widget li img {
-  padding: 4px;
-}
-.product_item:hover h5,
-.product_list_widget li:hover a {
+.product_item:hover h5 {
   color: #ffffff !important;
-}
-/*gekozen filter niet inspringen */
-html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
-  padding: 5px 15px;
-}
-/*styling van filter*/
-.woocommerce .widget_layered_nav ul.yith-wcan-label li.chosen a,
-.woocommerce .widget_layered_nav ul.yith-wcan-label li a,
-.woocommerce .widget_layered_nav ul.yith-wcan-label li a:hover {
-  -webkit-border-radius: 4px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 4px;
-  -moz-background-clip: padding;
-  border-radius: 4px;
-  background-clip: padding-box;
 }
 /*filter verwijderen*/
 .widget_layered_nav ul li.chosen a::before,
@@ -235,12 +201,6 @@ html .woocommerce-page .widget_layered_nav ul.yith-wcan-label li.chosen a {
   font-style: normal;
   font-weight: 400;
   margin-left: -12px;
-}
-.woo-archive-intro {
-  background-color: #444;
-  color: #fff;
-  padding: 15px;
-  margin: 15px;
 }
 /*pijltje op knoppen verbergen*/
 .wc-forward::after,
