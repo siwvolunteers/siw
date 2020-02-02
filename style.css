@@ -218,14 +218,6 @@ li.mapplic-list-location > a {
 .wizard > .steps a:active {
   text-align: left;
 }
-/*modal*/
-.modal-body {
-  height: 65vh;
-  overflow-y: auto;
-}
-.modal-footer {
-  padding: 10px;
-}
 .hide-button button.sm-kad-btn {
   display: none;
 }
